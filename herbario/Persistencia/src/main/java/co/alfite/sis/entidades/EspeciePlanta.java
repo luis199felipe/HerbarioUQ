@@ -21,6 +21,7 @@ public class EspeciePlanta implements Serializable {
 	@Column(length = 10)
 	private String idEspecie;
 	/**
+	 * CORREGIR
 	 * llave foranea: conecta especie con genero
 	 */
 	@Column(length = 10, nullable = false, unique = true)
