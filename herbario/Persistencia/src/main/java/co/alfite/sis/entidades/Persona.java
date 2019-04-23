@@ -10,9 +10,13 @@ import javax.persistence.*;
  *
  */
 @Entity
-
+@Inheritance(strategy=InheritanceType.JOINED )
 public class Persona implements Serializable {
 
+	
+	@ManyToOne
+	private HerbarioUQ herbario;
+	
 	/**
 	 * identificacion unica de una persona   
 	 */

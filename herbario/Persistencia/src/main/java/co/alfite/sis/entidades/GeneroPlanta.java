@@ -2,6 +2,8 @@ package co.alfite.sis.entidades;
 
 import java.io.Serializable;
 import java.lang.String;
+import java.util.List;
+
 import javax.persistence.*;
 
 /**
@@ -13,17 +15,19 @@ import javax.persistence.*;
 
 public class GeneroPlanta implements Serializable {
 
+	@OneToMany(mappedBy="generoPlanta")
+	private List<EspeciePlanta> especies;
+	
+
+@ManyToOne
+private FamiliaPlanta familiaPlanta;
 	/**
 	 * identificacion unica de un genero
 	 */
 	@Id
 	@Column(length = 10)
 	private String idGenero;
-	/**
-	 * llave foranea: conecta genero con familia
-	 */
-	@Column(length = 10, nullable = false, unique = true)
-	private String idFamilia;
+	
 	/**
 	 * nombre del generoPlanta
 	 */
@@ -42,13 +46,7 @@ public class GeneroPlanta implements Serializable {
 	public void setIdGenero(String idGenero) {
 		this.idGenero = idGenero;
 	}   
-	public String getIdFamilia() {
-		return this.idFamilia;
-	}
 
-	public void setIdFamilia(String idFamilia) {
-		this.idFamilia = idFamilia;
-	}
 	public String getNombre() {
 		return nombre;
 	}

@@ -14,18 +14,18 @@ import javax.persistence.*;
 
 public class EspeciePlanta implements Serializable {
 
+	@OneToOne
+	private RegistroEspecie registro;
+	
+	@ManyToOne
+	private GeneroPlanta generoPlanta;
 	/**
 	 * identificacion unica de una especie
 	 */
 	@Id
 	@Column(length = 10)
 	private String idEspecie;
-	/**
-	 * CORREGIR
-	 * llave foranea: conecta especie con genero
-	 */
-	@Column(length = 10, nullable = false, unique = true)
-	private String idGenero; 
+
 	/**
 	 * nombre cientifico de una especie
 	 */
@@ -46,13 +46,7 @@ public class EspeciePlanta implements Serializable {
 	public EspeciePlanta() {
 		super();
 	}   
-	public String getIdGenero() {
-		return this.idGenero;
-	}
-
-	public void setIdGenero(String idGenero) {
-		this.idGenero = idGenero;
-	}   
+	  
 	public String getIdEspecie() {
 		return this.idEspecie;
 	}

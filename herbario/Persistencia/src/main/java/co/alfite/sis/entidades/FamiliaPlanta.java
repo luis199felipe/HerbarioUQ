@@ -2,6 +2,8 @@ package co.alfite.sis.entidades;
 
 import java.io.Serializable;
 import java.lang.String;
+import java.util.List;
+
 import javax.persistence.*;
 
 /**
@@ -13,6 +15,12 @@ import javax.persistence.*;
 
 public class FamiliaPlanta implements Serializable {
 
+	@ManyToOne
+	private HerbarioUQ herbario;
+	
+	@OneToMany(mappedBy="familiaPlanta")
+	private List<GeneroPlanta> generos;
+	
 	/**
 	 * identificacion unica de una familia
 	 */

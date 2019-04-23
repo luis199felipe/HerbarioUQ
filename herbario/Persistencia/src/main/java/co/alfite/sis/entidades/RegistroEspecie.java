@@ -13,6 +13,14 @@ import javax.persistence.*;
 
 public class RegistroEspecie implements Serializable {
 	
+	
+	
+	@ManyToOne
+	private Trabajador trabajador;
+	
+	@OneToOne(mappedBy="registro")
+	private EspeciePlanta especie;
+	
 	/**
 	 * identificacion unica de un registro
 	 */

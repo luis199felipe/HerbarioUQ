@@ -2,6 +2,8 @@ package co.alfite.sis.entidades;
 
 import java.io.Serializable;
 import java.lang.String;
+import java.util.List;
+
 import javax.persistence.*;
 
 /**
@@ -10,15 +12,12 @@ import javax.persistence.*;
  *@version 1.0
  */
 @Entity
-
-public class Trabajador implements Serializable {
+@Inheritance(strategy=InheritanceType.JOINED )
+public class Trabajador  extends Persona implements Serializable {
 	
-	/**
-	 * identificacion unica de un trabajador
-	 */
-	@Id
-	@Column(length = 10)
-	private String idTrabajador;
+	@OneToMany(mappedBy="trabajador")
+	private List<RegistroEspecie> registros;
+	
 	/**
 	 * ¿Herencia? trabajador hereda de persona
 	 */
@@ -40,20 +39,8 @@ public class Trabajador implements Serializable {
 	public Trabajador() {
 		super();
 	}   
-	public String getIdPersona() {
-		return this.idPersona;
-	}
-
-	public void setIdPersona(String idPersona) {
-		this.idPersona = idPersona;
-	}   
-	public String getIdTrabajador() {
-		return this.idTrabajador;
-	}
-
-	public void setIdTrabajador(String idTrabajador) {
-		this.idTrabajador = idTrabajador;
-	}   
+	  
+  
 	public String getPassword() {
 		return this.password;
 	}
