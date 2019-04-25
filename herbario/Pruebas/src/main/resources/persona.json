@@ -1,0 +1,72 @@
+{
+	"PERSONA":[
+		{
+			"nombre":"Melissa",
+			"telefono":"31298219322",
+			"fechanacimiento":"2001-10-12",
+			"idpersona":"1"
+		},
+		{
+			"nombre":"Neyder",
+			"telefono":"3123923922",
+			"fechanacimiento":"2001-10-12",
+			"idpersona":"2"
+		},
+		{
+			"nombre":"Luis Felipe",
+			"telefono":"1234324332",
+			"fechanacimiento":"2001-10-12",
+			"idpersona":"3"
+		},
+		{
+			"idpersona":"4",
+			"nombre":"Andres",
+			"telefono":"1234324332",
+			"fechanacimiento":"2001-10-12"
+		}
+	],
+	"TRABAJADOR":[
+		{
+			"idpersona":"1",
+			"email":"meli@gmial.com",
+			"password":"root"
+		},
+		{
+			"idpersona":"2",
+			"email":"neyder@gmial.com",
+			"password":"root"
+		},
+		{
+			"idpersona":"3",
+			"email":"felipe@gmial.com",
+			"password":"root"
+		},
+		{
+			"idpersona":"4",
+			"email":"Andres@gmial.com",
+			"password":"root"
+		}
+	],
+	"RECOLECTOR":[
+		{
+			"idpersona":"1"
+		}		
+	],
+	
+	"EMPLEADO":[
+		{
+			"idpersona":"2"
+		}		
+	],	
+	"ADMINISTRADOR":[
+		{
+			"idpersona":"3"
+			
+		},
+		{
+			"idpersona":"4"
+			
+		}			
+	]	
+	
+}

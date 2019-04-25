@@ -19,7 +19,7 @@ public class Trabajador extends Persona implements Serializable {
 	/**
 	 * password para ingresar al software
 	 */
-	@Column(length = 12, nullable = false, unique = true)
+	@Column(length = 12, nullable = false)
 	private String password;
 	/**
 	 * email para ingresar al software
