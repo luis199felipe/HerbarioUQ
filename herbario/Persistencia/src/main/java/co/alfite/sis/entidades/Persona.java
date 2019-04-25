@@ -10,15 +10,11 @@ import javax.persistence.*;
  *
  */
 @Entity
-@Inheritance(strategy=InheritanceType.JOINED )
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Persona implements Serializable {
 
-	
-	@ManyToOne
-	private HerbarioUQ herbario;
-	
 	/**
-	 * identificacion unica de una persona   
+	 * identificacion unica de una persona
 	 */
 	@Id
 	@Column(length = 10)
@@ -38,33 +34,42 @@ public class Persona implements Serializable {
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fechaNacimiento;
+//	/**
+//	 * Muchas Persona pertenece aun Herbario
+//	 */
+//	@ManyToOne
+//	private HerbarioUQ herbario;
 	
 	private static final long serialVersionUID = 1L;
 
 	public Persona() {
 		super();
-	}   
+	}
+
 	public String getIdPersona() {
 		return this.idPersona;
 	}
 
 	public void setIdPersona(String idPersona) {
 		this.idPersona = idPersona;
-	}   
+	}
+
 	public String getNombre() {
 		return this.nombre;
 	}
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}   
+	}
+
 	public String getTelefono() {
 		return this.telefono;
 	}
 
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
-	}   
+	}
+
 	public Date getFechaNacimiento() {
 		return this.fechaNacimiento;
 	}
@@ -72,5 +77,5 @@ public class Persona implements Serializable {
 	public void setFechaNacimiento(Date fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
-   
+
 }

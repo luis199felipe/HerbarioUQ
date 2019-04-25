@@ -25,8 +25,8 @@ public class RegistroEspecie implements Serializable {
 	 * identificacion unica de un registro
 	 */
 	@Id
-	@Column(length = 10)
-	private String idRegistro;
+	//@Column(auto_increment)
+	private Integer idRegistro;
 	/**
 	 * llave foranea: conecta registro con familiaPlanta
 	 */
@@ -83,11 +83,11 @@ public class RegistroEspecie implements Serializable {
 	public void setIdEspecie(String idEspecie) {
 		this.idEspecie = idEspecie;
 	}   
-	public String getIdRegistro() {
+	public Integer getIdRegistro() {
 		return this.idRegistro;
 	}
 
-	public void setIdRegistro(String idRegistro) {
+	public void setIdRegistro(Integer idRegistro) {
 		this.idRegistro = idRegistro;
 	}   
 	public Estado getEstado() {
