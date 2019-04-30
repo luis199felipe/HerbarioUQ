@@ -1,0 +1,14 @@
+{
+	"GENEROPLANTA": [
+		{
+			"idgenero":"gen1",
+			"nombre":"Barnadesioideae",
+			"familiaplanta_idfamilia":"fam1"
+		},
+		{
+			"idgenero":"gen2",
+			"nombre":"Mutisioideae",
+			"familiaplanta_idfamilia":"fam1"
+		}
+	]
+}

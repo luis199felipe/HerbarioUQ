@@ -1,0 +1,24 @@
+{
+	"FAMILIAPLANTA": [
+		{
+			"idFamilia": "fam1",
+			"nombre": "familia asteraceae"
+		},
+		{
+			"idFamilia": "00002",
+			"nombre": "familia orchidaceae"
+		},
+		{
+			"idFamilia": "00003",
+			"nombre": "familia fabaceae"
+		},
+		{
+			"idFamilia": "00004",
+			"nombre": "familia rubiaceae"
+		},
+		{
+			"idFamilia": "00005",
+			"nombre": "familia poaceae"
+		}
+	]
+}

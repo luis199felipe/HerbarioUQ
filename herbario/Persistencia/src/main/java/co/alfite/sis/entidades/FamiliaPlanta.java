@@ -15,8 +15,8 @@ import javax.persistence.*;
 
 public class FamiliaPlanta implements Serializable {
 
-	@ManyToOne
-	private HerbarioUQ herbario;
+	//@ManyToOne
+	//private HerbarioUQ herbario;
 	
 	@OneToMany(mappedBy="familiaPlanta")
 	private List<GeneroPlanta> generos;
@@ -51,6 +51,12 @@ public class FamiliaPlanta implements Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	public List<GeneroPlanta> getGeneros() {
+		return generos;
+	}
+	public void setGeneros(List<GeneroPlanta> generos) {
+		this.generos = generos;
 	}
    
 }

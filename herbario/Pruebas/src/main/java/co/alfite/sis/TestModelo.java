@@ -49,12 +49,12 @@ public class TestModelo {
 	}
 
 	@Test
-	@UsingDataSet({"persona.json"})
+	@UsingDataSet({"familiaPlanta.json","persona.json","generoPlanta.json"})
 	@Transactional(value = TransactionMode.COMMIT)
 	public void insertarPersonaTest() {
 		Administrador administrador = new Administrador();
 		administrador.setIdPersona("1321");
-		administrador.setNombre("melissa");
+		administrador.setNombre("meelissa");
 		administrador.setTelefono("305");
 		administrador.setFechaNacimiento(new Date());
 		administrador.setEmail("mdn@com");
@@ -63,7 +63,10 @@ public class TestModelo {
 		entityManager.persist(administrador);
 		
 		Administrador a = entityManager.find(Administrador.class, administrador.getIdPersona());
-		
+		FamiliaPlanta m = entityManager.find(FamiliaPlanta.class, "fam1");
+		GeneroPlanta g = entityManager.find(GeneroPlanta.class, "gen2");
+		System.out.println(g.getNombre());
+		System.out.println(m.getGeneros().size());
 		Assert.assertNotNull(a);
 	}
 
