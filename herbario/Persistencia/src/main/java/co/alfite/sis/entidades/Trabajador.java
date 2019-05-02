@@ -13,7 +13,6 @@ import javax.persistence.*;
  * @version 1.0
  */
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
 public class Trabajador extends Persona implements Serializable {
 
 	/**

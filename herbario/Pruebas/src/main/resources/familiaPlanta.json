@@ -5,19 +5,19 @@
 			"nombre": "familia asteraceae"
 		},
 		{
-			"idFamilia": "00002",
+			"idFamilia": "fam2",
 			"nombre": "familia orchidaceae"
 		},
 		{
-			"idFamilia": "00003",
+			"idFamilia": "fam3",
 			"nombre": "familia fabaceae"
 		},
 		{
-			"idFamilia": "00004",
+			"idFamilia": "fam4",
 			"nombre": "familia rubiaceae"
 		},
 		{
-			"idFamilia": "00005",
+			"idFamilia": "fam5",
 			"nombre": "familia poaceae"
 		}
 	]

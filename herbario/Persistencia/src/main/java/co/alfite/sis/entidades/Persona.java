@@ -11,8 +11,12 @@ import javax.persistence.*;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@NamedQueries({@NamedQuery(name=Persona.LISTAR_TODOS,query="select p from Persona p")})
 public class Persona implements Serializable {
 
+	
+	
+	public static final String LISTAR_TODOS="ListarClientes";
 	/**
 	 * identificacion unica de una persona
 	 */

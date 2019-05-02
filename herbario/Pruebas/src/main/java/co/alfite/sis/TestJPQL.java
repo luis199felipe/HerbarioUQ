@@ -1,9 +1,13 @@
 package co.alfite.sis;
 
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -17,17 +21,16 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import co.alfite.sis.entidades.*;
 
 /**
- * Clase de pruebas dedicada para la pruebas de las entidades
+ * Clase encargada de probar las consultas usando JPQL
  * 
  * @author Melissa Neyder Pipe
  * @version 1.0
  */
 @RunWith(Arquillian.class)
-public class TestModelo {
+public class TestJPQL {
 
 	/**
 	 * instancia para realizar las transaciones con las entidades
@@ -48,24 +51,34 @@ public class TestModelo {
 
 	}
 
+	/**
+	 * permite cargar la lista de personas
+	 */
 	@Test
-	@UsingDataSet({"familiaPlanta.json","persona.json","generoPlanta.json"})
-	@Transactional(value = TransactionMode.COMMIT)
-	public void insertarPersonaTest() {
-		Administrador administrador = new Administrador();
-		administrador.setIdPersona("1321");
-		administrador.setNombre("meelissa");
-		administrador.setTelefono("305");
-		administrador.setFechaNacimiento(new Date());
-		administrador.setEmail("mdn@com");
-		administrador.setPassword("111111");
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json" })
+	public void listarPersonaTest() {
+		Query query = entityManager.createQuery("select p1 from Persona p1");
+		List listaPersona = query.getResultList();
+		Iterator ite = listaPersona.iterator();
 
-		entityManager.persist(administrador);
-		
-		Administrador a = entityManager.find(Administrador.class, administrador.getIdPersona());
-		FamiliaPlanta m = entityManager.find(FamiliaPlanta.class, "fam1");
-		GeneroPlanta g = entityManager.find(GeneroPlanta.class, "gen2");
-		Assert.assertNotNull(a);
+		while (ite.hasNext()) {
+			System.out.println("1 "+ ite.next());
+		}
+	}
+
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json" })
+	public void listarPersonaNamedTest() {
+		TypedQuery<Persona> query = entityManager.createNamedQuery(Persona.LISTAR_TODOS, Persona.class);
+		List<Persona> personas = query.getResultList();
+		Assert.assertEquals(personas.get(0).getNombre(), "Melissa");
+		Iterator ite = personas.iterator();
+
+		while (ite.hasNext()) {
+			System.out.println("2 "+ ite.next());
+		}
 	}
 
 }
