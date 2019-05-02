@@ -11,10 +11,13 @@ import javax.persistence.*;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@NamedQueries({@NamedQuery(name=Persona.LISTAR_TODOS,query="select p from Persona p")})
+@NamedQueries({@NamedQuery(name=Persona.LISTAR_TODOS,query="select p from Persona p"),
+@NamedQuery(name=Persona.PERSONA_POR_CREDENCIALES,query="select p from Persona p where p.email= :email and p.password")})
+
 public class Persona implements Serializable {
 
 	
+	public static final String PERSONA_POR_CREDENCIALES="PersonaPorCredenciales";
 	
 	public static final String LISTAR_TODOS="ListarClientes";
 	/**

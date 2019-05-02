@@ -81,4 +81,20 @@ public class TestJPQL {
 		}
 	}
 
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json" })
+	public void loginTest() {
+		TypedQuery<Persona> query = entityManager.createNamedQuery(Persona.LISTAR_TODOS, Persona.class);
+		
+		query.setParameter("email", "correo");
+		query.setParameter("password", "contraseña");
+		
+		Persona p= query.getSingleResult();
+		
+		Assert.assertEquals(p.getNombre(), "nombre");
+
+		
+
+	}
 }
