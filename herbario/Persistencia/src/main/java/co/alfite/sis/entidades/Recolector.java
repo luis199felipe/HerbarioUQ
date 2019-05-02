@@ -9,8 +9,7 @@ import javax.persistence.*;
  *
  */
 @Entity
-
-public class Recolector extends Trabajador implements Serializable {
+public class Recolector extends Persona implements Serializable {
 
 	/**
 	 * Entidad que hereda de Trabajador, no tiene campos propios

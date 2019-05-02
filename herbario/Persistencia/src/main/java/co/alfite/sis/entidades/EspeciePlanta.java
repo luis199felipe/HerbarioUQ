@@ -46,7 +46,33 @@ public class EspeciePlanta implements Serializable {
 	public EspeciePlanta() {
 		super();
 	}   
+	
+	
 	  
+	public RegistroEspecie getRegistro() {
+		return registro;
+	}
+
+
+
+	public void setRegistro(RegistroEspecie registro) {
+		this.registro = registro;
+	}
+
+
+
+	public GeneroPlanta getGeneroPlanta() {
+		return generoPlanta;
+	}
+
+
+
+	public void setGeneroPlanta(GeneroPlanta generoPlanta) {
+		this.generoPlanta = generoPlanta;
+	}
+
+
+
 	public String getIdEspecie() {
 		return this.idEspecie;
 	}

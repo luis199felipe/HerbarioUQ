@@ -38,6 +38,9 @@ public class FamiliaPlanta implements Serializable {
 	public FamiliaPlanta() {
 		super();
 	}   
+	
+	
+	
 	public String getIdFamilia() {
 		return this.idFamilia;
 	}

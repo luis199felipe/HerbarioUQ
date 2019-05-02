@@ -16,7 +16,7 @@ public class RegistroEspecie implements Serializable {
 	
 	
 	@ManyToOne
-	private Trabajador trabajador;
+	private Persona persona;
 	
 	@OneToOne(mappedBy="registro")
 	private EspeciePlanta especie;
@@ -25,17 +25,18 @@ public class RegistroEspecie implements Serializable {
 	 * identificacion unica de un registro
 	 */
 	@Id
-	//@Column(auto_increment)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer idRegistro;
 	/**
 	 * llave foranea: conecta registro con familiaPlanta
 	 */
-	@Column(length = 10, nullable = false, unique = true)
+	@Column(length = 10, nullable = false)
 	private String idFamilia;
+	
 	/**
 	 * llave foranea: conecta registro con generoPlanta
 	 */
-	@Column(length = 10, nullable = false, unique = true)
+	@Column(length = 10, nullable = false)
 	private String idGenero;
 	/**
 	 * llave foranea: conecta registro con especiePlanta
@@ -65,6 +66,21 @@ public class RegistroEspecie implements Serializable {
 	public String getIdFamilia() {
 		return this.idFamilia;
 	}
+	
+	public Persona getPersona() {
+		return persona;
+	}
+	
+	public void setPersona(Persona  p) {
+		this.persona = p;
+	}
+	public EspeciePlanta getEspecie() {
+		return especie;
+	}
+	public void setEspecie(EspeciePlanta especie) {
+		this.especie = especie;
+	}
+
 
 	public void setIdFamilia(String idFamilia) {
 		this.idFamilia = idFamilia;

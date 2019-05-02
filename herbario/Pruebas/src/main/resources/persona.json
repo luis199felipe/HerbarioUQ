@@ -1,16 +1,18 @@
-
-
 {
 	"PERSONA": [
 		{
 			"idpersona": "1",
 			"nombre": "Melissa",
+			"email": "meli@gmial.com",
+			"password": "root",
 			"dtype": "Recolector",
 			"telefono": "31298219322",
 			"fechanacimiento": "2001-10-12"
 		},
 		{
 			"nombre": "Neyder",
+			"email": "neyder@gmial.com",
+			"password": "root",
 			"dtype": "Empleado",
 			"telefono": "3123923922",
 			"fechanacimiento": "2001-10-12",
@@ -19,6 +21,8 @@
 		{
 			"nombre": "Luis Felipe",
 			"dtype": "Administrador",
+			"email": "felipe@gmial.com",
+			"password": "root",
 			"telefono": "1234324332",
 			"fechanacimiento": "2001-10-12",
 			"idpersona": "3"
@@ -26,31 +30,11 @@
 		{
 			"idpersona": "4",
 			"nombre": "Andres",
+			"email": "Andres@gmial.com",
+			"password": "root",
 			"dtype": "Administrador",
 			"telefono": "1234324332",
 			"fechanacimiento": "2001-10-12"
-		}
-	],
-	"TRABAJADOR": [
-		{
-			"idpersona": "1",
-			"email": "meli@gmial.com",
-			"password": "root"
-		},
-		{
-			"idpersona": "2",
-			"email": "neyder@gmial.com",
-			"password": "root"
-		},
-		{
-			"idpersona": "3",
-			"email": "felipe@gmial.com",
-			"password": "root"
-		},
-		{
-			"idpersona": "4",
-			"email": "Andres@gmial.com",
-			"password": "root"
 		}
 	],
 	"RECOLECTOR": [

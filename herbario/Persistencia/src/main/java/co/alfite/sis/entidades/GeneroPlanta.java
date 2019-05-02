@@ -39,6 +39,33 @@ private FamiliaPlanta familiaPlanta;
 	public GeneroPlanta() {
 		super();
 	}   
+	
+		
+	
+	public List<EspeciePlanta> getEspecies() {
+		return especies;
+	}
+
+
+
+	public void setEspecies(List<EspeciePlanta> especies) {
+		this.especies = especies;
+	}
+
+
+
+	public FamiliaPlanta getFamiliaPlanta() {
+		return familiaPlanta;
+	}
+
+
+
+	public void setFamiliaPlanta(FamiliaPlanta familiaPlanta) {
+		this.familiaPlanta = familiaPlanta;
+	}
+
+
+
 	public String getIdGenero() {
 		return this.idGenero;
 	}

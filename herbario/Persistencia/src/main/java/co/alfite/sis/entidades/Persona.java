@@ -2,6 +2,7 @@ package co.alfite.sis.entidades;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.lang.String;
 import javax.persistence.*;
 
@@ -11,14 +12,10 @@ import javax.persistence.*;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@NamedQueries({@NamedQuery(name=Persona.LISTAR_TODOS,query="select p from Persona p"),
-@NamedQuery(name=Persona.PERSONA_POR_CREDENCIALES,query="select p from Persona p where p.email= :email and p.password")})
+@NamedQueries({@NamedQuery(name=Persona.LISTAR_TODOS,query="select p from Persona p")})
+@NamedQuery(name=Persona.PERSONA_POR_CREDENCIALES,query="select p from Persona p where p.email= :email and p.password=:password")
 
 public class Persona implements Serializable {
-
-	
-	public static final String PERSONA_POR_CREDENCIALES="PersonaPorCredenciales";
-	
 	public static final String LISTAR_TODOS="ListarClientes";
 	/**
 	 * identificacion unica de una persona
@@ -48,9 +45,50 @@ public class Persona implements Serializable {
 //	private HerbarioUQ herbario;
 	
 	private static final long serialVersionUID = 1L;
-
+	
+	public static final String PERSONA_POR_CREDENCIALES="PersonaPorCredenciales";
+	/**
+	 * password para ingresar al software
+	 */
+	@Column(length = 12, nullable = false)
+	private String password;
+	/**
+	 * email para ingresar al software
+	 */
+	@Column(length = 50, nullable = false, unique = true)
+	private String email;
+	/**
+	 * Un Trabajador tiene muchos RegistrosEspecie
+	 */
+	@OneToMany(mappedBy = "persona")
+	private List<RegistroEspecie> registros;
+	
 	public Persona() {
 		super();
+	}
+	
+	public String getPassword() {
+		return this.password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getEmail() {
+		return this.email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public static String getListarTodos() {
+		return LISTAR_TODOS;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	public String getIdPersona() {
