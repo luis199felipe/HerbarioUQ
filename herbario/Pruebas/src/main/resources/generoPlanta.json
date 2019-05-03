@@ -10,5 +10,11 @@
 			"nombre":"Mutisioideae",
 			"familiaplanta_idfamilia":"fam1"
 		}
+		,
+		{
+			"idgenero":"gen2",
+			"nombre":"Mutisioideae",
+			"familiaplanta_idfamilia":"fam1"
+		}
 	]
 }
