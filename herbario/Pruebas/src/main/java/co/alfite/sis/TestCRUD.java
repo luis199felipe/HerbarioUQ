@@ -30,7 +30,7 @@ import co.alfite.sis.entidades.*;
  * @version 1.0
  */
 @RunWith(Arquillian.class)
-public class TestJPQL {
+public class TestCRUD {
 
 	/**
 	 * instancia para realizar las transaciones con las entidades
@@ -50,48 +50,51 @@ public class TestJPQL {
 				.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
 
 	}
-
-	/**
-	 * permite cargar la lista de personas
-	 */
+	
 	@Test
+	@UsingDataSet({"persona.json"})
 	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "persona.json" })
-	public void listarPersonaTest() {
-		Query query = entityManager.createQuery("select p1 from Persona p1");
-		List listaPersona = query.getResultList();
-		Iterator ite = listaPersona.iterator();
-
-		while (ite.hasNext()) {
-			System.out.println("1 "+ ite.next());
+	public void insertarPersonaTest() {
+		Empleado e1 = new Empleado("10", "Julio", "23423432", new Date("14/12/1999"), "123", "julio@gmail.com");
+		crearEmpleado(e1);
+		
+		Assert.assertNotNull(buscarEmpleado("10"));
+		
+		
+		List<Empleado> misEmp = getAllEmpleados();
+		Iterator<Empleado> it = misEmp.iterator();
+		while (it.hasNext()) {
+			Empleado p =  (Empleado) it.next();
+			System.out.println(p.toString());
 		}
-	}
-
-	@Test
-	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "persona.json" })
-	public void listarPersonaNamedTest() {
-		TypedQuery<Persona> query = entityManager.createNamedQuery(Persona.LISTAR_TODOS, Persona.class);
-		List<Persona> personas = query.getResultList();
-		Assert.assertEquals(personas.get(0).getNombre(), "Melissa");
-		Iterator ite = personas.iterator();
-
-		while (ite.hasNext()) {
-			System.out.println("2 "+ ite.next());
-		}
-	}
-
-	@Test
-	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "persona.json" })
-	public void loginTest() {
-		TypedQuery<Persona> query = entityManager.createNamedQuery(Persona.LISTAR_TODOS, Persona.class);
 		
-		query.setParameter("email", "email");
-		query.setParameter("password", "password");
-		
-		Persona p = query.getSingleResult();
-		
-		Assert.assertEquals(p.getNombre(), "nombre");
 	}
+	
+	
+	public void crearEmpleado(Empleado e) {
+		entityManager.persist(e);
+	}
+	
+	public void editarEmpleado(Empleado e) {
+		entityManager.merge(e);
+	}
+	
+	public void eliminarEmpleado(Empleado e) {
+		entityManager.remove(e);
+	}
+	
+	public Empleado buscarEmpleado(String idPersona) {
+		Empleado e = entityManager.find(Empleado.class, idPersona);
+		return e;
+	}
+	
+	public List<Empleado> getAllEmpleados() {		
+		Query q = entityManager.createNamedQuery(Empleado.EMPLEADO_GET_ALL);
+		List<Empleado> empleados = q.getResultList();
+		return empleados;
+	}
+	
+	
+	
+
 }
