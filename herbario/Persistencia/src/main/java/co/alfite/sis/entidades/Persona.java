@@ -71,6 +71,30 @@ public class Persona implements Serializable {
 	public Persona() {
 		super();
 	}
+	
+
+	public Persona(String idPersona, String nombre, String telefono, Date fechaNacimiento, String password,
+			String email) {
+		super();
+		this.idPersona = idPersona;
+		this.nombre = nombre;
+		this.telefono = telefono;
+		this.fechaNacimiento = fechaNacimiento;
+		this.password = password;
+		this.email = email;
+		
+	}
+	
+
+
+
+
+	@Override
+	public String toString() {
+		return "Persona [idPersona=" + idPersona + ", nombre=" + nombre + ", telefono=" + telefono
+				+ ", fechaNacimiento=" + fechaNacimiento + ", password=" + password + ", email=" + email +"]";
+	}
+
 
 	public HerbarioUQ getHerbario() {
 		return herbario;
