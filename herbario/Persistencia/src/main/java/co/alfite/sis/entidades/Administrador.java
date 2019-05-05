@@ -13,6 +13,7 @@ import javax.persistence.*;
  */
 @Entity
 
+
 public class Administrador extends Trabajador implements Serializable {
 
 	/**
