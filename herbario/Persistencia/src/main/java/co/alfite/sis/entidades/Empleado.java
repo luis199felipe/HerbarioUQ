@@ -8,7 +8,9 @@ import javax.persistence.*;
 
 /**
  * Entity implementation class for Entity: Empleado
- *
+ * 
+ * @author MelissaAlvarezCastro, NeyderFigueroaSanchez, LuisFelipeTejadaPadilla
+ * @version 1.0
  */
 @Entity
 @NamedQueries({
