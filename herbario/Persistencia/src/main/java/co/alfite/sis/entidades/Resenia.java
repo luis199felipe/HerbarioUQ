@@ -3,36 +3,50 @@ package co.alfite.sis.entidades;
 import java.io.Serializable;
 import javax.persistence.*;
 
-
 /**
  * Entity implementation class for Entity: Resenia
- *
+ * 
+ * @author MelissaAlvarezCastro, NeyderFigueroaSanchez, LuisFelipeTejadaPadilla
+ * @version 1.0
  */
 @Entity
 public class Resenia implements Serializable {
-	
+
+	/**
+	 * Muchos Resenia pertenecen a un Usuario
+	 */
+	@ManyToOne
+	private Usuario usuario;
+
+	/**
+	 * Muchos Resenia pertenecen a una EspeciePlanta
+	 */
+	@ManyToOne
+	private EspeciePlanta especie;
+
+	/**
+	 * identificacion unica de una Resenia
+	 */
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int idResenia;
-	
+
+	/**
+	 * texto de la resenia
+	 */
 	private String texto;
-	
+
 	/**
-	 * llave foranea: conecta registro con especiePlanta
+	 * estado de la Resenia (enviado, aprobado, rechazado)
 	 */
-	@Column(length = 10, nullable = false)
-	private String idEspecie;   
-	/**
-	 * estado del registro (enviado, aprobado, rechazado)
-	 */
-	private enum Estado{
-		enviado,aprovado,rechazado
+	private enum Estado {
+		enviado, aprobado, rechazado
 	}
+
 	@Enumerated(EnumType.STRING)
 	@Column(length = 10)
 	private Estado estado;
-	
-	
+
 	private static final long serialVersionUID = 1L;
 
 	public Resenia() {
@@ -55,14 +69,6 @@ public class Resenia implements Serializable {
 		this.texto = texto;
 	}
 
-	public String getIdEspecie() {
-		return idEspecie;
-	}
-
-	public void setIdEspecie(String idEspecie) {
-		this.idEspecie = idEspecie;
-	}
-
 	public Estado getEstado() {
 		return estado;
 	}
@@ -70,7 +76,21 @@ public class Resenia implements Serializable {
 	public void setEstado(Estado estado) {
 		this.estado = estado;
 	}
-	
-	
-   
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public EspeciePlanta getEspecie() {
+		return especie;
+	}
+
+	public void setEspecie(EspeciePlanta especie) {
+		this.especie = especie;
+	}
+
 }

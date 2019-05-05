@@ -7,23 +7,74 @@ import javax.persistence.*;
 
 /**
  * Entity implementation class for Entity: MeGustaEspeciePlanta
- *
+ * 
+ * @author MelissaAlvarezCastro, NeyderFigueroaSanchez, LuisFelipeTejadaPadilla
+ * @version 1.0
  */
 @Entity
 
 public class MeGustaEspeciePlanta implements Serializable {
 
+	/**
+	 * Muchos MeGustaEspeciePlanta pertenecen a un Usuario
+	 */
+	@ManyToOne
+	private Usuario usuario;
 	
-	private static final long serialVersionUID = 1L;
-	
+	/**
+	 * Muchos MeGustaEspeciePlanta pertenecen a una EspeciePlanta
+	 */
+	@ManyToOne
+	private EspeciePlanta especie;
+
+	/**
+	 * Identificacion unica de MegustaEspeciePlanta
+	 */
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int idMegusta;
-	
+
+	/**
+	 * fecha de publicacion del MeGustaEspeciePlanta
+	 */
 	private Date fecha;
+
+	private static final long serialVersionUID = 1L;
 
 	public MeGustaEspeciePlanta() {
 		super();
 	}
-   
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public EspeciePlanta getEspecie() {
+		return especie;
+	}
+
+	public void setEspecie(EspeciePlanta especie) {
+		this.especie = especie;
+	}
+
+	public int getIdMegusta() {
+		return idMegusta;
+	}
+
+	public void setIdMegusta(int idMegusta) {
+		this.idMegusta = idMegusta;
+	}
+
+	public Date getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
+	}
+
 }
