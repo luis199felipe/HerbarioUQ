@@ -6,113 +6,72 @@ import javax.persistence.*;
 
 /**
  * Entity implementation class for Entity: FamiliaPlanta
- *@author MelissaAlvarezCastro, NeyderFigueroaSanchez, LuisFelipeTejadaPadilla
- *@version 1.0
+ * 
+ * @author MelissaAlvarezCastro, NeyderFigueroaSanchez, LuisFelipeTejadaPadilla
+ * @version 1.0
  */
 @Entity
 
 public class RegistroEspecie implements Serializable {
-	
-	
-	
+
+	/**
+	 * Muchos Registros pertenecen a un Trabajador
+	 */
 	@ManyToOne
-	private Persona persona;
-	
-	@OneToOne(mappedBy="registro")
+	private Trabajador trabajador;
+
+	/**
+	 * Un registro tiene una Especie
+	 */
+	@OneToOne(mappedBy = "registro")
 	private EspeciePlanta especie;
-	
+
 	/**
 	 * identificacion unica de un registro
 	 */
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer idRegistro;
-	/**
-	 * llave foranea: conecta registro con familiaPlanta
-	 */
-	@Column(length = 10, nullable = false)
-	private String idFamilia;
-	
-	/**
-	 * llave foranea: conecta registro con generoPlanta
-	 */
-	@Column(length = 10, nullable = false)
-	private String idGenero;
-	/**
-	 * llave foranea: conecta registro con especiePlanta
-	 */
-	@Column(length = 10, nullable = false, unique = true)
-	private String idEspecie;   
+
 	/**
 	 * estado del registro (enviado, aprobado, rechazado)
 	 */
-	private enum Estado{
-		enviado,aprovado,rechazado
+	private enum Estado {
+		enviado, aprobado, rechazado
 	}
+
 	@Enumerated(EnumType.STRING)
 	@Column(length = 10)
 	private Estado estado;
+
 	/**
 	 * mensaje sobre el registro
 	 */
 	@Column(length = 100)
 	private String mensaje;
-	
+
 	private static final long serialVersionUID = 1L;
 
 	public RegistroEspecie() {
 		super();
-	}   
-	public String getIdFamilia() {
-		return this.idFamilia;
-	}
-	
-	public Persona getPersona() {
-		return persona;
-	}
-	
-	public void setPersona(Persona  p) {
-		this.persona = p;
-	}
-	public EspeciePlanta getEspecie() {
-		return especie;
-	}
-	public void setEspecie(EspeciePlanta especie) {
-		this.especie = especie;
 	}
 
-
-	public void setIdFamilia(String idFamilia) {
-		this.idFamilia = idFamilia;
-	}   
-	public String getIdGenero() {
-		return this.idGenero;
-	}
-
-	public void setIdGenero(String idGenero) {
-		this.idGenero = idGenero;
-	}   
-	public String getIdEspecie() {
-		return this.idEspecie;
-	}
-
-	public void setIdEspecie(String idEspecie) {
-		this.idEspecie = idEspecie;
-	}   
 	public Integer getIdRegistro() {
 		return this.idRegistro;
 	}
 
 	public void setIdRegistro(Integer idRegistro) {
 		this.idRegistro = idRegistro;
-	}   
+	}
+
 	public Estado getEstado() {
 		return this.estado;
 	}
 
 	public void setEstado(Estado estado) {
 		this.estado = estado;
-	}   
+	}
+
 	public String getMensaje() {
 		return this.mensaje;
 	}
@@ -120,5 +79,21 @@ public class RegistroEspecie implements Serializable {
 	public void setMensaje(String mensaje) {
 		this.mensaje = mensaje;
 	}
-   
+
+	public Trabajador getTrabajador() {
+		return trabajador;
+	}
+
+	public void setTrabajador(Trabajador trabajador) {
+		this.trabajador = trabajador;
+	}
+
+	public EspeciePlanta getEspecie() {
+		return especie;
+	}
+
+	public void setEspecie(EspeciePlanta especie) {
+		this.especie = especie;
+	}
+
 }
