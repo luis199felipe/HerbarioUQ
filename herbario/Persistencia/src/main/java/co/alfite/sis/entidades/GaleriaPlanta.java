@@ -5,7 +5,8 @@ import javax.persistence.*;
 
 /**
  * Entity implementation class for Entity: GaleriaPlanta
- *
+ *@author MelissaAlvarezCastro, NeyderFigueroaSanchez, LuisFelipeTejadaPadilla
+ *@version 1.0
  */
 @Entity
 

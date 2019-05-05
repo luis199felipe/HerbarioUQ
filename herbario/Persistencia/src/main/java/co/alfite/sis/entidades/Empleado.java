@@ -5,14 +5,16 @@ import javax.persistence.*;
 
 /**
  * Entity implementation class for Entity: Empleado
- *
+ * 
+ * @author MelissaAlvarezCastro, NeyderFigueroaSanchez, LuisFelipeTejadaPadilla
+ * @version 1.0
  */
 @Entity
 
-public class Empleado extends Persona  implements Serializable {
+public class Empleado extends Trabajador implements Serializable {
 
 	/**
-	 * Entidad que hereda de Persona , no tiene campos propios
+	 * Entidad que hereda de Persona, no tiene campos propios
 	 */
 
 	private static final long serialVersionUID = 1L;
