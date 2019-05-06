@@ -3,41 +3,141 @@
 		{
 			"idpersona": "1",
 			"nombre": "Melissa",
-			"email": "meli@gmial.com",
+			"email": "melissa@gmail.com",
 			"password": "root",
 			"dtype": "Recolector",
 			"telefono": "31298219322",
-			"fechanacimiento": "2001-10-12",
+			"fechanacimiento": "1999-10-12",
 			"herbario_idherbario": "her1"
 		},
 		{
 			"nombre": "Neyder",
-			"email": "neyder@gmial.com",
+			"email": "neyder@gmail.com",
 			"password": "root",
 			"dtype": "Empleado",
 			"telefono": "3123923922",
-			"fechanacimiento": "2001-10-12",
+			"fechanacimiento": "1995-08-15",
 			"idpersona": "2",
 			"herbario_idherbario": "her1"
 		},
 		{
 			"nombre": "Luis Felipe",
 			"dtype": "Administrador",
-			"email": "felipe@gmial.com",
+			"email": "felipe@gmail.com",
 			"password": "root",
 			"telefono": "1234324332",
-			"fechanacimiento": "2001-10-12",
+			"fechanacimiento": "1990-12-24",
 			"idpersona": "3",
 			"herbario_idherbario": "her1"
 		},
 		{
 			"idpersona": "4",
 			"nombre": "Andres",
-			"email": "Andres@gmial.com",
+			"email": "andres@gmail.com",
 			"password": "root",
 			"dtype": "Usuario",
-			"telefono": "1234324332",
-			"fechanacimiento": "2001-10-12",
+			"telefono": "3234644332",
+			"fechanacimiento": "1994-05-03",
+			"herbario_idherbario": "her1"
+		},
+		{
+			"idpersona": "5",
+			"nombre": "Ana Maria",
+			"email": "anamaria@gmail.com",
+			"password": "root",
+			"dtype": "Usuario",
+			"telefono": "3432434333",
+			"fechanacimiento": "1989-02-28",
+			"herbario_idherbario": "her1"
+		},
+		{
+			"idpersona": "6",
+			"nombre": "Juan Camilo",
+			"email": "juancamilo@gmail.com",
+			"password": "root",
+			"dtype": "Usuario",
+			"telefono": "1256724332",
+			"fechanacimiento": "1994-01-01",
+			"herbario_idherbario": "her1"
+		},
+		{
+			"idpersona": "7",
+			"nombre": "Valeria",
+			"email": "valeria@gmail.com",
+			"password": "root",
+			"dtype": "Administrador",
+			"telefono": "3452344332",
+			"fechanacimiento": "2000-11-15",
+			"herbario_idherbario": "her1"
+		},
+		{
+			"idpersona": "8",
+			"nombre": "carlos",
+			"email": "carlos@gmail.com",
+			"password": "root",
+			"dtype": "Recolector",
+			"telefono": "7234324642",
+			"fechanacimiento": "1993-12-12",
+			"herbario_idherbario": "her1"
+		},
+		{
+			"idpersona": "9",
+			"nombre": "Jorge",
+			"email": "jorge@gmail.com",
+			"password": "root",
+			"dtype": "Empleado",
+			"telefono": "3044324342",
+			"fechanacimiento": "1980-08-08",
+			"herbario_idherbario": "her1"
+		},
+		{
+			"idpersona": "10",
+			"nombre": "Camila",
+			"email": "camila@gmail.com",
+			"password": "root",
+			"dtype": "Usuario",
+			"telefono": "3103667239",
+			"fechanacimiento": "1993-05-30",
+			"herbario_idherbario": "her1"
+		},
+		{
+			"idpersona": "11",
+			"nombre": "Andrea",
+			"email": "Andrea@gmail.com",
+			"password": "root",
+			"dtype": "Usuario",
+			"telefono": "3243312332",
+			"fechanacimiento": "1999-07-15",
+			"herbario_idherbario": "her1"
+		},
+		{
+			"idpersona": "12",
+			"nombre": "Viviana",
+			"email": "viviana@gmail.com",
+			"password": "root",
+			"dtype": "Usuario",
+			"telefono": "1243321132",
+			"fechanacimiento": "1975-03-03",
+			"herbario_idherbario": "her1"
+		},
+		{
+			"idpersona": "13",
+			"nombre": "Michel",
+			"email": "michel@gmial.com",
+			"password": "root",
+			"dtype": "Recolector",
+			"telefono": "1253443322",
+			"fechanacimiento": "1990-10-05",
+			"herbario_idherbario": "her1"
+		},
+		{
+			"idpersona": "14",
+			"nombre": "Daniela",
+			"email": "daniela@gmial.com",
+			"password": "root",
+			"dtype": "Empleado",
+			"telefono": "4324343232",
+			"fechanacimiento": "2000-01-01",
 			"herbario_idherbario": "her1"
 		}
 	],
@@ -50,26 +150,71 @@
 		},
 		{
 			"idpersona": "3"
+		},
+		{
+			"idpersona": "7"
+		},
+		{
+			"idpersona": "8"
+		},
+		{
+			"idpersona": "9"
+		},
+		{
+			"idpersona": "13"
+		},
+		{
+			"idpersona": "14"
 		}
 	],
 	"RECOLECTOR": [
 		{
 			"idpersona": "1"
+		},
+		{
+			"idpersona": "8"
+		},
+		{
+			"idpersona": "13"
 		}
 	],
 	"EMPLEADO": [
 		{
 			"idpersona": "2"
+		},
+		{
+			"idpersona": "9"
+		},
+		{
+			"idpersona": "14"
 		}
 	],
 	"ADMINISTRADOR": [
 		{
 			"idpersona": "3"
+		},
+		{
+			"idpersona": "7"
 		}
 	],
 	"USUARIO": [
 		{
 			"idpersona": "4"
+		},
+		{
+			"idpersona": "5"
+		},
+		{
+			"idpersona": "6"
+		},
+		{
+			"idpersona": "10"
+		},
+		{
+			"idpersona": "11"
+		},
+		{
+			"idpersona": "12"
 		}
 	]
 }
