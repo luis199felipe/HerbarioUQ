@@ -50,51 +50,47 @@ public class TestCRUD {
 				.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
 
 	}
-	
+
 	@Test
-	@UsingDataSet({"persona.json"})
+	@UsingDataSet({ "persona.json", "registro.json", "herbarioUq.json", "generoPlanta.json",
+			"familiaPlanta.json", "especiePlanta.json" })
 	@Transactional(value = TransactionMode.ROLLBACK)
 	public void insertarPersonaTest() {
-		Empleado e1 = new Empleado("10", "Julio", "23423432", new Date("14/12/1999"), "123", "julio@gmail.com");
+		Empleado e1 = new Empleado("25", "Julio", "23423432", new Date("14/12/1999"), "123", "julio@gmail.com");
 		crearEmpleado(e1);
-		
-		Assert.assertNotNull(buscarEmpleado("10"));
-		
-		
+
+		Assert.assertNotNull(buscarEmpleado("25"));
+
 		List<Empleado> misEmp = getAllEmpleados();
 		Iterator<Empleado> it = misEmp.iterator();
 		while (it.hasNext()) {
-			Empleado p =  (Empleado) it.next();
+			Empleado p = (Empleado) it.next();
 			System.out.println(p.toString());
 		}
-		
+
 	}
-	
-	
+
 	public void crearEmpleado(Empleado e) {
 		entityManager.persist(e);
 	}
-	
+
 	public void editarEmpleado(Empleado e) {
 		entityManager.merge(e);
 	}
-	
+
 	public void eliminarEmpleado(Empleado e) {
 		entityManager.remove(e);
 	}
-	
+
 	public Empleado buscarEmpleado(String idPersona) {
 		Empleado e = entityManager.find(Empleado.class, idPersona);
 		return e;
 	}
-	
-	public List<Empleado> getAllEmpleados() {		
+
+	public List<Empleado> getAllEmpleados() {
 		Query q = entityManager.createNamedQuery(Empleado.EMPLEADO_GET_ALL);
 		List<Empleado> empleados = q.getResultList();
 		return empleados;
 	}
-	
-	
-	
 
 }
