@@ -7,7 +7,8 @@
 			"password": "root",
 			"dtype": "Recolector",
 			"telefono": "31298219322",
-			"fechanacimiento": "2001-10-12"
+			"fechanacimiento": "2001-10-12",
+			"herbario_idherbario": "her1"
 		},
 		{
 			"nombre": "Neyder",
@@ -16,7 +17,8 @@
 			"dtype": "Empleado",
 			"telefono": "3123923922",
 			"fechanacimiento": "2001-10-12",
-			"idpersona": "2"
+			"idpersona": "2",
+			"herbario_idherbario": "her1"
 		},
 		{
 			"nombre": "Luis Felipe",
@@ -25,16 +27,29 @@
 			"password": "root",
 			"telefono": "1234324332",
 			"fechanacimiento": "2001-10-12",
-			"idpersona": "3"
+			"idpersona": "3",
+			"herbario_idherbario": "her1"
 		},
 		{
 			"idpersona": "4",
 			"nombre": "Andres",
 			"email": "Andres@gmial.com",
 			"password": "root",
-			"dtype": "Administrador",
+			"dtype": "Usuario",
 			"telefono": "1234324332",
-			"fechanacimiento": "2001-10-12"
+			"fechanacimiento": "2001-10-12",
+			"herbario_idherbario": "her1"
+		}
+	],
+	"TRABAJADOR": [
+		{
+			"idpersona": "1"
+		},
+		{
+			"idpersona": "2"
+		},
+		{
+			"idpersona": "3"
 		}
 	],
 	"RECOLECTOR": [
@@ -50,7 +65,9 @@
 	"ADMINISTRADOR": [
 		{
 			"idpersona": "3"
-		},
+		}
+	],
+	"USUARIO": [
 		{
 			"idpersona": "4"
 		}
