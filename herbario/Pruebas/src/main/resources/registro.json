@@ -1,0 +1,40 @@
+{
+	"REGISTRO": [
+		{
+			"idregistro": "001",
+			"estado": "aprobado",
+			"mensaje": "muy buen trabajo",
+			"trabajador_idpersona": "1"
+		},
+		{
+			"idregistro": "002",
+			"estado": "enviado",
+			"mensaje": "Sigue en revision",
+			"trabajador_idpersona": "2"
+		},
+		{
+			"idregistro": "003",
+			"estado": "rechazado",
+			"mensaje": "campos mal diligenciados",
+			"trabajador_idpersona": "3"
+		},
+		{
+			"idregistro": "004",
+			"estado": "enviado",
+			"mensaje": "espere...",
+			"trabajador_idpersona": "1"
+		},
+		{
+			"idregistro": "005",
+			"estado": "aprobado",
+			"mensaje": "Buena investigacion",
+			"trabajador_idpersona": "2"
+		},
+		{
+			"idregistro": "006",
+			"estado": "enviado",
+			"mensaje": "espere...",
+			"trabajador_idpersona": "3"
+		}
+	]
+}
