@@ -11,8 +11,10 @@ import javax.persistence.*;
  * @author MelissaAlvarezCastro, NeyderFigueroaSanchez, LuisFelipeTejadaPadilla
  * @version 1.0
  */
-@Entity
 
+@NamedQueries({ @NamedQuery(name = Trabajador.TRABAJADOR_GET_ALL, query = "select trabajador from Trabajador trabajador") })
+
+@Entity
 public class Trabajador extends Persona implements Serializable {
 
 	/**
@@ -27,6 +29,10 @@ public class Trabajador extends Persona implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	
+	public static final String TRABAJADOR_GET_ALL = "TrabajadorGetAll";
+
+	
 	public Trabajador() {
 		super();
 	}

@@ -13,8 +13,10 @@ import javax.persistence.*;
  * @version 1.0
  */
 @Entity
-
+@NamedQueries({ @NamedQuery(name = ImagenPlanta.IMAGEN_GET_ALL, query = "select imagen from ImagenPlanta imagen") })
 public class ImagenPlanta implements Serializable {
+
+	public static final String IMAGEN_GET_ALL = "ImagenGetAll";
 
 	/**
 	 * Muchas ImagenesPlanta pertenecen a una EspecePlanta

@@ -12,6 +12,7 @@ import javax.persistence.*;
  * @version 1.0
  */
 @Entity
+@NamedQuery(name=MeGustaEspeciePlanta.MEGUSTAESPECIE_GET_ALL ,query="select megustaEspecie from MeGustaEspeciePlanta megustaEspecie")
 
 public class MeGustaEspeciePlanta implements Serializable {
 
@@ -20,6 +21,9 @@ public class MeGustaEspeciePlanta implements Serializable {
 	 */
 	@ManyToOne
 	private Usuario usuario;
+	
+	public static final String MEGUSTAESPECIE_GET_ALL = "MeGustaESpecieGetAll";
+
 	
 	/**
 	 * Muchos MeGustaEspeciePlanta pertenecen a una EspeciePlanta

@@ -11,8 +11,12 @@ import javax.persistence.*;
  * @version 1.0
  */
 @Entity
-
+@NamedQueries({
+	@NamedQuery(name=RegistroEspecie.REGISTRO_GET_ALL ,query="select registro from RegistroEspecie registro")
+})
 public class RegistroEspecie implements Serializable {
+
+	public static final String REGISTRO_GET_ALL = "RegistroGetAll";
 
 	/**
 	 * Muchos Registros pertenecen a un Trabajador

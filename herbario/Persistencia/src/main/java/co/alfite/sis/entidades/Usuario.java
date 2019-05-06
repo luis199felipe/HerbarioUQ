@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 /**
@@ -13,6 +15,9 @@ import javax.persistence.OneToMany;
  * @author MelissaAlvarezCastro, NeyderFigueroaSanchez, LuisFelipeTejadaPadilla
  * @version 1.0
  */
+
+@NamedQueries({ @NamedQuery(name = Usuario.USUARIO_GET_ALL, query = "select trabajador from Trabajador trabajador") })
+
 @Entity
 public class Usuario extends Persona implements Serializable {
 
@@ -25,6 +30,9 @@ public class Usuario extends Persona implements Serializable {
 	 */
 	@OneToMany(mappedBy = "usuario")
 	private List<Resenia> resenias;
+	
+	public static final String USUARIO_GET_ALL = "UsuarioGetAll";
+
 
 	/**
 	 * Un Usuario tiene muchas MeGusta de una EspeciePlanta (0..*)
