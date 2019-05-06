@@ -2,23 +2,28 @@
 	"FAMILIAPLANTA": [
 		{
 			"idFamilia": "fam1",
-			"nombre": "familia asteraceae"
+			"nombre": "familia asteraceae",
+			"herbario_idherbario": "her1"
 		},
 		{
 			"idFamilia": "fam2",
-			"nombre": "familia orchidaceae"
+			"nombre": "familia orchidaceae",
+			"herbario_idherbario": "her1"
 		},
 		{
 			"idFamilia": "fam3",
-			"nombre": "familia fabaceae"
+			"nombre": "familia fabaceae",
+			"herbario_idherbario": "her1"
 		},
 		{
 			"idFamilia": "fam4",
-			"nombre": "familia rubiaceae"
+			"nombre": "familia rubiaceae",
+			"herbario_idherbario": "her1"
 		},
 		{
 			"idFamilia": "fam5",
-			"nombre": "familia poaceae"
+			"nombre": "familia poaceae",
+			"herbario_idherbario": "her1"
 		}
 	]
 }

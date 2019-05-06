@@ -1,14 +1,55 @@
 {
 	"GENEROPLANTA": [
 		{
-			"idgenero":"gen1",
-			"nombre":"Barnadesioideae",
-			"familiaplanta_idfamilia":"fam1"
+			"idgenero": "gen1",
+			"nombre": "Barnadesioideae",
+			"familiaplanta_idfamilia": "fam1"
 		},
 		{
-			"idgenero":"gen2",
-			"nombre":"Mutisioideae",
-			"familiaplanta_idfamilia":"fam1"
+			"idgenero": "gen2",
+			"nombre": "Mutisioideae",
+			"familiaplanta_idfamilia": "fam1"
+			
+		},
+		{
+			"idgenero": "gen3",
+			"nombre": "Maranta",
+			"familiaplanta_idfamilia": "fam2"
+		},
+		{
+			"idgenero": "gen4",
+			"nombre": "Impatiens",
+			"familiaplanta_idfamilia": "fam2"
+		},
+		{
+			"idgenero": "gen5",
+			"nombre": "Calathea",
+			"familiaplanta_idfamilia": "fam3"
+		},
+		{
+			"idgenero": "gen6",
+			"nombre": "Saintpaulia",
+			"familiaplanta_idfamilia": "fam3"
+		},
+		{
+			"idgenero": "gen7",
+			"nombre": "Begonia",
+			"familiaplanta_idfamilia": "fam4"
+		},
+		{
+			"idgenero": "gen8",
+			"nombre": "Erythroxylum",
+			"familiaplanta_idfamilia": "fam4"
+		},
+		{
+			"idgenero": "gen9",
+			"nombre": "Solanum",
+			"familiaplanta_idfamilia": "fam5"
+		},
+		{
+			"idgenero": "gen10",
+			"nombre": "Tillandsia",
+			"familiaplanta_idfamilia": "fam5"
 		}
 	]
 }
