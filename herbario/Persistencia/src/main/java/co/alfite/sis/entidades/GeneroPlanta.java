@@ -12,9 +12,16 @@ import javax.persistence.*;
  *@version 1.0
  */
 @Entity
-
+@NamedQueries({
+	@NamedQuery(name=GeneroPlanta.GENERO_GET_ALL ,query="select genero from GeneroPlanta genero")
+})
 public class GeneroPlanta implements Serializable {
 
+	
+	public static final String GENERO_GET_ALL = "GeneroGetAll";
+
+	
+	
 	@OneToMany(mappedBy="generoPlanta")
 	private List<EspeciePlanta> especies;
 	

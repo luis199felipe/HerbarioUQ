@@ -12,9 +12,16 @@ import javax.persistence.*;
  *@version 1.0
  */
 @Entity
-
+@NamedQueries({
+	@NamedQuery(name=FamiliaPlanta.FAMILIA_GET_ALL ,query="select familia from FamiliaPlanta familia")
+})
 public class FamiliaPlanta implements Serializable {
 
+	
+	public static final String FAMILIA_GET_ALL = "FamiliaGetAll";
+
+	
+	
 	@ManyToOne
 	private HerbarioUQ herbario;
 	

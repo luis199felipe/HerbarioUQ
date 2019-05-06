@@ -14,9 +14,15 @@ import javax.persistence.*;
  * @version 1.0
  */
 @Entity
-
+@NamedQueries({
+	@NamedQuery(name=EspeciePlanta.ESPECIE_GET_ALL ,query="select especie from EspeciePlanta especie")
+})
 public class EspeciePlanta implements Serializable {
 
+	
+	public static final String ESPECIE_GET_ALL = "EspecieGetAll";
+
+	
 	/**
 	 * Una EspeciePlanta tiene muchas resenias de Usuarios
 	 */

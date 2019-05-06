@@ -12,10 +12,16 @@ import javax.persistence.*;
  * @version 1.0
  */
 @Entity
-
+@NamedQueries({
+	@NamedQuery(name=Administrador.ADMINISTRADOR_GET_ALL ,query="select administrador from Administrador administrador")
+})
 
 public class Administrador extends Trabajador implements Serializable {
 
+	
+	public static final String ADMINISTRADOR_GET_ALL = "AdministradorGetAll";
+
+	
 	/**
 	 * Entidad que hereda de Trabajador
 	 */
