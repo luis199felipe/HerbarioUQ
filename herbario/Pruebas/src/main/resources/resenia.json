@@ -4,7 +4,7 @@
 			"idresenia": 1,
 			"estado": "aprobado",
 			"texto": "La planta tambien se conoce como plants",
-			"especie_idespecie": "esp10",
+			"especie_idespecie": "esp1",
 			"usuario_idpersona": "4"
 		},
 		{
@@ -18,14 +18,14 @@
 			"idresenia": 3,
 			"estado": "rechazado",
 			"texto": "Blah Blah ahhhhhhhh",
-			"especie_idespecie": "esp15",
+			"especie_idespecie": "esp1",
 			"usuario_idpersona": "6"
 		},
 		{
 			"idresenia": 4,
 			"estado": "enviado",
-			"texto": "HOLAS SEÑORES Y SEÑORAS",
-			"especie_idespecie": "",
+			"texto": "HOLAS SENORES Y SENORAS",
+			"especie_idespecie": "esp13",
 			"usuario_idpersona": "10"
 		},
 		{
@@ -46,7 +46,7 @@
 			"idresenia": 7,
 			"estado": "rechazado",
 			"texto": "Como CoCo como, poco CoCo como",
-			"especie_idespecie": "",
+			"especie_idespecie": "esp12",
 			"usuario_idpersona": "4"
 		},
 		{
@@ -59,7 +59,9 @@
 		{
 			"idresenia": 9,
 			"estado": "enviado",
-			"texto": "Estas plantas se pueden encontrar en Africa"
+			"texto": "Estas plantas se pueden encontrar en Africa",
+			"especie_idespecie": "esp12",
+			"usuario_idpersona": "6"
 		}
 	]
 }

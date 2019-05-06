@@ -52,7 +52,7 @@ public class TestCRUD {
 	}
 
 	@Test
-	@UsingDataSet({ "persona.json", "registro.json", "herbarioUq.json", "generoPlanta.json",
+	@UsingDataSet({ "persona.json", "registro.json","resenia.json","herbarioUq.json", "generoPlanta.json",
 			"familiaPlanta.json", "especiePlanta.json" })
 	@Transactional(value = TransactionMode.ROLLBACK)
 	public void insertarPersonaTest() {
