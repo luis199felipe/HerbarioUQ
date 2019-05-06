@@ -35,6 +35,90 @@
 			"estado": "enviado",
 			"mensaje": "espere...",
 			"trabajador_idpersona": "3"
+		},
+		{
+			"idregistro": "007",
+			"estado": "aprobado",
+			"mensaje": "muy buen trabajo",
+			"trabajador_idpersona": "1"
+		},
+		{
+			"idregistro": "008",
+			"estado": "enviado",
+			"mensaje": "Sigue en revision",
+			"trabajador_idpersona": "3"
+		},
+		{
+			"idregistro": "009",
+			"estado": "rechazado",
+			"mensaje": "campos mal diligenciados",
+			"trabajador_idpersona": "2"
+		},
+		{
+			"idregistro": "010",
+			"estado": "enviado",
+			"mensaje": "espere...",
+			"trabajador_idpersona": "1"
+		},
+		{
+			"idregistro": "011",
+			"estado": "aprobado",
+			"mensaje": "Buena investigacion",
+			"trabajador_idpersona": "1"
+		},
+		{
+			"idregistro": "012",
+			"estado": "enviado",
+			"mensaje": "espere...",
+			"trabajador_idpersona": "3"
+		},
+		{
+			"idregistro": "013",
+			"estado": "aprobado",
+			"mensaje": "muy buen trabajo",
+			"trabajador_idpersona": "3"
+		},
+		{
+			"idregistro": "014",
+			"estado": "enviado",
+			"mensaje": "Sigue en revision",
+			"trabajador_idpersona": "2"
+		},
+		{
+			"idregistro": "015",
+			"estado": "rechazado",
+			"mensaje": "campos mal diligenciados",
+			"trabajador_idpersona": "2"
+		},
+		{
+			"idregistro": "016",
+			"estado": "enviado",
+			"mensaje": "espere...",
+			"trabajador_idpersona": "2"
+		},
+		{
+			"idregistro": "017",
+			"estado": "aprobado",
+			"mensaje": "Buena investigacion",
+			"trabajador_idpersona": "1"
+		},
+		{
+			"idregistro": "018",
+			"estado": "enviado",
+			"mensaje": "espere...",
+			"trabajador_idpersona": "3"
+		},
+		{
+			"idregistro": "019",
+			"estado": "aprobado",
+			"mensaje": "Buena investigacion",
+			"trabajador_idpersona": "3"
+		},
+		{
+			"idregistro": "020",
+			"estado": "enviado",
+			"mensaje": "espere...",
+			"trabajador_idpersona": "1"
 		}
 	]
 }
