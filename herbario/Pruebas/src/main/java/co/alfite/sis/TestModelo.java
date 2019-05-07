@@ -63,8 +63,6 @@ public class TestModelo {
 		entityManager.persist(administrador);
 		
 		Administrador a = entityManager.find(Administrador.class, administrador.getIdPersona());
-		FamiliaPlanta m = entityManager.find(FamiliaPlanta.class, "fam1");
-		GeneroPlanta g = entityManager.find(GeneroPlanta.class, "gen2");
 		Assert.assertNotNull(a);
 	}
 
