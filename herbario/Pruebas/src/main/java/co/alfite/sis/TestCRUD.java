@@ -1,5 +1,6 @@
 package co.alfite.sis;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -56,7 +57,13 @@ public class TestCRUD {
 			"familiaPlanta.json", "especiePlanta.json" })
 	@Transactional(value = TransactionMode.ROLLBACK)
 	public void insertarPersonaTest() {
-		Empleado e1 = new Empleado("25", "Julio", "23423432", new Date("14/12/1999"), "123", "julio@gmail.com");
+		Date fecha  = null;
+		try {
+			fecha = new SimpleDateFormat("dd/MM/yyyy").parse("12/12/1999");	
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		Empleado e1 = new Empleado("25", "Julio", "23423432", fecha, "123", "julio@gmail.com");
 		crearEmpleado(e1);
 
 		Assert.assertNotNull(buscarEmpleado("25"));
