@@ -1,17 +1,29 @@
 package co.alfite.sis;
 
+import java.util.Iterator;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.arquillian.persistence.UsingDataSet;
+import org.jboss.arquillian.transaction.api.annotation.TransactionMode;
+import org.jboss.arquillian.transaction.api.annotation.Transactional;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import co.alfite.sis.entidades.EspeciePlanta;
 import co.alfite.sis.entidades.Persona;
+import co.alfite.sis.entidades.RegistroEspecie;
+import co.alfite.sis.entidades.RegistroEspecie.Estado;
 
 @RunWith(Arquillian.class)
 
@@ -50,10 +62,20 @@ public class TestRead {
 
 	}
 	/*
-	 * permite ver la informacion detallada
+	 * permite ver las especies por genero especifico
 	 */
+	@Test
+	@UsingDataSet({"familiaPlanta.json","especiePlanta.json","herbarioUq.json","registro.json","persona.json","generoPlanta.json"})
+	@Transactional(value = TransactionMode.ROLLBACK)
 	public void listarEspeciesPorGenero() {
-
+		Query query = entityManager.createNamedQuery(EspeciePlanta.ESPECIES_GENERO);
+		query.setParameter("gen", "gen1");
+		List<EspeciePlanta> resultados = query.getResultList();
+		Iterator<EspeciePlanta> ep = resultados.iterator();
+		while (ep.hasNext()) {
+			EspeciePlanta especiePlanta = (EspeciePlanta) ep.next();
+			System.out.println(especiePlanta.getNombre());
+		}
 	}
 	/*
 	 * permite ver la informacion detallada
@@ -64,12 +86,33 @@ public class TestRead {
 	/*
 	 * permite ver la informacion detallada
 	 */
+	@Test
+	@UsingDataSet({"familiaPlanta.json","especiePlanta.json","herbarioUq.json","registro.json","persona.json","generoPlanta.json"})
+	@Transactional(value = TransactionMode.ROLLBACK)
 	public void listarEspeciesRechazadas() {
-
+		Query query = entityManager.createNamedQuery(EspeciePlanta.ESPECIES_ACEPTADAS);
+		query.setParameter("est", Estado.rechazado);
+		List resultados = query.getResultList();
+		Iterator ep = resultados.iterator();
+		while (ep.hasNext()) {
+			Object especiePlanta = ep.next();
+			System.out.println(especiePlanta);
+		}
 	}
 	
+	@Test
+	@UsingDataSet({"familiaPlanta.json","especiePlanta.json","herbarioUq.json","registro.json","persona.json","generoPlanta.json"})
+	@Transactional(value = TransactionMode.ROLLBACK)
 	public void listarEspeciesAceptadas() {
-
+		Query query = entityManager.createNamedQuery(EspeciePlanta.ESPECIES_ACEPTADAS);
+		query.setParameter("est", Estado.aprobado);
+		List resultados = query.getResultList();
+		Iterator ep = resultados.iterator();
+		while (ep.hasNext()) {
+			Object especiePlanta = ep.next();
+			System.out.println(especiePlanta);
+		}
 	}
+	
 	
 }

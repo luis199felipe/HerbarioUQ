@@ -22,12 +22,15 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import co.alfite.sis.entidades.FamiliaPlanta;
 import co.alfite.sis.entidades.Administrador;
 import co.alfite.sis.entidades.Empleado;
 import co.alfite.sis.entidades.FamiliaPlanta;
 import co.alfite.sis.entidades.GeneroPlanta;
 import co.alfite.sis.entidades.Persona;
 import co.alfite.sis.entidades.Recolector;
+import co.alfite.sis.entidades.Usuario;
+import co.alfite.sis.entidades.FamiliaPlanta;
 
 /**
  * Clase encargada de probar las consultas usando JPQL
@@ -107,7 +110,12 @@ public class TestUpdate {
 
 	}
 
-
+	/*
+	 * Permite la edicion de una familia de planta.
+	 */
+	@Test
+	@UsingDataSet({ "familiaPlanta.json"})
+	@Transactional(value = TransactionMode.ROLLBACK)
 	public void editarFamiliaPlanta() {
 		//Obtener Familia Planta a modificar
 		FamiliaPlanta familiaPlantaEditar = entityManager.find(FamiliaPlanta.class, "fam1");
@@ -119,23 +127,85 @@ public class TestUpdate {
 		entityManager.merge(familiaPlantaEditar);
 		
 		//Obtener Familia Planta ya modificado
-		FamiliaPlanta familiaPlantaEditar2 = entityManager.find(FamiliaPlanta.class, "gen1");
+		FamiliaPlanta familiaPlantaEditar2 = entityManager.find(FamiliaPlanta.class, "fam1");
 
 		//Verificacion de que la Familia Planta  cambio el nombre
 		Assert.assertEquals("No cambio el nombre", "asteraceae", familiaPlantaEditar2.getNombre());
 
 	}
-
-	public void editarEmpleado(Empleado e) {
+	
+	/*
+	 * Permite la edicion de un Recolector
+	 */
+	@Test
+	@UsingDataSet({ "Persona.json"})
+	@Transactional(value = TransactionMode.ROLLBACK)
+	public void editarRecolector() {
+		//Obtener Familia Planta a modificar
+		Recolector recolEditar = entityManager.find(Recolector.class, "13");
 		
+		//Edicion del correo del recolector con id 13
+		recolEditar.setEmail("michel12345@gmial.com");
+		
+		//Modificacion de Recolector
+		entityManager.merge(recolEditar);
+		
+		//Obtener Recolector ya modificado
+		Recolector recolectorEditar2 = entityManager.find(Recolector.class, "13");
+
+		//Verificacion de que recolector cambio el email
+		Assert.assertNotEquals("Cambio el email", "michel@gmial.com", recolectorEditar2.getEmail());
+
 	}
 
-	public void editarRecolector(Recolector e) {
-		entityManager.merge(e);
-	}
 
-	public void editarAdministrador(Administrador e) {
-		entityManager.merge(e);
-	}
+	
 
+	/*
+	 * Permite la edicion de un Administrador
+	 */
+	@Test
+	@UsingDataSet({ "Persona.json"})
+	@Transactional(value = TransactionMode.ROLLBACK)
+	public void editarAdministrador() {
+		//Obtener administrador a modificar
+		Administrador administradorEditar = entityManager.find(Administrador.class, "7");
+		
+		//Edicion del nombre del administrador "Valeria" a "Valentina"
+		administradorEditar.setNombre("Valentina");
+		
+		//Modificacion de administrador 
+		entityManager.merge(administradorEditar);
+		
+		//Obtener administrador ya modificado
+		Administrador administradorEditar2 = entityManager.find(Administrador.class, "7");
+
+		//Verificacion de que el admin  cambio el nombre
+		Assert.assertEquals("No cambio el nombre", "Valentina", administradorEditar2.getNombre());
+
+	}
+	
+	/*
+	 * Permite la edicion de un Usuario
+	 */
+	@Test
+	@UsingDataSet({ "Persona.json"})
+	@Transactional(value = TransactionMode.ROLLBACK)
+	public void editarUsuario() {
+		//Obtener Usuario a modificar
+		Usuario UsuarioEditar = entityManager.find(Usuario.class, "12");
+		
+		//Edicion del nombre del Usuario "Viviana" a "Vivi"
+		UsuarioEditar.setNombre("Vivi");
+		
+		//Modificacion de Usuario 
+		entityManager.merge(UsuarioEditar);
+		
+		//Obtener Usuario ya modificado
+		Usuario UsuarioEditar2 = entityManager.find(Usuario.class, "12");
+
+		//Verificacion de que el usuario  cambio el nombre
+		Assert.assertEquals("No cambio el nombre", "Vivi", UsuarioEditar2.getNombre());
+
+	}
 }
