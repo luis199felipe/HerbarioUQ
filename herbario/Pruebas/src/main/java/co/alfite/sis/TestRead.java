@@ -21,6 +21,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import co.alfite.sis.entidades.EspeciePlanta;
+import co.alfite.sis.entidades.FamiliaPlanta;
 import co.alfite.sis.entidades.Persona;
 import co.alfite.sis.entidades.RegistroEspecie;
 import co.alfite.sis.entidades.RegistroEspecie.Estado;
@@ -80,8 +81,19 @@ public class TestRead {
 	/*
 	 * permite ver la informacion detallada
 	 */
+	@Test
+	@UsingDataSet({"familiaPlanta.json","especiePlanta.json","herbarioUq.json","registro.json","persona.json","generoPlanta.json"})
+	@Transactional(value = TransactionMode.ROLLBACK)
 	public void listarEspeciesPorFamilia() {
-
+		Query query = entityManager.createNamedQuery(EspeciePlanta.ESPECIES_FAMILIA);
+		
+		query.setParameter("fam", "fam1");
+		List resultados = query.getResultList();
+		Iterator ep = resultados.iterator();
+		while (ep.hasNext()) {
+			Object especiePlanta =  ep.next();
+			System.out.println(especiePlanta);
+		}
 	}
 	/*
 	 * permite ver la informacion detallada
@@ -90,7 +102,7 @@ public class TestRead {
 	@UsingDataSet({"familiaPlanta.json","especiePlanta.json","herbarioUq.json","registro.json","persona.json","generoPlanta.json"})
 	@Transactional(value = TransactionMode.ROLLBACK)
 	public void listarEspeciesRechazadas() {
-		Query query = entityManager.createNamedQuery(EspeciePlanta.ESPECIES_ACEPTADAS);
+		Query query = entityManager.createNamedQuery(EspeciePlanta.ESPECIES_ESTADO);
 		query.setParameter("est", Estado.rechazado);
 		List resultados = query.getResultList();
 		Iterator ep = resultados.iterator();
@@ -104,7 +116,7 @@ public class TestRead {
 	@UsingDataSet({"familiaPlanta.json","especiePlanta.json","herbarioUq.json","registro.json","persona.json","generoPlanta.json"})
 	@Transactional(value = TransactionMode.ROLLBACK)
 	public void listarEspeciesAceptadas() {
-		Query query = entityManager.createNamedQuery(EspeciePlanta.ESPECIES_ACEPTADAS);
+		Query query = entityManager.createNamedQuery(EspeciePlanta.ESPECIES_ESTADO);
 		query.setParameter("est", Estado.aprobado);
 		List resultados = query.getResultList();
 		Iterator ep = resultados.iterator();
