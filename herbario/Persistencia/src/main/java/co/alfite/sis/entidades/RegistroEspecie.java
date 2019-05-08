@@ -40,7 +40,7 @@ public class RegistroEspecie implements Serializable {
 	/**
 	 * estado del registro (enviado, aprobado, rechazado)
 	 */
-	private enum Estado {
+	public enum Estado {
 		enviado, aprobado, rechazado
 	}
 
