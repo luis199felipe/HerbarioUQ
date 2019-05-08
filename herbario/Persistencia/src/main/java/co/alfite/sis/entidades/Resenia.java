@@ -9,12 +9,16 @@ import javax.persistence.*;
  * @author MelissaAlvarezCastro, NeyderFigueroaSanchez, LuisFelipeTejadaPadilla
  * @version 1.0
  */
-
-@NamedQueries({ @NamedQuery(name = Resenia.RESENIA_GET_ALL, query = "select resenia from Resenia resenia") })
 @Entity
+@NamedQueries({ 
+	@NamedQuery(name = Resenia.RESENIA_GET_ALL, query = "select resenia from Resenia resenia"), 
+	@NamedQuery(name = Resenia.RESENIA_ESPECIE, query = "select resenia from Resenia resenia where resenia.especie.idEspecie = :esp")
+})
+
 public class Resenia implements Serializable {
 
 	public static final String RESENIA_GET_ALL = "ReseniaGetAll";
+	public static final String RESENIA_ESPECIE = "ReseniaDeUnaEspecieEspecifica";
 
 	/**
 	 * Muchos Resenia pertenecen a un Usuario

@@ -12,17 +12,22 @@ import javax.persistence.*;
  * @version 1.0
  */
 @Entity
-@NamedQuery(name=MeGustaEspeciePlanta.MEGUSTAESPECIE_GET_ALL ,query="select megustaEspecie from MeGustaEspeciePlanta megustaEspecie")
-
+@NamedQueries({
+@NamedQuery(name=MeGustaEspeciePlanta.MEGUSTAESPECIE_GET_ALL ,query="select megustaEspecie from MeGustaEspeciePlanta megustaEspecie"),
+@NamedQuery(name=MeGustaEspeciePlanta.MEGUSTAESPECIE_ESPECIE ,query="select megusta from MeGustaEspeciePlanta megusta where megusta.especie.idEspecie = :esp "),
+//@NamedQuery(name=MeGustaEspeciePlanta.MEGUSTAESPECIE_ESPECIE ,query="select count(*)   from MeGustaEspeciePlanta megusta")
+})
 public class MeGustaEspeciePlanta implements Serializable {
 
 	/**
 	 * Muchos MeGustaEspeciePlanta pertenecen a un Usuario
 	 */
+	
 	@ManyToOne
 	private Usuario usuario;
 	
-	public static final String MEGUSTAESPECIE_GET_ALL = "MeGustaESpecieGetAll";
+	public static final String MEGUSTAESPECIE_GET_ALL = "MeGustaEspecieGetAll";
+	public static final String MEGUSTAESPECIE_ESPECIE = "MeGustaDeUnaEspecieEspecifica";
 
 	
 	/**

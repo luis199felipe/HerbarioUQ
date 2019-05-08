@@ -184,7 +184,7 @@ public class TestCreate {
 		RegistroEspecie registro = new RegistroEspecie();
 		registro.setIdRegistro(21);
 		registro.setMensaje("Espere...");
-		registro.setEstado(Estado.aprobado);
+		registro.setEstado(Estado.enviado);
 		registro.setTrabajador(trabajador);
 		
 		entityManager.persist(registro);
