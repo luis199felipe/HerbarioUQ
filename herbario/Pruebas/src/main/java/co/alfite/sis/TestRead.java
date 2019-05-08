@@ -1,5 +1,7 @@
 package co.alfite.sis;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.Iterator;
 import java.util.List;
 
@@ -7,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.swing.JOptionPane;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -52,16 +55,27 @@ public class TestRead {
 	/*
 	 * permite ver la informacion detallada
 	 */
-	public void verDetalleEspecie() {
-
+	@Test
+	@UsingDataSet({"familiaPlanta.json","especiePlanta.json","herbarioUq.json","registro.json","persona.json","generoPlanta.json"})
+	@Transactional(value = TransactionMode.ROLLBACK)
+	public void verDetalleEspeciePorNombre() {
+		String nombrePlanta = "planta4";
+		Query query = entityManager.createQuery("SELECT especie FROM EspeciePlanta especie where especie.nombre='"+nombrePlanta+"'",EspeciePlanta.class);
+		EspeciePlanta resultado = (EspeciePlanta) query.getSingleResult();
+		assertEquals("No existe la planta con el nombre dado",nombrePlanta,resultado.getNombre());
 	}
 	
 	/*
 	 * permite ver la informacion detallada
 	 */
+	@Test
+	@UsingDataSet({"familiaPlanta.json","especiePlanta.json","herbarioUq.json","registro.json","persona.json","generoPlanta.json"})
+	@Transactional(value = TransactionMode.ROLLBACK)
 	public void listarEspecies() {
-
-	}
+		Query query = entityManager.createNamedQuery(EspeciePlanta.ESPECIE_GET_ALL);
+		List<EspeciePlanta> resultados = query.getResultList();
+		assertEquals("Cantidad de especies erroneas",20,resultados.size());
+	}	
 	/*
 	 * permite ver las especies por genero especifico
 	 */
@@ -72,11 +86,7 @@ public class TestRead {
 		Query query = entityManager.createNamedQuery(EspeciePlanta.ESPECIES_GENERO);
 		query.setParameter("gen", "gen1");
 		List<EspeciePlanta> resultados = query.getResultList();
-		Iterator<EspeciePlanta> ep = resultados.iterator();
-		while (ep.hasNext()) {
-			EspeciePlanta especiePlanta = (EspeciePlanta) ep.next();
-			System.out.println(especiePlanta.getNombre());
-		}
+		assertEquals("Cantidad de especies por genero erroneas",2,resultados.size());
 	}
 	/*
 	 * permite ver la informacion detallada
@@ -89,11 +99,7 @@ public class TestRead {
 		
 		query.setParameter("fam", "fam1");
 		List resultados = query.getResultList();
-		Iterator ep = resultados.iterator();
-		while (ep.hasNext()) {
-			Object especiePlanta =  ep.next();
-			System.out.println(especiePlanta);
-		}
+		assertEquals("Cantidad de especies por familia erroneas",4,resultados.size());
 	}
 	/*
 	 * permite ver la informacion detallada
@@ -105,11 +111,7 @@ public class TestRead {
 		Query query = entityManager.createNamedQuery(EspeciePlanta.ESPECIES_ESTADO);
 		query.setParameter("est", Estado.rechazado);
 		List resultados = query.getResultList();
-		Iterator ep = resultados.iterator();
-		while (ep.hasNext()) {
-			Object especiePlanta = ep.next();
-			System.out.println(especiePlanta);
-		}
+		assertEquals("Cantidad de especies rechazadas erroneas",3,resultados.size());
 	}
 	
 	@Test
@@ -119,11 +121,7 @@ public class TestRead {
 		Query query = entityManager.createNamedQuery(EspeciePlanta.ESPECIES_ESTADO);
 		query.setParameter("est", Estado.aprobado);
 		List resultados = query.getResultList();
-		Iterator ep = resultados.iterator();
-		while (ep.hasNext()) {
-			Object especiePlanta = ep.next();
-			System.out.println(especiePlanta);
-		}
+		assertEquals("Cantidad de especies aceptadas erroneas",7,resultados.size());
 	}
 	
 	
