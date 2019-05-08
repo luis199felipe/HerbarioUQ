@@ -43,7 +43,7 @@ public class Resenia implements Serializable {
 	/**
 	 * estado de la Resenia (enviado, aprobado, rechazado)
 	 */
-	private enum Estado {
+	public enum Estado {
 		enviado, aprobado, rechazado
 	}
 

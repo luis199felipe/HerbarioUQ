@@ -23,6 +23,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import co.alfite.sis.entidades.*;
 
+import co.alfite.sis.entidades.RegistroEspecie.Estado;
+
 /**
  * Clase encargada de probar las consultas usando JPQL
  * 
@@ -50,9 +52,6 @@ public class TestCreate {
 				.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
 	}
 
-	/**
-	 * Metodos de Administrador
-	 */
 
 	/**
 	 * test que crea un nuevo genero de planta
@@ -134,10 +133,10 @@ public class TestCreate {
 		HerbarioUQ herbario = entityManager.find(HerbarioUQ.class, "her1");
 
 		Recolector recolector = new Recolector();
-		recolector.setIdPersona("16");
-		recolector.setNombre("Maria");
-		recolector.setTelefono("3234943546");
-		recolector.setEmail("maria@gmail.com");
+		recolector.setIdPersona("17");
+		recolector.setNombre("Jose");
+		recolector.setTelefono("3233456546");
+		recolector.setEmail("jose@gmail.com");
 		recolector.setFechaNacimiento(new Date());
 		recolector.setPassword("root");
 		recolector.setHerbario(herbario);
@@ -149,6 +148,31 @@ public class TestCreate {
 	}
 
 	/**
+	 * test que crea un nuevo Usuario
+	 */
+
+	@Test
+	@UsingDataSet({ "persona.json" })
+	@Transactional(value = TransactionMode.ROLLBACK)
+	public void createUsuarioTest() {
+		HerbarioUQ herbario = entityManager.find(HerbarioUQ.class, "her1");
+
+		Usuario usuario = new Usuario();
+		usuario.setIdPersona("16");
+		usuario.setNombre("Maria");
+		usuario.setTelefono("3234943546");
+		usuario.setEmail("maria@gmail.com");
+		usuario.setFechaNacimiento(new Date());
+		usuario.setPassword("root");
+		usuario.setHerbario(herbario);
+
+		entityManager.persist(usuario);
+
+		Usuario recolectorGuardado = entityManager.find(Usuario.class, usuario.getIdPersona());
+		Assert.assertNotNull(recolectorGuardado);
+	}
+	
+	/**
 	 * test que crea un nuevo registro de una especie
 	 */
 
@@ -156,7 +180,17 @@ public class TestCreate {
 	@UsingDataSet({ "persona.json" })
 	@Transactional(value = TransactionMode.ROLLBACK)
 	public void createRegistoEspecieTest() {
+		Trabajador trabajador = entityManager.find(Trabajador.class, "3");
 		RegistroEspecie registro = new RegistroEspecie();
+		registro.setIdRegistro(21);
+		registro.setMensaje("Espere...");
+		registro.setEstado(Estado.aprobado);
+		registro.setTrabajador(trabajador);
+		
+		entityManager.persist(registro);
+		
+		RegistroEspecie registroGuardado = entityManager.find(RegistroEspecie.class, 21);
+		Assert.assertNotNull(registroGuardado);
 	}
 
 }

@@ -1,0 +1,40 @@
+{
+	"MEGUSTAESPECIEPLANTA": [
+		{
+			"idmegusta": 1,
+			"fecha": "2019-05-07",
+			"especie_idespecie": "esp1",
+			"usuario_idpersona": "4"
+		},
+		{
+			"idmegusta": 2,
+			"fecha": "2019-05-03",
+			"especie_idespecie": "esp13",
+			"usuario_idpersona": "4"
+		},
+		{
+			"idmegusta": 3,
+			"fecha": "2019-04-28",
+			"especie_idespecie": "esp19",
+			"usuario_idpersona": "5"
+		},
+		{
+			"idmegusta": 4,
+			"fecha": "2019-05-01",
+			"especie_idespecie": "esp3",
+			"usuario_idpersona": "6"
+		},
+		{
+			"idmegusta": 5,
+			"fecha": "2019-04-20",
+			"especie_idespecie": "esp4",
+			"usuario_idpersona": "4"
+		},
+		{
+			"idmegusta": 6,
+			"fecha": "2019-05-09",
+			"especie_idespecie": "esp18",
+			"usuario_idpersona": "10"
+		}
+	]
+}
