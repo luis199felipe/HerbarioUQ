@@ -16,14 +16,16 @@ import javax.persistence.*;
 @Entity
 @NamedQueries({
 	@NamedQuery(name=EspeciePlanta.ESPECIE_GET_ALL ,query="select especie from EspeciePlanta especie"),
-	@NamedQuery(name=EspeciePlanta.ESPECIES_ACEPTADAS ,query="SELECT especie FROM EspeciePlanta especie where especie.registro.estado = :est "),
-	@NamedQuery(name=EspeciePlanta.ESPECIES_GENERO ,query="SELECT especie FROM EspeciePlanta especie where especie.generoPlanta.idGenero=:gen ")
+	@NamedQuery(name=EspeciePlanta.ESPECIES_ESTADO ,query="SELECT especie FROM EspeciePlanta especie where especie.registro.estado = :est "),
+	@NamedQuery(name=EspeciePlanta.ESPECIES_GENERO ,query="SELECT especie FROM EspeciePlanta especie where especie.generoPlanta.idGenero= :gen "),
+	@NamedQuery(name=EspeciePlanta.ESPECIES_FAMILIA ,query="SELECT especie FROM EspeciePlanta especie where especie.generoPlanta.familiaPlanta.idFamilia = :fam ")
 })
 public class EspeciePlanta implements Serializable {
 	
 	public static final String ESPECIE_GET_ALL = "EspecieGetAll";
-	public static final String ESPECIES_ACEPTADAS = "EspeciesAceptadas";
+	public static final String ESPECIES_ESTADO = "EspeciesEstado";
 	public static final String ESPECIES_GENERO= "EspeciesGenero";
+	public static final String ESPECIES_FAMILIA= "EspeciesFamilia";
 
 	
 	/**
