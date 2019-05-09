@@ -189,8 +189,8 @@ public class TestOpcionUnica {
 	public void ReadEspecieConMasMeGustas() {
 		TypedQuery<MeGustaEspeciePlanta> query = entityManager
 				.createNamedQuery(MeGustaEspeciePlanta.MEGUSTAESPECIE_ESPECIEMASMEGUSTAS, MeGustaEspeciePlanta.class);
-		MeGustaEspeciePlanta meGustas = query.getSingleResult();
-		System.out.println(meGustas.getEspecie().getIdEspecie());
+		List meGustas = query.getResultList();
+		
 
 	}
 
