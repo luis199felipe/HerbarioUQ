@@ -35,7 +35,7 @@ import co.alfite.sis.entidades.FamiliaPlanta;
 /**
  * Clase encargada de probar las consultas usando JPQL
  * 
- * @author Melissa Neyder Pipe
+ * @author MelissaAlvarezCastro, NeyderFigueroaSanchez, LuisFelipeTejadaPadilla
  * @version 1.0
  */
 @RunWith(Arquillian.class)

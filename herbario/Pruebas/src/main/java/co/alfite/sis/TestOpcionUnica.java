@@ -114,11 +114,6 @@ public class TestOpcionUnica {
 
 		Assert.assertEquals("El tamanio no coincide", 2, meGustas.size());
 
-//		Iterator ite = meGustas.iterator();
-//
-//		while (ite.hasNext()) {
-//			System.out.println("1 " + ite.next());
-//		}
 	}
 
 	/**
@@ -130,18 +125,12 @@ public class TestOpcionUnica {
 	@Transactional(value = TransactionMode.ROLLBACK)
 	public void ReadReseniasDeUnaEspecie() {
 
-		TypedQuery<Resenia> query = entityManager
-				.createNamedQuery(Resenia.RESENIA_ESPECIE, Resenia.class);
+		TypedQuery<Resenia> query = entityManager.createNamedQuery(Resenia.RESENIA_ESPECIE, Resenia.class);
 		query.setParameter("esp", "esp12");
 		List<Resenia> resenias = query.getResultList();
 
 		Assert.assertEquals("El tamanio no coincide", 3, resenias.size());
-		
-//		Iterator ite = personas.iterator();
-//
-//		while (ite.hasNext()) {
-//			System.out.println("2 " + ite.next());
-//		}
+
 	}
 
 	/**
@@ -202,6 +191,7 @@ public class TestOpcionUnica {
 				.createNamedQuery(MeGustaEspeciePlanta.MEGUSTAESPECIE_ESPECIEMASMEGUSTAS, MeGustaEspeciePlanta.class);
 		MeGustaEspeciePlanta meGustas = query.getSingleResult();
 		System.out.println(meGustas.getEspecie().getIdEspecie());
+
 	}
 
 	/**

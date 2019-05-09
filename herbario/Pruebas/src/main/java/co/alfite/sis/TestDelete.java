@@ -28,6 +28,14 @@ import co.alfite.sis.entidades.Recolector;
 
 import co.alfite.sis.entidades.Persona;
 
+/*
+ * clase que permite testear o verificar que se pueda eliminar correctamente  de las entidades
+ * 
+ * @author MelissaAlvarezCastro, NeyderFigueroaSanchez, LuisFelipeTejadaPadilla
+ * 
+ * @version 1.0
+ */
+
 @RunWith(Arquillian.class)
 public class TestDelete {
 
