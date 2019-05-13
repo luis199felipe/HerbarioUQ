@@ -54,7 +54,7 @@ public class TestJPQL {
 	/**
 	 * permite cargar la lista de personas
 	 */
-	@Test
+	// @Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json" })
 	public void listarPersonaTest() {
@@ -63,35 +63,70 @@ public class TestJPQL {
 		Iterator ite = listaPersona.iterator();
 
 		while (ite.hasNext()) {
-			System.out.println("1 "+ ite.next());
+			System.out.println("1 " + ite.next());
 		}
 	}
 
-	@Test
+	// @Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json" })
 	public void listarPersonaNamedTest() {
 		TypedQuery<Persona> query = entityManager.createNamedQuery(Persona.LISTAR_TODOS, Persona.class);
 		List<Persona> personas = query.getResultList();
-		//Assert.assertEquals(personas.get(0).getNombre(), "Melissa");
+		// Assert.assertEquals(personas.get(0).getNombre(), "Melissa");
 		Iterator ite = personas.iterator();
 
 		while (ite.hasNext()) {
-			System.out.println("2 "+ ite.next());
+			System.out.println("2 " + ite.next());
 		}
+	}
+
+	// @Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "familiaPlanta.json" })
+	public void loginTest() {
+		TypedQuery<Persona> query = entityManager.createNamedQuery(Persona.LISTAR_TODOS, Persona.class);
+
+		query.setParameter("email", "email");
+		query.setParameter("password", "password");
+
+		Persona p = query.getSingleResult();
+
+		Assert.assertEquals(p.getNombre(), "nombre");
 	}
 
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "persona.json" })
-	public void loginTest() {
-		TypedQuery<Persona> query = entityManager.createNamedQuery(Persona.LISTAR_TODOS, Persona.class);
+	@UsingDataSet({ "familiaPlanta.json" })
+	public void cantidadFamiliasTest() {
+		TypedQuery<FamiliaPlanta> query = entityManager.createNamedQuery(FamiliaPlanta.FAMILIA_GET_NUMBER,
+				FamiliaPlanta.class);
+
+		List<FamiliaPlanta> p = query.getResultList();
+
+		System.out.println(p.size());
+		for (int i = 0; i < p.size(); i++) {
+			System.out.println(p.get(i));	
+		}
 		
-		query.setParameter("email", "email");
-		query.setParameter("password", "password");
 		
-		Persona p = query.getSingleResult();
+	}
+	
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json","registro.json","especiePlanta.json" })
+	public void personasSinRegistros() {
+		TypedQuery<Trabajador> query = entityManager.createNamedQuery(Trabajador.TRABAJADOR_GET_EMPTY_REGISTERS,
+				Trabajador.class);
+
+		List<Trabajador> p = query.getResultList();
+
+		//deberia devolver todas las personas que no tienenregistros
+		System.out.println(p.size()+"R");
+		for (int i = 0; i < p.size(); i++) {
+			System.out.println(p.get(i)+"R");	
+		}
 		
-		Assert.assertEquals(p.getNombre(), "nombre");
+		
 	}
 }

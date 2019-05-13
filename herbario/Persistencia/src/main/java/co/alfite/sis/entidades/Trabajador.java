@@ -12,7 +12,9 @@ import javax.persistence.*;
  * @version 1.0
  */
 
-@NamedQueries({ @NamedQuery(name = Trabajador.TRABAJADOR_GET_ALL, query = "select trabajador from Trabajador trabajador") })
+@NamedQueries({
+		@NamedQuery(name = Trabajador.TRABAJADOR_GET_ALL, query = "select trabajador from Trabajador trabajador"),
+		@NamedQuery(name = Trabajador.TRABAJADOR_GET_EMPTY_REGISTERS, query = "select trabajador from Trabajador trabajador where trabajador.registros IS EMPTY") })
 
 @Entity
 public class Trabajador extends Persona implements Serializable {
@@ -29,10 +31,9 @@ public class Trabajador extends Persona implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	
 	public static final String TRABAJADOR_GET_ALL = "TrabajadorGetAll";
+	public static final String TRABAJADOR_GET_EMPTY_REGISTERS = "TrabajadorSinRegistros";
 
-	
 	public Trabajador() {
 		super();
 	}

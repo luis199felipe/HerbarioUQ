@@ -15,6 +15,8 @@ import javax.persistence.*;
 
 public class HerbarioUQ implements Serializable {
 
+	
+
 	/**
 	 * un Herbario tiene muchas FamiliaPlanta
 	 */

@@ -13,11 +13,13 @@ import javax.persistence.*;
  * @version 1.0
  */
 @Entity
-@NamedQueries({
-		@NamedQuery(name = FamiliaPlanta.FAMILIA_GET_ALL, query = "select familia from FamiliaPlanta familia") })
+@NamedQueries({ @NamedQuery(name = FamiliaPlanta.FAMILIA_GET_ALL, query = "select familia from FamiliaPlanta familia"),
+		@NamedQuery(name = FamiliaPlanta.FAMILIA_GET_NUMBER, query = "SELECT COUNT(p) from FamiliaPlanta p ") })
 public class FamiliaPlanta implements Serializable {
 
 	public static final String FAMILIA_GET_ALL = "FamiliaGetAll";
+	public static final String FAMILIA_GET_NUMBER = "FamiliaGetNumber";
+	public static final String FAMILIA_MAX_ESP= "familiaMasEspecies";
 
 	@ManyToOne
 	private HerbarioUQ herbario;
