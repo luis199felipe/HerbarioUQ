@@ -14,12 +14,14 @@ import javax.persistence.*;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@NamedQueries({ @NamedQuery(name = Persona.LISTAR_TODOS, query = "select p from Persona p") })
-@NamedQuery(name = Persona.PERSONA_POR_CREDENCIALES, query = "select p from Persona p where p.email= :email and p.password=:password")
+@NamedQueries({ @NamedQuery(name = Persona.LISTAR_TODOS, query = "select p from Persona p"),
+		@NamedQuery(name = Persona.PERSONA_POR_CREDENCIALES, query = "select p from Persona p where p.email= :email and p.password=:password")
+		 })
 
 public class Persona implements Serializable {
 
 	public static final String LISTAR_TODOS = "ListarClientes";
+	
 
 	/**
 	 * identificacion unica de una persona
@@ -71,7 +73,6 @@ public class Persona implements Serializable {
 	public Persona() {
 		super();
 	}
-	
 
 	public Persona(String idPersona, String nombre, String telefono, Date fechaNacimiento, String password,
 			String email) {
@@ -82,19 +83,14 @@ public class Persona implements Serializable {
 		this.fechaNacimiento = fechaNacimiento;
 		this.password = password;
 		this.email = email;
-		
+
 	}
-	
-
-
-
 
 	@Override
 	public String toString() {
 		return "Persona [idPersona=" + idPersona + ", nombre=" + nombre + ", telefono=" + telefono
-				+ ", fechaNacimiento=" + fechaNacimiento + ", password=" + password + ", email=" + email +"]";
+				+ ", fechaNacimiento=" + fechaNacimiento + ", password=" + password + ", email=" + email + "]";
 	}
-
 
 	public HerbarioUQ getHerbario() {
 		return herbario;

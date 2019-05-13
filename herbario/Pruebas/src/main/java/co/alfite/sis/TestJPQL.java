@@ -95,7 +95,7 @@ public class TestJPQL {
 		Assert.assertEquals(p.getNombre(), "nombre");
 	}
 
-	@Test
+	//@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "familiaPlanta.json" })
 	public void cantidadFamiliasTest() {
@@ -112,7 +112,7 @@ public class TestJPQL {
 		
 	}
 	
-	@Test
+	//@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json","registro.json","especiePlanta.json" })
 	public void personasSinRegistros() {
@@ -125,6 +125,24 @@ public class TestJPQL {
 		System.out.println(p.size()+"R");
 		for (int i = 0; i < p.size(); i++) {
 			System.out.println(p.get(i)+"R");	
+		}
+		
+		
+	}
+	
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json","registro.json","especiePlanta.json" })
+	public void registrosTrabajador() {
+		TypedQuery<DTO> query = entityManager.createNamedQuery(Trabajador.TRABAJADOR_GET_REGISTERS,
+				DTO.class);
+
+		List<co.alfite.sis.DTO> p = query.getResultList();
+
+		//deberia devolver todas las personas que no tienenregistros
+		System.out.println(p.size()+"T");
+		for (int i = 0; i < p.size(); i++) {
+			System.out.println(p.get(i).getCedula()+"T");	
 		}
 		
 		
