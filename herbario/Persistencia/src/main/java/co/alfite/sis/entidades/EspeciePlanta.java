@@ -14,20 +14,19 @@ import javax.persistence.*;
  * @version 1.0
  */
 @Entity
-@NamedQueries({
-	@NamedQuery(name=EspeciePlanta.ESPECIE_GET_ALL ,query="select especie from EspeciePlanta especie"),
-	@NamedQuery(name=EspeciePlanta.ESPECIES_ESTADO ,query="SELECT especie FROM EspeciePlanta especie where especie.registro.estado = :est "),
-	@NamedQuery(name=EspeciePlanta.ESPECIES_GENERO ,query="SELECT especie FROM EspeciePlanta especie where especie.generoPlanta.idGenero= :gen "),
-	@NamedQuery(name=EspeciePlanta.ESPECIES_FAMILIA ,query="SELECT especie FROM EspeciePlanta especie where especie.generoPlanta.familiaPlanta.idFamilia = :fam ")
-})
+@NamedQueries({ @NamedQuery(name = EspeciePlanta.ESPECIE_GET_ALL, query = "select especie from EspeciePlanta especie"),
+		@NamedQuery(name = EspeciePlanta.ESPECIES_ESTADO, query = "SELECT especie FROM EspeciePlanta especie where especie.registro.estado = :est "),
+		@NamedQuery(name = EspeciePlanta.ESPECIES_GENERO, query = "SELECT especie FROM EspeciePlanta especie where especie.generoPlanta.idGenero= :gen "),
+		@NamedQuery(name = EspeciePlanta.ESPECIES_FAMILIA, query = "SELECT especie FROM EspeciePlanta especie where especie.generoPlanta.familiaPlanta.idFamilia = :fam "),
+		@NamedQuery(name = EspeciePlanta.FAMILIA_MAX_ESPECIE, query = "select new co.alfite.sis.DTO(especie.generoPlanta.familiaPlanta.idFamilia,count(especie)) from EspeciePlanta especie group by especie.generoPlanta.familiaPlanta.idFamilia") })
 public class EspeciePlanta implements Serializable {
-	
+
 	public static final String ESPECIE_GET_ALL = "EspecieGetAll";
 	public static final String ESPECIES_ESTADO = "EspeciesEstado";
-	public static final String ESPECIES_GENERO= "EspeciesGenero";
-	public static final String ESPECIES_FAMILIA= "EspeciesFamilia";
+	public static final String ESPECIES_GENERO = "EspeciesGenero";
+	public static final String ESPECIES_FAMILIA = "EspeciesFamilia";
+	public static final String FAMILIA_MAX_ESPECIE = "familiaMasEspecies";
 
-	
 	/**
 	 * Una EspeciePlanta tiene muchas resenias de Usuarios
 	 */

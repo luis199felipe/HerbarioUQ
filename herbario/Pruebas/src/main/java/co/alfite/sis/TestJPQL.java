@@ -141,7 +141,7 @@ public class TestJPQL {
 
 	}
 
-	@Test
+	//@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "especiePlanta.json", "generoPlanta.json", "familiaPlanta.json" })
 	public void registrosAceptados() {
@@ -150,11 +150,28 @@ public class TestJPQL {
 		query.setParameter("est", Estado.aprobado);
 		List<Long> p = query.getResultList();
 
-		// deberia devolver todas las personas que no tienenregistros
+
 
 		for (int i = 0; i < p.size(); i++) {
 			System.out.println(p.get(i));
 		}
 
 	}
+	@Test
+		@Transactional(value = TransactionMode.ROLLBACK)
+		@UsingDataSet({ "persona.json", "registro.json", "especiePlanta.json", "generoPlanta.json", "familiaPlanta.json" })
+		public void familiaMasEspecies() {
+			TypedQuery<DTO> query = entityManager.createNamedQuery(EspeciePlanta.FAMILIA_MAX_ESPECIE, DTO.class);
+
+			
+			List<DTO> p = query.getResultList();
+
+			//estoy reutilizando el dto por eso cedula y num registros
+			//pero en realidad es nombrefamilia y numero de especies
+
+			for (int i = 0; i < p.size(); i++) {
+				System.out.println(p.get(i).getCedula()+","+ p.get(i).getNumeroRegistros());
+			}
+
+		}
 }
