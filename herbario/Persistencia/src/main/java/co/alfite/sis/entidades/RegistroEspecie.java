@@ -16,7 +16,7 @@ import javax.persistence.*;
 @NamedQueries({
 		@NamedQuery(name = RegistroEspecie.REGISTRO_GET_ALL, query = "select registro from RegistroEspecie registro"),
 		@NamedQuery(name = RegistroEspecie.TRABAJADOR_GET_REGISTERS, query = "select new co.alfite.sis.DTO(registro.trabajador.idPersona,count(registro.trabajador.idPersona)) from RegistroEspecie registro group by registro.trabajador.idPersona") ,
-		@NamedQuery(name = RegistroEspecie.TRABAJADOR_GET_ENVIOS, query = "select count(registro) from RegistroEspecie registro where registro.estado=:est group by registro.trabajador.idPersona ")})
+		@NamedQuery(name = RegistroEspecie.TRABAJADOR_GET_ENVIOS, query = "select count(registro) from RegistroEspecie registro where (registro.estado=:est) group by registro.fecha  ")})
 public class RegistroEspecie implements Serializable {
 
 	public static final String REGISTRO_GET_ALL = "RegistroGetAll";
