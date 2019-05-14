@@ -14,8 +14,7 @@ import javax.persistence.*;
 
 @NamedQueries({
 		@NamedQuery(name = Trabajador.TRABAJADOR_GET_ALL, query = "select trabajador from Trabajador trabajador"),
-		@NamedQuery(name = Trabajador.TRABAJADOR_GET_EMPTY_REGISTERS, query = "select trabajador from Trabajador trabajador where trabajador.registros IS EMPTY or (NOT NUll=false)"),
-		@NamedQuery(name = Trabajador.TRABAJADOR_GET_REGISTERS, query = "select new co.alfite.sis.DTO(trabajador.nombre,count(trabajador.registros)) from Trabajador trabajador")})
+		@NamedQuery(name = Trabajador.TRABAJADOR_GET_EMPTY_REGISTERS, query = "select trabajador from Trabajador trabajador where trabajador.registros IS EMPTY or (NOT NUll=false)")})
 
 @Entity
 public class Trabajador extends Persona implements Serializable {
@@ -35,7 +34,6 @@ public class Trabajador extends Persona implements Serializable {
 
 	public static final String TRABAJADOR_GET_ALL = "TrabajadorGetAll";
 	public static final String TRABAJADOR_GET_EMPTY_REGISTERS = "TrabajadorSinRegistros";
-	public static final String TRABAJADOR_GET_REGISTERS = "registrosTrabajador";
 
 	public Trabajador() {
 		super();

@@ -2,6 +2,8 @@ package co.alfite.sis.entidades;
 
 import java.io.Serializable;
 import java.lang.String;
+import java.util.Date;
+
 import javax.persistence.*;
 
 /**
@@ -12,11 +14,16 @@ import javax.persistence.*;
  */
 @Entity
 @NamedQueries({
-	@NamedQuery(name=RegistroEspecie.REGISTRO_GET_ALL ,query="select registro from RegistroEspecie registro")
-})
+		@NamedQuery(name = RegistroEspecie.REGISTRO_GET_ALL, query = "select registro from RegistroEspecie registro"),
+		@NamedQuery(name = RegistroEspecie.TRABAJADOR_GET_REGISTERS, query = "select new co.alfite.sis.DTO(registro.trabajador.idPersona,count(registro.trabajador.idPersona)) from RegistroEspecie registro group by registro.trabajador.idPersona") ,
+		@NamedQuery(name = RegistroEspecie.TRABAJADOR_GET_ENVIOS, query = "select count(registro) from RegistroEspecie registro where registro.estado=:est group by registro.trabajador.idPersona ")})
 public class RegistroEspecie implements Serializable {
 
 	public static final String REGISTRO_GET_ALL = "RegistroGetAll";
+
+	public static final String TRABAJADOR_GET_REGISTERS = "registrosTrabajador";
+	public static final String TRABAJADOR_GET_ENVIOS = "cantidadRegistrosDia";
+
 
 	/**
 	 * Muchos Registros pertenecen a un Trabajador
@@ -53,6 +60,12 @@ public class RegistroEspecie implements Serializable {
 	 */
 	@Column(length = 100)
 	private String mensaje;
+
+	/**
+	 * fecha del registro
+	 */
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date fecha;
 
 	private static final long serialVersionUID = 1L;
 
@@ -98,6 +111,14 @@ public class RegistroEspecie implements Serializable {
 
 	public void setEspecie(EspeciePlanta especie) {
 		this.especie = especie;
+	}
+
+	public Date getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
 	}
 
 }

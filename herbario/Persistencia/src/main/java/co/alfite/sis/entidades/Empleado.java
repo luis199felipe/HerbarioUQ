@@ -16,7 +16,7 @@ import javax.persistence.*;
 @NamedQueries({
 	@NamedQuery(name=Empleado.EMPLEADO_GET_ALL ,query="select empleado from Empleado empleado")
 })
-public class Empleado extends Persona  implements Serializable {
+public class Empleado extends Trabajador  implements Serializable {
 
 	/**
 	 * Entidad que hereda de Persona , no tiene campos propios

@@ -22,6 +22,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import co.alfite.sis.entidades.*;
+import co.alfite.sis.entidades.RegistroEspecie.Estado;
 
 /**
  * Clase encargada de probar las consultas usando JPQL
@@ -124,18 +125,35 @@ public class TestJPQL {
 
 	}
 
-	@Test
+	// @Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "especiePlanta.json", "generoPlanta.json", "familiaPlanta.json" })
 	public void registrosTrabajador() {
-		TypedQuery<DTO> query = entityManager.createNamedQuery(Trabajador.TRABAJADOR_GET_REGISTERS, DTO.class);
+		TypedQuery<DTO> query = entityManager.createNamedQuery(RegistroEspecie.TRABAJADOR_GET_REGISTERS, DTO.class);
 
 		List<co.alfite.sis.DTO> p = query.getResultList();
 
 		// deberia devolver todas las personas que no tienenregistros
-		
+
 		for (int i = 0; i < p.size(); i++) {
-			System.out.println(p.get(i).getCedula() + ","+p.get(i).getNumeroRegistros());
+			System.out.println(p.get(i).getCedula() + "," + p.get(i).getNumeroRegistros());
+		}
+
+	}
+
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "registro.json", "especiePlanta.json", "generoPlanta.json", "familiaPlanta.json" })
+	public void registrosAceptados() {
+		TypedQuery<Long> query = entityManager.createNamedQuery(RegistroEspecie.TRABAJADOR_GET_ENVIOS, Long.class);
+
+		query.setParameter("est", Estado.aprobado);
+		List<Long> p = query.getResultList();
+
+		// deberia devolver todas las personas que no tienenregistros
+
+		for (int i = 0; i < p.size(); i++) {
+			System.out.println(p.get(i));
 		}
 
 	}
