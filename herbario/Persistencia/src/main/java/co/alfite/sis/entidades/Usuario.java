@@ -16,7 +16,7 @@ import javax.persistence.OneToMany;
  * @version 1.0
  */
 
-@NamedQueries({ @NamedQuery(name = Usuario.USUARIO_GET_ALL, query = "select trabajador from Trabajador trabajador") })
+@NamedQueries({ @NamedQuery(name = Usuario.USUARIO_GET_ALL, query = "select u from Usuario u") })
 
 @Entity
 public class Usuario extends Persona implements Serializable {

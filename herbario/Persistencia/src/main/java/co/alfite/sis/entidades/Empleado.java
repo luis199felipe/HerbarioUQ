@@ -33,8 +33,5 @@ public class Empleado extends Persona  implements Serializable {
 		super();
 	}
 	
-	public Empleado(String idPersona, String nombre, String telefono, Date fechaNacimiento, String password,
-			String email) {
-		super(idPersona, nombre, telefono, fechaNacimiento, password, email);
-	}
+	
 }

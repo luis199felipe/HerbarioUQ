@@ -95,56 +95,48 @@ public class TestJPQL {
 		Assert.assertEquals(p.getNombre(), "nombre");
 	}
 
-	//@Test
+	// @Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "familiaPlanta.json" })
 	public void cantidadFamiliasTest() {
-		TypedQuery<FamiliaPlanta> query = entityManager.createNamedQuery(FamiliaPlanta.FAMILIA_GET_NUMBER,
-				FamiliaPlanta.class);
+		TypedQuery<Long> query = entityManager.createNamedQuery(FamiliaPlanta.FAMILIA_GET_NUMBER, Long.class);
 
-		List<FamiliaPlanta> p = query.getResultList();
+		Long a = query.getSingleResult();
 
-		System.out.println(p.size());
-		for (int i = 0; i < p.size(); i++) {
-			System.out.println(p.get(i));	
-		}
-		
-		
+		System.out.println(a);
 	}
-	
-	//@Test
+
+	// @Test
 	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "persona.json","registro.json","especiePlanta.json" })
+	@UsingDataSet({ "persona.json", "registro.json", "especiePlanta.json", "generoPlanta.json", "familiaPlanta.json" })
 	public void personasSinRegistros() {
 		TypedQuery<Trabajador> query = entityManager.createNamedQuery(Trabajador.TRABAJADOR_GET_EMPTY_REGISTERS,
 				Trabajador.class);
 
 		List<Trabajador> p = query.getResultList();
 
-		//deberia devolver todas las personas que no tienenregistros
-		System.out.println(p.size()+"R");
+		// haye un problema con el trabajor 9, 14
+		Trabajador x = entityManager.find(Trabajador.class, "14");
+		System.out.println(x.getNombre() + "##############");
 		for (int i = 0; i < p.size(); i++) {
-			System.out.println(p.get(i)+"R");	
+			System.out.println(p.get(i) + "R");
 		}
-		
-		
+
 	}
-	
+
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "persona.json","registro.json","especiePlanta.json" })
+	@UsingDataSet({ "persona.json", "registro.json", "especiePlanta.json", "generoPlanta.json", "familiaPlanta.json" })
 	public void registrosTrabajador() {
-		TypedQuery<DTO> query = entityManager.createNamedQuery(Trabajador.TRABAJADOR_GET_REGISTERS,
-				DTO.class);
+		TypedQuery<DTO> query = entityManager.createNamedQuery(Trabajador.TRABAJADOR_GET_REGISTERS, DTO.class);
 
 		List<co.alfite.sis.DTO> p = query.getResultList();
 
-		//deberia devolver todas las personas que no tienenregistros
-		System.out.println(p.size()+"T");
+		// deberia devolver todas las personas que no tienenregistros
+		
 		for (int i = 0; i < p.size(); i++) {
-			System.out.println(p.get(i).getCedula()+"T");	
+			System.out.println(p.get(i).getCedula() + ","+p.get(i).getNumeroRegistros());
 		}
-		
-		
+
 	}
 }
