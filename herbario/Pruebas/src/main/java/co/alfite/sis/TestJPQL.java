@@ -96,10 +96,10 @@ public class TestJPQL {
 		Assert.assertEquals(p.getNombre(), "nombre");
 	}
 
-	// @Test
+	//@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "familiaPlanta.json" })
-	public void cantidadFamiliasTest() {
+	public void cantidadFamiliasRegistradasTest() {
 		TypedQuery<Long> query = entityManager.createNamedQuery(FamiliaPlanta.FAMILIA_GET_NUMBER, Long.class);
 
 		Long a = query.getSingleResult();
@@ -125,7 +125,7 @@ public class TestJPQL {
 
 	}
 
-	// @Test
+	//@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "especiePlanta.json", "generoPlanta.json", "familiaPlanta.json" })
 	public void registrosTrabajador() {
@@ -141,7 +141,7 @@ public class TestJPQL {
 
 	}
 
-	//@Test
+	// @Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "especiePlanta.json", "generoPlanta.json", "familiaPlanta.json" })
 	public void registrosAceptados() {
@@ -150,28 +150,31 @@ public class TestJPQL {
 		query.setParameter("est", Estado.aprobado);
 		List<Long> p = query.getResultList();
 
-
-
 		for (int i = 0; i < p.size(); i++) {
 			System.out.println(p.get(i));
 		}
 
 	}
+
 	@Test
-		@Transactional(value = TransactionMode.ROLLBACK)
-		@UsingDataSet({ "persona.json", "registro.json", "especiePlanta.json", "generoPlanta.json", "familiaPlanta.json" })
-		public void familiaMasEspecies() {
-			TypedQuery<DTO> query = entityManager.createNamedQuery(EspeciePlanta.FAMILIA_MAX_ESPECIE, DTO.class);
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "registro.json", "especiePlanta.json", "generoPlanta.json", "familiaPlanta.json" })
+	public void familiaMasEspecies() {
+		TypedQuery<DTO> query = entityManager.createNamedQuery(EspeciePlanta.FAMILIA_MAX_ESPECIE, DTO.class);
 
-			
-			List<DTO> p = query.getResultList();
+		List<DTO> p = query.getResultList();
+		
+		//System.out.println(p.get(0).getCedula() + ", "+ p.get(0).getNumeroRegistros());
+		
+//		DTO p2 = query.getSingleResult();
+//		System.out.println(p2);
+		
+		// estoy reutilizando el dto por eso cedula y num registros
+		// pero en realidad es nombrefamilia y numero de especies
 
-			//estoy reutilizando el dto por eso cedula y num registros
-			//pero en realidad es nombrefamilia y numero de especies
-
-			for (int i = 0; i < p.size(); i++) {
-				System.out.println(p.get(i).getCedula()+","+ p.get(i).getNumeroRegistros());
-			}
-
+		for (int i = 0; i < p.size(); i++) {
+			System.out.println(p.get(i).getCedula() + "," + p.get(i).getNumeroRegistros());
 		}
+
+	}
 }

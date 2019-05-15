@@ -32,7 +32,7 @@
 			"idEspecie": "esp5",
 			"nombre": "planta5",
 			"nombreCientifico": "plantaus5",
-			"generoplanta_idgenero": "gen3",
+			"generoplanta_idgenero": "gen1",
 			"registro_idregistro": "005"
 		},
 		{
@@ -130,14 +130,14 @@
 			"idEspecie": "esp19",
 			"nombre": "planta19",
 			"nombreCientifico": "plantaus19",
-			"generoplanta_idgenero": "gen10",
+			"generoplanta_idgenero": "gen5",
 			"registro_idregistro": "019"
 		},
 		{
 			"idEspecie": "esp20",
 			"nombre": "planta20",
 			"nombreCientifico": "plantaus20",
-			"generoplanta_idgenero": "gen10",
+			"generoplanta_idgenero": "gen5",
 			"registro_idregistro": "020"
 		}
 	]

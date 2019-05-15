@@ -18,7 +18,8 @@ import javax.persistence.*;
 		@NamedQuery(name = EspeciePlanta.ESPECIES_ESTADO, query = "SELECT especie FROM EspeciePlanta especie where especie.registro.estado = :est "),
 		@NamedQuery(name = EspeciePlanta.ESPECIES_GENERO, query = "SELECT especie FROM EspeciePlanta especie where especie.generoPlanta.idGenero= :gen "),
 		@NamedQuery(name = EspeciePlanta.ESPECIES_FAMILIA, query = "SELECT especie FROM EspeciePlanta especie where especie.generoPlanta.familiaPlanta.idFamilia = :fam "),
-		@NamedQuery(name = EspeciePlanta.FAMILIA_MAX_ESPECIE, query = "select new co.alfite.sis.DTO(especie.generoPlanta.familiaPlanta.idFamilia,count(especie)) from EspeciePlanta especie group by especie.generoPlanta.familiaPlanta.idFamilia") })
+		//@NamedQuery(name = EspeciePlanta.FAMILIA_MAX_ESPECIE, query = "select max(count(especie.generoPlanta.familiaPlanta.idFamilia)), new co.alfite.sis.DTO(especie.generoPlanta.familiaPlanta.idFamilia,count(especie.generoPlanta.familiaPlanta.idFamilia)) from EspeciePlanta especie group by especie.generoPlanta.familiaPlanta.idFamilia") })
+		@NamedQuery(name = EspeciePlanta.FAMILIA_MAX_ESPECIE, query = "select new co.alfite.sis.DTO(fam.nombre, count(fam.idFamilia) ) from FamiliaPlanta fam, GeneroPlanta gen, EspeciePlanta esp where ((gen.idGenero = esp.generoPlanta.idGenero)and(fam.idFamilia = gen.familiaPlanta.idFamilia)) group by fam.idFamilia") })
 public class EspeciePlanta implements Serializable {
 
 	public static final String ESPECIE_GET_ALL = "EspecieGetAll";

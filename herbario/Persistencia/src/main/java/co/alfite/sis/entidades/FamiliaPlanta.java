@@ -14,7 +14,6 @@ import javax.persistence.*;
  */
 @Entity
 @NamedQueries({ @NamedQuery(name = FamiliaPlanta.FAMILIA_GET_ALL, query = "select familia from FamiliaPlanta familia"),
-		@NamedQuery(name = FamiliaPlanta.FAMILIA_GET_NUMBER, query = "SELECT COUNT(p) from FamiliaPlanta p "),
 		@NamedQuery(name = FamiliaPlanta.FAMILIA_GET_NUMBER, query = "SELECT COUNT(p) from FamiliaPlanta p ") })
 public class FamiliaPlanta implements Serializable {
 

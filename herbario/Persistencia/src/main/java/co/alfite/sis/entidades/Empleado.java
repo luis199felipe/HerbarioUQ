@@ -19,7 +19,7 @@ import javax.persistence.*;
 public class Empleado extends Trabajador  implements Serializable {
 
 	/**
-	 * Entidad que hereda de Persona , no tiene campos propios
+	 * Entidad que hereda de Persona, no tiene campos propios
 	 */
 	private static final long serialVersionUID = 1L;
 	
