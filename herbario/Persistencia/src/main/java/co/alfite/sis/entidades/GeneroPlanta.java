@@ -13,12 +13,15 @@ import javax.persistence.*;
  */
 @Entity
 @NamedQueries({
-	@NamedQuery(name=GeneroPlanta.GENERO_GET_ALL ,query="select genero from GeneroPlanta genero")
+	@NamedQuery(name=GeneroPlanta.GENERO_GET_ALL ,query="select genero from GeneroPlanta genero"),
+	
+	@NamedQuery(name=GeneroPlanta.GENERO_GET_ESPECIES ,query="select esp from GeneroPlanta genero, IN(genero.especies) esp where genero.idGenero=:var")
 })
 public class GeneroPlanta implements Serializable {
 
 	
 	public static final String GENERO_GET_ALL = "GeneroGetAll";
+	public static final String GENERO_GET_ESPECIES = "GeneroGeteSPECIES";
 
 	
 	

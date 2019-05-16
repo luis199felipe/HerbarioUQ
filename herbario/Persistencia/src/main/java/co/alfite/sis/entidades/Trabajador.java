@@ -14,7 +14,7 @@ import javax.persistence.*;
 
 @NamedQueries({
 		@NamedQuery(name = Trabajador.TRABAJADOR_GET_ALL, query = "select trabajador from Trabajador trabajador"),
-		@NamedQuery(name = Trabajador.TRABAJADOR_GET_EMPTY_REGISTERS, query = "select trabajador from Trabajador trabajador where trabajador.registros IS EMPTY or (NOT NUll=false)")})
+		@NamedQuery(name = Trabajador.TRABAJADOR_GET_EMPTY_REGISTERS, query = "select trabajador from Trabajador trabajador where trabajador.registros IS EMPTY or (NOT NUll=false)") })
 
 @Entity
 public class Trabajador extends Persona implements Serializable {

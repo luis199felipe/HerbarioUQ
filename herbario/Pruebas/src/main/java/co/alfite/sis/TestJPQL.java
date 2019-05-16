@@ -1,5 +1,7 @@
 package co.alfite.sis;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -96,7 +98,7 @@ public class TestJPQL {
 		Assert.assertEquals(p.getNombre(), "nombre");
 	}
 
-	//@Test
+	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "familiaPlanta.json" })
 	public void cantidadFamiliasRegistradasTest() {
@@ -104,10 +106,11 @@ public class TestJPQL {
 
 		Long a = query.getSingleResult();
 
-		System.out.println(a);
+		assertEquals("cantidad de familias incorrectas", 5 + "", a + "");
+
 	}
 
-	// @Test
+	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "especiePlanta.json", "generoPlanta.json", "familiaPlanta.json" })
 	public void personasSinRegistros() {
@@ -115,17 +118,10 @@ public class TestJPQL {
 				Trabajador.class);
 
 		List<Trabajador> p = query.getResultList();
-
-		// haye un problema con el trabajor 9, 14
-		Trabajador x = entityManager.find(Trabajador.class, "14");
-		System.out.println(x.getNombre() + "##############");
-		for (int i = 0; i < p.size(); i++) {
-			System.out.println(p.get(i) + "R");
-		}
-
+		assertEquals("cantidad de personas  sin registro incorrectas", 5, p.size());
 	}
 
-	//@Test
+	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "especiePlanta.json", "generoPlanta.json", "familiaPlanta.json" })
 	public void registrosTrabajador() {
@@ -133,15 +129,11 @@ public class TestJPQL {
 
 		List<co.alfite.sis.DTO> p = query.getResultList();
 
-		// deberia devolver todas las personas que no tienenregistros
-
-		for (int i = 0; i < p.size(); i++) {
-			System.out.println(p.get(i).getCedula() + "," + p.get(i).getNumeroRegistros());
-		}
+		assertEquals("cantidad de registros asociados incorrectos", 3, p.size());
 
 	}
 
-	// @Test
+	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "especiePlanta.json", "generoPlanta.json", "familiaPlanta.json" })
 	public void registrosAceptados() {
@@ -150,31 +142,45 @@ public class TestJPQL {
 		query.setParameter("est", Estado.aprobado);
 		List<Long> p = query.getResultList();
 
-		for (int i = 0; i < p.size(); i++) {
-			System.out.println(p.get(i));
-		}
+		assertEquals("cantidad de registros aceptados incorrectos", 3, p.size());
 
 	}
 
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "especiePlanta.json", "generoPlanta.json", "familiaPlanta.json" })
-	public void familiaMasEspecies() {
-		TypedQuery<DTO> query = entityManager.createNamedQuery(EspeciePlanta.FAMILIA_MAX_ESPECIE, DTO.class);
+	public void familiaDadaUnaEspecie() {
+		TypedQuery<FamiliaPlanta> query = entityManager.createNamedQuery(EspeciePlanta.ESPECIES_FAMILIA_ID,
+				FamiliaPlanta.class);
 
-		List<DTO> p = query.getResultList();
-		
-		//System.out.println(p.get(0).getCedula() + ", "+ p.get(0).getNumeroRegistros());
-		
-//		DTO p2 = query.getSingleResult();
-//		System.out.println(p2);
-		
-		// estoy reutilizando el dto por eso cedula y num registros
-		// pero en realidad es nombrefamilia y numero de especies
+		query.setParameter("idEspecie", "esp1");
+		FamiliaPlanta p = query.getSingleResult();
 
-		for (int i = 0; i < p.size(); i++) {
-			System.out.println(p.get(i).getCedula() + "," + p.get(i).getNumeroRegistros());
-		}
-
+		assertEquals("la familia no existe", "fam1", p.getIdFamilia());
 	}
+
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "registro.json", "especiePlanta.json", "generoPlanta.json", "familiaPlanta.json" })
+	public void especiesDelGenero() {
+		TypedQuery<EspeciePlanta> query = entityManager.createNamedQuery(GeneroPlanta.GENERO_GET_ESPECIES,
+				EspeciePlanta.class);
+		query.setParameter("var", "gen1");
+		List<EspeciePlanta> p = query.getResultList();
+
+		assertEquals("la cantidad de especies es incorrecta", 3, p.size());
+	}
+	
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "registro.json", "especiePlanta.json", "generoPlanta.json", "familiaPlanta.json" })
+	public void trabajadoresConRegistro() {
+		TypedQuery<Trabajador> query = entityManager.createNamedQuery(RegistroEspecie.TRABAJADOR_WITH_REGISTERS,
+				Trabajador.class);
+	
+		List<Trabajador> p = query.getResultList();
+
+		assertEquals("la cantidad de trabajadores sin registro es  incorrecta", 5, p.size());
+	}
+
 }

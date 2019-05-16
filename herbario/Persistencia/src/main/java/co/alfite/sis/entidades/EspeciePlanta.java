@@ -18,15 +18,18 @@ import javax.persistence.*;
 		@NamedQuery(name = EspeciePlanta.ESPECIES_ESTADO, query = "SELECT especie FROM EspeciePlanta especie where especie.registro.estado = :est "),
 		@NamedQuery(name = EspeciePlanta.ESPECIES_GENERO, query = "SELECT especie FROM EspeciePlanta especie where especie.generoPlanta.idGenero= :gen "),
 		@NamedQuery(name = EspeciePlanta.ESPECIES_FAMILIA, query = "SELECT especie FROM EspeciePlanta especie where especie.generoPlanta.familiaPlanta.idFamilia = :fam "),
-		//@NamedQuery(name = EspeciePlanta.FAMILIA_MAX_ESPECIE, query = "select max(count(especie.generoPlanta.familiaPlanta.idFamilia)), new co.alfite.sis.DTO(especie.generoPlanta.familiaPlanta.idFamilia,count(especie.generoPlanta.familiaPlanta.idFamilia)) from EspeciePlanta especie group by especie.generoPlanta.familiaPlanta.idFamilia") })
-		@NamedQuery(name = EspeciePlanta.FAMILIA_MAX_ESPECIE, query = "select new co.alfite.sis.DTO(fam.nombre, count(fam.idFamilia) ) from FamiliaPlanta fam, GeneroPlanta gen, EspeciePlanta esp where ((gen.idGenero = esp.generoPlanta.idGenero)and(fam.idFamilia = gen.familiaPlanta.idFamilia)) group by fam.idFamilia") })
+		@NamedQuery(name = EspeciePlanta.FAMILIA_MAX_ESPECIE, query = "select count(esp.generoPlanta.familiaPlanta.idFamilia) as n from EspeciePlanta esp where n= :var group by esp.generoPlanta.familiaPlanta.idFamilia "),
+		@NamedQuery(name = EspeciePlanta.ESPECIES_FAMILIA_ID, query = "SELECT especie.generoPlanta.familiaPlanta FROM EspeciePlanta especie where especie.idEspecie = :idEspecie ")})
+
 public class EspeciePlanta implements Serializable {
 
 	public static final String ESPECIE_GET_ALL = "EspecieGetAll";
 	public static final String ESPECIES_ESTADO = "EspeciesEstado";
 	public static final String ESPECIES_GENERO = "EspeciesGenero";
 	public static final String ESPECIES_FAMILIA = "EspeciesFamilia";
+	public static final String ESPECIES_FAMILIA_ID = "EspeciesFamiliaPrID";
 	public static final String FAMILIA_MAX_ESPECIE = "familiaMasEspecies";
+	public static final String FAMILIA_MAX = "familiaMas";
 
 	/**
 	 * Una EspeciePlanta tiene muchas resenias de Usuarios
