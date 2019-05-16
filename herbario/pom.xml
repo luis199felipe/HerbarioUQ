@@ -78,5 +78,7 @@
   <modules>
     <module>Persistencia</module>
     <module>Pruebas</module>
+    <module>ear-huq</module>
+    <module>Negocio</module>
   </modules>
 </project>

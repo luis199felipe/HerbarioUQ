@@ -16,12 +16,13 @@ import javax.persistence.*;
 @Inheritance(strategy = InheritanceType.JOINED)
 @NamedQueries({ @NamedQuery(name = Persona.LISTAR_TODOS, query = "select p from Persona p"),
 		@NamedQuery(name = Persona.PERSONA_POR_CREDENCIALES, query = "select p from Persona p where p.email= :email and p.password=:password")
-		 })
+		 ,@NamedQuery(name = Persona.PERSONA_POR_EMAIL, query = "select p from Persona p where p.email= :email")
+})
 
 public class Persona implements Serializable {
 
 	public static final String LISTAR_TODOS = "ListarClientes";
-	
+	public static final String PERSONA_POR_EMAIL = "personaPorEmail";
 
 	/**
 	 * identificacion unica de una persona
