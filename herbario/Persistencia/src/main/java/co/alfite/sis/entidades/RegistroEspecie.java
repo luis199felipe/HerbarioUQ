@@ -18,7 +18,11 @@ import javax.persistence.*;
 		@NamedQuery(name = RegistroEspecie.TRABAJADOR_GET_REGISTERS, query = "select new co.alfite.sis.DTO(registro.trabajador.idPersona,count(registro.trabajador.idPersona)) from RegistroEspecie registro group by registro.trabajador.idPersona"),
 		@NamedQuery(name = RegistroEspecie.TRABAJADOR_GET_ENVIOS, query = "select count(registro) from RegistroEspecie registro where (registro.estado=:est) group by registro.fecha  "),
 		@NamedQuery(name = RegistroEspecie.REGISTRO_MAX, query = "select max(registro.fecha) from RegistroEspecie registro "),
-		@NamedQuery(name = RegistroEspecie.TRABAJADOR_WITH_REGISTERS, query = "select distinct registro.trabajador from RegistroEspecie registro ") })
+		@NamedQuery(name = RegistroEspecie.TRABAJADOR_WITH_REGISTERS, query = "select distinct registro.trabajador from RegistroEspecie registro "),
+		@NamedQuery(name = RegistroEspecie.REGISTRO_FECHA, query = "select registro.idRegistro,registro.especie.nombre, registro.especie.generoPlanta.nombre, registro.trabajador.email, registro.trabajador.idPersona from RegistroEspecie registro where registro.fecha=:fecha"),
+		@NamedQuery(name = RegistroEspecie.REGISTRO_FECHA_DTO, query = "select new co.alfite.sis.RegistroFechaDTO(registro.idRegistro,registro.especie.nombre, registro.especie.generoPlanta.nombre, registro.trabajador.email, registro.trabajador.idPersona) from RegistroEspecie registro where registro.fecha=:fecha")
+		
+})
 public class RegistroEspecie implements Serializable {
 
 	public static final String REGISTRO_GET_ALL = "RegistroGetAll";
@@ -27,6 +31,8 @@ public class RegistroEspecie implements Serializable {
 	public static final String TRABAJADOR_GET_ENVIOS = "cantidadRegistrosDia";
 	public static final String REGISTRO_MAX = "PRUEBA AL MAX";
 	public static final String TRABAJADOR_WITH_REGISTERS = "TrabajadorCONREGISTROS";
+	public static final String REGISTRO_FECHA = "RegistroPorFecha";
+	public static final String REGISTRO_FECHA_DTO = "RegistroPorFechaDTO";
 
 	/**
 	 * Muchos Registros pertenecen a un Trabajador
