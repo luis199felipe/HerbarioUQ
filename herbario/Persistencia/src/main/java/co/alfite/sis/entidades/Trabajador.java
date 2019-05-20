@@ -14,7 +14,9 @@ import javax.persistence.*;
 
 @NamedQueries({
 		@NamedQuery(name = Trabajador.TRABAJADOR_GET_ALL, query = "select trabajador from Trabajador trabajador"),
-		@NamedQuery(name = Trabajador.TRABAJADOR_GET_EMPTY_REGISTERS, query = "select trabajador from Trabajador trabajador where trabajador.registros IS EMPTY or (NOT NUll=false)") })
+		@NamedQuery(name = Trabajador.TRABAJADOR_GET_EMPTY_REGISTERS, query = "select trabajador from Trabajador trabajador where trabajador.registros IS EMPTY or (NOT NUll=false)"),
+		@NamedQuery(name = Trabajador.TRABAJADOR_GET_REGISTERS, query = "select registro from Trabajador trabajador INNER JOIN trabajador.registros registro where trabajador.idPersona=:var"),
+		@NamedQuery(name = Trabajador.ALL_TRABAJADOR_GET_REGISTERS, query = "select registro, registro.trabajador.idPersona from Trabajador trabajador LEFT JOIN trabajador.registros registro") })
 
 @Entity
 public class Trabajador extends Persona implements Serializable {
@@ -34,6 +36,8 @@ public class Trabajador extends Persona implements Serializable {
 
 	public static final String TRABAJADOR_GET_ALL = "TrabajadorGetAll";
 	public static final String TRABAJADOR_GET_EMPTY_REGISTERS = "TrabajadorSinRegistros";
+	public static final String TRABAJADOR_GET_REGISTERS = "RegistrosTrabajador";
+	public static final String ALL_TRABAJADOR_GET_REGISTERS = "RegistrosTrabajadorAsociados";
 
 	public Trabajador() {
 		super();
