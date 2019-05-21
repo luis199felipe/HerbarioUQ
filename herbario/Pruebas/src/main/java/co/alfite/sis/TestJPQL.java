@@ -1,6 +1,7 @@
 package co.alfite.sis;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -285,12 +286,11 @@ public class TestJPQL {
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "especiePlanta.json", "generoPlanta.json", "familiaPlanta.json" })
 	public void familiasMasespecies() {
-//		TypedQuery<Long> query = entityManager.createNamedQuery(EspeciePlanta.FAMILIA_MAX_ESPECIE, Long.class);
-//
-//		long p = query.getSingleResult();
-//		System.out.println(p);
-		// assertEquals("la cantidad de trabajadores con registro es incorrecta", 3,
-		// p.size());
+		TypedQuery<Object[]> query = entityManager.createNamedQuery(GeneroPlanta.FAMILIA_MAX, Object[].class);
+
+		Object[] p = query.getSingleResult();
+	
+		assertNotNull("Error en la familia con mas especies", p);
 	}
 
 }
