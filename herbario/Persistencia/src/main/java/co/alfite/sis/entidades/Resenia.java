@@ -37,7 +37,7 @@ public class Resenia implements Serializable {
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int idResenia;
+	private Integer idResenia;
 
 	/**
 	 * texto de la resenia
@@ -61,11 +61,11 @@ public class Resenia implements Serializable {
 		super();
 	}
 
-	public int getIdResenia() {
+	public Integer getIdResenia() {
 		return idResenia;
 	}
 
-	public void setIdResenia(int idResenia) {
+	public void setIdResenia(Integer idResenia) {
 		this.idResenia = idResenia;
 	}
 

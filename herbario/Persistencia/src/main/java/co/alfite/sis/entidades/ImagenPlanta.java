@@ -28,7 +28,8 @@ public class ImagenPlanta implements Serializable {
 	 * Identificacion unica de una ImagenPlanta
 	 */
 	@Id
-	private String idImagen;
+	@GeneratedValue(strategy=GenerationType.AUTO) 
+	private Integer idImagen;
 
 	/**
 	 * Imagen de una ImagenPlanta
@@ -49,11 +50,11 @@ public class ImagenPlanta implements Serializable {
 		this.especie = especie;
 	}
 
-	public String getIdImagen() {
+	public Integer getIdImagen() {
 		return this.idImagen;
 	}
 
-	public void setIdImagen(String idImagen) {
+	public void setIdImagen(Integer idImagen) {
 		this.idImagen = idImagen;
 	}
 

@@ -53,7 +53,8 @@ public class TestRead {
 
 	/*
 	 * permite ver la informacion detallada
-	 */
+	 * 	 */
+
 	@Test
 	@UsingDataSet({ "familiaPlanta.json", "especiePlanta.json", "herbarioUq.json", "registro.json", "persona.json",
 			"generoPlanta.json" })
@@ -69,7 +70,7 @@ public class TestRead {
 
 	/*
 	 * permite probar el listado de especies
-	 */
+	 
 	@Test
 	@UsingDataSet({ "familiaPlanta.json", "especiePlanta.json", "herbarioUq.json", "registro.json", "persona.json",
 			"generoPlanta.json" })
@@ -82,21 +83,21 @@ public class TestRead {
 
 	/*
 	 * permite probar la lista de especies de acuerdo a un genero dado
-	 */
+	 
 	@Test
 	@UsingDataSet({ "familiaPlanta.json", "especiePlanta.json", "herbarioUq.json", "registro.json", "persona.json",
 			"generoPlanta.json" })
 	@Transactional(value = TransactionMode.ROLLBACK)
 	public void listarEspeciesPorGenero() {
 		Query query = entityManager.createNamedQuery(EspeciePlanta.ESPECIES_GENERO);
-		query.setParameter("gen", "gen1");
+		query.setParameter("gen", 1);
 		List<EspeciePlanta> resultados = query.getResultList();
 		assertEquals("Cantidad de especies por genero erroneas", 2, resultados.size());
 	}
 
 	/*
 	 * permite probar la lista de especies dada una familia
-	 */
+	 
 	@Test
 	@UsingDataSet({ "familiaPlanta.json", "especiePlanta.json", "herbarioUq.json", "registro.json", "persona.json",
 			"generoPlanta.json" })
@@ -104,14 +105,14 @@ public class TestRead {
 	public void listarEspeciesPorFamilia() {
 		Query query = entityManager.createNamedQuery(EspeciePlanta.ESPECIES_FAMILIA);
 
-		query.setParameter("fam", "fam1");
+		query.setParameter("fam", 1);
 		List resultados = query.getResultList();
 		assertEquals("Cantidad de especies por familia erroneas", 4, resultados.size());
 	}
 
 	/*
 	 * permite probar la lista de especies rechazadas
-	 */
+	 
 	@Test
 	@UsingDataSet({ "familiaPlanta.json", "especiePlanta.json", "herbarioUq.json", "registro.json", "persona.json",
 			"generoPlanta.json" })
@@ -126,7 +127,7 @@ public class TestRead {
 	/*
 	 * 
 	 * permite probar la lista de especies rechazadas
-	 */
+	 
 	@Test
 	@UsingDataSet({ "familiaPlanta.json", "especiePlanta.json", "herbarioUq.json", "registro.json", "persona.json",
 			"generoPlanta.json" })
@@ -137,5 +138,5 @@ public class TestRead {
 		List resultados = query.getResultList();
 		assertEquals("Cantidad de especies aceptadas erroneas", 7, resultados.size());
 	}
-
+	 */
 }

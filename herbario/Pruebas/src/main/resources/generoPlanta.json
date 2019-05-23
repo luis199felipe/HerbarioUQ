@@ -1,55 +1,55 @@
 {
 	"GENEROPLANTA": [
 		{
-			"idgenero": "gen1",
+			"idgenero": 1,
 			"nombre": "Barnadesioideae",
-			"familiaplanta_idfamilia": "fam1"
+			"familiaplanta_idfamilia": 1
 		},
 		{
-			"idgenero": "gen2",
+			"idgenero": 2,
 			"nombre": "Mutisioideae",
-			"familiaplanta_idfamilia": "fam1"
+			"familiaplanta_idfamilia": 1
 			
 		},
 		{
-			"idgenero": "gen3",
+			"idgenero": 3,
 			"nombre": "Maranta",
-			"familiaplanta_idfamilia": "fam2"
+			"familiaplanta_idfamilia": 2
 		},
 		{
-			"idgenero": "gen4",
+			"idgenero": 4,
 			"nombre": "Impatiens",
-			"familiaplanta_idfamilia": "fam2"
+			"familiaplanta_idfamilia": 2
 		},
 		{
-			"idgenero": "gen5",
+			"idgenero": 5,
 			"nombre": "Calathea",
-			"familiaplanta_idfamilia": "fam3"
+			"familiaplanta_idfamilia": 3
 		},
 		{
-			"idgenero": "gen6",
+			"idgenero": 6,
 			"nombre": "Saintpaulia",
-			"familiaplanta_idfamilia": "fam3"
+			"familiaplanta_idfamilia": 3
 		},
 		{
-			"idgenero": "gen7",
+			"idgenero": 7,
 			"nombre": "Begonia",
-			"familiaplanta_idfamilia": "fam4"
+			"familiaplanta_idfamilia": 4
 		},
 		{
-			"idgenero": "gen8",
+			"idgenero": 8,
 			"nombre": "Erythroxylum",
-			"familiaplanta_idfamilia": "fam4"
+			"familiaplanta_idfamilia": 4
 		},
 		{
-			"idgenero": "gen9",
+			"idgenero": 9,
 			"nombre": "Solanum",
-			"familiaplanta_idfamilia": "fam5"
+			"familiaplanta_idfamilia": 5
 		},
 		{
-			"idgenero": "gen10",
+			"idgenero": 10,
 			"nombre": "Tillandsia",
-			"familiaplanta_idfamilia": "fam5"
+			"familiaplanta_idfamilia": 5
 		}
 	]
 }

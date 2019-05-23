@@ -65,8 +65,9 @@ public class EspeciePlanta implements Serializable {
 	 * identificacion unica de una EspeciePlanta
 	 */
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO) 
 	@Column(length = 10)
-	private String idEspecie;
+	private int idEspecie;
 
 	/**
 	 * nombre cientifico de una EspeciePlanta
@@ -129,11 +130,11 @@ public class EspeciePlanta implements Serializable {
 		this.megustas = megustas;
 	}
 
-	public String getIdEspecie() {
+	public int getIdEspecie() {
 		return this.idEspecie;
 	}
 
-	public void setIdEspecie(String idEspecie) {
+	public void setIdEspecie(int idEspecie) {
 		this.idEspecie = idEspecie;
 	}
 

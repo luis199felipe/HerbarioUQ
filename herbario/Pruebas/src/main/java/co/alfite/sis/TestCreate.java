@@ -65,7 +65,7 @@ public class TestCreate {
 
 		GeneroPlanta genero = new GeneroPlanta();
 		genero.setFamiliaPlanta(familia);
-		genero.setIdGenero("gen11");
+		
 		genero.setNombre("Planteusom");
 
 		entityManager.persist(genero);
@@ -86,7 +86,7 @@ public class TestCreate {
 
 		FamiliaPlanta familia = new FamiliaPlanta();
 		familia.setHerbario(herbario);
-		familia.setIdFamilia("fam6");
+		
 		familia.setNombre("familiusos");
 
 		entityManager.persist(familia);

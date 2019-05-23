@@ -4,63 +4,63 @@
 			"idresenia": 1,
 			"estado": "aprobado",
 			"texto": "La planta tambien se conoce como plants",
-			"especie_idespecie": "esp1",
+			"especie_idespecie": 1,
 			"usuario_idpersona": "4"
 		},
 		{
 			"idresenia": 2,
 			"estado": "enviado",
 			"texto": "La imagen de la especie se ve mal",
-			"especie_idespecie": "esp2",
+			"especie_idespecie": 2,
 			"usuario_idpersona": "5"
 		},
 		{
 			"idresenia": 3,
 			"estado": "rechazado",
 			"texto": "Blah Blah ahhhhhhhh",
-			"especie_idespecie": "esp1",
+			"especie_idespecie": 1,
 			"usuario_idpersona": "6"
 		},
 		{
 			"idresenia": 4,
 			"estado": "enviado",
 			"texto": "HOLAS SENORES Y SENORAS",
-			"especie_idespecie": "esp13",
+			"especie_idespecie": 13,
 			"usuario_idpersona": "10"
 		},
 		{
 			"idresenia": 5,
 			"estado": "enviado",
 			"texto": "Que hermosa planta, se pueden ver en el herbario de la UQ",
-			"especie_idespecie": "esp17",
+			"especie_idespecie": 17,
 			"usuario_idpersona": "12"
 		},
 		{
 			"idresenia": 6,
 			"estado": "aprobado",
 			"texto": "La planta pertenece a una de las mas hermosas",
-			"especie_idespecie": "esp20",
+			"especie_idespecie": 20,
 			"usuario_idpersona": "4"
 		},
 		{
 			"idresenia": 7,
 			"estado": "rechazado",
 			"texto": "Como CoCo como, poco CoCo como",
-			"especie_idespecie": "esp12",
+			"especie_idespecie": 12,
 			"usuario_idpersona": "4"
 		},
 		{
 			"idresenia": 8,
 			"estado": "aprobado",
 			"texto": "La planta es fauna y flora del departamento",
-			"especie_idespecie": "esp12",
+			"especie_idespecie": 12,
 			"usuario_idpersona": "6"
 		},
 		{
 			"idresenia": 9,
 			"estado": "enviado",
 			"texto": "Estas plantas se pueden encontrar en Africa",
-			"especie_idespecie": "esp12",
+			"especie_idespecie": 12,
 			"usuario_idpersona": "6"
 		}
 	]

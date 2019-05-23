@@ -42,7 +42,7 @@ public class MeGustaEspeciePlanta implements Serializable {
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int idMegusta;
+	private Integer idMegusta;
 
 	/**
 	 * fecha de publicacion del MeGustaEspeciePlanta
@@ -71,11 +71,11 @@ public class MeGustaEspeciePlanta implements Serializable {
 		this.especie = especie;
 	}
 
-	public int getIdMegusta() {
+	public Integer getIdMegusta() {
 		return idMegusta;
 	}
 
-	public void setIdMegusta(int idMegusta) {
+	public void setIdMegusta(Integer idMegusta) {
 		this.idMegusta = idMegusta;
 	}
 

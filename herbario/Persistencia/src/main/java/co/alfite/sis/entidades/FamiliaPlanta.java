@@ -36,8 +36,9 @@ public class FamiliaPlanta implements Serializable {
 	 * identificacion unica de una familia
 	 */
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO) 
 	@Column(length = 10)
-	private String idFamilia;
+	private Integer idFamilia;
 	/**
 	 * nombre de la familiaPlanta
 	 */
@@ -58,11 +59,11 @@ public class FamiliaPlanta implements Serializable {
 		this.herbario = herbario;
 	}
 
-	public String getIdFamilia() {
+	public Integer getIdFamilia() {
 		return this.idFamilia;
 	}
 
-	public void setIdFamilia(String idFamilia) {
+	public void setIdFamilia(Integer idFamilia) {
 		this.idFamilia = idFamilia;
 	}
 

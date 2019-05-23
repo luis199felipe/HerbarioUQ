@@ -36,6 +36,15 @@ public class Persona implements Serializable {
 	 */
 	@Column(length = 50)
 	private String nombre;
+	
+	
+	/**
+	 * estado del registro (enviado, aprobado, rechazado)
+	 */
+	public enum Estado {
+		activo, inactivo
+	}
+	
 
 	/**
 	 * telefono de una persona

@@ -37,8 +37,9 @@ public class GeneroPlanta implements Serializable {
 	 * identificacion unica de un genero
 	 */
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO) 
 	@Column(length = 10)
-	private String idGenero;
+	private Integer idGenero;
 
 	/**
 	 * nombre del generoPlanta
@@ -68,11 +69,11 @@ public class GeneroPlanta implements Serializable {
 		this.familiaPlanta = familiaPlanta;
 	}
 
-	public String getIdGenero() {
+	public Integer getIdGenero() {
 		return this.idGenero;
 	}
 
-	public void setIdGenero(String idGenero) {
+	public void setIdGenero(Integer  idGenero) {
 		this.idGenero = idGenero;
 	}
 
