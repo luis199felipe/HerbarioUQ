@@ -12,6 +12,7 @@ import co.alfite.sis.entidades.EspeciePlanta;
 import co.alfite.sis.entidades.FamiliaPlanta;
 import co.alfite.sis.entidades.GeneroPlanta;
 import co.alfite.sis.entidades.Persona;
+import co.alfite.sis.entidades.Recolector;
 import co.alfite.sis.entidades.RegistroEspecie;
 import co.alfite.sis.entidades.RegistroEspecie.Estado;
 import co.alfite.sis.excepciones.ElementoRepetidoExcepcion;
@@ -57,6 +58,24 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 		}
 	}
 
+	public Recolector insertarRecolector(Recolector recolector) throws ElementoRepetidoExcepcion {
+
+		if (entityManager.find(Recolector.class, recolector.getIdPersona()) != null) {
+			throw new ElementoRepetidoExcepcion("el recolector con esa cedula ya fue registrado");
+
+		} else if (buscarPorEmail(recolector) != null) {
+			throw new ElementoRepetidoExcepcion("el recolector con ese email ya fue registrado");
+
+		}
+		try {
+			entityManager.persist(recolector);
+			return recolector;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 	private Persona buscarPorEmail(Persona per) {
 
 		try {
@@ -72,8 +91,8 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 
 	public FamiliaPlanta insertarFamilia(FamiliaPlanta familia) throws ElementoRepetidoExcepcion {
 
-		if (entityManager.find(FamiliaPlanta.class, familia.getIdFamilia()) != null) {
-			throw new ElementoRepetidoExcepcion("la familia con este id ya fue registrada");
+		if (entityManager.find(FamiliaPlanta.class, familia.getNombre()) != null) {
+			throw new ElementoRepetidoExcepcion("la familia con este Nombre ya fue registrada");
 
 		}
 
@@ -89,8 +108,8 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 
 	public GeneroPlanta insertarGenero(GeneroPlanta genero) throws ElementoRepetidoExcepcion {
 
-		if (entityManager.find(GeneroPlanta.class, genero.getIdGenero()) != null) {
-			throw new ElementoRepetidoExcepcion("el genero con este id ya fue registrado");
+		if (entityManager.find(GeneroPlanta.class, genero.getNombre()) != null) {
+			throw new ElementoRepetidoExcepcion("el genero con este nombre ya fue registrado");
 
 		}
 
@@ -104,16 +123,48 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 
 	}
 
-//	public boolean validarRegistro(RegistroEspecie registro) throws ElementoRepetidoExcepcion {
-//
-////		boolean r = true;
-////		if (entityManager.find(RegistroEspecie.class, registro.get) != null
-////				&& entityManager.find(RegistroEspecie.class, registro.getIdRegistro()) != null) {
-////
-////			r = false;
-////		} else {
-////
-////		}
-//
-//	}
+	public EspeciePlanta insertarEspecie(EspeciePlanta especie) throws ElementoRepetidoExcepcion {
+
+		if (entityManager.find(EspeciePlanta.class, especie.getNombre()) != null) {
+			throw new ElementoRepetidoExcepcion("la especie con este nombre ya fue registrada");
+
+		}
+		try {
+			entityManager.persist(especie);
+			return especie;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+
+	}
+
+	public RegistroEspecie insertarRegistro(RegistroEspecie registro) {
+
+		if (registro.getGenero() != null && registro.getFamilia() != null) {
+			if (entityManager.find(GeneroPlanta.class, registro.getGenero().getFamiliaPlanta().getIdFamilia())
+					.equals(registro.getFamilia().getIdFamilia())) {
+
+				registro.setEstado(Estado.aprobado);
+
+			} else {
+				registro.setEstado(Estado.rechazado);
+
+			}
+
+		} else {
+			registro.setEstado(Estado.rechazado);
+
+		}
+
+		try {
+			entityManager.persist(registro);
+			insertarEspecie(registro.getEspecie());
+			return registro;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+
+	}
 }

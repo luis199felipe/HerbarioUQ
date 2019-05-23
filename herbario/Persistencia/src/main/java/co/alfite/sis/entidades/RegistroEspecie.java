@@ -134,4 +134,20 @@ public class RegistroEspecie implements Serializable {
 		this.fecha = fecha;
 	}
 
+	public FamiliaPlanta getFamilia() {
+		return familia;
+	}
+
+	public void setFamilia(FamiliaPlanta familia) {
+		this.familia = familia;
+	}
+
+	public GeneroPlanta getGenero() {
+		return genero;
+	}
+
+	public void setGenero(GeneroPlanta genero) {
+		this.genero = genero;
+	}
+
 }

@@ -7,5 +7,5 @@ import co.alfite.sis.entidades.Resenia;
 @Remote
 public interface UsuarioEJBRemote {
 
-	Resenia agregarResenia(Resenia resenia);
+	
 }

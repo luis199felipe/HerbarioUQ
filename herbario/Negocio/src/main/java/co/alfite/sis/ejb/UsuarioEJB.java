@@ -6,6 +6,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import co.alfite.sis.entidades.MeGustaEspeciePlanta;
 import co.alfite.sis.entidades.Resenia;
 
 /**
@@ -25,7 +26,7 @@ public class UsuarioEJB implements UsuarioEJBRemote {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Resenia agregarResenia(Resenia resenia) {
+	public Resenia insertarResenia(Resenia resenia) {
 
 		try {
 			entityManager.persist(resenia);
@@ -35,5 +36,18 @@ public class UsuarioEJB implements UsuarioEJBRemote {
 			return null;
 		}
 	}
+	
+	
+	public MeGustaEspeciePlanta insertarMegusta(MeGustaEspeciePlanta meGusta) {
 
+		try {
+			entityManager.persist(meGusta);
+			return meGusta;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	
 }
