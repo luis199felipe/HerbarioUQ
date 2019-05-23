@@ -38,6 +38,12 @@ public class RegistroEspecie implements Serializable {
 	@ManyToOne
 	private Trabajador trabajador;
 
+	@OneToOne(mappedBy = "registro")
+	private FamiliaPlanta familia;
+	
+	@OneToOne(mappedBy = "registro")
+	private GeneroPlanta genero;
+	
 	/**
 	 * Un registro tiene una Especie
 	 */

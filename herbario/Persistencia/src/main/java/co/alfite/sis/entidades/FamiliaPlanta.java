@@ -23,6 +23,9 @@ public class FamiliaPlanta implements Serializable {
 	public static final String FAMILIA_GET_MAX = "FamiliaGetmax";
 	public static final String FAMILIA_MAX_ESP = "familiaMasEspecies";
 
+	@OneToOne
+	private RegistroEspecie registro;
+	
 	@ManyToOne
 	private HerbarioUQ herbario;
 
