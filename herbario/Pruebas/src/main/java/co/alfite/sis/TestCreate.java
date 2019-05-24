@@ -61,7 +61,7 @@ public class TestCreate {
 	@UsingDataSet({ "generoPlanta.json", "familiaPlanta.json" })
 	@Transactional(value = TransactionMode.ROLLBACK)
 	public void createGeneroPlantaTest() {
-		FamiliaPlanta familia = entityManager.find(FamiliaPlanta.class, "fam1");
+		FamiliaPlanta familia = entityManager.find(FamiliaPlanta.class, 1);
 
 		GeneroPlanta genero = new GeneroPlanta();
 		genero.setFamiliaPlanta(familia);
@@ -86,9 +86,7 @@ public class TestCreate {
 
 		FamiliaPlanta familia = new FamiliaPlanta();
 		familia.setHerbario(herbario);
-		
 		familia.setNombre("familiusos");
-
 		entityManager.persist(familia);
 
 		FamiliaPlanta familiaGuardado = entityManager.find(FamiliaPlanta.class, familia.getIdFamilia());

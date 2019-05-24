@@ -62,7 +62,7 @@ public class TestOpcionUnica {
 	public void createMeGusta() {
 		Usuario usuario = entityManager.find(Usuario.class, "4");
 
-		EspeciePlanta especie = entityManager.find(EspeciePlanta.class, "esp20");
+		EspeciePlanta especie = entityManager.find(EspeciePlanta.class, 20);
 
 		MeGustaEspeciePlanta meGusta = new MeGustaEspeciePlanta();
 		meGusta.setFecha(new Date());
@@ -85,7 +85,7 @@ public class TestOpcionUnica {
 	public void createResenia() {
 		Usuario usuario = entityManager.find(Usuario.class, "12");
 
-		EspeciePlanta especie = entityManager.find(EspeciePlanta.class, "esp15");
+		EspeciePlanta especie = entityManager.find(EspeciePlanta.class, 15);
 
 		Resenia resenia = new Resenia();
 		resenia.setIdResenia(10);
@@ -109,7 +109,7 @@ public class TestOpcionUnica {
 	public void ReadMeGustaDeUnaEspecie() {
 		TypedQuery<MeGustaEspeciePlanta> query = entityManager
 				.createNamedQuery(MeGustaEspeciePlanta.MEGUSTAESPECIE_ESPECIE, MeGustaEspeciePlanta.class);
-		query.setParameter("esp", "esp1");
+		query.setParameter("esp", 1);
 		List<MeGustaEspeciePlanta> meGustas = query.getResultList();
 
 		Assert.assertEquals("El tamanio no coincide", 2, meGustas.size());
@@ -126,7 +126,7 @@ public class TestOpcionUnica {
 	public void ReadReseniasDeUnaEspecie() {
 
 		TypedQuery<Resenia> query = entityManager.createNamedQuery(Resenia.RESENIA_ESPECIE, Resenia.class);
-		query.setParameter("esp", "esp12");
+		query.setParameter("esp", 12);
 		List<Resenia> resenias = query.getResultList();
 
 		Assert.assertEquals("El tamanio no coincide", 3, resenias.size());

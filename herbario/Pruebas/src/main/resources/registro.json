@@ -64,77 +64,77 @@
 			"fecha": "1999-10-13"
 		},
 		{
-			"idregistro": "010",
+			"idregistro": 10,
 			"estado": "enviado",
 			"mensaje": "espere...",
 			"trabajador_idpersona": "1",
 			"fecha": "1999-10-13"
 		},
 		{
-			"idregistro": "011",
+			"idregistro": 11,
 			"estado": "aprobado",
 			"mensaje": "Buena investigacion",
 			"trabajador_idpersona": "1",
 			"fecha": "1999-10-13"
 		},
 		{
-			"idregistro": "012",
+			"idregistro": 12,
 			"estado": "enviado",
 			"mensaje": "espere...",
 			"trabajador_idpersona": "3",
 			"fecha": "1999-10-13"
 		},
 		{
-			"idregistro": "013",
+			"idregistro": 13,
 			"estado": "aprobado",
 			"mensaje": "muy buen trabajo",
 			"trabajador_idpersona": "3",
 			"fecha": "1999-10-13"
 		},
 		{
-			"idregistro": "014",
+			"idregistro": 14,
 			"estado": "enviado",
 			"mensaje": "Sigue en revision",
 			"trabajador_idpersona": "2",
 			"fecha": "1999-10-13"
 		},
 		{
-			"idregistro": "015",
+			"idregistro": 15,
 			"estado": "rechazado",
 			"mensaje": "campos mal diligenciados",
 			"trabajador_idpersona": "2",
 			"fecha": "1999-10-13"
 		},
 		{
-			"idregistro": "016",
+			"idregistro": 16,
 			"estado": "enviado",
 			"mensaje": "espere...",
 			"trabajador_idpersona": "2",
 			"fecha": "1999-10-14"
 		},
 		{
-			"idregistro": "017",
+			"idregistro": 17,
 			"estado": "aprobado",
 			"mensaje": "Buena investigacion",
 			"trabajador_idpersona": "1",
 			"fecha": "1999-10-14"
 		},
 		{
-			"idregistro": "018",
+			"idregistro": 18,
 			"estado": "enviado",
 			"mensaje": "espere...",
 			"trabajador_idpersona": "3",
 			"fecha": "1999-10-14"
 		},
 		{
-			"idregistro": "019",
+			"idregistro": 19,
 			"estado": "aprobado",
 			"mensaje": "Buena investigacion",
 			"trabajador_idpersona": "3",
 			"fecha": "1999-10-14"
 		},
 		{
-			"idregistro": "020",
+			"idregistro": 20,
 			"estado": "enviado",
 			"mensaje": "espere...",
 			"trabajador_idpersona": "1",

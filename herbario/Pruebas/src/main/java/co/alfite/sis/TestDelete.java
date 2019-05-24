@@ -96,9 +96,9 @@ public class TestDelete {
 	@Transactional(value = TransactionMode.ROLLBACK)
 	public void eliminarFamiliaPlanta() {
 
-		FamiliaPlanta familiaPlanta = entityManager.find(FamiliaPlanta.class, "fam1");
+		FamiliaPlanta familiaPlanta = entityManager.find(FamiliaPlanta.class, 1);
 		entityManager.remove(familiaPlanta);
-		assertEquals("El la familia no se elimino", null, entityManager.find(FamiliaPlanta.class, "fam1"));
+		assertEquals("El la familia no se elimino", null, entityManager.find(FamiliaPlanta.class, 1));
 
 	}
 
@@ -110,9 +110,9 @@ public class TestDelete {
 	@Transactional(value = TransactionMode.ROLLBACK)
 	public void eliminarGeneroPlanta() {
 
-		GeneroPlanta generoPlanta = entityManager.find(GeneroPlanta.class, "gen1");
+		GeneroPlanta generoPlanta = entityManager.find(GeneroPlanta.class, 1);
 		entityManager.remove(generoPlanta);
-		assertEquals("El genero no se elimino", null, entityManager.find(GeneroPlanta.class, "gen1"));
+		assertEquals("El genero no se elimino", null, entityManager.find(GeneroPlanta.class, 1));
 
 	}
 
@@ -124,9 +124,9 @@ public class TestDelete {
 	@Transactional(value = TransactionMode.ROLLBACK)
 	public void eliminarEspeciePlanta() {
 
-		EspeciePlanta especiePlanta = entityManager.find(EspeciePlanta.class, "esp1");
+		EspeciePlanta especiePlanta = entityManager.find(EspeciePlanta.class, 1);
 		entityManager.remove(especiePlanta);
-		assertEquals("la planta  no se elimino", null, entityManager.find(EspeciePlanta.class, "esp1"));
+		assertEquals("la planta  no se elimino", null, entityManager.find(EspeciePlanta.class, 1));
 	}
 
 }

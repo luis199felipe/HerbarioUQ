@@ -4,141 +4,141 @@
 			"idEspecie": 1,
 			"nombre": "planta1",
 			"nombreCientifico": "plantaus1",
-			"generoplanta_idgenero": "gen1",
-			"registro_idregistro": "001"
+			"generoplanta_idgenero": 1,
+			"registro_idregistro": 1
 		},
 		{
 			"idEspecie": 2,
 			"nombre": "planta2",
 			"nombreCientifico": "plantaus2",
-			"generoplanta_idgenero": "gen1",
-			"registro_idregistro": "002"
+			"generoplanta_idgenero": 1,
+			"registro_idregistro": 2
 		},
 		{
 			"idEspecie": 3,
 			"nombre": "planta3",
 			"nombreCientifico": "plantaus3",
-			"generoplanta_idgenero": "gen2",
-			"registro_idregistro": "003"
+			"generoplanta_idgenero": 2,
+			"registro_idregistro": 3
 		},
 		{
 			"idEspecie": 4,
 			"nombre": "planta4",
 			"nombreCientifico": "plantaus4",
-			"generoplanta_idgenero": "gen2",
-			"registro_idregistro": "004"
+			"generoplanta_idgenero": 2,
+			"registro_idregistro": 4
 		},
 		{
 			"idEspecie": 5,
 			"nombre": "planta5",
 			"nombreCientifico": "plantaus5",
-			"generoplanta_idgenero": "gen1",
-			"registro_idregistro": "005"
+			"generoplanta_idgenero": 1,
+			"registro_idregistro": 5
 		},
 		{
 			"idEspecie": 6,
 			"nombre": "planta6",
 			"nombreCientifico": "plantaus6",
-			"generoplanta_idgenero": "gen3",
-			"registro_idregistro": "006"
+			"generoplanta_idgenero": 3,
+			"registro_idregistro": 6
 		},
 		{
 			"idEspecie": 7,
 			"nombre": "planta7",
 			"nombreCientifico": "plantaus7",
-			"generoplanta_idgenero": "gen4",
-			"registro_idregistro": "007"
+			"generoplanta_idgenero": 4,
+			"registro_idregistro": 7
 		},
 		{
 			"idEspecie": 8,
 			"nombre": "planta8",
 			"nombreCientifico": "plantaus8",
-			"generoplanta_idgenero": "gen4",
-			"registro_idregistro": "008"
+			"generoplanta_idgenero": 4,
+			"registro_idregistro": 8
 		},
 		{
 			"idEspecie": 9,
 			"nombre": "planta9",
 			"nombreCientifico": "plantaus9",
-			"generoplanta_idgenero": "gen5",
-			"registro_idregistro": "009"
+			"generoplanta_idgenero": 5,
+			"registro_idregistro": 9
 		},
 		{
 			"idEspecie": 10,
 			"nombre": "planta10",
 			"nombreCientifico": "plantaus10",
-			"generoplanta_idgenero": "gen5",
-			"registro_idregistro": "010"
+			"generoplanta_idgenero": 5,
+			"registro_idregistro": 10
 		},
 		{
 			"idEspecie":11,
 			"nombre": "planta11",
 			"nombreCientifico": "plantaus11",
-			"generoplanta_idgenero": "gen6",
-			"registro_idregistro": "011"
+			"generoplanta_idgenero": 6,
+			"registro_idregistro": 11
 		},
 		{
 			"idEspecie": 12,
 			"nombre": "planta12",
 			"nombreCientifico": "plantaus12",
-			"generoplanta_idgenero": "gen6",
-			"registro_idregistro": "012"
+			"generoplanta_idgenero": 6,
+			"registro_idregistro": 12
 		},
 		{
 			"idEspecie": 13,
 			"nombre": "planta13",
 			"nombreCientifico": "plantaus13",
-			"generoplanta_idgenero": "gen7",
-			"registro_idregistro": "013"
+			"generoplanta_idgenero": 7,
+			"registro_idregistro": 13
 		},
 		{
 			"idEspecie": 14,
 			"nombre": "planta14",
 			"nombreCientifico": "plantaus14",
-			"generoplanta_idgenero": "gen7",
-			"registro_idregistro": "014"
+			"generoplanta_idgenero": 7,
+			"registro_idregistro": 14
 		},
 		{
 			"idEspecie": 15,
 			"nombre": "planta15",
 			"nombreCientifico": "plantaus15",
-			"generoplanta_idgenero": "gen8",
-			"registro_idregistro": "015"
+			"generoplanta_idgenero": 8,
+			"registro_idregistro": 15
 		},
 		{
 			"idEspecie": 16,
 			"nombre": "planta16",
 			"nombreCientifico": "plantaus16",
-			"generoplanta_idgenero": "gen8",
-			"registro_idregistro": "016"
+			"generoplanta_idgenero": 8,
+			"registro_idregistro": 16
 		},
 		{
 			"idEspecie": 17,
 			"nombre": "planta17",
 			"nombreCientifico": "plantaus17",
-			"generoplanta_idgenero": "gen9",
-			"registro_idregistro": "017"
+			"generoplanta_idgenero": 9,
+			"registro_idregistro": 17
 		},
 		{
 			"idEspecie": 18,
 			"nombre": "planta18",
 			"nombreCientifico": "plantaus18",
-			"generoplanta_idgenero": "gen9",
-			"registro_idregistro": "018"
+			"generoplanta_idgenero": 9,
+			"registro_idregistro": 18
 		},
 		{
 			"idEspecie": 19,
 			"nombre": "planta19",
 			"nombreCientifico": "plantaus19",
-			"generoplanta_idgenero": "gen5",
-			"registro_idregistro": "019"
+			"generoplanta_idgenero": 5,
+			"registro_idregistro": 19
 		},
 		{
 			"idEspecie": 20,
 			"nombre": "planta20",
 			"nombreCientifico": "plantaus20",
-			"generoplanta_idgenero": "gen5",
-			"registro_idregistro": "020"
+			"generoplanta_idgenero": 5,
+			"registro_idregistro": 20
 		}
 	]
 }

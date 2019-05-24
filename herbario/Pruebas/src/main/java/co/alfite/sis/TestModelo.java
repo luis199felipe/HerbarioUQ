@@ -50,7 +50,7 @@ public class TestModelo {
 
 	@Test
 	@UsingDataSet({"familiaPlanta.json","persona.json","generoPlanta.json"})
-	@Transactional(value = TransactionMode.COMMIT)
+	@Transactional(value = TransactionMode.ROLLBACK)
 	public void insertarPersonaTest() {
 		Administrador administrador = new Administrador();
 		administrador.setIdPersona("1321");

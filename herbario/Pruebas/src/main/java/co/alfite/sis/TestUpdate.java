@@ -94,7 +94,7 @@ public class TestUpdate {
 	public void editarGeneroPlanta() {
 		
 		//Obtener genero de la planta a modificar
-		GeneroPlanta generoPlantaEditar = entityManager.find(GeneroPlanta .class, "gen1");
+		GeneroPlanta generoPlantaEditar = entityManager.find(GeneroPlanta .class, 1);
 		
 		//Edicion del nombre del genero de la planta de Barnadesioideae a Barnade
 		generoPlantaEditar.setNombre("Barnade");
@@ -103,7 +103,7 @@ public class TestUpdate {
 		entityManager.merge(generoPlantaEditar);
 		
 		//Obtener  genero de la planta ya modificado
-		GeneroPlanta  genPlanta2 = entityManager.find(GeneroPlanta .class, "gen1");
+		GeneroPlanta  genPlanta2 = entityManager.find(GeneroPlanta .class, 1);
 
 		//Verificacion de que el  genero de la planta cambio el nombre
 		Assert.assertEquals("No cambio el nombre", "Barnade", genPlanta2.getNombre());
@@ -118,7 +118,7 @@ public class TestUpdate {
 	@Transactional(value = TransactionMode.ROLLBACK)
 	public void editarFamiliaPlanta() {
 		//Obtener Familia Planta a modificar
-		FamiliaPlanta familiaPlantaEditar = entityManager.find(FamiliaPlanta.class, "fam1");
+		FamiliaPlanta familiaPlantaEditar = entityManager.find(FamiliaPlanta.class,1);
 		
 		//Edicion del nombre del Familia Planta de "familia asteraceae" a "asteraceae"
 		familiaPlantaEditar.setNombre("asteraceae");
@@ -127,7 +127,7 @@ public class TestUpdate {
 		entityManager.merge(familiaPlantaEditar);
 		
 		//Obtener Familia Planta ya modificado
-		FamiliaPlanta familiaPlantaEditar2 = entityManager.find(FamiliaPlanta.class, "fam1");
+		FamiliaPlanta familiaPlantaEditar2 = entityManager.find(FamiliaPlanta.class, 1);
 
 		//Verificacion de que la Familia Planta  cambio el nombre
 		Assert.assertEquals("No cambio el nombre", "asteraceae", familiaPlantaEditar2.getNombre());
