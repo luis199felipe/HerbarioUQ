@@ -58,6 +58,13 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * co.alfite.sis.ejb.AdministradorEJBRemote#insertarRecolector(co.alfite.sis.
+	 * entidades.Recolector)
+	 */
 	public Recolector insertarRecolector(Recolector recolector) throws ElementoRepetidoExcepcion {
 
 		if (entityManager.find(Recolector.class, recolector.getIdPersona()) != null) {
@@ -76,6 +83,11 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 		}
 	}
 
+	/**
+	 * 
+	 * @param per
+	 * @return
+	 */
 	private Persona buscarPorEmail(Persona per) {
 
 		try {
@@ -89,6 +101,12 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see co.alfite.sis.ejb.AdministradorEJBRemote#insertarFamilia(co.alfite.sis.
+	 * entidades.FamiliaPlanta)
+	 */
 	public FamiliaPlanta insertarFamilia(FamiliaPlanta familia) throws ElementoRepetidoExcepcion {
 
 		if (entityManager.find(FamiliaPlanta.class, familia.getNombre()) != null) {
@@ -106,6 +124,12 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see co.alfite.sis.ejb.AdministradorEJBRemote#insertarGenero(co.alfite.sis.
+	 * entidades.GeneroPlanta)
+	 */
 	public GeneroPlanta insertarGenero(GeneroPlanta genero) throws ElementoRepetidoExcepcion {
 
 		if (entityManager.find(GeneroPlanta.class, genero.getNombre()) != null) {
@@ -123,6 +147,12 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see co.alfite.sis.ejb.AdministradorEJBRemote#insertarEspecie(co.alfite.sis.
+	 * entidades.EspeciePlanta)
+	 */
 	public EspeciePlanta insertarEspecie(EspeciePlanta especie) throws ElementoRepetidoExcepcion {
 
 		if (entityManager.find(EspeciePlanta.class, especie.getNombre()) != null) {
@@ -139,6 +169,12 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see co.alfite.sis.ejb.AdministradorEJBRemote#insertarRegistro(co.alfite.sis.
+	 * entidades.RegistroEspecie)
+	 */
 	public RegistroEspecie insertarRegistro(RegistroEspecie registro) {
 
 		if (registro.getGenero() != null && registro.getFamilia() != null) {

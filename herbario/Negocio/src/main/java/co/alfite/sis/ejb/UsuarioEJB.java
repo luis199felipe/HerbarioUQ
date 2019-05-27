@@ -26,6 +26,13 @@ public class UsuarioEJB implements UsuarioEJBRemote {
 		// TODO Auto-generated constructor stub
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * co.alfite.sis.ejb.UsuarioEJBRemote#insertarResenia(co.alfite.sis.entidades.
+	 * Resenia)
+	 */
 	public Resenia insertarResenia(Resenia resenia) {
 
 		try {
@@ -36,8 +43,14 @@ public class UsuarioEJB implements UsuarioEJBRemote {
 			return null;
 		}
 	}
-	
-	
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * co.alfite.sis.ejb.UsuarioEJBRemote#insertarMegusta(co.alfite.sis.entidades.
+	 * MeGustaEspeciePlanta)
+	 */
 	public MeGustaEspeciePlanta insertarMegusta(MeGustaEspeciePlanta meGusta) {
 
 		try {
@@ -49,5 +62,4 @@ public class UsuarioEJB implements UsuarioEJBRemote {
 		}
 	}
 
-	
 }
