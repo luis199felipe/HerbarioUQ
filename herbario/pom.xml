@@ -80,5 +80,6 @@
     <module>Pruebas</module>
     <module>ear-huq</module>
     <module>Negocio</module>
+    <module>herbario-web</module>
   </modules>
 </project>
