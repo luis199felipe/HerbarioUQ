@@ -8,5 +8,8 @@
         <dependent-module archiveName="Negocio.jar" deploy-path="/" handle="module:/resource/Negocio/Negocio">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="herbario-web.war" deploy-path="/" handle="module:/resource/herbario-web/herbario-web">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
     </wb-module>
 </project-modules>

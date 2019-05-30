@@ -26,7 +26,7 @@ public class HolaMundoBean {
 	 * @return the mensaje
 	 */
 	public String getMensaje() {
-		mensaje = "Hola mundo";
+		mensaje = "Hola mundo jBean";
 		return mensaje;
 	}
 
