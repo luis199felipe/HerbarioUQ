@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane prefHeight="497.0" prefWidth="766.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.TrabajadorVistaControlador">
+<BorderPane prefHeight="497.0" prefWidth="766.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.alfite.sis.controlador.TrabajadorVistaControlador">
    <top>
       <ToolBar prefHeight="25.0" prefWidth="766.0" BorderPane.alignment="CENTER">
         <items>

@@ -7,19 +7,21 @@
 		<artifactId>herbario</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>herbario-esc</artifactId>
-	<packaging>pom</packaging>
+	<artifactId>escritorio-huq</artifactId>
+	<name>escritorio-huq</name>
 	<dependencies>
-		<dependency>
-			<groupId>co.alfite.sis</groupId>
-			<artifactId>Negocio</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-			<type>ejb</type>
-		</dependency>
-		<dependency>
-			<groupId>co.alfite.sis</groupId>
-			<artifactId>Persistencia</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
+
+
+	<dependency>
+		<groupId>co.alfite.sis</groupId>
+		<artifactId>Persistencia</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</dependency>
+	<dependency>
+		<groupId>co.alfite.sis</groupId>
+		<artifactId>Negocio</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<type>ejb</type>
+	</dependency>
 	</dependencies>
 </project>
