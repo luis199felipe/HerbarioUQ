@@ -10,6 +10,7 @@
 	<artifactId>escritorio-huq</artifactId>
 	<name>escritorio-huq</name>
 	<dependencies>
+
 	<dependency>
 		<groupId>co.alfite.sis</groupId>
 		<artifactId>Persistencia</artifactId>

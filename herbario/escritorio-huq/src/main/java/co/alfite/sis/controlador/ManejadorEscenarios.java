@@ -50,10 +50,7 @@ public class ManejadorEscenarios {
 
 		this.escenario = escenario;
 //
-
 		administradorDelegado = AdministradorDelegado.administradorDelegado;
-//		administradorDelegado = AdministradorDelegado.administradorDelegado;
-
 //		empleadosObservables = FXCollections.observableArrayList();
 
 		try {
@@ -62,11 +59,7 @@ public class ManejadorEscenarios {
 
 			// se carga la vista
 			FXMLLoader loader = new FXMLLoader();
-
 			loader.setLocation(Main.class.getResource("./vista/VistaRaiz.fxml"));
-
-			loader.setLocation(Main.class.getResource("./vista/inicio.fxml"));
-
 
 			bordePanel = (BorderPane) loader.load();
 
@@ -83,11 +76,9 @@ public class ManejadorEscenarios {
 
 	}
 
-
 	public void escenarioInicial() {
 		escenario.show();
 	}
-
 
 	/**
 	 * carga una escena en el centro del escenario
@@ -102,20 +93,14 @@ public class ManejadorEscenarios {
 
 			bordePanel.setCenter(loginVista);
 
-
 			VistaLoginControlador controladorVistaPersona = loader.getController();
 			controladorVistaPersona.setManejador(this);
 			controladorVistaPersona.setStage(escenario);
-
-			LoginVistaControlador controladorVistaPersona = loader.getController();
-			controladorVistaPersona.asignarMain(this);
-
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-
 
 	public void cargarEscenarioTrabajador() {
 		try {
@@ -138,37 +123,9 @@ public class ManejadorEscenarios {
 			stage.show();
 			controladorVistaTrabajador.cargarMenu();
 
-	/**
-	 * muestra el escenario para crear un empleado nuevo
-	 */
-	public void cargarEscenarioCrearEmpleado() {
-
-		try {
-
-			// se carga la interfaz
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(Main.class.getResource("./vista/editar_empleado.fxml"));
-			AnchorPane page = (AnchorPane) loader.load();
-
-			// se crea el escenario
-			Stage escenarioCrear = new Stage();
-			escenarioCrear.setTitle("Crear");
-			Scene scene = new Scene(page);
-			escenarioCrear.setScene(scene);
-
-			// se carga el controlador
-			EdicionEmpleadoControlador empleadoControlador = loader.getController();
-			empleadoControlador.setEscenarioEditar(escenarioCrear);
-			empleadoControlador.setManejador(this);
-
-			// se crea el escenario
-			escenarioCrear.showAndWait();
-
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	public void iniciarVistaMenuTrabajador(BorderPane pane) {
@@ -185,32 +142,10 @@ public class ManejadorEscenarios {
 			controladorMenu.setPanePrincipal(pane);
 		
 
-
-
-	}
-
-	public void iniciarVistaTrabajador() {
-		try {
-
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(Main.class.getResource("./vista/VistaTrabajador.fxml"));
-			BorderPane vista = (BorderPane) loader.load();
-
-			BorderPane root = new BorderPane();
-			root.setCenter(vista);
-			Scene scene = new Scene(root);
-			Stage stage = new Stage();
-
-			stage.setScene(scene);
-			stage.show();
-
-			escenario.close();
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-
 
 	public void cargarEscenarioRegistro() {
 		try {
@@ -231,24 +166,10 @@ public class ManejadorEscenarios {
 			// importante
 			controladorVistaRegistro.setStage(stage);
 
-	public void iniciarVistaRegistro() {
-		try {
-
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(Main.class.getResource("./vista/VistaRegistroTrabajador.fxml"));
-			BorderPane vista = (BorderPane) loader.load();
-
-			Scene scene = new Scene(vista);
-			Stage stage = new Stage();
-			stage.setScene(scene);
-			stage.show();
-
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-
 	public void iniciarVistaGestionar(BorderPane pane) {
 		try {
 
@@ -307,22 +228,6 @@ public class ManejadorEscenarios {
 	}
 	
 	public void cargarEscenarioDialogo() {
-
-
-	public ObservableList<EmpleadoObservable> getEmpleadosObservables() {
-		return empleadosObservables;
-	}
-
-	public void agregarALista(Persona empleado) {
-		empleadosObservables.add(new EmpleadoObservable(empleado));
-	}
-
-	public Stage getEscenario() {
-		return escenario;
-	}
-
-	public void iniciarDialogo() {
-
 		try {
 
 			FXMLLoader loader = new FXMLLoader();
@@ -341,7 +246,6 @@ public class ManejadorEscenarios {
 		}
 	}
 
-
 	public ObservableList<EmpleadoObservable> getEmpleadosObservables() {
 		return empleadosObservables;
 	}
@@ -353,7 +257,6 @@ public class ManejadorEscenarios {
 	public Stage getEscenario() {
 		return escenario;
 	}
-
 
 	public boolean registrarTrabajador(Empleado empleado) {
 		try {

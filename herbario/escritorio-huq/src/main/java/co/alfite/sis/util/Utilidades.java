@@ -9,10 +9,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 /**
  * Permite manejar las operaciones generales de la capa de presentacion
-
  * @author Neyder Figueroa, Melissa Alvarez, Felipe Tejada
- * @author EinerZG
-
  * @version 1.0
  */
 public final class Utilidades {
@@ -22,7 +19,6 @@ public final class Utilidades {
 	 * @param titulo subtitulo de la alerta
 	 * @param mensaje mensaje principal
 	 */
-
 	public static boolean mostrarMensaje( String titulo, String mensaje, AlertType tipo) {
 		Alert alert = new Alert(tipo);
 		alert.setTitle("Herbario UQ");
@@ -31,13 +27,6 @@ public final class Utilidades {
 		alert.showAndWait();	
 	
 		return false;
-
-	public static void mostrarMensaje( String titulo, String mensaje ) {
-		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("Balotera");
-		alert.setHeaderText(titulo);
-		alert.setContentText(mensaje);
-		alert.showAndWait();	
 	}
 	
 	/**

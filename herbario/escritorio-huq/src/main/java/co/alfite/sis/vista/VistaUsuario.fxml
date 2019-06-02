@@ -6,11 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-
-<BorderPane prefHeight="570.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.alfite.sis.controlador.VistaUsuarioControlador">
-
-<BorderPane prefHeight="570.0" prefWidth="750.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
-
+<BorderPane prefHeight="570.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Vco.alfite.sis.controlador.VistaUsuarioControlador">
    <bottom>
       <Pagination prefHeight="56.0" prefWidth="750.0" BorderPane.alignment="CENTER" />
    </bottom>

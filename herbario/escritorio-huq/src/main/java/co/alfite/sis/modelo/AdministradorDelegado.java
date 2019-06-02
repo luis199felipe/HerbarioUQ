@@ -7,23 +7,12 @@ import java.util.List;
 
 
 
-
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import co.alfite.sis.ejb.AdministradorEJBRemote;
 import co.alfite.sis.entidades.Empleado;
 import co.alfite.sis.entidades.Persona;
-
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-
-import co.alfite.sis.ejb.AdministradorEJB;
-import co.alfite.sis.ejb.AdministradorEJBRemote;
-import co.alfite.sis.entidades.Empleado;
-import co.alfite.sis.entidades.Persona;
-import co.alfite.sis.entidades.Trabajador;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -38,11 +27,7 @@ public class AdministradorDelegado {
 	/**
 	 * instancia que representa el ejb remoto de administrador
 	 */
-
 	private AdministradorEJBRemote adminEJB;
-
-	private AdministradorEJB adminEJB;
-
 	/**
 	 * permite manejar una unica instancia para le manejo de delegados
 	 */
@@ -57,12 +42,6 @@ public class AdministradorDelegado {
 //		} catch (NamingException e) {
 //			e.printStackTrace();
 //		}
-
-		try {
-			adminEJB = (AdministradorEJB) new InitialContext().lookup(AdministradorEJBRemote.JNDI);
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
 	}
 
 	/**
