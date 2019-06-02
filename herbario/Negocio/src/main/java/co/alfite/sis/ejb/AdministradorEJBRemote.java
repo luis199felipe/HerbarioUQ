@@ -16,6 +16,8 @@ import co.alfite.sis.excepciones.ElementoRepetidoExcepcion;
 @Remote
 public interface AdministradorEJBRemote {
 
+	
+	String JNDI = "java:global/ear-huq/Negocio/AdministradorEJB!co.alfite.sis.ejb.AdministradorEJBRemote";
 	/**
 	 * permite registrar un elemento en la base de datos
 	 * 

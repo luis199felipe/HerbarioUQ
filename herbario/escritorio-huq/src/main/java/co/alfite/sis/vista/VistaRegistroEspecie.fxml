@@ -8,7 +8,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
+
 <BorderPane prefHeight="464.0" prefWidth="647.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.alfite.sis.controlador.VistaRegistroEspecieControlador">
+
+
+<BorderPane prefHeight="464.0" prefWidth="647.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
    <center>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>

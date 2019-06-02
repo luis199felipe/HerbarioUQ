@@ -8,7 +8,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
+
 <BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.alfite.sis.controlador.VistaLoginControlador">
+
    <center>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -74,6 +76,21 @@
                      <effect>
                         <DropShadow />
                      </effect>
+
+               <center>
+                  <Hyperlink onAction="#registrarTrabajador" text="Registrarse  en el Herbario" BorderPane.alignment="CENTER" />
+               </center>
+            </BorderPane>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+               <center>
+                  <ImageView fitHeight="109.0" fitWidth="211.0" pickOnBounds="true" preserveRatio="true" x="6.0" BorderPane.alignment="CENTER">
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                     <image>
+                        <Image url="@../../resources/IogoHerbario2.png" />
+                     </image>
+
                   </ImageView>
                </center>
             </BorderPane>
