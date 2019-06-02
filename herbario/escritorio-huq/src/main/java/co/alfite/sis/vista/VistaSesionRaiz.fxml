@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane prefHeight="497.0" prefWidth="766.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.alfite.sis.controlador.VistaSesionRaizControlador">
+     <top>
+      <ToolBar prefHeight="0.0" prefWidth="766.0">
+        <items>
+            <SplitMenuButton fx:id="control" mnemonicParsing="false" text="User@root">
+              <items>
+                <MenuItem fx:id="mnActualizarInf" mnemonicParsing="false" onAction="#actualizarInformacion" onMenuValidation="#actualizarInformacion" text="Actualizar Informacion" />
+                <MenuItem fx:id="mnCerrarSesion" mnemonicParsing="false" onAction="#cerrarSesion" onMenuValidation="#cerrarSesion" text="cerrar sesion" />
+              </items>
+               <effect>
+                  <DropShadow color="#e40f0f" />
+               </effect>
+            </SplitMenuButton>
+            <ProgressIndicator prefHeight="8.0" prefWidth="40.0" />
+            <Button fx:id="botonHome" mnemonicParsing="false" onAction="#irAHome" text="Inicio" />
+            <Button mnemonicParsing="false" text="&lt;" />
+            <Button mnemonicParsing="false" text="&gt;" />
+        </items>
+         <effect>
+            <Lighting bumpInput="$null">
+               <light>
+                  <Light.Distant color="#7dfffb" />
+               </light>
+            </Lighting>
+         </effect>
+      </ToolBar>
+   </top>
+</BorderPane>
