@@ -13,24 +13,22 @@ import javax.persistence.*;
  */
 @Entity
 @NamedQueries({
-@NamedQuery(name=MeGustaEspeciePlanta.MEGUSTAESPECIE_GET_ALL ,query="select megustaEspecie from MeGustaEspeciePlanta megustaEspecie"),
-@NamedQuery(name=MeGustaEspeciePlanta.MEGUSTAESPECIE_ESPECIE ,query="select megusta from MeGustaEspeciePlanta megusta where megusta.especie.idEspecie = :esp "),
-@NamedQuery(name=MeGustaEspeciePlanta.MEGUSTAESPECIE_ESPECIEMASMEGUSTAS ,query="select count(megusta.especie.idEspecie) as n from MeGustaEspeciePlanta megusta group by megusta.especie order by n desc")
-})
+		@NamedQuery(name = MeGustaEspeciePlanta.MEGUSTAESPECIE_GET_ALL, query = "select megustaEspecie from MeGustaEspeciePlanta megustaEspecie"),
+		@NamedQuery(name = MeGustaEspeciePlanta.MEGUSTAESPECIE_ESPECIE, query = "select megusta from MeGustaEspeciePlanta megusta where megusta.especie.idEspecie = :esp "),
+		@NamedQuery(name = MeGustaEspeciePlanta.MEGUSTAESPECIE_ESPECIEMASMEGUSTAS, query = "select count(megusta.especie.idEspecie) as n from MeGustaEspeciePlanta megusta group by megusta.especie order by n desc") })
 public class MeGustaEspeciePlanta implements Serializable {
 
-	/**
-	 * Muchos MeGustaEspeciePlanta pertenecen a un Usuario
-	 */
-	
-	@ManyToOne
-	private Usuario usuario;
-	
 	public static final String MEGUSTAESPECIE_GET_ALL = "MeGustaEspecieGetAll";
 	public static final String MEGUSTAESPECIE_ESPECIE = "MeGustaDeUnaEspecieEspecifica";
 	public static final String MEGUSTAESPECIE_ESPECIEMASMEGUSTAS = "EspecieConMasMegustas";
 
-	
+	/**
+	 * Muchos MeGustaEspeciePlanta pertenecen a un Usuario
+	 */
+
+	@ManyToOne
+	private Usuario usuario;
+
 	/**
 	 * Muchos MeGustaEspeciePlanta pertenecen a una EspeciePlanta
 	 */
