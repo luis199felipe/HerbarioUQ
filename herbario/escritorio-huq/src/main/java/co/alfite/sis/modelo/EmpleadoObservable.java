@@ -70,13 +70,12 @@ public class EmpleadoObservable {
 	 */
 	public EmpleadoObservable(Persona empleado) {
 
-//		this.empleado = (Empleado) empleado;
-//		this.cedula = new SimpleStringProperty(empleado.getCedula());
-//		this.nombre = new SimpleStringProperty(empleado.getNombre());
-//		this.apellido = new SimpleStringProperty(empleado.getApellido());
-//		this.email = new SimpleStringProperty(empleado.getEmail());
-//		this.clave = new SimpleStringProperty(empleado.getClave());
-//		this.fechaNacimiento = new SimpleObjectProperty<>(empleado.getFechaNacimiento());
+		this.empleado = (Empleado) empleado;
+		this.cedula = new SimpleStringProperty(empleado.getIdPersona());
+		this.nombre = new SimpleStringProperty(empleado.getNombre());
+		this.email = new SimpleStringProperty(empleado.getEmail());
+		this.clave = new SimpleStringProperty(empleado.getPassword());
+		this.fechaNacimiento = new SimpleObjectProperty<>(empleado.getFechaNacimiento());
 
 	}
 
