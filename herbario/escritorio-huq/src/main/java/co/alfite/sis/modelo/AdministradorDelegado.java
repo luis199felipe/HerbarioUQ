@@ -7,6 +7,7 @@ import java.util.List;
 
 
 
+
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
@@ -37,11 +38,11 @@ public class AdministradorDelegado {
 	 * constructor para conectar con la capa de negocio
 	 */
 	private AdministradorDelegado() {
-//		try {
-//			//adminEJB = (AdministradorEJBRemote) new InitialContext().lookup(AdministradorEJBRemote.JNDI);
-//		} catch (NamingException e) {
-//			e.printStackTrace();
-//		}
+		try {
+			adminEJB = (AdministradorEJBRemote) new InitialContext().lookup(AdministradorEJBRemote.JNDI);
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -66,6 +67,7 @@ public class AdministradorDelegado {
 	 */
 	public boolean registrarTrabajador(Empleado empleado) {
 		try {
+			System.out.println(empleado.getNombre());
 			return adminEJB.insertarEmpleado(empleado) != null;
 		} catch (Exception e) {
 			e.printStackTrace();

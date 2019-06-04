@@ -70,10 +70,13 @@
             </BorderPane>
             <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                <center>
-                  <ImageView fx:id="logoHerbario" fitHeight="109.0" fitWidth="211.0" pickOnBounds="true" preserveRatio="true" x="6.0" BorderPane.alignment="CENTER">
+                  <ImageView fx:id="logoHerbario" fitHeight="128.0" fitWidth="156.0" pickOnBounds="true" preserveRatio="true" x="6.0" BorderPane.alignment="CENTER">
                      <effect>
                         <DropShadow />
                      </effect>
+                     <image>
+                        <Image url="@../util/logoHerbario.png" />
+                     </image>
                   </ImageView>
                </center>
             </BorderPane>

@@ -22,5 +22,11 @@
 		<version>0.0.1-SNAPSHOT</version>
 		<type>ejb</type>
 	</dependency>
+		<dependency>
+			<groupId>org.glassfish.main.extras</groupId>
+			<artifactId>glassfish-embedded-all</artifactId>
+			<version>5.1.0</version>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 </project>

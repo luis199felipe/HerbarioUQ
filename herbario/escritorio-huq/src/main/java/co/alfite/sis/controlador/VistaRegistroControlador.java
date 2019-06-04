@@ -54,28 +54,38 @@ public class VistaRegistroControlador {
 	@FXML
 	public void registrarPersona() {
 
-		Persona persona = null;
-
-		if (validarCampos()) {
-			String cargoPersona = comboboxCargo.getSelectionModel().getSelectedItem();
-
-			if (cargoPersona.equals("Trabajador")) {
-				persona = new Trabajador();
-			} else if (cargoPersona.equals("Empleado")) {
-				persona = new Empleado();
-				;
-			} else if (cargoPersona.equals("Recolector")) {
-				persona = new Recolector();
-			} else if (cargoPersona.equals("Usuario")) {
-				persona = new Usuario();
-			}
-			persona.setIdPersona(campoCedula.getText());
-			persona.setNombre(campoNombre.getText());
-			persona.setPassword(campoContrasenia.getText());
-			persona.setEmail(campoContrasenia.getText());
-			persona.setFechaNacimiento(Utilidades.pasarADate(fechaNacimiento.getValue()));
-		}
+//		Persona persona = null;
+//
+//		if (validarCampos()) {
+//			String cargoPersona = comboboxCargo.getSelectionModel().getSelectedItem();
+//
+//			if (cargoPersona.equals("Trabajador")) {
+//				persona = new Trabajador();
+//			} else if (cargoPersona.equals("Empleado")) {
+//				persona = new Empleado();
+//				;
+//			} else if (cargoPersona.equals("Recolector")) {
+//				persona = new Recolector();
+//			} else if (cargoPersona.equals("Usuario")) {
+//				persona = new Usuario();
+//			}
+//			persona.setIdPersona(campoCedula.getText());
+//			persona.setNombre(campoNombre.getText());
+//			persona.setPassword(campoContrasenia.getText());
+//			persona.setEmail(campoContrasenia.getText());
+//			persona.setFechaNacimiento(Utilidades.pasarADate(fechaNacimiento.getValue()));
+//		}
 		
+		
+		Empleado x=new Empleado();
+		x.setNombre("pipe");
+		
+		x.setEmail("pipe@hotmail");
+		x.setPassword("contra");
+		x.setIdPersona("654323455");
+		manejador.insertarPersona(x);
+		
+
 
 //		if (manejador.registrarEmpleado(persona)) {
 //			Utilidades.mostrarMensaje("Registro", "Registro exitoso!!");

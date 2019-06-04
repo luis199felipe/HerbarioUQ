@@ -1,18 +1,17 @@
 package co.alfite.sis.controlador;
 
 import java.io.IOException;
-
 import co.alfite.sis.Main;
 import co.alfite.sis.entidades.Empleado;
 import co.alfite.sis.entidades.Persona;
-import co.alfite.sis.entidades.Trabajador;
 import co.alfite.sis.modelo.AdministradorDelegado;
 import co.alfite.sis.modelo.EmpleadoObservable;
-import javafx.collections.FXCollections;
+import co.alfite.sis.modelo.InsertarDelegado;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.image.Image;
+
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -24,6 +23,7 @@ import javafx.stage.Stage;
  */
 public class ManejadorEscenarios {
 
+	private final static String ruta="./util/iconH.png";
 	/**
 	 * contenedor prinpipal de la aplicacion
 	 */
@@ -40,6 +40,7 @@ public class ManejadorEscenarios {
 	 * conexion con capa de negocio
 	 */
 	private AdministradorDelegado administradorDelegado;
+	private InsertarDelegado insertarDelegado;
 
 	/**
 	 * recibe el escenario principla de la aplicacion
@@ -49,14 +50,15 @@ public class ManejadorEscenarios {
 	public ManejadorEscenarios(Stage escenario) {
 
 		this.escenario = escenario;
-//
 		administradorDelegado = AdministradorDelegado.administradorDelegado;
-//		empleadosObservables = FXCollections.observableArrayList();
-
+		insertarDelegado=InsertarDelegado.insertarDelegado;
+		
 		try {
+			
+			escenario.getIcons().add(new Image(Main.class.getResourceAsStream(ruta)));	
 			// se inicializa el escenario
 			escenario.setTitle("Herbario");
-
+		
 			// se carga la vista
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Main.class.getResource("./vista/VistaRaiz.fxml"));
@@ -111,9 +113,11 @@ public class ManejadorEscenarios {
 
 			BorderPane root = new BorderPane();
 			root.setCenter(vista);
+			
 			Scene scene = new Scene(root);
 			Stage stage = new Stage();
-
+			stage.getIcons().add(new Image(Main.class.getResourceAsStream(ruta)));
+			stage.setTitle("Herbario");
 			VistaSesionRaizControlador controladorVistaTrabajador = loader.getController();
 			controladorVistaTrabajador.setManejador(this);
 			controladorVistaTrabajador.setStage(vista);
@@ -160,7 +164,9 @@ public class ManejadorEscenarios {
 
 			Scene scene = new Scene(vista);
 			Stage stage = new Stage();
-
+			stage.setTitle("Herbario/registro");
+			
+			stage.getIcons().add(new Image(Main.class.getResourceAsStream(ruta)));
 			stage.setScene(scene);
 			stage.show();
 			// importante
@@ -237,7 +243,8 @@ public class ManejadorEscenarios {
 			Scene scene = new Scene(vista);
 
 			Stage stage = new Stage();
-
+			stage.setTitle("Herbario/dialogo");
+			stage.getIcons().add(new Image(Main.class.getResourceAsStream(ruta)));
 			stage.setScene(scene);
 			stage.show();
 
@@ -266,9 +273,14 @@ public class ManejadorEscenarios {
 		}
 		return false;
 	}
-
-	public boolean eliminarEmpleado(Empleado empleado) {
-		return administradorDelegado.eliminarEmpleado(empleado);
+	public boolean insertarPersona(Empleado empleado) {
+		try {
+			return insertarDelegado.registrarTrabajador(empleado);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
+
 
 }

@@ -2,12 +2,17 @@ package co.alfite.sis.ejb;
 
 import javax.ejb.LocalBean;
 
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import co.alfite.sis.entidades.Empleado;
 import co.alfite.sis.entidades.MeGustaEspeciePlanta;
+import co.alfite.sis.entidades.Persona;
+import co.alfite.sis.entidades.Recolector;
 import co.alfite.sis.entidades.Resenia;
+import co.alfite.sis.excepciones.ElementoRepetidoExcepcion;
 
 /**
  * Session Bean implementation class UsuarioEJB
@@ -61,5 +66,8 @@ public class UsuarioEJB implements UsuarioEJBRemote {
 			return null;
 		}
 	}
+	
+
+
 
 }
