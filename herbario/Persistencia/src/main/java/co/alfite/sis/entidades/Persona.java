@@ -6,6 +6,8 @@ import java.util.List;
 import java.lang.String;
 import javax.persistence.*;
 
+import co.alfite.sis.entidades.RegistroEspecie.Estado;
+
 /**
  * Entity implementation class for Entity: Persona
  * 
@@ -45,7 +47,12 @@ public class Persona implements Serializable {
 		activo, inactivo
 	}
 	
+	
 
+	@Enumerated(EnumType.STRING)
+	@Column(length = 10)
+	private Estado estado;
+		
 	/**
 	 * telefono de una persona
 	 */

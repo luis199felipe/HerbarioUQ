@@ -10,7 +10,7 @@ import co.alfite.sis.excepciones.ElementoRepetidoExcepcion;
 @Remote
 public interface InsertarEJBRemote {
 
-	String JNDI = "java:global/ear-huq/Negocio/InsertarEJB!co.alfite.sis.ejb.InsertarEJBRemote";
+	String JNDI = "java:global/ear-huq/Negocio/EliminarEJB!co.alfite.sis.ejb.EliminarEJBRemote";
 
 	Empleado insertarEmpleado(Empleado empleado) throws ElementoRepetidoExcepcion;
 

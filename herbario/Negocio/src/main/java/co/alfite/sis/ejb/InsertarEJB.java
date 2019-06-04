@@ -32,7 +32,7 @@ public class InsertarEJB implements InsertarEJBRemote {
 	public InsertarEJB() {
 		// TODO Auto-generated constructor stub
 	}
-
+	@Override
 	public RegistroEspecie insertarRegistro(RegistroEspecie registro) {
 
 		if (registro.getGenero() != null && registro.getFamilia() != null) {
@@ -60,7 +60,7 @@ public class InsertarEJB implements InsertarEJBRemote {
 		}
 
 	}
-
+	@Override
 	public Empleado insertarEmpleado(Empleado empleado) throws ElementoRepetidoExcepcion {
 
 		if (entityManager.find(Empleado.class, empleado.getIdPersona()) != null) {
@@ -79,7 +79,7 @@ public class InsertarEJB implements InsertarEJBRemote {
 		}
 	}
 
-	
+	@Override
 	public Recolector insertarRecolector(Recolector recolector) throws ElementoRepetidoExcepcion {
 
 		if (entityManager.find(Recolector.class, recolector.getIdPersona()) != null) {
@@ -97,7 +97,7 @@ public class InsertarEJB implements InsertarEJBRemote {
 			return null;
 		}
 	}
-
+	
 	private Persona buscarPorEmail(Persona per) {
 
 		try {
