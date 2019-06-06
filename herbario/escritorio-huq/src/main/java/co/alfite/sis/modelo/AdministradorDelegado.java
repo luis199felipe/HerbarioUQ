@@ -5,15 +5,15 @@ package co.alfite.sis.modelo;
 
 import java.util.List;
 
-
-
-
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import co.alfite.sis.ejb.AdministradorEJBRemote;
 import co.alfite.sis.entidades.Empleado;
 import co.alfite.sis.entidades.Persona;
+import co.alfite.sis.entidades.Recolector;
+import co.alfite.sis.entidades.Usuario;
+import co.alfite.sis.excepciones.ElementoRepetidoExcepcion;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -64,16 +64,14 @@ public class AdministradorDelegado {
 	 * 
 	 * @param empleado empleado a agregar
 	 * @return devuelve true si el empleado fue eliminado
+	 * @throws ElementoRepetidoExcepcion
 	 */
-	public boolean registrarTrabajador(Empleado empleado) {
-		try {
-			System.out.println(empleado.getNombre());
-			return adminEJB.insertarEmpleado(empleado) != null;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
+	public boolean insertarEmpleado(Empleado empleado) throws ElementoRepetidoExcepcion {
+
+		return adminEJB.insertarEmpleado(empleado) != null;
+
 	}
+
 
 	/**
 	 * devuvel la lista de empleado que estan en la base de datos
@@ -94,7 +92,7 @@ public class AdministradorDelegado {
 //			return adminEJB.eliminarPersona(empleado.getCedula()) != null;
 //		} catch (ElementoNoEncontradoException e) {
 //			e.printStackTrace();
-			return false;
+		return false;
 //		}
 	}
 

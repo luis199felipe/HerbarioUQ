@@ -1,6 +1,8 @@
 package co.alfite.sis.excepciones;
 
-public class ElementoRepetidoExcepcion extends Exception {
+import java.io.Serializable;
+
+public class ElementoRepetidoExcepcion extends Exception  implements Serializable{
 
 	/**
 	 * 

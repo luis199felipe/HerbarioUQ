@@ -5,10 +5,12 @@ import co.alfite.sis.entidades.Persona;
 import co.alfite.sis.entidades.Recolector;
 import co.alfite.sis.entidades.Trabajador;
 import co.alfite.sis.entidades.Usuario;
+import co.alfite.sis.excepciones.ElementoRepetidoExcepcion;
 import co.alfite.sis.util.Utilidades;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -54,44 +56,60 @@ public class VistaRegistroControlador {
 	@FXML
 	public void registrarPersona() {
 
-//		Persona persona = null;
-//
-//		if (validarCampos()) {
-//			String cargoPersona = comboboxCargo.getSelectionModel().getSelectedItem();
-//
-//			if (cargoPersona.equals("Trabajador")) {
-//				persona = new Trabajador();
-//			} else if (cargoPersona.equals("Empleado")) {
-//				persona = new Empleado();
-//				;
-//			} else if (cargoPersona.equals("Recolector")) {
-//				persona = new Recolector();
-//			} else if (cargoPersona.equals("Usuario")) {
-//				persona = new Usuario();
-//			}
-//			persona.setIdPersona(campoCedula.getText());
-//			persona.setNombre(campoNombre.getText());
-//			persona.setPassword(campoContrasenia.getText());
-//			persona.setEmail(campoContrasenia.getText());
-//			persona.setFechaNacimiento(Utilidades.pasarADate(fechaNacimiento.getValue()));
-//		}
-		
-		
-		Empleado x=new Empleado();
-		x.setNombre("pipe");
-		
-		x.setEmail("pipe@hotmail");
-		x.setPassword("contra");
-		x.setIdPersona("654323455");
-		manejador.insertarPersona(x);
-		
+		try {
 
+			boolean registroValido = false;
+			if (validarCampos()) {
+				String cargoPersona = comboboxCargo.getSelectionModel().getSelectedItem();
 
-//		if (manejador.registrarEmpleado(persona)) {
-//			Utilidades.mostrarMensaje("Registro", "Registro exitoso!!");
-//		} else {
-//			Utilidades.mostrarMensaje("Registro", "Error en registro!!");
-//		}
+				if (cargoPersona.equals("Empleado")) {
+					Empleado persona = new Empleado();
+
+					persona.setIdPersona(campoCedula.getText());
+					persona.setNombre(campoNombre.getText());
+					persona.setPassword(campoContrasenia.getText());
+					persona.setEmail(campoContrasenia.getText());
+					persona.setTelefono(campoTelefono.getText());
+					persona.setFechaNacimiento(Utilidades.pasarADate(fechaNacimiento.getValue()));
+					registroValido = manejador.insertarEmpleado(persona);
+
+				} else if (cargoPersona.equals("Recolector")) {
+					Recolector persona = new Recolector();
+
+					persona.setIdPersona(campoCedula.getText());
+					persona.setNombre(campoNombre.getText());
+					persona.setPassword(campoContrasenia.getText());
+					persona.setEmail(campoContrasenia.getText());
+					persona.setTelefono(campoTelefono.getText());
+					persona.setFechaNacimiento(Utilidades.pasarADate(fechaNacimiento.getValue()));
+
+					registroValido = manejador.insertarRecolector(persona);
+
+				} else if (cargoPersona.equals("Usuario")) {
+					Usuario nuevoUsuario = new Usuario();
+					nuevoUsuario.setIdPersona(campoCedula.getText());
+					nuevoUsuario.setNombre(campoNombre.getText());
+					nuevoUsuario.setPassword(campoContrasenia.getText());
+					nuevoUsuario.setEmail(campoContrasenia.getText());
+					nuevoUsuario.setTelefono(campoTelefono.getText());
+					nuevoUsuario.setFechaNacimiento(Utilidades.pasarADate(fechaNacimiento.getValue()));
+
+					registroValido = manejador.insertarUsuario(nuevoUsuario);
+				}
+
+			} else {
+				Utilidades.mostrarMensaje("Error", "Debe llenar todos los campos", AlertType.ERROR);
+			}
+			if (registroValido) {
+				Utilidades.mostrarMensaje("Error", "Bienvenido al Herbario de la universidad del quindio",
+						AlertType.INFORMATION);
+
+			}
+		} catch (ElementoRepetidoExcepcion e) {
+			Utilidades.mostrarMensaje("Error", e.getMessage(), AlertType.ERROR);
+			e.printStackTrace();
+		}
+
 	}
 
 	@FXML
@@ -103,7 +121,10 @@ public class VistaRegistroControlador {
 	private boolean validarCampos() {
 
 		boolean valido = true;
-		if (comboboxCargo.getSelectionModel().getSelectedItem() == null) {
+		if (comboboxCargo.getSelectionModel().getSelectedItem() == null || campoCedula.getText().isEmpty()
+				|| campoNombre.getText().isEmpty() || campoContrasenia.getText().isEmpty()
+				|| campoCorreo.getText().isEmpty() || campoTelefono.getText().isEmpty()
+				|| Utilidades.pasarADate(fechaNacimiento.getValue()) == null) {
 			valido = false;
 		}
 		return valido;

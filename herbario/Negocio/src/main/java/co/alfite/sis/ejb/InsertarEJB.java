@@ -1,6 +1,7 @@
 package co.alfite.sis.ejb;
 
 import javax.ejb.LocalBean;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -17,6 +18,7 @@ import co.alfite.sis.entidades.Recolector;
 import co.alfite.sis.entidades.RegistroEspecie;
 import co.alfite.sis.entidades.RegistroEspecie.Estado;
 import co.alfite.sis.entidades.Resenia;
+import co.alfite.sis.entidades.Usuario;
 import co.alfite.sis.excepciones.ElementoRepetidoExcepcion;
 
 /**
@@ -36,9 +38,8 @@ public class InsertarEJB implements InsertarEJBRemote {
 	public InsertarEJB() {
 		// TODO Auto-generated constructor stub
 	}
+
 	
-	
-	@Override
 	public MeGustaEspeciePlanta insertarMeGusta(MeGustaEspeciePlanta meGusta) throws ElementoRepetidoExcepcion {
 		try {
 			entityManager.persist(meGusta);
@@ -48,9 +49,8 @@ public class InsertarEJB implements InsertarEJBRemote {
 			return null;
 		}
 	}
+
 	
-	
-	@Override
 	public Resenia insertarResenia(Resenia resenia) {
 		try {
 			entityManager.persist(resenia);
@@ -60,10 +60,8 @@ public class InsertarEJB implements InsertarEJBRemote {
 			return null;
 		}
 	}
+
 	
-	
-	
-	@Override
 	public RegistroEspecie insertarRegistroEspecie(RegistroEspecie registro) {
 
 		if (registro.getGenero() != null && registro.getFamilia() != null) {
@@ -91,7 +89,8 @@ public class InsertarEJB implements InsertarEJBRemote {
 		}
 
 	}
-	@Override
+
+
 	public Empleado insertarEmpleado(Empleado empleado) throws ElementoRepetidoExcepcion {
 
 		if (entityManager.find(Empleado.class, empleado.getIdPersona()) != null) {
@@ -110,7 +109,26 @@ public class InsertarEJB implements InsertarEJBRemote {
 		}
 	}
 
-	@Override
+	
+	public Usuario insertarUsuario(Usuario nuevoUsuario)throws ElementoRepetidoExcepcion {
+
+		if (entityManager.find(Usuario.class, nuevoUsuario.getIdPersona()) != null) {
+			throw new ElementoRepetidoExcepcion("el Usuario con esa cedula ya fue registrado");
+
+		} else if (buscarPorEmail(nuevoUsuario) != null) {
+			throw new ElementoRepetidoExcepcion("el Usuario con ese email ya fue registrado");
+
+		}
+		try {
+			entityManager.persist(nuevoUsuario);
+			return nuevoUsuario;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+
 	public Recolector insertarRecolector(Recolector recolector) throws ElementoRepetidoExcepcion {
 
 		if (entityManager.find(Recolector.class, recolector.getIdPersona()) != null) {
@@ -120,7 +138,7 @@ public class InsertarEJB implements InsertarEJBRemote {
 			throw new ElementoRepetidoExcepcion("el recolector con ese email ya fue registrado");
 
 		}
-		
+
 		try {
 			entityManager.persist(recolector);
 			return recolector;
@@ -129,9 +147,8 @@ public class InsertarEJB implements InsertarEJBRemote {
 			return null;
 		}
 	}
+
 	
-	
-	@Override
 	public FamiliaPlanta insertarFamilia(FamiliaPlanta familia) throws ElementoRepetidoExcepcion {
 
 		if (entityManager.find(FamiliaPlanta.class, familia.getIdFamilia()) != null) {
@@ -146,8 +163,8 @@ public class InsertarEJB implements InsertarEJBRemote {
 			return null;
 		}
 	}
-	
-	@Override
+
+
 	public GeneroPlanta insertarGenero(GeneroPlanta genero) throws ElementoRepetidoExcepcion {
 
 		if (entityManager.find(GeneroPlanta.class, genero.getIdGenero()) != null) {
@@ -162,11 +179,11 @@ public class InsertarEJB implements InsertarEJBRemote {
 			return null;
 		}
 	}
+
 	
-	@Override
 	public EspeciePlanta insertarEspecie(EspeciePlanta especie) throws ElementoRepetidoExcepcion {
 
-		if (entityManager.find(EspeciePlanta .class, especie.getIdEspecie()) != null) {
+		if (entityManager.find(EspeciePlanta.class, especie.getIdEspecie()) != null) {
 			throw new ElementoRepetidoExcepcion("El genero con el id ya fue registrado");
 
 		}
@@ -178,7 +195,6 @@ public class InsertarEJB implements InsertarEJBRemote {
 			return null;
 		}
 	}
-	
 
 	private Persona buscarPorEmail(Persona per) {
 
@@ -191,4 +207,5 @@ public class InsertarEJB implements InsertarEJBRemote {
 			return null;
 		}
 	}
+
 }

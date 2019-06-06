@@ -4,6 +4,9 @@ import java.io.IOException;
 import co.alfite.sis.Main;
 import co.alfite.sis.entidades.Empleado;
 import co.alfite.sis.entidades.Persona;
+import co.alfite.sis.entidades.Recolector;
+import co.alfite.sis.entidades.Usuario;
+import co.alfite.sis.excepciones.ElementoRepetidoExcepcion;
 import co.alfite.sis.modelo.AdministradorDelegado;
 import co.alfite.sis.modelo.EmpleadoObservable;
 import co.alfite.sis.modelo.InsertarDelegado;
@@ -23,7 +26,7 @@ import javafx.stage.Stage;
  */
 public class ManejadorEscenarios {
 
-	private final static String ruta="./util/iconH.png";
+	private final static String ruta = "./util/iconH.png";
 	/**
 	 * contenedor prinpipal de la aplicacion
 	 */
@@ -39,8 +42,8 @@ public class ManejadorEscenarios {
 	/**
 	 * conexion con capa de negocio
 	 */
-	private AdministradorDelegado administradorDelegado;
 	private InsertarDelegado insertarDelegado;
+	private AdministradorDelegado adminDelegado;
 
 	/**
 	 * recibe el escenario principla de la aplicacion
@@ -50,15 +53,15 @@ public class ManejadorEscenarios {
 	public ManejadorEscenarios(Stage escenario) {
 
 		this.escenario = escenario;
-		administradorDelegado = AdministradorDelegado.administradorDelegado;
-		insertarDelegado=InsertarDelegado.insertarDelegado;
-		
+		insertarDelegado = InsertarDelegado.insertarDelegado;
+		adminDelegado= adminDelegado.administradorDelegado;
+
 		try {
-			
-			escenario.getIcons().add(new Image(Main.class.getResourceAsStream(ruta)));	
+
+			escenario.getIcons().add(new Image(Main.class.getResourceAsStream(ruta)));
 			// se inicializa el escenario
 			escenario.setTitle("Herbario");
-		
+
 			// se carga la vista
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Main.class.getResource("./vista/VistaRaiz.fxml"));
@@ -113,7 +116,7 @@ public class ManejadorEscenarios {
 
 			BorderPane root = new BorderPane();
 			root.setCenter(vista);
-			
+
 			Scene scene = new Scene(root);
 			Stage stage = new Stage();
 			stage.getIcons().add(new Image(Main.class.getResourceAsStream(ruta)));
@@ -144,7 +147,6 @@ public class ManejadorEscenarios {
 			VistaTrabajadorMenuControlador controladorMenu = loader.getController();
 			controladorMenu.setManejador(this);
 			controladorMenu.setPanePrincipal(pane);
-		
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -165,7 +167,7 @@ public class ManejadorEscenarios {
 			Scene scene = new Scene(vista);
 			Stage stage = new Stage();
 			stage.setTitle("Herbario/registro");
-			
+
 			stage.getIcons().add(new Image(Main.class.getResourceAsStream(ruta)));
 			stage.setScene(scene);
 			stage.show();
@@ -176,6 +178,7 @@ public class ManejadorEscenarios {
 			e.printStackTrace();
 		}
 	}
+
 	public void iniciarVistaGestionar(BorderPane pane) {
 		try {
 
@@ -187,13 +190,12 @@ public class ManejadorEscenarios {
 
 			VistaGestionarPersonaControlador controladorGestionar = loader.getController();
 			controladorGestionar.setManejador(this);
-			
-			
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
+
 	public void iniciarVistaValidarRegistros(BorderPane pane) {
 		try {
 
@@ -205,15 +207,13 @@ public class ManejadorEscenarios {
 
 			VistaValidarRegistroControlador controladorValidarRegistros = loader.getController();
 			controladorValidarRegistros.setManejador(this);
-			
-			
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public void iniciarVistaGestionarGFE(BorderPane pane,String elementoAGestionar) {
+
+	public void iniciarVistaGestionarGFE(BorderPane pane, String elementoAGestionar) {
 		try {
 
 			FXMLLoader loader = new FXMLLoader();
@@ -225,14 +225,12 @@ public class ManejadorEscenarios {
 			VistaGestionarGFEControlador controladorGestionGFE = loader.getController();
 			controladorGestionGFE.setManejador(this);
 			controladorGestionGFE.adaptarVista(elementoAGestionar);
-			
-			
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void cargarEscenarioDialogo() {
 		try {
 
@@ -265,22 +263,22 @@ public class ManejadorEscenarios {
 		return escenario;
 	}
 
-	public boolean registrarTrabajador(Empleado empleado) {
-		try {
-			return administradorDelegado.registrarTrabajador(empleado);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return false;
-	}
-	public boolean insertarPersona(Empleado empleado) {
-		try {
-			return insertarDelegado.registrarTrabajador(empleado);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return false;
+	public boolean insertarEmpleado(Empleado empleado) throws ElementoRepetidoExcepcion {
+
+		return insertarDelegado.insertarEmpleado(empleado);
+
 	}
 
+	public boolean insertarUsuario(Usuario nuevoUsuario) throws ElementoRepetidoExcepcion {
+
+		return insertarDelegado.insertarUsusario(nuevoUsuario);
+
+	}
+
+	public boolean insertarRecolector(Recolector recolector) throws ElementoRepetidoExcepcion {
+
+		return insertarDelegado.insertarRecolector(recolector);
+
+	}
 
 }

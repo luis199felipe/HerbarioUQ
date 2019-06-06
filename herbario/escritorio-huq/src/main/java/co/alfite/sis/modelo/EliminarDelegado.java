@@ -11,7 +11,7 @@ public class EliminarDelegado {
 	/**
 	 * instancia que representa el ejb remoto de administrador
 	 */
-	private EliminarEJBRemote insertarEJB;
+	private EliminarEJBRemote eliminarEJB;
 	/**
 	 * permite manejar una unica instancia para le manejo de delegados
 	 */
@@ -22,7 +22,7 @@ public class EliminarDelegado {
 	 */
 	private EliminarDelegado() {
 		try {
-			insertarEJB = (EliminarEJBRemote) new InitialContext().lookup(EliminarEJBRemote.JNDI);
+			eliminarEJB = (EliminarEJBRemote) new InitialContext().lookup(EliminarEJBRemote.JNDI);
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}

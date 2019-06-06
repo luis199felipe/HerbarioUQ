@@ -1,19 +1,16 @@
 package co.alfite.sis.ejb;
 
 import co.alfite.sis.entidades.Recolector;
-import co.alfite.sis.entidades.RegistroEspecie;
-import co.alfite.sis.excepciones.ElementoRepetidoExcepcion;
-import javax.ejb.Remote;
 
-import co.alfite.sis.entidades.Empleado;
-import co.alfite.sis.entidades.Recolector;
 import co.alfite.sis.entidades.RegistroEspecie;
-import co.alfite.sis.excepciones.ElementoRepetidoExcepcion;
+import javax.ejb.Remote;
+import co.alfite.sis.entidades.Empleado;
+
 
 @Remote
 public interface EliminarEJBRemote {
 	
-	String JNDI = "java:global/ear-huq/Negocio/InsertarEJB!co.alfite.sis.ejb.eliminarEJBRemote";
+	String JNDI = "java:global/ear-huq/Negocio/EliminarEJB!co.alfite.sis.ejb.EliminarEJBRemote";
 	
 
 	/**

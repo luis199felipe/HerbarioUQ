@@ -53,6 +53,14 @@ public class Persona implements Serializable {
 	@Column(length = 10)
 	private Estado estado;
 		
+	public Estado getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Estado estado) {
+		this.estado = estado;
+	}
+
 	/**
 	 * telefono de una persona
 	 */

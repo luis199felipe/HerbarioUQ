@@ -10,12 +10,13 @@ import co.alfite.sis.entidades.MeGustaEspeciePlanta;
 import co.alfite.sis.entidades.Recolector;
 import co.alfite.sis.entidades.RegistroEspecie;
 import co.alfite.sis.entidades.Resenia;
+import co.alfite.sis.entidades.Usuario;
 import co.alfite.sis.excepciones.ElementoRepetidoExcepcion;
 
 @Remote
 public interface InsertarEJBRemote {
 
-	String JNDI = "java:global/ear-huq/Negocio/EliminarEJB!co.alfite.sis.ejb.EliminarEJBRemote";
+	String JNDI = "java:global/ear-huq/Negocio/InsertarEJB!co.alfite.sis.ejb.InsertarEJBRemote";
 
 	Empleado insertarEmpleado(Empleado empleado) throws ElementoRepetidoExcepcion;
 
@@ -43,4 +44,8 @@ public interface InsertarEJBRemote {
 	MeGustaEspeciePlanta insertarMeGusta(MeGustaEspeciePlanta meGusta) throws ElementoRepetidoExcepcion;
 
 	Resenia insertarResenia(Resenia resenia);
+
+	Usuario insertarUsuario(Usuario nuevoUsuario)throws ElementoRepetidoExcepcion;
+
+
 }

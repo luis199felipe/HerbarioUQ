@@ -29,14 +29,6 @@ public interface AdministradorEJBRemote {
 
 	/**
 	 * 
-	 * @param recolector
-	 * @return
-	 * @throws ElementoRepetidoExcepcion
-	 */
-	Recolector insertarRecolector(Recolector recolector) throws ElementoRepetidoExcepcion;
-
-	/**
-	 * 
 	 * @param registro
 	 * @return
 	 */
