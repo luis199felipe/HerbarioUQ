@@ -1,4 +1,4 @@
-package co.alfite.sis.modelo;
+package co.alfite.sis.modelo.observable;
 
 import co.alfite.sis.entidades.EspeciePlanta;
 import co.alfite.sis.entidades.Resenia;

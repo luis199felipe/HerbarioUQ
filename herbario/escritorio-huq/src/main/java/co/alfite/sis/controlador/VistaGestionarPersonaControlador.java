@@ -1,6 +1,7 @@
 package co.alfite.sis.controlador;
 
 import co.alfite.sis.entidades.Persona;
+import co.alfite.sis.modelo.observable.PersonaObservable;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

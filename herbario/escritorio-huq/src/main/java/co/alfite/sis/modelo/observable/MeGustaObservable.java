@@ -1,4 +1,4 @@
-package co.alfite.sis.modelo;
+package co.alfite.sis.modelo.observable;
 
 import java.util.Date;
 

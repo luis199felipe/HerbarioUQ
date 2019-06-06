@@ -12,8 +12,6 @@ public interface ActualizarEJBRemote {
 
 	String JNDI =  "java:global/ear-huq/Negocio/ActualizarEJB!co.alfite.sis.ejb.ActualizarEJBRemote";
 
-	RegistroEspecie ActualizarRegistro(RegistroEspecie registro);
-
 	Empleado ActualizarEmpleado(Empleado empleado);
 
 	Recolector ActualizarRecolector(Recolector recolector);

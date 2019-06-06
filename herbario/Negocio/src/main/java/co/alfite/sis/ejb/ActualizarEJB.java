@@ -33,23 +33,7 @@ public class ActualizarEJB implements ActualizarEJBRemote {
 		// TODO Auto-generated constructor stub
 	}
 
-	public RegistroEspecie ActualizarRegistro(RegistroEspecie registro) {
 
-		if (entityManager.find(RegistroEspecie.class, registro.getIdRegistro())!=null) {
-
-			try {
-				entityManager.merge(registro);
-				return registro;
-			} catch (Exception e) {
-				e.printStackTrace();
-				return null;
-			}
-		} else {
-			return null;
-		}
-
-		
-	}
 
 	@Override
 	public Empleado ActualizarEmpleado(Empleado empleado){

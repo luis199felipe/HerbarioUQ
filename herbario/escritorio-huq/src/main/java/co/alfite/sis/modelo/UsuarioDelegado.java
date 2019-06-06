@@ -6,6 +6,8 @@ import co.alfite.sis.ejb.UsuarioEJBRemote;
 import co.alfite.sis.entidades.Empleado;
 import co.alfite.sis.entidades.MeGustaEspeciePlanta;
 import co.alfite.sis.entidades.Resenia;
+import co.alfite.sis.modelo.observable.MeGustaObservable;
+import co.alfite.sis.modelo.observable.ReseniaObservable;
 import co.alfite.sis.entidades.Resenia;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

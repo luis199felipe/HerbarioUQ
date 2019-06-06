@@ -1,4 +1,4 @@
-package co.alfite.sis.controlador;
+package co.alfite.sis.modelo.observable;
 
 import co.alfite.sis.entidades.Persona;
 import javafx.beans.property.SimpleStringProperty;

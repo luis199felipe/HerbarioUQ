@@ -14,6 +14,7 @@ import co.alfite.sis.entidades.Persona;
 import co.alfite.sis.entidades.Recolector;
 import co.alfite.sis.entidades.Usuario;
 import co.alfite.sis.excepciones.ElementoRepetidoExcepcion;
+import co.alfite.sis.modelo.observable.EmpleadoObservable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 

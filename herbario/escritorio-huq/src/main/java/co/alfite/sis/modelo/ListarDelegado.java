@@ -5,11 +5,11 @@ import java.util.List;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-import co.alfite.sis.controlador.PersonaObservable;
 import co.alfite.sis.ejb.ListarEJBRemote;
 import co.alfite.sis.entidades.Empleado;
 import co.alfite.sis.entidades.Persona;
 import co.alfite.sis.entidades.Recolector;
+import co.alfite.sis.modelo.observable.PersonaObservable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
