@@ -1,6 +1,8 @@
 package co.alfite.sis.controlador;
 
 import java.io.IOException;
+import java.util.List;
+
 import co.alfite.sis.Main;
 import co.alfite.sis.entidades.Empleado;
 import co.alfite.sis.entidades.Persona;
@@ -10,6 +12,7 @@ import co.alfite.sis.excepciones.ElementoRepetidoExcepcion;
 import co.alfite.sis.modelo.AdministradorDelegado;
 import co.alfite.sis.modelo.EmpleadoObservable;
 import co.alfite.sis.modelo.InsertarDelegado;
+import co.alfite.sis.modelo.ListarDelegado;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -39,11 +42,17 @@ public class ManejadorEscenarios {
 	 * para almacenar empleados observables
 	 */
 	private ObservableList<EmpleadoObservable> empleadosObservables;
+
+	private Persona personaEnSesion;
 	/**
 	 * conexion con capa de negocio
 	 */
 	private InsertarDelegado insertarDelegado;
+
 	private AdministradorDelegado adminDelegado;
+
+	private ListarDelegado listarDelegado;
+	private List<PersonaObservable> listaRecolectoresObservables;
 
 	/**
 	 * recibe el escenario principla de la aplicacion
@@ -54,7 +63,8 @@ public class ManejadorEscenarios {
 
 		this.escenario = escenario;
 		insertarDelegado = InsertarDelegado.insertarDelegado;
-		adminDelegado= adminDelegado.administradorDelegado;
+		adminDelegado = adminDelegado.administradorDelegado;
+		listarDelegado=listarDelegado.listarDelegado;
 
 		try {
 
@@ -182,6 +192,7 @@ public class ManejadorEscenarios {
 	public void iniciarVistaGestionar(BorderPane pane) {
 		try {
 
+			listaRecolectoresObservables=listarDelegado.listarRecolectoresObservables();
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Main.class.getResource("./vista/VistaGestionarPersona.fxml"));
 			BorderPane subVista = (BorderPane) loader.load();
@@ -251,10 +262,6 @@ public class ManejadorEscenarios {
 		}
 	}
 
-	public ObservableList<EmpleadoObservable> getEmpleadosObservables() {
-		return empleadosObservables;
-	}
-
 	public void agregarALista(Persona empleado) {
 		empleadosObservables.add(new EmpleadoObservable(empleado));
 	}
@@ -279,6 +286,16 @@ public class ManejadorEscenarios {
 
 		return insertarDelegado.insertarRecolector(recolector);
 
+	}
+
+	public List<PersonaObservable> ListaEmpleadosObservables() {
+
+		return listarDelegado.listarEmpleadosObservables();
+	}
+	
+	public List<PersonaObservable> ListaRecolectoresObservables() {
+
+		return listaRecolectoresObservables;
 	}
 
 }

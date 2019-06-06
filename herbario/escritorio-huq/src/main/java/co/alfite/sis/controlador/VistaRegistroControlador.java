@@ -2,6 +2,7 @@ package co.alfite.sis.controlador;
 
 import co.alfite.sis.entidades.Empleado;
 import co.alfite.sis.entidades.Persona;
+import co.alfite.sis.entidades.Persona.Estado;
 import co.alfite.sis.entidades.Recolector;
 import co.alfite.sis.entidades.Trabajador;
 import co.alfite.sis.entidades.Usuario;
@@ -68,9 +69,10 @@ public class VistaRegistroControlador {
 					persona.setIdPersona(campoCedula.getText());
 					persona.setNombre(campoNombre.getText());
 					persona.setPassword(campoContrasenia.getText());
-					persona.setEmail(campoContrasenia.getText());
+					persona.setEmail(campoCorreo.getText());
 					persona.setTelefono(campoTelefono.getText());
 					persona.setFechaNacimiento(Utilidades.pasarADate(fechaNacimiento.getValue()));
+					persona.setEstado(Estado.activo);
 					registroValido = manejador.insertarEmpleado(persona);
 
 				} else if (cargoPersona.equals("Recolector")) {
@@ -79,8 +81,9 @@ public class VistaRegistroControlador {
 					persona.setIdPersona(campoCedula.getText());
 					persona.setNombre(campoNombre.getText());
 					persona.setPassword(campoContrasenia.getText());
-					persona.setEmail(campoContrasenia.getText());
+					persona.setEmail(campoCorreo.getText());
 					persona.setTelefono(campoTelefono.getText());
+					persona.setEstado(Estado.activo);
 					persona.setFechaNacimiento(Utilidades.pasarADate(fechaNacimiento.getValue()));
 
 					registroValido = manejador.insertarRecolector(persona);
@@ -89,8 +92,9 @@ public class VistaRegistroControlador {
 					Usuario nuevoUsuario = new Usuario();
 					nuevoUsuario.setIdPersona(campoCedula.getText());
 					nuevoUsuario.setNombre(campoNombre.getText());
+					nuevoUsuario.setEstado(Estado.activo);
 					nuevoUsuario.setPassword(campoContrasenia.getText());
-					nuevoUsuario.setEmail(campoContrasenia.getText());
+					nuevoUsuario.setEmail(campoCorreo.getText());
 					nuevoUsuario.setTelefono(campoTelefono.getText());
 					nuevoUsuario.setFechaNacimiento(Utilidades.pasarADate(fechaNacimiento.getValue()));
 
@@ -101,13 +105,12 @@ public class VistaRegistroControlador {
 				Utilidades.mostrarMensaje("Error", "Debe llenar todos los campos", AlertType.ERROR);
 			}
 			if (registroValido) {
-				Utilidades.mostrarMensaje("Error", "Bienvenido al Herbario de la universidad del quindio",
+				Utilidades.mostrarMensaje("Bienvenida", "Bienvenido al Herbario de la universidad del quindio",
 						AlertType.INFORMATION);
 
 			}
 		} catch (ElementoRepetidoExcepcion e) {
 			Utilidades.mostrarMensaje("Error", e.getMessage(), AlertType.ERROR);
-			e.printStackTrace();
 		}
 
 	}
