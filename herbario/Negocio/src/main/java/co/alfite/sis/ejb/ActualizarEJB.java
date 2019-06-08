@@ -68,9 +68,7 @@ public class ActualizarEJB implements ActualizarEJBRemote {
 		if (rs!=null) {
 			rs.setEspecie(registro.getEspecie());
 			rs.setEstado(registro.getEstado());
-			rs.setFamilia(registro.getFamilia());
 			rs.setFecha(registro.getFecha());
-			rs.setGenero(registro.getGenero());
 			rs.setMensaje(registro.getMensaje());
 			
 			try {

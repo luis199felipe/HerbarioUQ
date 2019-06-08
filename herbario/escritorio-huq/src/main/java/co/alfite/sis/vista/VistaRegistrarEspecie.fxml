@@ -6,8 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-
-<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="VistaRegistroEspecieControlador">
    <center>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -67,10 +66,15 @@
                   </BorderPane>
                   <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <top>
-                        <Button mnemonicParsing="false" text="Cargar Imagen" BorderPane.alignment="CENTER" />
+                        <Button fx:id="botonCargarImagen" mnemonicParsing="false" onAction="#cargarImagen" text="Cargar Imagen" BorderPane.alignment="CENTER" />
                      </top>
                      <center>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+                        <ImageView fx:id="imagenEspecie" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+                     </center>
+                  </BorderPane>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
+                     <center>
+                        <Button fx:id="botonGuardar" mnemonicParsing="false" onAction="#insertarImagen" text="Realizar Registro" BorderPane.alignment="CENTER" />
                      </center>
                   </BorderPane>
                </children>

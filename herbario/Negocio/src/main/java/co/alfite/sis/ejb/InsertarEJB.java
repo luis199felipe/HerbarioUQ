@@ -39,7 +39,6 @@ public class InsertarEJB implements InsertarEJBRemote {
 		// TODO Auto-generated constructor stub
 	}
 
-	
 	public MeGustaEspeciePlanta insertarMeGusta(MeGustaEspeciePlanta meGusta) throws ElementoRepetidoExcepcion {
 		try {
 			entityManager.persist(meGusta);
@@ -50,7 +49,6 @@ public class InsertarEJB implements InsertarEJBRemote {
 		}
 	}
 
-	
 	public Resenia insertarResenia(Resenia resenia) {
 		try {
 			entityManager.persist(resenia);
@@ -61,24 +59,7 @@ public class InsertarEJB implements InsertarEJBRemote {
 		}
 	}
 
-	
 	public RegistroEspecie insertarRegistroEspecie(RegistroEspecie registro) {
-
-		if (registro.getGenero() != null && registro.getFamilia() != null) {
-			if (entityManager.find(GeneroPlanta.class, registro.getGenero().getFamiliaPlanta().getIdFamilia())
-					.equals(registro.getFamilia().getIdFamilia())) {
-
-				registro.setEstado(Estado.aprobado);
-
-			} else {
-				registro.setEstado(Estado.rechazado);
-
-			}
-
-		} else {
-			registro.setEstado(Estado.rechazado);
-
-		}
 
 		try {
 			entityManager.persist(registro);
@@ -89,7 +70,6 @@ public class InsertarEJB implements InsertarEJBRemote {
 		}
 
 	}
-
 
 	public Empleado insertarEmpleado(Empleado empleado) throws ElementoRepetidoExcepcion {
 
@@ -109,8 +89,7 @@ public class InsertarEJB implements InsertarEJBRemote {
 		}
 	}
 
-	
-	public Usuario insertarUsuario(Usuario nuevoUsuario)throws ElementoRepetidoExcepcion {
+	public Usuario insertarUsuario(Usuario nuevoUsuario) throws ElementoRepetidoExcepcion {
 
 		if (entityManager.find(Usuario.class, nuevoUsuario.getIdPersona()) != null) {
 			throw new ElementoRepetidoExcepcion("el Usuario con esa cedula ya fue registrado");
@@ -127,7 +106,6 @@ public class InsertarEJB implements InsertarEJBRemote {
 			return null;
 		}
 	}
-
 
 	public Recolector insertarRecolector(Recolector recolector) throws ElementoRepetidoExcepcion {
 
@@ -148,7 +126,6 @@ public class InsertarEJB implements InsertarEJBRemote {
 		}
 	}
 
-	
 	public FamiliaPlanta insertarFamilia(FamiliaPlanta familia) throws ElementoRepetidoExcepcion {
 
 		if (entityManager.find(FamiliaPlanta.class, familia.getIdFamilia()) != null) {
@@ -163,7 +140,6 @@ public class InsertarEJB implements InsertarEJBRemote {
 			return null;
 		}
 	}
-
 
 	public GeneroPlanta insertarGenero(GeneroPlanta genero) throws ElementoRepetidoExcepcion {
 
@@ -180,7 +156,6 @@ public class InsertarEJB implements InsertarEJBRemote {
 		}
 	}
 
-	
 	public EspeciePlanta insertarEspecie(EspeciePlanta especie) throws ElementoRepetidoExcepcion {
 
 		if (entityManager.find(EspeciePlanta.class, especie.getIdEspecie()) != null) {

@@ -152,21 +152,7 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 	 */
 	public RegistroEspecie insertarRegistro(RegistroEspecie registro) {
 
-		if (registro.getGenero() != null && registro.getFamilia() != null) {
-			if (entityManager.find(GeneroPlanta.class, registro.getGenero().getFamiliaPlanta().getIdFamilia())
-					.equals(registro.getFamilia().getIdFamilia())) {
-
-				registro.setEstado(Estado.aprobado);
-
-			} else {
-				registro.setEstado(Estado.rechazado);
-
-			}
-
-		} else {
-			registro.setEstado(Estado.rechazado);
-
-		}
+		registro.setEstado(Estado.enviado);
 
 		try {
 			entityManager.persist(registro);

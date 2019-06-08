@@ -28,11 +28,11 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <TableView prefHeight="200.0" prefWidth="200.0">
+            <TableView fx:id="tablaRegistros" prefHeight="200.0" prefWidth="200.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="idRegistro" />
-                <TableColumn prefWidth="75.0" text="Estado" />
-                  <TableColumn prefWidth="149.0" text="Trabajador " />
+                <TableColumn fx:id="columnaIdRegistro" prefWidth="75.0" text="idRegistro" />
+                <TableColumn fx:id="columnaEstadoRegistro" prefWidth="75.0" text="Estado" />
+                  <TableColumn fx:id="columnaNombreTrabajador" prefWidth="149.0" text="Trabajador " />
               </columns>
             </TableView>
             <GridPane GridPane.columnIndex="1">
@@ -49,7 +49,7 @@
                   <RowConstraints maxHeight="57.0" minHeight="10.0" prefHeight="57.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <ImageView fitHeight="96.0" fitWidth="157.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <ImageView fx:id="imagenPlanta" fitHeight="96.0" fitWidth="157.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
                         <Label prefHeight="17.0" prefWidth="116.0" text="Nombre Planta" BorderPane.alignment="CENTER" />
@@ -77,13 +77,13 @@
                   </BorderPane>
                   <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                      <center>
-                        <Button mnemonicParsing="false" text="Actualizar Estado" BorderPane.alignment="CENTER" />
+                        <Button fx:id="botonActualizarEstado" mnemonicParsing="false" text="Actualizar Estado" BorderPane.alignment="CENTER" />
                      </center>
                   </BorderPane>
-                  <Label text="Label" GridPane.columnIndex="1" />
-                  <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <ComboBox prefHeight="27.0" prefWidth="161.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label fx:id="nombrePlanta" text="Label" GridPane.columnIndex="1" />
+                  <Label fx:id="familiaPlanta" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label fx:id="genaroPlanta" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <ComboBox fx:id="comoBoxEstado" prefHeight="27.0" prefWidth="161.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                </children>
             </GridPane>
          </children>
@@ -103,12 +103,12 @@
                <children>
                   <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                      <center>
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="164.0" text="Nuevo Registro" BorderPane.alignment="CENTER" />
+                        <Button fx:id="botonNuevoRegistro" mnemonicParsing="false" onAction="#insertarImagen" prefHeight="25.0" prefWidth="164.0" text="Nuevo Registro" BorderPane.alignment="CENTER" />
                      </center>
                   </BorderPane>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
-                        <ComboBox prefHeight="25.0" prefWidth="168.0" promptText="Ver Todos los Registro" BorderPane.alignment="CENTER">
+                        <ComboBox fx:id="filtrarPor" prefHeight="25.0" prefWidth="168.0" promptText="Ver Todos los Registro" BorderPane.alignment="CENTER">
                            <effect>
                               <Lighting>
                                  <bumpInput>

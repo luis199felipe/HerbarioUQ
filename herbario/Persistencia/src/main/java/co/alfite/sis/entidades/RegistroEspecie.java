@@ -19,7 +19,7 @@ import javax.persistence.*;
 		@NamedQuery(name = RegistroEspecie.REGISTRO_MAX, query = "select max(registro.fecha) from RegistroEspecie registro "),
 		@NamedQuery(name = RegistroEspecie.TRABAJADOR_WITH_REGISTERS, query = "select distinct registro.trabajador from RegistroEspecie registro "),
 		@NamedQuery(name = RegistroEspecie.REGISTRO_FECHA, query = "select registro.idRegistro,registro.especie.nombre, registro.especie.generoPlanta.nombre, registro.trabajador.email, registro.trabajador.idPersona from RegistroEspecie registro where registro.fecha=:fecha"),
-		
+
 })
 public class RegistroEspecie implements Serializable {
 
@@ -38,12 +38,6 @@ public class RegistroEspecie implements Serializable {
 	@ManyToOne
 	private Trabajador trabajador;
 
-	@OneToOne(mappedBy = "registro")
-	private FamiliaPlanta familia;
-	
-	@OneToOne(mappedBy = "registro")
-	private GeneroPlanta genero;
-	
 	/**
 	 * Un registro tiene una Especie
 	 */
@@ -132,22 +126,6 @@ public class RegistroEspecie implements Serializable {
 
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
-	}
-
-	public FamiliaPlanta getFamilia() {
-		return familia;
-	}
-
-	public void setFamilia(FamiliaPlanta familia) {
-		this.familia = familia;
-	}
-
-	public GeneroPlanta getGenero() {
-		return genero;
-	}
-
-	public void setGenero(GeneroPlanta genero) {
-		this.genero = genero;
 	}
 
 }
