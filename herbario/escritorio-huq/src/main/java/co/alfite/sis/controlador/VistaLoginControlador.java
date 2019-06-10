@@ -35,15 +35,12 @@ public class VistaLoginControlador {
 	private TextField campoCorreo;
 	@FXML
 	private PasswordField campoContrasenia;
-	@FXML
-	private ProgressIndicator spinerCarga;
+
 	@FXML
 	private Button botonIniciar;
 	@FXML
 	private ImageView logoHerbario;
 
-	@FXML
-	private ProgressIndicator spinner;
 	@FXML
 	private ComboBox<String> comboBoxCargo;
 	@FXML
