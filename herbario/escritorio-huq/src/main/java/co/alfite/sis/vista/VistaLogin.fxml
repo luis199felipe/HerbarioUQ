@@ -67,6 +67,9 @@
                <right>
                   <Hyperlink onAction="#recuperarContrasenia" prefHeight="23.0" prefWidth="148.0" text="Olvido su contraseña" BorderPane.alignment="CENTER_LEFT" />
                </right>
+               <bottom>
+                  <ProgressIndicator fx:id="spinner" visible="false" BorderPane.alignment="CENTER" />
+               </bottom>
             </BorderPane>
             <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                <center>

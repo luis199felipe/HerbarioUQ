@@ -41,6 +41,9 @@ public class VistaLoginControlador {
 	private Button botonIniciar;
 	@FXML
 	private ImageView logoHerbario;
+
+	@FXML
+	private ProgressIndicator spinner;
 	@FXML
 	private ComboBox<String> comboBoxCargo;
 	@FXML
@@ -83,15 +86,17 @@ public class VistaLoginControlador {
 
 	@FXML
 	private void recuperarContrasenia() {
-		enviarConGMail("neidersanchez2000@gmail.com", campoContrasenia.getText(), "nfigueroas@uqvirtual.edu.co");
+
+		enviarConGMail("neidersanchez2000@gmail.com", campoContrasenia.getText(), "nfigueroas@uqvirtual.edu.co",
+				"prueba contraseña");
+
 	}
 
-	private void enviarConGMail(String remitente, String clave, String destinatario) {
+	private void enviarConGMail(String remitente, String clave, String destinatario, String password) {
 		// Esto es lo que va delante de @gmail.com en tu cuenta de correo. Es el
 		// remitente también.
 
 		// Para la dirección nomcuenta@gmail.com
-
 		Properties props = System.getProperties();
 		props.put("mail.smtp.host", "smtp.gmail.com"); // El servidor SMTP de Google
 		props.put("mail.smtp.user", remitente);
@@ -99,30 +104,25 @@ public class VistaLoginControlador {
 		props.put("mail.smtp.auth", "true"); // Usar autenticación mediante usuario y clave
 		props.put("mail.smtp.starttls.enable", "true"); // Para conectar de manera segura al servidor SMTP
 		props.put("mail.smtp.port", "587"); // El puerto SMTP seguro de Google
+		props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
 
 		Session session = Session.getDefaultInstance(props);
 		MimeMessage message = new MimeMessage(session);
-	//	BodyPart texto = new MimeBodyPart();
+		BodyPart texto = new MimeBodyPart();
 		MimeMultipart multiParte = new MimeMultipart();
-//		try {
-//			texto.setText("informe programa elaborado por Neyder Figueroa ");
-//			BodyPart adjunto = new MimeBodyPart();
-//			// adjunto.setDataHandler(new DataHandler(new FileDataSource(RUTA_INFORME)));
-//			// cambiar esto
-//			//adjunto.setFileName("informe-Orange_mall_neyder_figueroa");
-//
-//			multiParte.addBodyPart(texto);
-//			multiParte.addBodyPart(adjunto);
-//		} catch (MessagingException e) {
-//			e.printStackTrace();
-//		}
+		try {
+			texto.setText("la contraseña asociada con el correo proporcionado es " + "password ");
+
+			multiParte.addBodyPart(texto);
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
 
 		try {
 			message.setFrom(new InternetAddress(remitente));
 			message.addRecipients(Message.RecipientType.TO, destinatario);
 
-			// Se podrían añadir varios de la misma manera
-			message.setSubject("Recuperacion de contraseña herbario uq");
+			message.setSubject("Recuperacion de contraseña Herbario Universidad del quindio:");
 			message.setText("prueba");
 			message.setContent(multiParte);
 
