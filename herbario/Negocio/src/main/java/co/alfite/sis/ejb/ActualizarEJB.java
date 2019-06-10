@@ -82,9 +82,9 @@ public class ActualizarEJB implements ActualizarEJBRemote {
 		EspeciePlanta  plant = entityManager.find(EspeciePlanta.class, esp.getIdEspecie());
 		
 		if (plant!=null) {
-			plant.setCantidad(esp.getCantidad());
+			//plant.setCantidad(esp.getCantidad());
 			plant.setGeneroPlanta(esp.getGeneroPlanta());
-			plant.setImagenes(esp.getImagenes());
+		//	plant.setImagenes(esp.getImagenes());
 			//plant.setMegustas(esp.get());
 			plant.setNombre(esp.getNombre());
 			plant.setNombreCientifico(esp.getNombreCientifico());
@@ -227,7 +227,7 @@ public class ActualizarEJB implements ActualizarEJBRemote {
 	public ImagenPlanta ActualizarImagenPlanta(ImagenPlanta i){
 		ImagenPlanta img = entityManager.find(ImagenPlanta.class, i.getIdImagen()); 
 		if (img != null) {
-			img.setEspecie(i.getEspecie());
+			//img.setEspecie(i.getEspecie());
 			img.setImagen(i.getImagen());
 			
 			try {

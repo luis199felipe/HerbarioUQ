@@ -46,10 +46,10 @@
             <Label text="Se debe adjuntar una imagen a continuacion:  " GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <BorderPane prefHeight="212.0" prefWidth="475.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <center>
-                  <ImageView fitHeight="186.0" fitWidth="235.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+                  <ImageView fx:id="imagenPlanta" fitHeight="186.0" fitWidth="235.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
                </center>
                <right>
-                  <Button mnemonicParsing="false" text="Adjutar Imagen" BorderPane.alignment="CENTER" />
+                  <Button fx:id="botonCargarImagen" mnemonicParsing="false" onAction="#cargarImagen" text="Adjutar Imagen" BorderPane.alignment="CENTER" />
                </right>
             </BorderPane>
             <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
@@ -57,7 +57,7 @@
                   <Button mnemonicParsing="false" text="Descartar y regresar" BorderPane.alignment="CENTER" />
                </left>
                <right>
-                  <Button mnemonicParsing="false" text="Enviar Registro" BorderPane.alignment="CENTER" />
+                  <Button fx:id="botonRealizarRegistro" mnemonicParsing="false" onAction="#insertarRegistro" text="Enviar Registro" BorderPane.alignment="CENTER" />
                </right>
             </BorderPane>
             <Label alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="396.0" text="          Formulario de registro para especies" GridPane.columnIndex="1">

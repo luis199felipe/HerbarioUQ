@@ -5,8 +5,10 @@ import java.util.List;
 
 import co.alfite.sis.Main;
 import co.alfite.sis.entidades.Empleado;
+import co.alfite.sis.entidades.ImagenPlanta;
 import co.alfite.sis.entidades.Persona;
 import co.alfite.sis.entidades.Recolector;
+import co.alfite.sis.entidades.RegistroEspecie;
 import co.alfite.sis.entidades.Usuario;
 import co.alfite.sis.excepciones.ElementoRepetidoExcepcion;
 import co.alfite.sis.modelo.AdministradorDelegado;
@@ -65,7 +67,7 @@ public class ManejadorEscenarios {
 		this.escenario = escenario;
 		insertarDelegado = InsertarDelegado.insertarDelegado;
 		adminDelegado = adminDelegado.administradorDelegado;
-		listarDelegado=listarDelegado.listarDelegado;
+		listarDelegado = listarDelegado.listarDelegado;
 
 		try {
 
@@ -193,7 +195,7 @@ public class ManejadorEscenarios {
 	public void iniciarVistaGestionar(BorderPane pane) {
 		try {
 
-			listaRecolectoresObservables=listarDelegado.listarRecolectoresObservables();
+			listaRecolectoresObservables = listarDelegado.listarRecolectoresObservables();
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Main.class.getResource("./vista/VistaGestionarPersona.fxml"));
 			BorderPane subVista = (BorderPane) loader.load();
@@ -243,6 +245,33 @@ public class ManejadorEscenarios {
 		}
 	}
 
+	public void cargarEscenarioRegistroEspecie() {
+		try {
+
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(Main.class.getResource("./vista/VistaRegistroEspecie.fxml"));
+			BorderPane vista = (BorderPane) loader.load();
+
+			VistaRegistroEspecieControlador controladorVistaRegistroEspecie = loader.getController();
+			// importante
+			controladorVistaRegistroEspecie.setManejador(this);
+
+			Scene scene = new Scene(vista);
+			Stage stage = new Stage();
+			stage.setTitle("Herbario/registro");
+
+			stage.getIcons().add(new Image(Main.class.getResourceAsStream(ruta)));
+			stage.setScene(scene);
+			stage.show();
+			// importante
+			controladorVistaRegistroEspecie.setStage(stage);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
 	public void cargarEscenarioDialogo() {
 		try {
 
@@ -289,14 +318,31 @@ public class ManejadorEscenarios {
 
 	}
 
+	public boolean insertarRegistro(RegistroEspecie registro) throws ElementoRepetidoExcepcion {
+
+		return insertarDelegado.insertarRegistro(registro);
+
+	}
+
 	public List<PersonaObservable> ListaEmpleadosObservables() {
 
 		return listarDelegado.listarEmpleadosObservables();
 	}
-	
+
 	public List<PersonaObservable> ListaRecolectoresObservables() {
 
 		return listaRecolectoresObservables;
+	}
+
+	public boolean insertarImagenPlanta(ImagenPlanta y) {
+
+		return insertarDelegado.insertarImagenPlanta(y);
+
+	}
+
+	public ImagenPlanta obtenerImagen(int id) {
+
+		return insertarDelegado.obtenerImagen(id);
 	}
 
 }

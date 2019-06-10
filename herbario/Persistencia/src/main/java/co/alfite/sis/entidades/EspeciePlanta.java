@@ -58,14 +58,14 @@ public class EspeciePlanta implements Serializable {
 	/**
 	 * Una EspeciePlanta tiene muchas ImagenesPlanta (1..*)
 	 */
-	@OneToMany(mappedBy = "especie")
-	private List<ImagenPlanta> imagenes;
+//	@OneToMany(mappedBy = "especie")
+//	private List<ImagenPlanta> imagenes;
 
 	/**
 	 * identificacion unica de una EspeciePlanta
 	 */
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO) 
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(length = 10)
 	private int idEspecie;
 
@@ -82,7 +82,6 @@ public class EspeciePlanta implements Serializable {
 	/**
 	 * cantidad de una EspeciePlanta en el herbario
 	 */
-	private Integer cantidad;
 
 	private static final long serialVersionUID = 1L;
 
@@ -106,13 +105,13 @@ public class EspeciePlanta implements Serializable {
 		this.generoPlanta = generoPlanta;
 	}
 
-	public List<ImagenPlanta> getImagenes() {
-		return imagenes;
-	}
-
-	public void setImagenes(List<ImagenPlanta> imagenes) {
-		this.imagenes = imagenes;
-	}
+//	public List<ImagenPlanta> getImagenes() {
+//		return imagenes;
+//	}
+//
+//	public void setImagenes(List<ImagenPlanta> imagenes) {
+//		this.imagenes = imagenes;
+//	}
 
 	public List<Resenia> getResenias() {
 		return resenias;
@@ -152,14 +151,6 @@ public class EspeciePlanta implements Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-	public Integer getCantidad() {
-		return this.cantidad;
-	}
-
-	public void setCantidad(Integer cantidad) {
-		this.cantidad = cantidad;
 	}
 
 }

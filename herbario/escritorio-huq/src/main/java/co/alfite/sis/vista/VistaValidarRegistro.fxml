@@ -77,7 +77,7 @@
                   </BorderPane>
                   <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                      <center>
-                        <Button fx:id="botonActualizarEstado" mnemonicParsing="false" text="Actualizar Estado" BorderPane.alignment="CENTER" />
+                        <Button fx:id="botonActualizarEstado" mnemonicParsing="false" onAction="#insertarImagen" text="Actualizar Estado" BorderPane.alignment="CENTER" />
                      </center>
                   </BorderPane>
                   <Label fx:id="nombrePlanta" text="Label" GridPane.columnIndex="1" />
@@ -103,7 +103,7 @@
                <children>
                   <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                      <center>
-                        <Button fx:id="botonNuevoRegistro" mnemonicParsing="false" onAction="#insertarImagen" prefHeight="25.0" prefWidth="164.0" text="Nuevo Registro" BorderPane.alignment="CENTER" />
+                        <Button fx:id="botonNuevoRegistro" mnemonicParsing="false" onAction="#insertarRegistro" prefHeight="25.0" prefWidth="164.0" text="Nuevo Registro" BorderPane.alignment="CENTER" />
                      </center>
                   </BorderPane>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">

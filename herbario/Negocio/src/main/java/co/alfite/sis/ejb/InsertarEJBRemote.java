@@ -6,6 +6,7 @@ import co.alfite.sis.entidades.Empleado;
 import co.alfite.sis.entidades.EspeciePlanta;
 import co.alfite.sis.entidades.FamiliaPlanta;
 import co.alfite.sis.entidades.GeneroPlanta;
+import co.alfite.sis.entidades.ImagenPlanta;
 import co.alfite.sis.entidades.MeGustaEspeciePlanta;
 import co.alfite.sis.entidades.Recolector;
 import co.alfite.sis.entidades.RegistroEspecie;
@@ -46,6 +47,9 @@ public interface InsertarEJBRemote {
 	Resenia insertarResenia(Resenia resenia);
 
 	Usuario insertarUsuario(Usuario nuevoUsuario)throws ElementoRepetidoExcepcion;
+
+	ImagenPlanta insertarImagenPlanta(ImagenPlanta y);
+	public ImagenPlanta obtenerImagen(int id);
 
 
 }

@@ -4,7 +4,9 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import co.alfite.sis.ejb.InsertarEJBRemote;
 import co.alfite.sis.entidades.Empleado;
+import co.alfite.sis.entidades.ImagenPlanta;
 import co.alfite.sis.entidades.Recolector;
+import co.alfite.sis.entidades.RegistroEspecie;
 import co.alfite.sis.entidades.Usuario;
 import co.alfite.sis.excepciones.ElementoRepetidoExcepcion;
 
@@ -64,6 +66,20 @@ public class InsertarDelegado {
 	public boolean insertarRecolector(Recolector recolector) throws ElementoRepetidoExcepcion {
 		return insertarEJB.insertarRecolector(recolector) != null;
 
+	}
+
+	public boolean insertarRegistro(RegistroEspecie registro) {
+		// TODO Auto-generated method stub
+		return insertarEJB.insertarRegistroEspecie(registro) != null;
+	}
+
+	public boolean insertarImagenPlanta(ImagenPlanta y) {
+		return insertarEJB.insertarImagenPlanta(y) != null;	
+		}
+	
+	public  ImagenPlanta obtenerImagen(int id) {
+		
+		return insertarEJB.obtenerImagen(id);
 	}
 
 }

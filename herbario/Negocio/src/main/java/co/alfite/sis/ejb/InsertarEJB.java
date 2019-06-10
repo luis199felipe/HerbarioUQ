@@ -1,5 +1,7 @@
 package co.alfite.sis.ejb;
 
+import java.sql.ResultSet;
+
 import javax.ejb.LocalBean;
 
 import javax.ejb.Stateless;
@@ -12,6 +14,7 @@ import co.alfite.sis.entidades.Empleado;
 import co.alfite.sis.entidades.EspeciePlanta;
 import co.alfite.sis.entidades.FamiliaPlanta;
 import co.alfite.sis.entidades.GeneroPlanta;
+import co.alfite.sis.entidades.ImagenPlanta;
 import co.alfite.sis.entidades.MeGustaEspeciePlanta;
 import co.alfite.sis.entidades.Persona;
 import co.alfite.sis.entidades.Recolector;
@@ -177,10 +180,26 @@ public class InsertarEJB implements InsertarEJBRemote {
 			TypedQuery<Persona> query = entityManager.createNamedQuery(Persona.PERSONA_POR_EMAIL, Persona.class);
 
 			query.setParameter("email", per.getEmail());
+
 			return query.getSingleResult();
 		} catch (NoResultException e) {
 			return null;
 		}
+	}
+
+	public ImagenPlanta insertarImagenPlanta(ImagenPlanta y) {
+
+		try {
+			entityManager.persist(y);
+			return y;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	public ImagenPlanta obtenerImagen(int id) {
+
+		return entityManager.find(ImagenPlanta.class, id);
 	}
 
 }

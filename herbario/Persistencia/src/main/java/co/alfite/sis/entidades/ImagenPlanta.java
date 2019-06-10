@@ -21,20 +21,30 @@ public class ImagenPlanta implements Serializable {
 	/**
 	 * Muchas ImagenesPlanta pertenecen a una EspecePlanta
 	 */
-	@ManyToOne
-	private EspeciePlanta especie;
+//	@ManyToOne
+//	private EspeciePlanta especie;
 
 	/**
 	 * Identificacion unica de una ImagenPlanta
 	 */
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO) 
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer idImagen;
 
 	/**
 	 * Imagen de una ImagenPlanta
 	 */
-	private Blob imagen;
+	@Lob
+	@Column()
+	private byte[] imagen;
+
+	public byte[] getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(byte[] imagen) {
+		this.imagen = imagen;
+	}
 
 	private static final long serialVersionUID = 1L;
 
@@ -42,13 +52,13 @@ public class ImagenPlanta implements Serializable {
 		super();
 	}
 
-	public EspeciePlanta getEspecie() {
-		return especie;
-	}
-
-	public void setEspecie(EspeciePlanta especie) {
-		this.especie = especie;
-	}
+//	public EspeciePlanta getEspecie() {
+//		return especie;
+//	}
+//
+//	public void setEspecie(EspeciePlanta especie) {
+//		this.especie = especie;
+//	}
 
 	public Integer getIdImagen() {
 		return this.idImagen;
@@ -56,14 +66,6 @@ public class ImagenPlanta implements Serializable {
 
 	public void setIdImagen(Integer idImagen) {
 		this.idImagen = idImagen;
-	}
-
-	public Blob getImagen() {
-		return this.imagen;
-	}
-
-	public void setImagen(Blob imagen) {
-		this.imagen = imagen;
 	}
 
 }

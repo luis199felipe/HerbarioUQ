@@ -1,10 +1,16 @@
 package co.alfite.sis.controlador;
 
+import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+
+import co.alfite.sis.entidades.ImagenPlanta;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -58,8 +64,19 @@ public class VistaValidarRegistroControlador {
 
 	}
 
-	
+	@FXML
+	public void insertarRegistro() {
+		miEscenario.cargarEscenarioRegistroEspecie();
+	}
 
-	
+	@FXML
+	public void insertarImagen() {
+
+		ImagenPlanta x = miEscenario.obtenerImagen(51);
+		InputStream in = new ByteArrayInputStream(x.getImagen());
+		Image z = new Image(in);
+		imagenPlanta.setImage(z);
+
+	}
 
 }
