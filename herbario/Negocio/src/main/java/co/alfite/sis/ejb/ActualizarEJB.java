@@ -10,11 +10,15 @@ import javax.persistence.TypedQuery;
 import co.alfite.sis.entidades.Administrador;
 import co.alfite.sis.entidades.Empleado;
 import co.alfite.sis.entidades.EspeciePlanta;
+import co.alfite.sis.entidades.FamiliaPlanta;
 import co.alfite.sis.entidades.GeneroPlanta;
+import co.alfite.sis.entidades.ImagenPlanta;
+import co.alfite.sis.entidades.MeGustaEspeciePlanta;
 import co.alfite.sis.entidades.Persona;
 import co.alfite.sis.entidades.Recolector;
 import co.alfite.sis.entidades.RegistroEspecie;
 import co.alfite.sis.entidades.RegistroEspecie.Estado;
+import co.alfite.sis.entidades.Resenia;
 import co.alfite.sis.entidades.Usuario;
 import co.alfite.sis.excepciones.ElementoRepetidoExcepcion;
 
@@ -34,8 +38,46 @@ public class ActualizarEJB implements ActualizarEJBRemote {
 	public ActualizarEJB() {
 		
 	}
+	@Override
+	public FamiliaPlanta ActualizarFamiliaPlanta(FamiliaPlanta f) {
+		FamiliaPlanta fam = entityManager.find(FamiliaPlanta.class, f.getIdFamilia());
+		
+		if (fam!=null) {
+			fam.setGeneros(f.getGeneros());
+			fam.setNombre(f.getNombre());
+			try {
+				entityManager.merge(fam);
+				return fam;
+			} catch (Exception e) {
+				e.printStackTrace();
+				return null;
+			}
+		} else {
+			return null;
+		}
+	}
 	
+	@Override
+	public GeneroPlanta ActualizarGeneroPlanta(GeneroPlanta g) {
+		GeneroPlanta gen = entityManager.find(GeneroPlanta.class, g.getIdGenero());
+		
+		if (gen!=null) {
+			gen.setEspecies(g.getEspecies());
+			gen.setFamiliaPlanta(g.getFamiliaPlanta());
+			gen.setNombre(g.getNombre());
+			try {
+				entityManager.merge(gen);
+				return gen;
+			} catch (Exception e) {
+				e.printStackTrace();
+				return null;
+			}
+		} else {
+			return null;
+		}
+	}
 	
+	@Override
 	public EspeciePlanta ActualizarEspeciePlanta(EspeciePlanta esp) {
 		EspeciePlanta  plant = entityManager.find(EspeciePlanta.class, esp.getIdEspecie());
 		
@@ -58,10 +100,9 @@ public class ActualizarEJB implements ActualizarEJBRemote {
 		} else {
 			return null;
 		}
-		
 	}
 	
-
+	@Override
 	public RegistroEspecie ActualizarRegistroEspecie(RegistroEspecie registro) {
 		RegistroEspecie rs = entityManager.find(RegistroEspecie.class, registro.getIdRegistro());
 		
@@ -180,7 +221,70 @@ public class ActualizarEJB implements ActualizarEJBRemote {
 
 		}
 	}
+	
+	
+	@Override
+	public ImagenPlanta ActualizarImagenPlanta(ImagenPlanta i){
+		ImagenPlanta img = entityManager.find(ImagenPlanta.class, i.getIdImagen()); 
+		if (img != null) {
+			img.setEspecie(i.getEspecie());
+			img.setImagen(i.getImagen());
+			
+			try {
+				entityManager.merge(img);
+				return img;
+			} catch (Exception e) {
+				e.printStackTrace();
+				return null;
+			}
+		} else {
+			return null;
 
+		}
+	}
+
+	@Override
+	public Resenia ActualizarResenia(Resenia r){
+		Resenia res = entityManager.find(Resenia.class, r.getIdResenia()); 
+		if (res != null) {
+			res.setEspecie(r.getEspecie());
+			res.setEstado(r.getEstado());
+			res.setTexto(r.getTexto());
+			res.setUsuario(r.getUsuario());
+			
+			try {
+				entityManager.merge(res);
+				return res;
+			} catch (Exception e) {
+				e.printStackTrace();
+				return null;
+			}
+		} else {
+			return null;
+
+		}
+	}
+	
+	@Override
+	public MeGustaEspeciePlanta ActualizarMeGustaEspeciePlanta (MeGustaEspeciePlanta m){
+		MeGustaEspeciePlanta mg = entityManager.find(MeGustaEspeciePlanta.class, m.getIdMegusta()); 
+		if (mg!= null) {
+			mg.setEspecie(m.getEspecie());
+			mg.setFecha(m.getFecha());
+			mg.setUsuario(m.getUsuario());
+			
+			try {
+				entityManager.merge(mg);
+				return mg;
+			} catch (Exception e) {
+				e.printStackTrace();
+				return null;
+			}
+		} else {
+			return null;
+
+		}
+	}
 
 
 
