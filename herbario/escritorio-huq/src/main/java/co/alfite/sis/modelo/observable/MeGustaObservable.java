@@ -18,13 +18,13 @@ public class MeGustaObservable {
 
 	private ObjectProperty<Date> fecha;
 
-	private IntegerProperty id;
+	private IntegerProperty idMeGusta;
 
 	private MeGustaEspeciePlanta meGusta;
 
 	public MeGustaObservable(MeGustaEspeciePlanta meGusta) {
 		this.meGusta = meGusta;
-		this.id = new SimpleIntegerProperty(meGusta.getIdMegusta());
+		this.idMeGusta = new SimpleIntegerProperty(meGusta.getIdMegusta());
 		this.especie = new SimpleObjectProperty<>(meGusta.getEspecie());
 		this.fecha = new SimpleObjectProperty<>(new Date());
 		this.usuario = new SimpleObjectProperty<>(meGusta.getUsuario());
@@ -54,12 +54,12 @@ public class MeGustaObservable {
 		this.fecha = fecha;
 	}
 
-	public IntegerProperty getId() {
-		return id;
+	public IntegerProperty getIdMeGusta() {
+		return idMeGusta;
 	}
 
-	public void setId(IntegerProperty id) {
-		this.id = id;
+	public void setIdMeGusta(IntegerProperty id) {
+		this.idMeGusta = id;
 	}
 
 	public MeGustaEspeciePlanta getMeGusta() {
