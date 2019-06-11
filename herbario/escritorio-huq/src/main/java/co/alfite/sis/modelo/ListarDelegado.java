@@ -16,11 +16,11 @@ import javafx.collections.ObservableList;
 public class ListarDelegado {
 
 	/**
-	 * instancia que representa el ejb remoto de administrador
+	 * instancia que representa el ejb remoto de listar
 	 */
 	private ListarEJBRemote listarEJB;
 	/**
-	 * permite manejar una unica instancia para le manejo de delegados
+	 * permite manejar una unica instancia para el manejo de delegados
 	 */
 	public static ListarDelegado listarDelegado = instancia();
 
@@ -49,11 +49,7 @@ public class ListarDelegado {
 		return listarDelegado;
 	}
 
-	public List<Empleado> listarEmpleado() {
-		return listarEJB.listarEmpleados();
-	}
-
-	public List<PersonaObservable> listarEmpleadosObservables() {
+	public List<PersonaObservable> listarPersonasObservables() {
 		List<Empleado> empleados = listarEmpleado();
 		ObservableList<PersonaObservable> empleadosObservables = FXCollections.observableArrayList();
 
