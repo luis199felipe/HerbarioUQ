@@ -12,10 +12,6 @@ import javafx.beans.property.SimpleObjectProperty;
 
 public class MeGustaObservable {
 
-	private ObjectProperty<EspeciePlanta> especie;
-
-	private ObjectProperty<Usuario> usuario;
-
 	private ObjectProperty<Date> fecha;
 
 	private IntegerProperty idMeGusta;
@@ -25,25 +21,7 @@ public class MeGustaObservable {
 	public MeGustaObservable(MeGustaEspeciePlanta meGusta) {
 		this.meGusta = meGusta;
 		this.idMeGusta = new SimpleIntegerProperty(meGusta.getIdMegusta());
-		this.especie = new SimpleObjectProperty<>(meGusta.getEspecie());
 		this.fecha = new SimpleObjectProperty<>(new Date());
-		this.usuario = new SimpleObjectProperty<>(meGusta.getUsuario());
-	}
-
-	public ObjectProperty<EspeciePlanta> getEspecie() {
-		return especie;
-	}
-
-	public void setEspecie(ObjectProperty<EspeciePlanta> especie) {
-		this.especie = especie;
-	}
-
-	public ObjectProperty<Usuario> getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(ObjectProperty<Usuario> usuario) {
-		this.usuario = usuario;
 	}
 
 	public ObjectProperty<Date> getFecha() {
