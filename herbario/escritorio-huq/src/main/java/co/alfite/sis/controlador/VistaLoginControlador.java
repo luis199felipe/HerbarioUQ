@@ -1,20 +1,20 @@
 package co.alfite.sis.controlador;
 
-import co.alfite.sis.Main;
-import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+
+import co.alfite.sis.entidades.Persona;
+import co.alfite.sis.util.Utilidades;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
@@ -25,9 +25,6 @@ import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 
 public class VistaLoginControlador {
 
@@ -49,10 +46,6 @@ public class VistaLoginControlador {
 	private ManejadorEscenarios manejador;
 	private Stage miEscenario;
 
-	private static Properties mailServerProperties;
-	private static Session getMailSession;
-	private static MimeMessage generateMailMessage;
-
 	public VistaLoginControlador() {
 
 	}
@@ -69,8 +62,14 @@ public class VistaLoginControlador {
 
 	@FXML
 	private void iniciarSesion() {
-		manejador.cargarEscenarioTrabajador();
-		miEscenario.close();
+		Persona p = manejador.personaPorCredenciales(campoCorreo.getText(),campoContrasenia.getText());
+		if (p != null) {
+			manejador.cargarEscenarioTrabajador(p);
+			miEscenario.close();
+		} else {
+
+			Utilidades.mostrarMensaje("Error", "el correo o la contraseña son icorrectos", AlertType.ERROR);
+		}
 	}
 
 	@FXML
@@ -84,8 +83,7 @@ public class VistaLoginControlador {
 	@FXML
 	private void recuperarContrasenia() {
 
-		enviarConGMail("neidersanchez2000@gmail.com", campoContrasenia.getText(), "nfigueroas@uqvirtual.edu.co",
-				"prueba contraseña");
+		enviarConGMail("herbariouq@gmail.com", "alfite12345", campoCorreo.getText(), "prueba contraseña");
 
 	}
 

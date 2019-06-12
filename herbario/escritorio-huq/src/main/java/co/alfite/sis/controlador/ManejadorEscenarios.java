@@ -12,6 +12,7 @@ import co.alfite.sis.entidades.RegistroEspecie;
 import co.alfite.sis.entidades.Usuario;
 import co.alfite.sis.excepciones.ElementoRepetidoExcepcion;
 import co.alfite.sis.modelo.AdministradorDelegado;
+import co.alfite.sis.modelo.BuscarDelegado;
 import co.alfite.sis.modelo.InsertarDelegado;
 import co.alfite.sis.modelo.ListarDelegado;
 import co.alfite.sis.modelo.observable.EmpleadoObservable;
@@ -51,10 +52,10 @@ public class ManejadorEscenarios {
 	 * conexion con capa de negocio
 	 */
 	private InsertarDelegado insertarDelegado;
-
 	private AdministradorDelegado adminDelegado;
-
 	private ListarDelegado listarDelegado;
+	private BuscarDelegado buscarDelegado;
+	
 	private List<PersonaObservable> listaRecolectoresObservables;
 
 	/**
@@ -68,6 +69,7 @@ public class ManejadorEscenarios {
 		insertarDelegado = InsertarDelegado.insertarDelegado;
 		adminDelegado = adminDelegado.administradorDelegado;
 		listarDelegado = listarDelegado.listarDelegado;
+		buscarDelegado=buscarDelegado.buscarDelegado;
 
 		try {
 
@@ -120,7 +122,7 @@ public class ManejadorEscenarios {
 		}
 	}
 
-	public void cargarEscenarioTrabajador() {
+	public void cargarEscenarioTrabajador(Persona p) {
 		try {
 
 			FXMLLoader loader = new FXMLLoader();
@@ -138,6 +140,7 @@ public class ManejadorEscenarios {
 			controladorVistaTrabajador.setManejador(this);
 			controladorVistaTrabajador.setStage(vista);
 			controladorVistaTrabajador.setStage(stage);
+			controladorVistaTrabajador.setPersonaEnSesion(p);
 
 			stage.setScene(scene);
 			stage.show();
@@ -192,7 +195,13 @@ public class ManejadorEscenarios {
 		}
 	}
 
-	public void iniciarVistaGestionar(BorderPane pane) {
+	/**Metodo que añade el boredn pane vistaGestionarPersona al centro del borde
+	 * pane de la VistaSesionRaiz
+	 * 
+	 * @param pane Border pane que equivale al la vista sesion raiz
+	 * @param personaGestionar atributo para poder reutilizar la vista gestionar
+	 */
+	public void iniciarVistaGestionar(BorderPane pane, String personaGestionar) {
 		try {
 
 			listaRecolectoresObservables = listarDelegado.listarRecolectoresObservables();
@@ -203,7 +212,9 @@ public class ManejadorEscenarios {
 			pane.setCenter(subVista);
 
 			VistaGestionarPersonaControlador controladorGestionar = loader.getController();
+			controladorGestionar.adaptarVista(personaGestionar);
 			controladorGestionar.setManejador(this);
+			
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -343,6 +354,11 @@ public class ManejadorEscenarios {
 	public ImagenPlanta obtenerImagen(int id) {
 
 		return insertarDelegado.obtenerImagen(id);
+	}
+
+	public Persona personaPorCredenciales(String correo,String password) {
+		// TODO Auto-generated method stub
+		return buscarDelegado.personaPorCredenciales(correo, password);
 	}
 
 }

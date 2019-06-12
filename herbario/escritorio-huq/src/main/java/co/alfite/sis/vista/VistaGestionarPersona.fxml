@@ -33,6 +33,8 @@
                         <TextField fx:id="campoCedula" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                         <TextField fx:id="campoFechaNacimiento" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <TextField fx:id="campoCargo" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label text="Estado" GridPane.rowIndex="6" />
+                        <TextField fx:id="campoEstado" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                      </children>
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -45,11 +47,12 @@
                         <RowConstraints maxHeight="403.0" minHeight="2.0" prefHeight="35.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="403.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="403.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="403.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                   </GridPane>
                   <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <center>
-                        <Button fx:id="botonInactivar" mnemonicParsing="false" text="Inactivar Persona" BorderPane.alignment="CENTER" />
+                        <Button fx:id="botonCambiarEstadoPersona" mnemonicParsing="false" onAction="#cambiarEstadoPersona" text="Inactivar Persona" BorderPane.alignment="CENTER" />
                      </center>
                   </BorderPane>
                   <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
@@ -102,24 +105,24 @@
               </rowConstraints>
                <children>
                   <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
-                     <left>
-                        <TextField prefHeight="25.0" prefWidth="212.0" promptText="BUSQUEDA" BorderPane.alignment="CENTER" />
-                     </left>
                      <center>
-                        <ComboBox prefHeight="25.0" prefWidth="154.0" promptText="Buscar por nombre" BorderPane.alignment="CENTER" />
+                        <HBox prefHeight="27.0" prefWidth="407.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <TextField fx:id="campoBuscar" prefHeight="25.0" prefWidth="212.0" promptText="BUSQUEDA" />
+                              <ComboBox fx:id="botonFiltraPor" prefHeight="25.0" prefWidth="154.0" promptText="Buscar por nombre" />
+                              <Button fx:id="botonBuscar" mnemonicParsing="false" onAction="#buscarTrabajadorPor" text="Buscar" />
+                           </children>
+                        </HBox>
                      </center>
-                     <right>
-                        <Button mnemonicParsing="false" text="Buscar" BorderPane.alignment="CENTER" />
-                     </right>
                   </BorderPane>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
-                        <Button mnemonicParsing="false" text="Actualizar Lista" BorderPane.alignment="CENTER" />
+                        <Button fx:id="botonActualizarLista" mnemonicParsing="false" onAction="#actualizarLista" text="Actualizar Lista" BorderPane.alignment="CENTER" />
                      </center>
                   </BorderPane>
                   <BorderPane prefHeight="43.0" prefWidth="151.0" GridPane.columnIndex="2">
                      <center>
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="169.0" text="Agregar Nuevo Trabajador" BorderPane.alignment="CENTER" />
+                        <Button fx:id="botonAgregarTrabajador" mnemonicParsing="false" onAction="#agregarNuevoTrabajador" prefHeight="25.0" prefWidth="169.0" text="Agregar Nuevo Trabajador" BorderPane.alignment="CENTER" />
                      </center>
                   </BorderPane>
                </children>

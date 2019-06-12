@@ -22,11 +22,11 @@ public class PersonaObservable {
 
 	public PersonaObservable(Persona p) {
 		this.idPersona = new SimpleStringProperty(p.getIdPersona());
-		this.nombre = new SimpleStringProperty(p.getIdPersona());
-		this.email = new SimpleStringProperty(p.getIdPersona());
-		this.password = new SimpleStringProperty(p.getIdPersona());
-		this.estado = new SimpleStringProperty(p.getIdPersona());
-		this.telefono = new SimpleStringProperty(p.getIdPersona());
+		this.nombre = new SimpleStringProperty(p.getNombre());
+		this.email = new SimpleStringProperty(p.getEmail());
+		this.password = new SimpleStringProperty(p.getPassword());
+		this.estado = new SimpleStringProperty(String.valueOf(p.getEstado()));
+		this.telefono = new SimpleStringProperty(p.getTelefono());
 		this.fechaNacimiento = new SimpleObjectProperty<>(p.getFechaNacimiento());
 	}
 

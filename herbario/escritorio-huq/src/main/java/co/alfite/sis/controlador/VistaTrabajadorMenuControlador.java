@@ -28,39 +28,58 @@ public class VistaTrabajadorMenuControlador {
 	private ManejadorEscenarios miEscenario;
 	private BorderPane pane;
 
-
 	@FXML
 	private void initialize() {
 
 	}
 
+	/**
+	 * lanza la vista para gestionar Familias
+	 */
 	@FXML
 	private void gestionarFamilias() {
-		miEscenario.iniciarVistaGestionarGFE(pane,"familia");
+		miEscenario.iniciarVistaGestionarGFE(pane, "familia");
 	}
 
+	/**
+	 * lanza la vista para gestionar Generos
+	 */
 	@FXML
 	private void gestionarGeneros() {
-		miEscenario.iniciarVistaGestionarGFE(pane,"genero");
+		miEscenario.iniciarVistaGestionarGFE(pane, "genero");
 	}
+
+	/**
+	 * lanza la vista para gestionar Especies
+	 */
 
 	@FXML
 	private void gestionarEspecies() {
-		miEscenario.iniciarVistaGestionarGFE(pane,"especie");
+		miEscenario.iniciarVistaGestionarGFE(pane, "especie");
 	}
+
+	/**
+	 * lanza la vista para gestionar Recolectores
+	 */
 
 	@FXML
 	private void gestionarRecolectores() {
 
-		miEscenario.iniciarVistaGestionar(pane);
+		miEscenario.iniciarVistaGestionar(pane, "recolector");
 
 	}
 
+	/**
+	 * lanza la vista para gestionar Empleados
+	 */
 	@FXML
 	private void gestionarEmpleados() {
-		miEscenario.iniciarVistaGestionar(pane);
+		miEscenario.iniciarVistaGestionar(pane, "empleado");
 	}
 
+	/**
+	 * lanza la vista para gestionar Registros
+	 */
 	@FXML
 	private void gestionarRegistros() {
 
@@ -72,20 +91,22 @@ public class VistaTrabajadorMenuControlador {
 
 	}
 
+	/**
+	 * define el manejador de escenarios para esta clase
+	 */
 	public void setManejador(ManejadorEscenarios manejadorEscenarios) {
 		this.miEscenario = manejadorEscenarios;
 
 	}
 
-	public void setStage(Stage escenario) {
-
-	}
-
+	/**
+	 * transporta la vista Raiz sesion hasta esta clase para tener control sobre la
+	 * misma
+	 */
 	public void setPanePrincipal(BorderPane pane) {
 
 		this.pane = pane;
 
 	}
-
 
 }

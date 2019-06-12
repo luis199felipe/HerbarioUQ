@@ -10,25 +10,29 @@
 
 <BorderPane prefHeight="497.0" prefWidth="766.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.alfite.sis.controlador.VistaSesionRaizControlador">
      <top>
-      <ToolBar prefHeight="0.0" prefWidth="766.0">
+      <ToolBar prefHeight="29.0" prefWidth="766.0">
         <items>
-            <SplitMenuButton fx:id="control" mnemonicParsing="false" text="User@root">
+            <SplitMenuButton fx:id="control" mnemonicParsing="false" prefHeight="30.0" prefWidth="135.0" text="User@root">
               <items>
                 <MenuItem fx:id="mnActualizarInf" mnemonicParsing="false" onAction="#actualizarInformacion" onMenuValidation="#actualizarInformacion" text="Actualizar Informacion" />
                 <MenuItem fx:id="mnCerrarSesion" mnemonicParsing="false" onAction="#cerrarSesion" onMenuValidation="#cerrarSesion" text="cerrar sesion" />
               </items>
-               <effect>
-                  <DropShadow color="#e40f0f" />
-               </effect>
+               <font>
+                  <Font size="14.0" />
+               </font>
             </SplitMenuButton>
-            <Button fx:id="botonHome" mnemonicParsing="false" onAction="#irAHome" prefHeight="25.0" prefWidth="48.0" text="Inicio" />
-            <Button mnemonicParsing="false" text="&lt;" />
-            <Button mnemonicParsing="false" text="&gt;" />
+            <Button fx:id="botonHome" mnemonicParsing="false" onAction="#irAHome" prefHeight="27.0" prefWidth="57.0" text="Inicio">
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
         </items>
          <effect>
-            <Lighting bumpInput="$null">
+            <Lighting specularExponent="5.12" surfaceScale="0.0">
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
                <light>
-                  <Light.Distant color="#7dfffb" />
+                  <Light.Distant color="#c3c3c3" />
                </light>
             </Lighting>
          </effect>
