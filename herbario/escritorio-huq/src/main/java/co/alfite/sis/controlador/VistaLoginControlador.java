@@ -38,11 +38,6 @@ public class VistaLoginControlador {
 	@FXML
 	private ImageView logoHerbario;
 
-	@FXML
-	private ComboBox<String> comboBoxCargo;
-	@FXML
-	private ObservableList<String> listaItems;
-
 	private ManejadorEscenarios manejador;
 	private Stage miEscenario;
 
@@ -53,16 +48,15 @@ public class VistaLoginControlador {
 	@FXML
 	private void initialize() {
 
-		listaItems = FXCollections.observableArrayList();
-		listaItems.add("Administrador");
-		listaItems.add("Usuario");
-		comboBoxCargo.setItems(listaItems);
+		
+		campoCorreo.setText("nfigueroas@uqvirtual.edu.co");
+		campoContrasenia.setText("root");
 
 	}
 
 	@FXML
 	private void iniciarSesion() {
-		Persona p = manejador.personaPorCredenciales(campoCorreo.getText(),campoContrasenia.getText());
+		Persona p = manejador.personaPorCredenciales(campoCorreo.getText(), campoContrasenia.getText());
 		if (p != null) {
 			manejador.cargarEscenarioTrabajador(p);
 			miEscenario.close();
@@ -72,10 +66,13 @@ public class VistaLoginControlador {
 		}
 	}
 
+	/**
+	 * carga la vista adaptada a registro de Usuario o recolector
+	 */
 	@FXML
 	private void registrarTrabajador() {
 
-		manejador.cargarEscenarioRegistro();
+		manejador.cargarEscenarioRegistro("registrar", "vistaLogin", null);
 		miEscenario.close();
 
 	}
@@ -83,7 +80,22 @@ public class VistaLoginControlador {
 	@FXML
 	private void recuperarContrasenia() {
 
-		enviarConGMail("herbariouq@gmail.com", "alfite12345", campoCorreo.getText(), "prueba contraseña");
+		if (!campoCorreo.getText().isEmpty()) {
+			Persona p = manejador.personaPorCorreo(campoCorreo.getText());
+			if (p != null) {
+				enviarConGMail("herbariouq@gmail.com", "alfite12345", p.getEmail(), p.getPassword());
+				
+				Utilidades.mostrarMensaje("Mensaje", "Su contraseña ha sido enviada a  el correo: "+ p.getEmail(), AlertType.INFORMATION);
+
+				
+			} else {
+				Utilidades.mostrarMensaje("Error", "El correo no esta registrado en el herbario", AlertType.ERROR);
+			}
+
+		} else {
+			Utilidades.mostrarMensaje("Error", "Para recuperar la contraseña deba ingresar al menos su correo",
+					AlertType.ERROR);
+		}
 
 	}
 

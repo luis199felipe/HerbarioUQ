@@ -55,7 +55,7 @@ public class ManejadorEscenarios {
 	private AdministradorDelegado adminDelegado;
 	private ListarDelegado listarDelegado;
 	private BuscarDelegado buscarDelegado;
-	
+
 	private List<PersonaObservable> listaRecolectoresObservables;
 
 	/**
@@ -69,7 +69,7 @@ public class ManejadorEscenarios {
 		insertarDelegado = InsertarDelegado.insertarDelegado;
 		adminDelegado = adminDelegado.administradorDelegado;
 		listarDelegado = listarDelegado.listarDelegado;
-		buscarDelegado=buscarDelegado.buscarDelegado;
+		buscarDelegado = buscarDelegado.buscarDelegado;
 
 		try {
 
@@ -136,15 +136,15 @@ public class ManejadorEscenarios {
 			Stage stage = new Stage();
 			stage.getIcons().add(new Image(Main.class.getResourceAsStream(ruta)));
 			stage.setTitle("Herbario");
-			VistaSesionRaizControlador controladorVistaTrabajador = loader.getController();
-			controladorVistaTrabajador.setManejador(this);
-			controladorVistaTrabajador.setStage(vista);
-			controladorVistaTrabajador.setStage(stage);
-			controladorVistaTrabajador.setPersonaEnSesion(p);
-
+			VistaSesionRaizControlador controladorVistaSesionRaiz = loader.getController();
+			controladorVistaSesionRaiz.setManejador(this);
+			controladorVistaSesionRaiz.setStage(vista);
+			controladorVistaSesionRaiz.setStage(stage);
+			controladorVistaSesionRaiz.setPersonaEnSesion(p);
+			this.personaEnSesion = p;
 			stage.setScene(scene);
 			stage.show();
-			controladorVistaTrabajador.cargarMenu();
+			controladorVistaSesionRaiz.cargarMenu();
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -169,7 +169,14 @@ public class ManejadorEscenarios {
 		}
 	}
 
-	public void cargarEscenarioRegistro() {
+	/**
+	 * 
+	 * @param tipo   define si es una vista para registro o para actualizacion de
+	 *               datos
+	 * 
+	 * @param origen define desde que vista se llama al escenario
+	 */
+	public void cargarEscenarioRegistro(String tipo, String origen, Persona p) {
 		try {
 
 			FXMLLoader loader = new FXMLLoader();
@@ -189,16 +196,18 @@ public class ManejadorEscenarios {
 			stage.show();
 			// importante
 			controladorVistaRegistro.setStage(stage);
+			controladorVistaRegistro.adaptarVista(tipo, origen, p);
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	/**Metodo que añade el boredn pane vistaGestionarPersona al centro del borde
+	/**
+	 * Metodo que añade el boredn pane vistaGestionarPersona al centro del borde
 	 * pane de la VistaSesionRaiz
 	 * 
-	 * @param pane Border pane que equivale al la vista sesion raiz
+	 * @param pane             Border pane que equivale al la vista sesion raiz
 	 * @param personaGestionar atributo para poder reutilizar la vista gestionar
 	 */
 	public void iniciarVistaGestionar(BorderPane pane, String personaGestionar) {
@@ -214,7 +223,6 @@ public class ManejadorEscenarios {
 			VistaGestionarPersonaControlador controladorGestionar = loader.getController();
 			controladorGestionar.adaptarVista(personaGestionar);
 			controladorGestionar.setManejador(this);
-			
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -356,9 +364,14 @@ public class ManejadorEscenarios {
 		return insertarDelegado.obtenerImagen(id);
 	}
 
-	public Persona personaPorCredenciales(String correo,String password) {
-		// TODO Auto-generated method stub
+	public Persona personaPorCredenciales(String correo, String password) {
+
 		return buscarDelegado.personaPorCredenciales(correo, password);
+	}
+
+	public Persona personaPorCorreo(String correo) {
+
+		return buscarDelegado.personaPorCorreo(correo);
 	}
 
 }

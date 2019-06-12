@@ -42,6 +42,18 @@ public class BuscarEJB implements BuscarEJBRemote {
 		}
 
 	}
+	public Persona personaPorCorreo(String correo) {
+
+		TypedQuery<Persona> query = entityManager.createNamedQuery(Persona.PERSONA_POR_EMAIL, Persona.class);
+
+		query.setParameter("email", correo);
+		try {
+			return query.getSingleResult();
+		} catch (Exception e) {
+			return null;
+		}
+
+	}
 
 	public List<EspeciePlanta> especiesPorEstado(Estado est) {
 

@@ -36,21 +36,15 @@
                      </font>
                   </Label>
                   <PasswordField fx:id="campoContrasenia" prefHeight="25.0" prefWidth="170.0" promptText="12345678" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <ComboBox fx:id="comboBoxCargo" prefHeight="25.0" prefWidth="189.0" promptText="--seleccione--" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Label prefHeight="17.0" prefWidth="160.0" text="Seleccione Cargo:" GridPane.rowIndex="2">
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                  </Label>
                </children>
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="174.0" minWidth="10.0" prefWidth="168.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="280.0" minWidth="10.0" prefWidth="172.0" />
                </columnConstraints>
                <rowConstraints>
-                  <RowConstraints maxHeight="51.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="56.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="53.0" minHeight="10.0" prefHeight="49.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="59.0" minHeight="10.0" prefHeight="59.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="63.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="53.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <effect>
                   <DropShadow color="#a8ffb0" />

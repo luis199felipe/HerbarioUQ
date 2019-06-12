@@ -60,6 +60,11 @@ public class ListarDelegado {
 
 	}
 
+	private List<Empleado> listarEmpleado() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	public List<Recolector> listarRecolector() {
 		return listarEJB.listarRecolectores();
 	}
@@ -78,5 +83,10 @@ public class ListarDelegado {
 
 		return empleadosObservables;
 
+	}
+
+	public List<PersonaObservable> listarEmpleadosObservables() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

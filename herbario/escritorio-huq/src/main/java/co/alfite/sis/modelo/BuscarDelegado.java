@@ -38,10 +38,14 @@ public class BuscarDelegado {
 		}
 		return buscarDelegado;
 	}
-	
-	
+
 	public Persona personaPorCredenciales(String correo, String password) {
-		
+
 		return buscarEJB.personaPorCredenciales(correo, password);
+	}
+
+	public Persona personaPorCorreo(String correo) {
+
+		return buscarEJB.personaPorCorreo(correo);
 	}
 }

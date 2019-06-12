@@ -65,7 +65,7 @@
             <BorderPane prefHeight="200.0" prefWidth="200.0" />
             <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                <center>
-                  <Label text="Formulario de registro para personas" BorderPane.alignment="CENTER">
+                  <Label fx:id="labelTitulo" text="Formulario de registro para personas" BorderPane.alignment="CENTER">
                      <font>
                         <Font size="15.0" />
                      </font>

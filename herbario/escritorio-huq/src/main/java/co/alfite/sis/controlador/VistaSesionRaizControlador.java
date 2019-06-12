@@ -43,7 +43,7 @@ public class VistaSesionRaizControlador {
 	@FXML
 	private void actualizarInformacion() {
 
-		manejador.cargarEscenarioRegistro();
+		manejador.cargarEscenarioRegistro("actualizar","vistaSesionRaiz",personaEnSesion);
 	}
 
 	@FXML

@@ -18,4 +18,6 @@ public interface BuscarEJBRemote {
 	List<EspeciePlanta> especiesPorEstado(Estado est);
 
 	List<EspeciePlanta> especiesPorFamilia(String nombreFamilia);
+
+	Persona personaPorCorreo(String correo);
 }

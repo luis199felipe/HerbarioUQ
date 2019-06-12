@@ -112,7 +112,7 @@ public class VistaGestionarPersonaControlador {
 		if (personaGestionar.equals("recolector")) {
 			botonAgregarTrabajador.setText("Agregar nuevo Recolector");
 			campoBuscar.setPromptText("Busca un Recolector");
-			
+
 		} else {
 			botonAgregarTrabajador.setText("Agregar nuevo Empleado");
 			campoBuscar.setPromptText("Busca un Empleado");
@@ -136,6 +136,12 @@ public class VistaGestionarPersonaControlador {
 
 	@FXML
 	void agregarNuevoTrabajador() {
+		if (persona.equals("recolector")) {
+			manejador.cargarEscenarioRegistro("registrar", "vistaAdministradorRecolector", null);
+		} else {
+			manejador.cargarEscenarioRegistro("registrar", "vistaAdministradorEmpleado", null);
+
+		}
 
 	}
 
