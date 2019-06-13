@@ -5,6 +5,7 @@ import java.util.List;
 
 import co.alfite.sis.Main;
 import co.alfite.sis.entidades.Empleado;
+import co.alfite.sis.entidades.EspeciePlanta;
 import co.alfite.sis.entidades.ImagenPlanta;
 import co.alfite.sis.entidades.Persona;
 import co.alfite.sis.entidades.Recolector;
@@ -48,6 +49,14 @@ public class ManejadorEscenarios {
 	private ObservableList<EmpleadoObservable> empleadosObservables;
 
 	private Persona personaEnSesion;
+	public Persona getPersonaEnSesion() {
+		return personaEnSesion;
+	}
+
+	public void setPersonaEnSesion(Persona personaEnSesion) {
+		this.personaEnSesion = personaEnSesion;
+	}
+
 	/**
 	 * conexion con capa de negocio
 	 */
@@ -363,6 +372,9 @@ public class ManejadorEscenarios {
 
 		return insertarDelegado.obtenerImagen(id);
 	}
+	
+	
+
 
 	public Persona personaPorCredenciales(String correo, String password) {
 

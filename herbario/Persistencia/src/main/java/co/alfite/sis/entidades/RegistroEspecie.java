@@ -45,6 +45,8 @@ public class RegistroEspecie implements Serializable {
 	@OneToOne(mappedBy = "registro")
 	private EspeciePlanta especie;
 
+	@OneToOne(mappedBy = "registro")
+	private ImagenPlanta imagen;
 	/**
 	 * identificacion unica de un registro
 	 */
@@ -127,6 +129,19 @@ public class RegistroEspecie implements Serializable {
 
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
+	}
+
+	public ImagenPlanta getImagenPlanta() {
+		// TODO Auto-generated method stub
+		return imagen;
+	}
+
+	public ImagenPlanta getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(ImagenPlanta imagen) {
+		this.imagen = imagen;
 	}
 
 }

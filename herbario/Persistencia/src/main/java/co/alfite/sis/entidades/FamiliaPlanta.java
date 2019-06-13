@@ -23,8 +23,9 @@ public class FamiliaPlanta implements Serializable {
 	public static final String FAMILIA_GET_MAX = "FamiliaGetmax";
 	public static final String FAMILIA_MAX_ESP = "familiaMasEspecies";
 
-	
-	
+	@OneToOne
+	private RegistroEspecie registro;
+
 	@ManyToOne
 	private HerbarioUQ herbario;
 
@@ -35,7 +36,7 @@ public class FamiliaPlanta implements Serializable {
 	 * identificacion unica de una familia
 	 */
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO) 
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(length = 10)
 	private Integer idFamilia;
 	/**
@@ -80,6 +81,14 @@ public class FamiliaPlanta implements Serializable {
 
 	public void setGeneros(List<GeneroPlanta> generos) {
 		this.generos = generos;
+	}
+
+	public RegistroEspecie getRegistro() {
+		return registro;
+	}
+
+	public void setRegistro(RegistroEspecie registro) {
+		this.registro = registro;
 	}
 
 }

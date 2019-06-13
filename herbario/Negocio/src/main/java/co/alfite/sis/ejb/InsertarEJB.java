@@ -65,6 +65,9 @@ public class InsertarEJB implements InsertarEJBRemote {
 	public RegistroEspecie insertarRegistroEspecie(RegistroEspecie registro) {
 
 		try {
+			
+			insertarEspecie(registro.getEspecie());
+			insertarImagenPlanta(registro.getImagenPlanta());
 			entityManager.persist(registro);
 			return registro;
 		} catch (Exception e) {
