@@ -16,48 +16,32 @@ import co.alfite.sis.excepciones.ElementoRepetidoExcepcion;
 @Remote
 public interface AdministradorEJBRemote {
 
-	
 	String JNDI = "java:global/ear-huq/Negocio/AdministradorEJB!co.alfite.sis.ejb.AdministradorEJBRemote";
-	/**
-	 * permite registrar un elemento en la base de datos
-	 * 
-	 * @param empleado
-	 * @return
-	 * @throws ElementoRepetidoExcepcion
-	 */
+	
 	Empleado insertarEmpleado(Empleado empleado) throws ElementoRepetidoExcepcion;
 
-	/**
-	 * 
-	 * @param registro
-	 * @return
-	 */
-	RegistroEspecie insertarRegistro(RegistroEspecie registro);
-
-	/**
-	 * 
-	 * @param familia
-	 * @return
-	 * @throws ElementoRepetidoExcepcion
-	 */
+	Recolector insertarRecolector(Recolector recolector) throws ElementoRepetidoExcepcion;
 
 	FamiliaPlanta insertarFamilia(FamiliaPlanta familia) throws ElementoRepetidoExcepcion;
 
-	/**
-	 * 
-	 * @param genero
-	 * @return
-	 * @throws ElementoRepetidoExcepcion
-	 */
 	GeneroPlanta insertarGenero(GeneroPlanta genero) throws ElementoRepetidoExcepcion;
 
-	/**
-	 * 
-	 * @param especie
-	 * @return
-	 * @throws ElementoRepetidoExcepcion
-	 */
-
 	EspeciePlanta insertarEspecie(EspeciePlanta especie) throws ElementoRepetidoExcepcion;
+	
+	
+	
+	Empleado ActualizarEmpleado(Empleado empleado);
+
+	Recolector ActualizarRecolector(Recolector recolector);
+
+	FamiliaPlanta ActualizarFamiliaPlanta(FamiliaPlanta f);
+
+	GeneroPlanta ActualizarGeneroPlanta(GeneroPlanta g);
+
+	EspeciePlanta ActualizarEspeciePlanta(EspeciePlanta esp);
+	
+	
+	
+
 
 }
