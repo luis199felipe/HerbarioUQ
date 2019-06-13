@@ -7,6 +7,7 @@ import co.alfite.sis.entidades.Recolector;
 import co.alfite.sis.entidades.Trabajador;
 import co.alfite.sis.entidades.Usuario;
 import co.alfite.sis.excepciones.ElementoRepetidoExcepcion;
+import co.alfite.sis.modelo.AdministradorDelegado;
 import co.alfite.sis.util.Utilidades;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -49,6 +50,11 @@ public class VistaRegistroControlador {
 	private Stage miEscenario;
 	private String tipoVista;
 	private String origen;
+	private AdministradorDelegado adminDelegado;
+
+	public VistaRegistroControlador() {
+		adminDelegado = adminDelegado.administradorDelegado;
+	}
 
 	@FXML
 	private void initialize() {
@@ -80,7 +86,7 @@ public class VistaRegistroControlador {
 						persona.setTelefono(campoTelefono.getText());
 						persona.setFechaNacimiento(Utilidades.pasarADate(fechaNacimiento.getValue()));
 						persona.setEstado(Estado.activo);
-						registroValido = manejador.insertarEmpleado(persona);
+						registroValido = (adminDelegado.insertarEmpleado(persona) == null);
 
 					} else if (cargoPersona.equals("Recolector")) {
 						Recolector persona = new Recolector();
@@ -93,7 +99,7 @@ public class VistaRegistroControlador {
 						persona.setEstado(Estado.activo);
 						persona.setFechaNacimiento(Utilidades.pasarADate(fechaNacimiento.getValue()));
 
-						registroValido = manejador.insertarRecolector(persona);
+						registroValido = (adminDelegado.insertarRecolector(persona)==null);
 
 					} else if (cargoPersona.equals("Usuario")) {
 						Usuario nuevoUsuario = new Usuario();
@@ -105,7 +111,7 @@ public class VistaRegistroControlador {
 						nuevoUsuario.setTelefono(campoTelefono.getText());
 						nuevoUsuario.setFechaNacimiento(Utilidades.pasarADate(fechaNacimiento.getValue()));
 
-						registroValido = manejador.insertarUsuario(nuevoUsuario);
+						registroValido = adminDelegado.insertarUsusario(nuevoUsuario);
 					}
 
 				} else {
@@ -131,8 +137,8 @@ public class VistaRegistroControlador {
 
 	@FXML
 	public void regresar() {
-		if (!tipoVista.equals("actualizar")
-				&& !origen.equals("vistaAdministradorRecolector") && !origen.equals("vistaAdministradorEmpleado")) {
+		if (!tipoVista.equals("actualizar") && !origen.equals("vistaAdministradorRecolector")
+				&& !origen.equals("vistaAdministradorEmpleado")) {
 			manejador.escenarioInicial();
 		}
 		miEscenario.close();

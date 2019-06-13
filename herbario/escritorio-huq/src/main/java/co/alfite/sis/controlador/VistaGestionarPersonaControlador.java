@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import co.alfite.sis.entidades.Persona;
+import co.alfite.sis.modelo.AdministradorDelegado;
 import co.alfite.sis.modelo.observable.PersonaObservable;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -59,6 +60,11 @@ public class VistaGestionarPersonaControlador {
 
 	private ManejadorEscenarios manejador;
 	private String persona;
+	private AdministradorDelegado adminDelegado;
+
+	public VistaGestionarPersonaControlador() {
+		adminDelegado = adminDelegado.administradorDelegado;
+	}
 
 	@FXML
 	private void initialize() {
@@ -94,9 +100,9 @@ public class VistaGestionarPersonaControlador {
 		this.manejador = m;
 
 		if (this.persona.equals("recolector")) {
-			tablaPersonas.setItems((ObservableList<PersonaObservable>) manejador.ListaRecolectoresObservables());
+			tablaPersonas.setItems((ObservableList<PersonaObservable>) adminDelegado.listarRecolectoresObservables());
 		} else {
-			tablaPersonas.setItems((ObservableList<PersonaObservable>) manejador.ListaEmpleadosObservables());
+			tablaPersonas.setItems((ObservableList<PersonaObservable>) adminDelegado.listarEmpleadosObservables());
 
 		}
 	}

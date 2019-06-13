@@ -22,6 +22,7 @@ import co.alfite.sis.entidades.RegistroEspecie;
 import co.alfite.sis.entidades.RegistroEspecie.Estado;
 import co.alfite.sis.entidades.Trabajador;
 import co.alfite.sis.excepciones.ElementoRepetidoExcepcion;
+import co.alfite.sis.modelo.AdministradorDelegado;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -49,11 +50,17 @@ public class VistaRegistroEspecieControlador {
 //	    private TextField campoNombre;
 	private Path rutaImagen;
 
+	private AdministradorDelegado adminDelegado;
+
 	private Stage stage;
 
 	private ManejadorEscenarios miEscenario;
 	private byte[] buffers;
 	private int readers;
+
+	public VistaRegistroEspecieControlador() {
+		adminDelegado = adminDelegado.administradorDelegado;
+	}
 
 	@FXML
 	private void initialize() {
@@ -67,9 +74,9 @@ public class VistaRegistroEspecieControlador {
 		ImagenPlanta nuevaImagen = new ImagenPlanta();
 		nuevaImagen.setImagen(buffers);
 
-		EspeciePlanta nuevaEspecie=new EspeciePlanta();
+		EspeciePlanta nuevaEspecie = new EspeciePlanta();
 		nuevaEspecie.setNombre("esp9000");
-			
+
 		Persona p = miEscenario.getPersonaEnSesion();
 		Trabajador trabajadorEnSesion = new Trabajador();
 
@@ -90,19 +97,7 @@ public class VistaRegistroEspecieControlador {
 		// nuevoRegistro.setGenero(genero);
 		// nuevoRegistro.setFamilia(familia);
 
-		try {
-
-			miEscenario.insertarRegistro(nuevoRegistro);
-			
-			//el hecho de que tenga una especie asociada quiere decir que la especie ya existe
-			//ahorafalta probar a  relacionar registro con genero y familia
-			
-			
-			
-		} catch (ElementoRepetidoExcepcion e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		adminDelegado.insertarRegistro(nuevoRegistro);
 
 	}
 

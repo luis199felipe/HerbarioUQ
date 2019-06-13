@@ -6,6 +6,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 import co.alfite.sis.entidades.Persona;
+import co.alfite.sis.modelo.AdministradorDelegado;
 import co.alfite.sis.util.Utilidades;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -41,14 +42,15 @@ public class VistaLoginControlador {
 	private ManejadorEscenarios manejador;
 	private Stage miEscenario;
 
-	public VistaLoginControlador() {
+	private AdministradorDelegado adminDelegado;
 
+	public VistaLoginControlador() {
+		adminDelegado = adminDelegado.administradorDelegado;
 	}
 
 	@FXML
 	private void initialize() {
 
-		
 		campoCorreo.setText("nfigueroas@uqvirtual.edu.co");
 		campoContrasenia.setText("root");
 
@@ -56,7 +58,7 @@ public class VistaLoginControlador {
 
 	@FXML
 	private void iniciarSesion() {
-		Persona p = manejador.personaPorCredenciales(campoCorreo.getText(), campoContrasenia.getText());
+		Persona p = adminDelegado.personaPorCredenciales(campoCorreo.getText(), campoContrasenia.getText());
 		if (p != null) {
 			manejador.cargarEscenarioTrabajador(p);
 			miEscenario.close();
@@ -81,13 +83,13 @@ public class VistaLoginControlador {
 	private void recuperarContrasenia() {
 
 		if (!campoCorreo.getText().isEmpty()) {
-			Persona p = manejador.personaPorCorreo(campoCorreo.getText());
+			String p = adminDelegado.recuperarContrasenia(campoCorreo.getText());
 			if (p != null) {
-				enviarConGMail("herbariouq@gmail.com", "alfite12345", p.getEmail(), p.getPassword());
-				
-				Utilidades.mostrarMensaje("Mensaje", "Su contraseña ha sido enviada a  el correo: "+ p.getEmail(), AlertType.INFORMATION);
+				enviarConGMail("herbariouq@gmail.com", "alfite12345", campoCorreo.getText(), p);
 
-				
+				Utilidades.mostrarMensaje("Mensaje",
+						"Su contraseña ha sido enviada a  el correo: " + campoCorreo.getText(), AlertType.INFORMATION);
+
 			} else {
 				Utilidades.mostrarMensaje("Error", "El correo no esta registrado en el herbario", AlertType.ERROR);
 			}

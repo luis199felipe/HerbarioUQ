@@ -15,6 +15,7 @@ import co.alfite.sis.entidades.Empleado;
 import co.alfite.sis.entidades.EspeciePlanta;
 import co.alfite.sis.entidades.FamiliaPlanta;
 import co.alfite.sis.entidades.GeneroPlanta;
+import co.alfite.sis.entidades.ImagenPlanta;
 import co.alfite.sis.entidades.Persona;
 import co.alfite.sis.entidades.Recolector;
 import co.alfite.sis.entidades.RegistroEspecie;
@@ -127,27 +128,27 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 		}
 	}
 
-	public EspeciePlanta insertarEspecie(EspeciePlanta especie) throws ElementoRepetidoExcepcion {
-
-		if (entityManager.find(EspeciePlanta.class, especie.getIdEspecie()) != null) {
-			throw new ElementoRepetidoExcepcion("El genero con el id ya fue registrado");
-
-		}
-		try {
-			entityManager.persist(especie);
-			return especie;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
+//	public EspeciePlanta insertarEspecie(EspeciePlanta especie) throws ElementoRepetidoExcepcion {
+//
+//		if (entityManager.find(EspeciePlanta.class, especie.getIdEspecie()) != null) {
+//			throw new ElementoRepetidoExcepcion("El genero con el id ya fue registrado");
+//
+//		}
+//		try {
+//			entityManager.persist(especie);
+//			return especie;
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return null;
+//		}
+//	}
 
 	/**
 	 * METODOS DE MODIFICAR(ACTUALIZAR)
 	 */
 
-	public Usuario actualizarUsuario(Usuario us){
-		Usuario u = entityManager.find(Usuario.class, us.getIdPersona()); 
+	public Usuario actualizarUsuario(Usuario us) {
+		Usuario u = entityManager.find(Usuario.class, us.getIdPersona());
 		if (u != null) {
 			u.setEmail(us.getEmail());
 			u.setEstado(us.getEstado());
@@ -155,7 +156,7 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 			u.setNombre(us.getNombre());
 			u.setPassword(us.getPassword());
 			u.setTelefono(us.getTelefono());
-			
+
 			try {
 				entityManager.merge(u);
 				return u;
@@ -168,7 +169,7 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 
 		}
 	}
-	
+
 	public Empleado actualizarEmpleado(Empleado em) {
 		Empleado ps = entityManager.find(Empleado.class, em.getIdPersona());
 		if (ps != null) {
@@ -275,7 +276,7 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 			return null;
 		}
 	}
-	
+
 	public RegistroEspecie actualizarRegistroEspecie(RegistroEspecie registro) {
 		RegistroEspecie rs = entityManager.find(RegistroEspecie.class, registro.getIdRegistro());
 
@@ -415,7 +416,7 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 	 * 
 	 * METODOS LISTAR
 	 */
-	
+
 	public List<Usuario> listarUsuarios() {
 		TypedQuery<Usuario> query = entityManager.createNamedQuery(Usuario.USUARIO_GET_ALL, Usuario.class);
 		return query.getResultList();
@@ -488,50 +489,51 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 	 * METODOS BUSCAR(CONSULTA)
 	 */
 	public Persona buscarPersona(String idPersona) {
-		TypedQuery<Persona> query = entityManager.createNamedQuery(Persona.PERSONA_POR_ID,
-				Persona.class);
+		TypedQuery<Persona> query = entityManager.createNamedQuery(Persona.PERSONA_POR_ID, Persona.class);
 		query.setParameter("id", idPersona);
 		return query.getSingleResult();
 	}
+
 	public Usuario buscarUsuario(String idPersona) {
-		TypedQuery<Usuario> query = entityManager.createNamedQuery(Usuario.USUARIO_POR_ID,
-				Usuario.class);
+		TypedQuery<Usuario> query = entityManager.createNamedQuery(Usuario.USUARIO_POR_ID, Usuario.class);
 		query.setParameter("id", idPersona);
 		return query.getSingleResult();
 	}
 
 	public Empleado buscarEmpleado(String idPersona) {
-		TypedQuery<Empleado> query = entityManager.createNamedQuery(Empleado.EMPLEADO_POR_ID,
-				Empleado.class);
+		TypedQuery<Empleado> query = entityManager.createNamedQuery(Empleado.EMPLEADO_POR_ID, Empleado.class);
 		query.setParameter("id", idPersona);
 		return query.getSingleResult();
 	}
+
 	public Recolector buscarRecolector(String idPersona) {
-		TypedQuery<Recolector> query = entityManager.createNamedQuery(Recolector.RECOLECTOR_POR_ID,
-				Recolector.class);
+		TypedQuery<Recolector> query = entityManager.createNamedQuery(Recolector.RECOLECTOR_POR_ID, Recolector.class);
 		query.setParameter("id", idPersona);
 		return query.getSingleResult();
 	}
+
 	public FamiliaPlanta buscarFamiliaPlanta(String nombre) {
 		TypedQuery<FamiliaPlanta> query = entityManager.createNamedQuery(FamiliaPlanta.FAMILIA_POR_NOMBRE,
 				FamiliaPlanta.class);
 		query.setParameter("nom", nombre);
 		return query.getSingleResult();
 	}
+
 	public GeneroPlanta buscarGeneroPlanta(String nombre) {
 		TypedQuery<GeneroPlanta> query = entityManager.createNamedQuery(GeneroPlanta.GENERO_POR_NOMBRE,
 				GeneroPlanta.class);
 		query.setParameter("nom", nombre);
 		return query.getSingleResult();
 	}
+
 	public EspeciePlanta buscarEspeciePlanta(String nombreCientifico) {
 		TypedQuery<EspeciePlanta> query = entityManager.createNamedQuery(EspeciePlanta.ESPECIES_POR_NOMBRECIENTIFICO,
 				EspeciePlanta.class);
 		query.setParameter("nomCien", nombreCientifico);
 		return query.getSingleResult();
 	}
-	
-	//OTROS METODOS
+
+	// OTROS METODOS
 	public void validarRegistro(int id, Estado est) {
 
 		TypedQuery<RegistroEspecie> query = entityManager.createNamedQuery(RegistroEspecie.REGISTRO_POR_ID,
@@ -541,7 +543,7 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 		actualizarRegistroEspecie(query.getSingleResult());
 
 	}
-	
+
 	private Persona buscarPorEmail(Persona per) {
 
 		try {
@@ -555,8 +557,97 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 
 	}
 
-	
+	public RegistroEspecie insertarRegistro(RegistroEspecie registro) {
 
+		registro.setEstado(Estado.enviado);
 
+		try {
+			insertarEspecie(registro.getEspecie());
+			insertarImagenPlanta(registro.getImagenPlanta());
+			entityManager.persist(registro);
+			return registro;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+
+	}
+
+	/**
+	 * 
+	 * @param especie
+	 * @return
+	 * @throws ElementoRepetidoExcepcion
+	 */
+
+	private boolean insertarEspecie(EspeciePlanta especie) {
+
+		boolean i = false;
+		if (entityManager.find(EspeciePlanta.class, especie.getNombre()) == null) {
+
+			i = true;
+			entityManager.persist(especie);
+		}
+
+		return i;
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * co.alfite.sis.ejb.ComunEJBRemote#personaPorCredenciales(java.lang.String,
+	 * java.lang.String)
+	 */
+	public Persona personaPorCredenciales(String correo, String password) {
+
+		TypedQuery<Persona> query = entityManager.createNamedQuery(Persona.PERSONA_POR_CREDENCIALES, Persona.class);
+
+		query.setParameter("email", correo);
+		query.setParameter("password", password);
+		try {
+			return query.getSingleResult();
+		} catch (Exception e) {
+			return null;
+		}
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see co.alfite.sis.ejb.ComunEJBRemote#recuperarContrasenia(java.lang.String)
+	 */
+	public String recuperarContrasenia(String correo) {
+
+		TypedQuery<Persona> query = entityManager.createNamedQuery(Persona.PERSONA_POR_EMAIL, Persona.class);
+
+		query.setParameter("email", correo);
+		try {
+			return query.getSingleResult().getPassword();
+		} catch (Exception e) {
+			return null;
+		}
+
+	}
+
+	public EspeciePlanta verDetalleEspecie(int id) {
+
+		TypedQuery<EspeciePlanta> query = entityManager.createNamedQuery(EspeciePlanta.ESPECIES_POR_ID,
+				EspeciePlanta.class);
+
+		return query.getSingleResult();
+	}
+
+	private ImagenPlanta insertarImagenPlanta(ImagenPlanta img) {
+
+		try {
+			entityManager.persist(img);
+			return img;
+		} catch (Exception e) {
+			return null;
+		}
+	}
 
 }

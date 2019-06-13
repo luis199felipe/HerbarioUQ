@@ -56,7 +56,7 @@ public class ManejadorEscenarios {
 	/**
 	 * conexion con capa de negocio
 	 */
-	private AdministradorDelegado adminDelegado;
+	//private AdministradorDelegado adminDelegado;
 
 	/**
 	 * recibe el escenario principla de la aplicacion
@@ -66,7 +66,7 @@ public class ManejadorEscenarios {
 	public ManejadorEscenarios(Stage escenario) {
 
 		this.escenario = escenario;
-		adminDelegado = adminDelegado.administradorDelegado;
+//		adminDelegado = adminDelegado.administradorDelegado;
 		
 
 		try {
