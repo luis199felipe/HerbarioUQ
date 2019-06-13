@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+import co.alfite.sis.entidades.Resenia.Estado;
+
 /**
  * Entity implementation class for Entity: MeGustaEspeciePlanta
  * 
@@ -16,7 +18,7 @@ import javax.persistence.*;
 		@NamedQuery(name = MeGustaEspeciePlanta.MEGUSTAESPECIE_GET_ALL, query = "select megustaEspecie from MeGustaEspeciePlanta megustaEspecie"),
 		@NamedQuery(name = MeGustaEspeciePlanta.MEGUSTAESPECIE_ESPECIE, query = "select megusta from MeGustaEspeciePlanta megusta where megusta.especie.idEspecie = :esp "),
 		@NamedQuery(name = MeGustaEspeciePlanta.MEGUSTAESPECIE_ESPECIE_NOMBRECIENTIFICO, query = "select megusta from MeGustaEspeciePlanta megusta where megusta.especie.nombreCientifico = :nom "),
-		@NamedQuery(name = MeGustaEspeciePlanta.MEGUSTAESPECIE_USUARIO, query = "select megusta from MeGustaEspeciePlanta megusta where megusta.usuario.idPersona = :esp "),
+		@NamedQuery(name = MeGustaEspeciePlanta.MEGUSTAESPECIE_USUARIO, query = "select megusta from MeGustaEspeciePlanta megusta where megusta.usuario.idPersona = :per "),
 		@NamedQuery(name = MeGustaEspeciePlanta.MEGUSTAESPECIE_ESPECIEMASMEGUSTAS, query = "select count(megusta.especie.idEspecie) as n from MeGustaEspeciePlanta megusta group by megusta.especie order by n desc") })
 public class MeGustaEspeciePlanta implements Serializable {
 
@@ -39,6 +41,17 @@ public class MeGustaEspeciePlanta implements Serializable {
 	@ManyToOne
 	private EspeciePlanta especie;
 
+	/**
+	 * estado del meGusta (meGusta, noMeGusta)
+	 */
+	public enum Estado {
+		MeGusta, NoMeGusta
+	}
+
+	@Enumerated(EnumType.STRING)
+	@Column(length = 10)
+	private Estado estado;
+	
 	/**
 	 * Identificacion unica de MegustaEspeciePlanta
 	 */
@@ -87,6 +100,14 @@ public class MeGustaEspeciePlanta implements Serializable {
 
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
+	}
+
+	public Estado getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Estado estado) {
+		this.estado = estado;
 	}
 
 }
