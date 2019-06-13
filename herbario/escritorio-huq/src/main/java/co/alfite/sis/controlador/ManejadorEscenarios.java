@@ -17,7 +17,13 @@ import co.alfite.sis.modelo.BuscarDelegado;
 import co.alfite.sis.modelo.InsertarDelegado;
 import co.alfite.sis.modelo.ListarDelegado;
 import co.alfite.sis.modelo.observable.EmpleadoObservable;
+import co.alfite.sis.modelo.observable.EspecieObservable;
+import co.alfite.sis.modelo.observable.FamiliaObservable;
+import co.alfite.sis.modelo.observable.GeneroObservable;
+import co.alfite.sis.modelo.observable.MeGustaObservable;
 import co.alfite.sis.modelo.observable.PersonaObservable;
+import co.alfite.sis.modelo.observable.RegistroObservable;
+import co.alfite.sis.modelo.observable.ReseniaObservable;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -49,6 +55,7 @@ public class ManejadorEscenarios {
 	private ObservableList<EmpleadoObservable> empleadosObservables;
 
 	private Persona personaEnSesion;
+
 	public Persona getPersonaEnSesion() {
 		return personaEnSesion;
 	}
@@ -352,16 +359,6 @@ public class ManejadorEscenarios {
 
 	}
 
-	public List<PersonaObservable> ListaEmpleadosObservables() {
-
-		return listarDelegado.listarEmpleadosObservables();
-	}
-
-	public List<PersonaObservable> ListaRecolectoresObservables() {
-
-		return listaRecolectoresObservables;
-	}
-
 	public boolean insertarImagenPlanta(ImagenPlanta y) {
 
 		return insertarDelegado.insertarImagenPlanta(y);
@@ -372,9 +369,6 @@ public class ManejadorEscenarios {
 
 		return insertarDelegado.obtenerImagen(id);
 	}
-	
-	
-
 
 	public Persona personaPorCredenciales(String correo, String password) {
 
@@ -385,5 +379,86 @@ public class ManejadorEscenarios {
 
 		return buscarDelegado.personaPorCorreo(correo);
 	}
+	
+	public List<PersonaObservable> listarUsuariosObservables(){
+		return listarDelegado.listarUsuariosObservables();
+	}
+	
+	public List<PersonaObservable> listarAdministradoresObservables(){
+		return listarDelegado.listarAdministradoresObservables();
+	}
+	
+	public List<PersonaObservable> ListaEmpleadosObservables() {
 
+		return listarDelegado.listarEmpleadosObservables();
+	}
+
+	public List<PersonaObservable> ListaRecolectoresObservables() {
+
+		return listarDelegado.listarRecolectoresObservables();
+	}
+
+	public List<RegistroObservable> listarRegistrosObservables(){
+		return listarDelegado.listarRegistrosObservables();
+	}
+	
+	public List<FamiliaObservable> listarFamiliasObservables(){
+		return listarDelegado.listarFamiliasObservables();
+	}
+	
+	public List<GeneroObservable> listarGenerosObservables(){
+		return listarDelegado.listarGenerosObservables();
+	}
+	
+	public List<EspecieObservable> listarEspeciesObservables(){
+		return listarDelegado.listarEspeciesObservables();
+	}
+	
+	public List<EspecieObservable> listarEspeciesPorFamiliaObservables(String nombre){
+		return listarDelegado.listarEspeciesPorFamiliaObservables(nombre);
+	}
+	
+	public List<EspecieObservable> listarEspeciesPorGeneroObservables(String nombre){
+		return listarDelegado.listarEspeciesPorGeneroObservables(nombre);
+	}
+	
+	public List<EspecieObservable> listarEspeciesAceptadasObservables(){
+		return listarDelegado.listarEspeciesAceptadasObservables();
+	}
+	
+	public List<EspecieObservable> listarEspeciesRechazadasObservables(){
+		return listarDelegado.listarEspeciesRechazadasObservables();
+	}
+	
+	public List<RegistroObservable> listarRegistrosAceptadasPorUnTrabajadorObservables(String idPersona){
+		return listarDelegado.listarRegistrosAceptadasPorUnTrabajadorObservables(idPersona);
+	}
+	
+	public List<RegistroObservable> listarRegistrosRechazadasPorUnTrabajadorObservables(String idPersona){
+		return listarDelegado.listarRegistrosRechazadasPorUnTrabajadorObservables(idPersona);
+	}
+	
+	public List<MeGustaObservable> listarMeGustasObservables(){
+		return listarDelegado.listarMeGustasObservables();
+	}
+	
+	public List<MeGustaObservable> listarMeGustasDeUnUsuarioObservables(String idPersona){
+		return listarDelegado.listarMeGustasDeUnUsuarioObservables(idPersona);
+	}
+	
+	public List<MeGustaObservable> listarMeGustasDeUnaEspecieObservables(String nombreCientifico){
+		return listarDelegado.listarMeGustasDeUnaEspecieObservables(nombreCientifico);
+	}
+	
+	public List<ReseniaObservable> listarReseniasObservables(){
+		return listarDelegado.listarReseniasObservables();
+	}
+	
+	public List<ReseniaObservable> listarReseniasDeUnUsuarioObservables(String idPersona){
+		return listarDelegado.listarReseniasDeUnUsuarioObservables(idPersona);
+	}
+	
+	public List<ReseniaObservable> listarReseniasDeUnaEspecieObservables(String nombreCientifico){
+		return listarDelegado.listarReseniasDeUnaEspecieObservables(nombreCientifico);
+	}
 }
