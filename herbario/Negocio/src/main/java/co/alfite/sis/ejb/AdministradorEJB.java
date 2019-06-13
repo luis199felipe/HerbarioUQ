@@ -14,6 +14,7 @@ import co.alfite.sis.entidades.GeneroPlanta;
 import co.alfite.sis.entidades.Persona;
 import co.alfite.sis.entidades.Recolector;
 import co.alfite.sis.entidades.RegistroEspecie;
+import co.alfite.sis.entidades.Usuario;
 import co.alfite.sis.entidades.RegistroEspecie.Estado;
 import co.alfite.sis.excepciones.ElementoRepetidoExcepcion;
 
@@ -150,18 +151,60 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 	 * @see co.alfite.sis.ejb.AdministradorEJBRemote#insertarRegistro(co.alfite.sis.
 	 * entidades.RegistroEspecie)
 	 */
-	public RegistroEspecie insertarRegistro(RegistroEspecie registro) {
 
-		registro.setEstado(Estado.enviado);
+	
+	
+	public boolean inactivarRecolector(Recolector recolector) {
 
-		try {
-			entityManager.persist(registro);
-			insertarEspecie(registro.getEspecie());
-			return registro;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
+		Recolector r = entityManager.find(Recolector.class, recolector.getIdPersona());
+		if (r != null) {
+			try {
+				r.setEstado(co.alfite.sis.entidades.Persona.Estado.inactivo);
+				entityManager.merge(r);
+				return true;
+			} catch (Exception e) {
+				e.printStackTrace();
+				return false;
+			}
+
+		} else {
+			return false;
 		}
+	}
 
+	public boolean inactivarEmpleado(Empleado empleado) {
+
+		Empleado e = entityManager.find(Empleado.class, empleado.getIdPersona());
+		if (e != null) {
+			try {
+				e.setEstado(co.alfite.sis.entidades.Persona.Estado.inactivo);
+				entityManager.merge(e);
+				return true;
+			} catch (Exception e1) {
+				e1.printStackTrace();
+				return false;
+			}
+
+		} else {
+			return false;
+		}
+	}
+
+	public boolean inactivarUsuario(Usuario usuario) {
+
+		Usuario u = entityManager.find(Usuario.class, usuario.getIdPersona());
+		if (u != null) {
+			try {
+				u.setEstado(co.alfite.sis.entidades.Persona.Estado.inactivo);
+				entityManager.merge(u);
+				return true;
+			} catch (Exception e) {
+				e.printStackTrace();
+				return false;
+			}
+
+		} else {
+			return false;
+		}
 	}
 }
