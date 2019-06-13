@@ -41,7 +41,7 @@ public class VistaGestionarPersonaControlador {
 		
 		
 		columnaNombre.setCellValueFactory(cellData -> cellData.getValue().getNombre());
-		columnaId.setCellValueFactory(cellData -> cellData.getValue().getId());
+		columnaId.setCellValueFactory(cellData -> cellData.getValue().getIdPersona());
 
 		
 

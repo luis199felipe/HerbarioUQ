@@ -15,13 +15,16 @@ import javax.persistence.*;
 @Entity
 @NamedQueries({ @NamedQuery(name = FamiliaPlanta.FAMILIA_GET_ALL, query = "select familia from FamiliaPlanta familia"),
 		@NamedQuery(name = FamiliaPlanta.FAMILIA_GET_NUMBER, query = "SELECT COUNT(p) from FamiliaPlanta p "),
-		@NamedQuery(name = FamiliaPlanta.FAMILIA_GET_MAX, query = "SELECT  p from FamiliaPlanta p ") })
+		@NamedQuery(name = FamiliaPlanta.FAMILIA_GET_MAX, query = "SELECT  p from FamiliaPlanta p "),
+		@NamedQuery(name = FamiliaPlanta.FAMILIA_NOMBRE, query = "SELECT  p from FamiliaPlanta p where p.nombre = :var") 
+})
 public class FamiliaPlanta implements Serializable {
 
 	public static final String FAMILIA_GET_ALL = "FamiliaGetAll";
 	public static final String FAMILIA_GET_NUMBER = "FamiliaGetNumber";
 	public static final String FAMILIA_GET_MAX = "FamiliaGetmax";
 	public static final String FAMILIA_MAX_ESP = "familiaMasEspecies";
+	public static final String FAMILIA_NOMBRE = "FamiliaNombre";
 
 	
 	

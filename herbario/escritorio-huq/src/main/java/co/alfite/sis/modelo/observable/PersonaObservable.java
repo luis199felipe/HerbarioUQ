@@ -30,6 +30,62 @@ public class PersonaObservable {
 		this.fechaNacimiento = new SimpleObjectProperty<>(p.getFechaNacimiento());
 	}
 
+	public StringProperty getIdPersona() {
+		return idPersona;
+	}
+
+	public void setIdPersona(StringProperty idPersona) {
+		this.idPersona = idPersona;
+	}
+
+	public StringProperty getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(StringProperty nombre) {
+		this.nombre = nombre;
+	}
+
+	public StringProperty getEmail() {
+		return email;
+	}
+
+	public void setEmail(StringProperty email) {
+		this.email = email;
+	}
+
+	public StringProperty getPassword() {
+		return password;
+	}
+
+	public void setPassword(StringProperty password) {
+		this.password = password;
+	}
+
+	public StringProperty getEstado() {
+		return estado;
+	}
+
+	public void setEstado(StringProperty estado) {
+		this.estado = estado;
+	}
+
+	public StringProperty getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(StringProperty telefono) {
+		this.telefono = telefono;
+	}
+
+	public ObjectProperty<Date> getFechaNacimiento() {
+		return fechaNacimiento;
+	}
+
+	public void setFechaNacimiento(ObjectProperty<Date> fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
+	}
+
 	public PersonaObservable(StringProperty idPersona, StringProperty nombre, StringProperty email,
 			StringProperty password, StringProperty estado, StringProperty telefono,
 			ObjectProperty<Date> fechaNacimiento) {

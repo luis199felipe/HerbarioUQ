@@ -29,5 +29,9 @@ public class HolaMundoBean {
 		mensaje = "Hola mundo jBean";
 		return mensaje;
 	}
+	
+	public String ir() {
+		return "index?faces-redirect=true";
+	}
 
 }

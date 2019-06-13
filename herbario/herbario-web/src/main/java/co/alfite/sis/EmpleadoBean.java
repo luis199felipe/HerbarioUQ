@@ -65,6 +65,8 @@ public class EmpleadoBean {
 		}
 		return "listo";
 	}
+	
+	
 
 	public String getIdPersona() {
 		return idPersona;
