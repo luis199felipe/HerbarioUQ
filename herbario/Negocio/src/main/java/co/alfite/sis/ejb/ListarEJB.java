@@ -90,6 +90,34 @@ public class ListarEJB implements ListarEJBRemote {
 				EspeciePlanta.class);
 		return query.getResultList();
 	}
+	
+	public List<EspeciePlanta> listarEspeciesPorFamilia() {
+
+		TypedQuery<EspeciePlanta> query = entityManager.createNamedQuery(EspeciePlanta.ESPECIES_FAMILIA,
+				EspeciePlanta.class);
+		return query.getResultList();
+	}
+	
+	public List<EspeciePlanta> listarEspeciesPorGenero() {
+
+		TypedQuery<EspeciePlanta> query = entityManager.createNamedQuery(EspeciePlanta.ESPECIES_GENERO,
+				EspeciePlanta.class);
+		return query.getResultList();
+	}
+	
+	public List<EspeciePlanta> listarEspeciesAceptadas() {
+
+		TypedQuery<EspeciePlanta> query = entityManager.createNamedQuery(EspeciePlanta.ESPECIES_ESTADO,
+				EspeciePlanta.class);
+		return query.getResultList();
+	}
+	
+	public List<EspeciePlanta> listarEspeciesRechazadas() {
+
+		TypedQuery<EspeciePlanta> query = entityManager.createNamedQuery(EspeciePlanta.ESPECIES_ESTADO,
+				EspeciePlanta.class);
+		return query.getResultList();
+	}
 
 	public List<MeGustaEspeciePlanta> listarMeGustas() {
 
