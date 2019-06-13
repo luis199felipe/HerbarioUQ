@@ -28,8 +28,21 @@ public interface ListarEJBRemote {
 	List<FamiliaPlanta> listarFamilias();
 	List<GeneroPlanta> listarGeneros();
 	List<EspeciePlanta> listarEspecies();
-	List<MeGustaEspeciePlanta> listarMeGustas();
-	List<Resenia> listarResenias();
 	
+	List<EspeciePlanta> listarEspeciesPorFamilia(String nombre);
+	List<EspeciePlanta> listarEspeciesPorGenero(String nombre);
+	List<EspeciePlanta> listarEspeciesAceptadas();
+	List<EspeciePlanta> listarEspeciesRechazadas();
+	
+	List<RegistroEspecie> listarRegistrosAceptadasDeUnTrabajador(String idPersona);
+	List<RegistroEspecie> listarRegistrosRechazadasDeUnTrabajador(String idPersona);
+
+	List<MeGustaEspeciePlanta> listarMeGustas();
+	List<MeGustaEspeciePlanta> listarMeGustasDeUnUsuario(String idPersona);
+	List<MeGustaEspeciePlanta> listarMeGustasDeUnaEspecie(String nombreCientifico);
+	
+	List<Resenia> listarResenias();
+	List<Resenia> listarReseniasDeUnUsuario(String idPersona);
+	List<Resenia> listarReseniasDeUnaEspecie(String nombreCientifico);
 	
 }

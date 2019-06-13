@@ -17,6 +17,7 @@ import co.alfite.sis.entidades.MeGustaEspeciePlanta;
 import co.alfite.sis.entidades.Persona;
 import co.alfite.sis.entidades.Recolector;
 import co.alfite.sis.entidades.RegistroEspecie;
+import co.alfite.sis.entidades.RegistroEspecie.Estado;
 import co.alfite.sis.entidades.Resenia;
 import co.alfite.sis.entidades.Usuario;
 
@@ -36,11 +37,12 @@ public class ListarEJB implements ListarEJBRemote {
 	public ListarEJB() {
 		// TODO Auto-generated constructor stub
 	}
+
 	public List<Persona> listarPersonas() {
 		TypedQuery<Persona> query = entityManager.createNamedQuery(Persona.LISTAR_TODOS, Persona.class);
 		return query.getResultList();
 	}
-	
+
 	public List<Usuario> listarUsuarios() {
 		TypedQuery<Usuario> query = entityManager.createNamedQuery(Usuario.USUARIO_GET_ALL, Usuario.class);
 		return query.getResultList();
@@ -90,32 +92,54 @@ public class ListarEJB implements ListarEJBRemote {
 				EspeciePlanta.class);
 		return query.getResultList();
 	}
-	
-	public List<EspeciePlanta> listarEspeciesPorFamilia() {
 
-		TypedQuery<EspeciePlanta> query = entityManager.createNamedQuery(EspeciePlanta.ESPECIES_FAMILIA,
+	public List<EspeciePlanta> listarEspeciesPorFamilia(String nombre) {
+
+		TypedQuery<EspeciePlanta> query = entityManager.createNamedQuery(EspeciePlanta.ESPECIES_FAMILIA_NOMBRE,
 				EspeciePlanta.class);
+		query.setParameter("fam", nombre);
 		return query.getResultList();
 	}
-	
-	public List<EspeciePlanta> listarEspeciesPorGenero() {
 
-		TypedQuery<EspeciePlanta> query = entityManager.createNamedQuery(EspeciePlanta.ESPECIES_GENERO,
+	public List<EspeciePlanta> listarEspeciesPorGenero(String nombre) {
+
+		TypedQuery<EspeciePlanta> query = entityManager.createNamedQuery(EspeciePlanta.ESPECIES_GENERO_NOMBRE,
 				EspeciePlanta.class);
+		query.setParameter("gen", nombre);
 		return query.getResultList();
 	}
-	
+
 	public List<EspeciePlanta> listarEspeciesAceptadas() {
-
+		Estado estado = Estado.aprobado;
 		TypedQuery<EspeciePlanta> query = entityManager.createNamedQuery(EspeciePlanta.ESPECIES_ESTADO,
 				EspeciePlanta.class);
+		query.setParameter("est", estado);
 		return query.getResultList();
 	}
-	
-	public List<EspeciePlanta> listarEspeciesRechazadas() {
 
+	public List<EspeciePlanta> listarEspeciesRechazadas() {
+		Estado estado = Estado.rechazado;
 		TypedQuery<EspeciePlanta> query = entityManager.createNamedQuery(EspeciePlanta.ESPECIES_ESTADO,
 				EspeciePlanta.class);
+		query.setParameter("est", estado);
+		return query.getResultList();
+	}
+
+	public List<RegistroEspecie> listarRegistrosAceptadasDeUnTrabajador(String idPersona) {
+		Estado estado = Estado.aprobado;
+		TypedQuery<RegistroEspecie> query = entityManager.createNamedQuery(RegistroEspecie.REGISTRO_ESTADO_TRABAJADOR,
+				RegistroEspecie.class);
+		query.setParameter("per", idPersona);
+		query.setParameter("est", estado);
+		return query.getResultList();
+	}
+
+	public List<RegistroEspecie> listarRegistrosRechazadasDeUnTrabajador(String idPersona) {
+		Estado estado = Estado.rechazado;
+		TypedQuery<RegistroEspecie> query = entityManager.createNamedQuery(RegistroEspecie.REGISTRO_ESTADO_TRABAJADOR,
+				RegistroEspecie.class);
+		query.setParameter("per", idPersona);
+		query.setParameter("est", estado);
 		return query.getResultList();
 	}
 
@@ -126,9 +150,37 @@ public class ListarEJB implements ListarEJBRemote {
 		return query.getResultList();
 	}
 
+	public List<MeGustaEspeciePlanta> listarMeGustasDeUnUsuario(String idPersona) {
+		TypedQuery<MeGustaEspeciePlanta> query = entityManager
+				.createNamedQuery(MeGustaEspeciePlanta.MEGUSTAESPECIE_USUARIO, MeGustaEspeciePlanta.class);
+		query.setParameter("per", idPersona);
+		return query.getResultList();
+	}
+
+	public List<MeGustaEspeciePlanta> listarMeGustasDeUnaEspecie(String nombreCientifico) {
+		TypedQuery<MeGustaEspeciePlanta> query = entityManager
+				.createNamedQuery(MeGustaEspeciePlanta.MEGUSTAESPECIE_ESPECIE_NOMBRECIENTIFICO, MeGustaEspeciePlanta.class);
+		query.setParameter("nom", nombreCientifico);
+		return query.getResultList();
+	}
+
 	public List<Resenia> listarResenias() {
 
 		TypedQuery<Resenia> query = entityManager.createNamedQuery(Resenia.RESENIA_GET_ALL, Resenia.class);
+		return query.getResultList();
+	}
+
+	public List<Resenia> listarReseniasDeUnUsuario(String idPersona) {
+
+		TypedQuery<Resenia> query = entityManager.createNamedQuery(Resenia.RESENIA_USUARIO, Resenia.class);
+		query.setParameter("per", idPersona);
+		return query.getResultList();
+	}
+
+	public List<Resenia> listarReseniasDeUnaEspecie(String nombreCientifico) {
+
+		TypedQuery<Resenia> query = entityManager.createNamedQuery(Resenia.RESENIA_ESPECIE_NOMBRECIENTIFICO, Resenia.class);
+		query.setParameter("nom", nombreCientifico);
 		return query.getResultList();
 	}
 

@@ -15,11 +15,15 @@ import javax.persistence.*;
 @NamedQueries({
 		@NamedQuery(name = MeGustaEspeciePlanta.MEGUSTAESPECIE_GET_ALL, query = "select megustaEspecie from MeGustaEspeciePlanta megustaEspecie"),
 		@NamedQuery(name = MeGustaEspeciePlanta.MEGUSTAESPECIE_ESPECIE, query = "select megusta from MeGustaEspeciePlanta megusta where megusta.especie.idEspecie = :esp "),
+		@NamedQuery(name = MeGustaEspeciePlanta.MEGUSTAESPECIE_ESPECIE_NOMBRECIENTIFICO, query = "select megusta from MeGustaEspeciePlanta megusta where megusta.especie.nombreCientifico = :nom "),
+		@NamedQuery(name = MeGustaEspeciePlanta.MEGUSTAESPECIE_USUARIO, query = "select megusta from MeGustaEspeciePlanta megusta where megusta.usuario.idPersona = :esp "),
 		@NamedQuery(name = MeGustaEspeciePlanta.MEGUSTAESPECIE_ESPECIEMASMEGUSTAS, query = "select count(megusta.especie.idEspecie) as n from MeGustaEspeciePlanta megusta group by megusta.especie order by n desc") })
 public class MeGustaEspeciePlanta implements Serializable {
 
 	public static final String MEGUSTAESPECIE_GET_ALL = "MeGustaEspecieGetAll";
 	public static final String MEGUSTAESPECIE_ESPECIE = "MeGustaDeUnaEspecieEspecifica";
+	public static final String MEGUSTAESPECIE_ESPECIE_NOMBRECIENTIFICO = "MeGustaDeUnaEspecieEspecificaPorNombreCientifico";
+	public static final String MEGUSTAESPECIE_USUARIO = "MeGustaDeUnUsuarioEspecifico";
 	public static final String MEGUSTAESPECIE_ESPECIEMASMEGUSTAS = "EspecieConMasMegustas";
 
 	/**
