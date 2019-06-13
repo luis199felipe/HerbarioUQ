@@ -17,14 +17,19 @@ import co.alfite.sis.entidades.RegistroEspecie.Estado;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @NamedQueries({ @NamedQuery(name = Persona.LISTAR_TODOS, query = "select p from Persona p"),
-		@NamedQuery(name = Persona.PERSONA_POR_CREDENCIALES, query = "select p from Persona p where p.email= :email and p.password=:password")
-		 ,@NamedQuery(name = Persona.PERSONA_POR_EMAIL, query = "select p from Persona p where p.email= :email")
+		@NamedQuery(name = Persona.PERSONA_POR_CREDENCIALES, query = "select p from Persona p where p.email= :email and p.password=:password"),
+		@NamedQuery(name = Persona.PERSONA_POR_EMAIL, query = "select p from Persona p where p.email= :email"),
+		@NamedQuery(name = Persona.PERSONA_POR_ID, query = "select p from Persona p where p.idPersona= :id")
 })
 
 public class Persona implements Serializable {
 
 	public static final String LISTAR_TODOS = "ListarPersonas";
 	public static final String PERSONA_POR_EMAIL = "personaPorEmail";
+	public static final String PERSONA_POR_CREDENCIALES = "PersonaPorCredenciales";
+	public static final String PERSONA_POR_ID = "PersonaPorId";
+
+
 
 	/**
 	 * identificacion unica de una persona
@@ -93,8 +98,7 @@ public class Persona implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	public static final String PERSONA_POR_CREDENCIALES = "PersonaPorCredenciales";
-
+	
 	public Persona() {
 		super();
 	}

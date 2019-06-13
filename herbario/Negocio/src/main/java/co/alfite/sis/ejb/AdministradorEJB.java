@@ -7,8 +7,10 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
+import co.alfite.sis.entidades.Administrador;
 import co.alfite.sis.entidades.Empleado;
 import co.alfite.sis.entidades.EspeciePlanta;
 import co.alfite.sis.entidades.FamiliaPlanta;
@@ -40,6 +42,23 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 	/**
 	 * METODOS DE CREAR(INSERTAR)
 	 */
+	public Usuario insertarUsuario(Usuario nuevoUsuario) throws ElementoRepetidoExcepcion {
+
+		if (entityManager.find(Usuario.class, nuevoUsuario.getIdPersona()) != null) {
+			throw new ElementoRepetidoExcepcion("el Usuario con esa cedula ya fue registrado");
+
+		} else if (buscarPorEmail(nuevoUsuario) != null) {
+			throw new ElementoRepetidoExcepcion("el Usuario con ese email ya fue registrado");
+
+		}
+		try {
+			entityManager.persist(nuevoUsuario);
+			return nuevoUsuario;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 
 	public Empleado insertarEmpleado(Empleado empleado) throws ElementoRepetidoExcepcion {
 
@@ -127,6 +146,29 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 	 * METODOS DE MODIFICAR(ACTUALIZAR)
 	 */
 
+	public Usuario actualizarUsuario(Usuario us){
+		Usuario u = entityManager.find(Usuario.class, us.getIdPersona()); 
+		if (u != null) {
+			u.setEmail(us.getEmail());
+			u.setEstado(us.getEstado());
+			u.setFechaNacimiento(us.getFechaNacimiento());
+			u.setNombre(us.getNombre());
+			u.setPassword(us.getPassword());
+			u.setTelefono(us.getTelefono());
+			
+			try {
+				entityManager.merge(u);
+				return u;
+			} catch (Exception e) {
+				e.printStackTrace();
+				return null;
+			}
+		} else {
+			return null;
+
+		}
+	}
+	
 	public Empleado actualizarEmpleado(Empleado em) {
 		Empleado ps = entityManager.find(Empleado.class, em.getIdPersona());
 		if (ps != null) {
@@ -256,12 +298,11 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 
 	}
 
-
-
 	/**
 	 * 
 	 * METODOS ELIMINAR
 	 */
+
 	public boolean eliminarEspecie(EspeciePlanta esp) {
 
 		EspeciePlanta e = entityManager.find(EspeciePlanta.class, esp.getIdEspecie());
@@ -374,6 +415,44 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 	 * 
 	 * METODOS LISTAR
 	 */
+	
+	public List<Usuario> listarUsuarios() {
+		TypedQuery<Usuario> query = entityManager.createNamedQuery(Usuario.USUARIO_GET_ALL, Usuario.class);
+		return query.getResultList();
+	}
+
+	public List<Empleado> listarEmpleados() {
+		TypedQuery<Empleado> query = entityManager.createNamedQuery(Empleado.EMPLEADO_GET_ALL, Empleado.class);
+		return query.getResultList();
+	}
+
+	public List<Recolector> listarRecolectores() {
+
+		TypedQuery<Recolector> query = entityManager.createNamedQuery(Recolector.RECOLECTOR_GET_ALL, Recolector.class);
+		return query.getResultList();
+	}
+
+	public List<RegistroEspecie> listarRegistros() {
+
+		TypedQuery<RegistroEspecie> query = entityManager.createNamedQuery(RegistroEspecie.REGISTRO_GET_ALL,
+				RegistroEspecie.class);
+		return query.getResultList();
+	}
+
+	public List<FamiliaPlanta> listarFamilias() {
+
+		TypedQuery<FamiliaPlanta> query = entityManager.createNamedQuery(FamiliaPlanta.FAMILIA_GET_ALL,
+				FamiliaPlanta.class);
+		return query.getResultList();
+	}
+
+	public List<GeneroPlanta> listarGeneros() {
+
+		TypedQuery<GeneroPlanta> query = entityManager.createNamedQuery(GeneroPlanta.GENERO_GET_ALL,
+				GeneroPlanta.class);
+		return query.getResultList();
+	}
+
 	public List<EspeciePlanta> listarEspecies() {
 
 		TypedQuery<EspeciePlanta> query = entityManager.createNamedQuery(EspeciePlanta.ESPECIE_GET_ALL,
@@ -405,6 +484,52 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 		return query.getResultList();
 	}
 
+	/**
+	 * METODOS BUSCAR(CONSULTA)
+	 */
+	public Persona buscarPersona(String idPersona) {
+		TypedQuery<Persona> query = entityManager.createNamedQuery(Persona.PERSONA_POR_ID,
+				Persona.class);
+		query.setParameter("id", idPersona);
+		return query.getSingleResult();
+	}
+	public Usuario buscarUsuario(String idPersona) {
+		TypedQuery<Usuario> query = entityManager.createNamedQuery(Usuario.USUARIO_POR_ID,
+				Usuario.class);
+		query.setParameter("id", idPersona);
+		return query.getSingleResult();
+	}
+
+	public Empleado buscarEmpleado(String idPersona) {
+		TypedQuery<Empleado> query = entityManager.createNamedQuery(Empleado.EMPLEADO_POR_ID,
+				Empleado.class);
+		query.setParameter("id", idPersona);
+		return query.getSingleResult();
+	}
+	public Recolector buscarRecolector(String idPersona) {
+		TypedQuery<Recolector> query = entityManager.createNamedQuery(Recolector.RECOLECTOR_POR_ID,
+				Recolector.class);
+		query.setParameter("id", idPersona);
+		return query.getSingleResult();
+	}
+	public FamiliaPlanta buscarFamiliaPlanta(String nombre) {
+		TypedQuery<FamiliaPlanta> query = entityManager.createNamedQuery(FamiliaPlanta.FAMILIA_POR_NOMBRE,
+				FamiliaPlanta.class);
+		query.setParameter("nom", nombre);
+		return query.getSingleResult();
+	}
+	public GeneroPlanta buscarGeneroPlanta(String nombre) {
+		TypedQuery<GeneroPlanta> query = entityManager.createNamedQuery(GeneroPlanta.GENERO_POR_NOMBRE,
+				GeneroPlanta.class);
+		query.setParameter("nom", nombre);
+		return query.getSingleResult();
+	}
+	public EspeciePlanta buscarEspeciePlanta(String nombreCientifico) {
+		TypedQuery<EspeciePlanta> query = entityManager.createNamedQuery(EspeciePlanta.ESPECIES_POR_NOMBRECIENTIFICO,
+				EspeciePlanta.class);
+		query.setParameter("nomCien", nombreCientifico);
+		return query.getSingleResult();
+	}
 	
 	//OTROS METODOS
 	public void validarRegistro(int id, Estado est) {
@@ -429,6 +554,8 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 		}
 
 	}
+
+	
 
 
 

@@ -16,7 +16,9 @@ import javax.persistence.OneToMany;
  * @version 1.0
  */
 
-@NamedQueries({ @NamedQuery(name = Usuario.USUARIO_GET_ALL, query = "select u from Usuario u") })
+@NamedQueries({ @NamedQuery(name = Usuario.USUARIO_GET_ALL, query = "select u from Usuario u"),
+				@NamedQuery(name = Usuario.USUARIO_POR_ID, query = "select u from Usuario u where u.idPersona=:id") 
+})
 
 @Entity
 public class Usuario extends Persona implements Serializable {
@@ -30,9 +32,9 @@ public class Usuario extends Persona implements Serializable {
 	 */
 	@OneToMany(mappedBy = "usuario")
 	private List<Resenia> resenias;
-	
-	public static final String USUARIO_GET_ALL = "UsuarioGetAll";
 
+	public static final String USUARIO_GET_ALL = "UsuarioGetAll";
+	public static final String USUARIO_POR_ID = "UsuarioID";
 
 	/**
 	 * Un Usuario tiene muchas MeGusta de una EspeciePlanta (0..*)

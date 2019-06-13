@@ -14,7 +14,8 @@ import javax.persistence.*;
  */
 @Entity
 @NamedQueries({
-	@NamedQuery(name=Empleado.EMPLEADO_GET_ALL ,query="select empleado from Empleado empleado")
+	@NamedQuery(name=Empleado.EMPLEADO_GET_ALL ,query="select empleado from Empleado empleado"),
+	@NamedQuery(name=Empleado.EMPLEADO_POR_ID ,query="select empleado from Empleado empleado where empleado.idPersona=:id")
 })
 public class Empleado extends Trabajador  implements Serializable {
 
@@ -28,6 +29,8 @@ public class Empleado extends Trabajador  implements Serializable {
 	 * {@code select personafrom Personapersonawhere persona.nui= :nui}
 	 */
 	public static final String EMPLEADO_GET_ALL = "EmpleadoGetAll";
+	public static final String EMPLEADO_POR_ID = "EmpleadoID";
+	
 	
 	public Empleado() {
 		super();

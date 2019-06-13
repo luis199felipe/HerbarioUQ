@@ -14,10 +14,12 @@ import javax.persistence.*;
  */
 @Entity
 @NamedQueries({ @NamedQuery(name = GeneroPlanta.GENERO_GET_ALL, query = "select genero from GeneroPlanta genero"),
-
 		@NamedQuery(name = GeneroPlanta.GENERO_GET_ESPECIES, query = "select esp from GeneroPlanta genero, IN(genero.especies) esp where genero.idGenero=:var"),
 		@NamedQuery(name = GeneroPlanta.FAMILIA_MAX, query = "select f, MAX(select COUNT(genero.especies) from GeneroPlanta genero where genero.familiaPlanta.idFamilia=f.idFamilia) from FamiliaPlanta f"),
-		@NamedQuery(name = GeneroPlanta.GENERO_GET_NUMBER, query = "SELECT COUNT(p) from GeneroPlanta p ") })
+		@NamedQuery(name = GeneroPlanta.GENERO_GET_NUMBER, query = "SELECT COUNT(p) from GeneroPlanta p "),
+		@NamedQuery(name = GeneroPlanta.GENERO_POR_NOMBRE, query = "SELECT p from GeneroPlanta p where p.nombre=:nom") 
+})
+
 public class GeneroPlanta implements Serializable {
 
 	public static final String GENERO_GET_ALL = "GeneroGetAll";
@@ -25,6 +27,7 @@ public class GeneroPlanta implements Serializable {
 	public static final String GENERO_GET_ESPECIES = "GeneroGeteSPECIES";
 	public static final String FAMILIA_MAX = "familiamas Especies";
 	public static final String FAMILIA_MAX_TWO = "familiamas Especies 2";
+	public static final String GENERO_POR_NOMBRE = "GeneroNombre";
 
 	
 	@OneToOne
