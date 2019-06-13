@@ -1,6 +1,7 @@
 package co.alfite.sis.controlador;
 
 import java.io.IOException;
+
 import java.util.List;
 
 import co.alfite.sis.Main;
@@ -13,18 +14,7 @@ import co.alfite.sis.entidades.RegistroEspecie;
 import co.alfite.sis.entidades.Usuario;
 import co.alfite.sis.excepciones.ElementoRepetidoExcepcion;
 import co.alfite.sis.modelo.AdministradorDelegado;
-import co.alfite.sis.modelo.BuscarDelegado;
-import co.alfite.sis.modelo.InsertarDelegado;
-import co.alfite.sis.modelo.ListarDelegado;
-import co.alfite.sis.modelo.observable.EmpleadoObservable;
-import co.alfite.sis.modelo.observable.EspecieObservable;
-import co.alfite.sis.modelo.observable.FamiliaObservable;
-import co.alfite.sis.modelo.observable.GeneroObservable;
-import co.alfite.sis.modelo.observable.MeGustaObservable;
-import co.alfite.sis.modelo.observable.PersonaObservable;
-import co.alfite.sis.modelo.observable.RegistroObservable;
-import co.alfite.sis.modelo.observable.ReseniaObservable;
-import javafx.collections.ObservableList;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -52,7 +42,6 @@ public class ManejadorEscenarios {
 	/**
 	 * para almacenar empleados observables
 	 */
-	private ObservableList<EmpleadoObservable> empleadosObservables;
 
 	private Persona personaEnSesion;
 
@@ -67,12 +56,7 @@ public class ManejadorEscenarios {
 	/**
 	 * conexion con capa de negocio
 	 */
-	private InsertarDelegado insertarDelegado;
 	private AdministradorDelegado adminDelegado;
-	private ListarDelegado listarDelegado;
-	private BuscarDelegado buscarDelegado;
-
-	private List<PersonaObservable> listaRecolectoresObservables;
 
 	/**
 	 * recibe el escenario principla de la aplicacion
@@ -82,10 +66,8 @@ public class ManejadorEscenarios {
 	public ManejadorEscenarios(Stage escenario) {
 
 		this.escenario = escenario;
-		insertarDelegado = InsertarDelegado.insertarDelegado;
 		adminDelegado = adminDelegado.administradorDelegado;
-		listarDelegado = listarDelegado.listarDelegado;
-		buscarDelegado = buscarDelegado.buscarDelegado;
+		
 
 		try {
 
@@ -229,7 +211,6 @@ public class ManejadorEscenarios {
 	public void iniciarVistaGestionar(BorderPane pane, String personaGestionar) {
 		try {
 
-			listaRecolectoresObservables = listarDelegado.listarRecolectoresObservables();
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Main.class.getResource("./vista/VistaGestionarPersona.fxml"));
 			BorderPane subVista = (BorderPane) loader.load();
@@ -327,138 +308,8 @@ public class ManejadorEscenarios {
 		}
 	}
 
-	public void agregarALista(Persona empleado) {
-		empleadosObservables.add(new EmpleadoObservable(empleado));
-	}
-
 	public Stage getEscenario() {
 		return escenario;
 	}
-
-	public boolean insertarEmpleado(Empleado empleado) throws ElementoRepetidoExcepcion {
-
-		return insertarDelegado.insertarEmpleado(empleado);
-
-	}
-
-	public boolean insertarUsuario(Usuario nuevoUsuario) throws ElementoRepetidoExcepcion {
-
-		return insertarDelegado.insertarUsusario(nuevoUsuario);
-
-	}
-
-	public boolean insertarRecolector(Recolector recolector) throws ElementoRepetidoExcepcion {
-
-		return insertarDelegado.insertarRecolector(recolector);
-
-	}
-
-	public boolean insertarRegistro(RegistroEspecie registro) throws ElementoRepetidoExcepcion {
-
-		return insertarDelegado.insertarRegistro(registro);
-
-	}
-
-	public boolean insertarImagenPlanta(ImagenPlanta y) {
-
-		return insertarDelegado.insertarImagenPlanta(y);
-
-	}
-
-	public ImagenPlanta obtenerImagen(int id) {
-
-		return insertarDelegado.obtenerImagen(id);
-	}
-
-	public Persona personaPorCredenciales(String correo, String password) {
-
-		return buscarDelegado.personaPorCredenciales(correo, password);
-	}
-
-	public Persona personaPorCorreo(String correo) {
-
-		return buscarDelegado.personaPorCorreo(correo);
-	}
 	
-	public List<PersonaObservable> listarUsuariosObservables(){
-		return listarDelegado.listarUsuariosObservables();
-	}
-	
-	public List<PersonaObservable> listarAdministradoresObservables(){
-		return listarDelegado.listarAdministradoresObservables();
-	}
-	
-	public List<PersonaObservable> ListaEmpleadosObservables() {
-
-		return listarDelegado.listarEmpleadosObservables();
-	}
-
-	public List<PersonaObservable> ListaRecolectoresObservables() {
-
-		return listarDelegado.listarRecolectoresObservables();
-	}
-
-	public List<RegistroObservable> listarRegistrosObservables(){
-		return listarDelegado.listarRegistrosObservables();
-	}
-	
-	public List<FamiliaObservable> listarFamiliasObservables(){
-		return listarDelegado.listarFamiliasObservables();
-	}
-	
-	public List<GeneroObservable> listarGenerosObservables(){
-		return listarDelegado.listarGenerosObservables();
-	}
-	
-	public List<EspecieObservable> listarEspeciesObservables(){
-		return listarDelegado.listarEspeciesObservables();
-	}
-	
-	public List<EspecieObservable> listarEspeciesPorFamiliaObservables(String nombre){
-		return listarDelegado.listarEspeciesPorFamiliaObservables(nombre);
-	}
-	
-	public List<EspecieObservable> listarEspeciesPorGeneroObservables(String nombre){
-		return listarDelegado.listarEspeciesPorGeneroObservables(nombre);
-	}
-	
-	public List<EspecieObservable> listarEspeciesAceptadasObservables(){
-		return listarDelegado.listarEspeciesAceptadasObservables();
-	}
-	
-	public List<EspecieObservable> listarEspeciesRechazadasObservables(){
-		return listarDelegado.listarEspeciesRechazadasObservables();
-	}
-	
-	public List<RegistroObservable> listarRegistrosAceptadasPorUnTrabajadorObservables(String idPersona){
-		return listarDelegado.listarRegistrosAceptadasPorUnTrabajadorObservables(idPersona);
-	}
-	
-	public List<RegistroObservable> listarRegistrosRechazadasPorUnTrabajadorObservables(String idPersona){
-		return listarDelegado.listarRegistrosRechazadasPorUnTrabajadorObservables(idPersona);
-	}
-	
-	public List<MeGustaObservable> listarMeGustasObservables(){
-		return listarDelegado.listarMeGustasObservables();
-	}
-	
-	public List<MeGustaObservable> listarMeGustasDeUnUsuarioObservables(String idPersona){
-		return listarDelegado.listarMeGustasDeUnUsuarioObservables(idPersona);
-	}
-	
-	public List<MeGustaObservable> listarMeGustasDeUnaEspecieObservables(String nombreCientifico){
-		return listarDelegado.listarMeGustasDeUnaEspecieObservables(nombreCientifico);
-	}
-	
-	public List<ReseniaObservable> listarReseniasObservables(){
-		return listarDelegado.listarReseniasObservables();
-	}
-	
-	public List<ReseniaObservable> listarReseniasDeUnUsuarioObservables(String idPersona){
-		return listarDelegado.listarReseniasDeUnUsuarioObservables(idPersona);
-	}
-	
-	public List<ReseniaObservable> listarReseniasDeUnaEspecieObservables(String nombreCientifico){
-		return listarDelegado.listarReseniasDeUnaEspecieObservables(nombreCientifico);
-	}
 }

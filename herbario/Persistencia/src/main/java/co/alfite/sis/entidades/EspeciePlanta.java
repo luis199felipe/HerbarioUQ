@@ -25,6 +25,7 @@ import javax.persistence.*;
 
 		@NamedQuery(name = EspeciePlanta.ESPECIES_GENERO_NOMBRE, query = "SELECT especie FROM EspeciePlanta especie where especie.generoPlanta.nombre= :gen "),
 		@NamedQuery(name = EspeciePlanta.ESPECIES_FAMILIA_NOMBRE, query = "SELECT especie FROM EspeciePlanta especie where especie.generoPlanta.familiaPlanta.nombre = :fam "),
+		@NamedQuery(name = EspeciePlanta.ESPECIES_POR_ID, query = "SELECT especie FROM EspeciePlanta especie where especie.idEspecie= :id ")
 
 })
 
@@ -39,6 +40,7 @@ public class EspeciePlanta implements Serializable {
 	public static final String FAMILIA_MAX = "familiaMas";
 	public static final String ESPECIES_GET_NUMBER = "familiaMas";
 	public static final String ESPECIES_POR_NOMBRE_FAMILIA = "especiesPorNombreFamilia";
+	public static final String ESPECIES_POR_ID = "especiesPorID";
 
 	public static final String ESPECIES_GENERO_NOMBRE = "EspeciesGeneroListarPorNombreFamilia";
 	public static final String ESPECIES_FAMILIA_NOMBRE = "EspeciesFamiliaListarPorNombreGenero";

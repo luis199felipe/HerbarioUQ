@@ -1,5 +1,7 @@
 package co.alfite.sis.ejb;
 
+import java.util.List;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -34,7 +36,7 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 	public AdministradorEJB() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	/**
 	 * METODOS DE CREAR(INSERTAR)
 	 */
@@ -124,9 +126,9 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 	/**
 	 * METODOS DE MODIFICAR(ACTUALIZAR)
 	 */
-	
-	public Empleado ActualizarEmpleado(Empleado em){
-		Empleado ps = entityManager.find(Empleado.class, em.getIdPersona()); 
+
+	public Empleado actualizarEmpleado(Empleado em) {
+		Empleado ps = entityManager.find(Empleado.class, em.getIdPersona());
 		if (ps != null) {
 			ps.setEmail(em.getEmail());
 			ps.setEstado(em.getEstado());
@@ -134,7 +136,7 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 			ps.setNombre(em.getNombre());
 			ps.setPassword(em.getPassword());
 			ps.setTelefono(em.getTelefono());
-			
+
 			try {
 				entityManager.merge(ps);
 				return ps;
@@ -147,9 +149,9 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 
 		}
 	}
-	
-	public Recolector ActualizarRecolector(Recolector rc){
-		Recolector ps = entityManager.find(Recolector.class, rc.getIdPersona()); 
+
+	public Recolector actualizarRecolector(Recolector rc) {
+		Recolector ps = entityManager.find(Recolector.class, rc.getIdPersona());
 		if (ps != null) {
 			ps.setEmail(rc.getEmail());
 			ps.setEstado(rc.getEstado());
@@ -157,7 +159,7 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 			ps.setNombre(rc.getNombre());
 			ps.setPassword(rc.getPassword());
 			ps.setTelefono(rc.getTelefono());
-			
+
 			try {
 				entityManager.merge(ps);
 				return ps;
@@ -170,11 +172,11 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 
 		}
 	}
-	
-	public FamiliaPlanta ActualizarFamiliaPlanta(FamiliaPlanta f) {
+
+	public FamiliaPlanta actualizarFamiliaPlanta(FamiliaPlanta f) {
 		FamiliaPlanta fam = entityManager.find(FamiliaPlanta.class, f.getIdFamilia());
-		
-		if (fam!=null) {
+
+		if (fam != null) {
 			fam.setGeneros(f.getGeneros());
 			fam.setNombre(f.getNombre());
 			try {
@@ -188,11 +190,11 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 			return null;
 		}
 	}
-	
-	public GeneroPlanta ActualizarGeneroPlanta(GeneroPlanta g) {
+
+	public GeneroPlanta actualizarGeneroPlanta(GeneroPlanta g) {
 		GeneroPlanta gen = entityManager.find(GeneroPlanta.class, g.getIdGenero());
-		
-		if (gen!=null) {
+
+		if (gen != null) {
 			gen.setEspecies(g.getEspecies());
 			gen.setFamiliaPlanta(g.getFamiliaPlanta());
 			gen.setNombre(g.getNombre());
@@ -207,19 +209,19 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 			return null;
 		}
 	}
-	
-	public EspeciePlanta ActualizarEspeciePlanta(EspeciePlanta esp) {
-		EspeciePlanta  plant = entityManager.find(EspeciePlanta.class, esp.getIdEspecie());
-		
-		if (plant!=null) {
-			//plant.setCantidad(esp.getCantidad());
+
+	public EspeciePlanta actualizarEspeciePlanta(EspeciePlanta esp) {
+		EspeciePlanta plant = entityManager.find(EspeciePlanta.class, esp.getIdEspecie());
+
+		if (plant != null) {
+			// plant.setCantidad(esp.getCantidad());
 			plant.setGeneroPlanta(esp.getGeneroPlanta());
-		//	plant.setImagenes(esp.getImagenes());
-			//plant.setMegustas(esp.get());
+			// plant.setImagenes(esp.getImagenes());
+			// plant.setMegustas(esp.get());
 			plant.setNombre(esp.getNombre());
 			plant.setNombreCientifico(esp.getNombreCientifico());
 			plant.setResenias(esp.getResenias());
-			
+
 			try {
 				entityManager.merge(plant);
 				return plant;
@@ -231,18 +233,85 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 			return null;
 		}
 	}
-
 	
-	
-	private Persona buscarPorEmail(Persona per) {
+	public RegistroEspecie actualizarRegistroEspecie(RegistroEspecie registro) {
+		RegistroEspecie rs = entityManager.find(RegistroEspecie.class, registro.getIdRegistro());
 
-		try {
-			TypedQuery<Persona> query = entityManager.createNamedQuery(Persona.PERSONA_POR_EMAIL, Persona.class);
+		if (rs != null) {
+			rs.setEspecie(registro.getEspecie());
+			rs.setEstado(registro.getEstado());
+			rs.setFecha(registro.getFecha());
+			rs.setMensaje(registro.getMensaje());
 
-			query.setParameter("email", per.getEmail());
-			return query.getSingleResult();
-		} catch (NoResultException e) {
+			try {
+				entityManager.merge(rs);
+				return registro;
+			} catch (Exception e) {
+				e.printStackTrace();
+				return null;
+			}
+		} else {
 			return null;
+		}
+
+	}
+
+
+
+	/**
+	 * 
+	 * METODOS ELIMINAR
+	 */
+	public boolean eliminarEspecie(EspeciePlanta esp) {
+
+		EspeciePlanta e = entityManager.find(EspeciePlanta.class, esp.getIdEspecie());
+		if (e != null) {
+			try {
+				entityManager.remove(e);
+				return true;
+			} catch (Exception e1) {
+				e1.printStackTrace();
+				return false;
+			}
+		} else {
+
+			return false;
+		}
+
+	}
+
+	public boolean eliminarGenero(GeneroPlanta gen) {
+
+		EspeciePlanta e = entityManager.find(EspeciePlanta.class, gen.getIdGenero());
+		if (e != null) {
+			try {
+				entityManager.remove(e);
+				return true;
+			} catch (Exception e1) {
+				e1.printStackTrace();
+				return false;
+			}
+		} else {
+
+			return false;
+		}
+
+	}
+
+	public boolean eliminarFamilia(FamiliaPlanta fam) {
+
+		EspeciePlanta e = entityManager.find(EspeciePlanta.class, fam.getIdFamilia());
+		if (e != null) {
+			try {
+				entityManager.remove(e);
+				return true;
+			} catch (Exception e1) {
+				e1.printStackTrace();
+				return false;
+			}
+		} else {
+
+			return false;
 		}
 
 	}
@@ -300,4 +369,67 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 			return false;
 		}
 	}
+
+	/**
+	 * 
+	 * METODOS LISTAR
+	 */
+	public List<EspeciePlanta> listarEspecies() {
+
+		TypedQuery<EspeciePlanta> query = entityManager.createNamedQuery(EspeciePlanta.ESPECIE_GET_ALL,
+				EspeciePlanta.class);
+		return query.getResultList();
+	}
+
+	public List<EspeciePlanta> listarEspeciesPorFamilia(String nombre) {
+
+		TypedQuery<EspeciePlanta> query = entityManager.createNamedQuery(EspeciePlanta.ESPECIES_FAMILIA_NOMBRE,
+				EspeciePlanta.class);
+		query.setParameter("fam", nombre);
+		return query.getResultList();
+	}
+
+	public List<EspeciePlanta> listarEspeciesPorGenero(String nombre) {
+
+		TypedQuery<EspeciePlanta> query = entityManager.createNamedQuery(EspeciePlanta.ESPECIES_GENERO_NOMBRE,
+				EspeciePlanta.class);
+		query.setParameter("gen", nombre);
+		return query.getResultList();
+	}
+
+	public List<EspeciePlanta> listarEspeciesPorEstado(Estado estado) {
+
+		TypedQuery<EspeciePlanta> query = entityManager.createNamedQuery(EspeciePlanta.ESPECIES_ESTADO,
+				EspeciePlanta.class);
+		query.setParameter("est", estado);
+		return query.getResultList();
+	}
+
+	
+	//OTROS METODOS
+	public void validarRegistro(int id, Estado est) {
+
+		TypedQuery<RegistroEspecie> query = entityManager.createNamedQuery(RegistroEspecie.REGISTRO_POR_ID,
+				RegistroEspecie.class);
+
+		query.setParameter("id", id);
+		actualizarRegistroEspecie(query.getSingleResult());
+
+	}
+	
+	private Persona buscarPorEmail(Persona per) {
+
+		try {
+			TypedQuery<Persona> query = entityManager.createNamedQuery(Persona.PERSONA_POR_EMAIL, Persona.class);
+
+			query.setParameter("email", per.getEmail());
+			return query.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
+
+	}
+
+
+
 }

@@ -19,8 +19,9 @@ import javax.persistence.*;
 		@NamedQuery(name = RegistroEspecie.REGISTRO_MAX, query = "select max(registro.fecha) from RegistroEspecie registro "),
 		@NamedQuery(name = RegistroEspecie.TRABAJADOR_WITH_REGISTERS, query = "select distinct registro.trabajador from RegistroEspecie registro "),
 		@NamedQuery(name = RegistroEspecie.REGISTRO_FECHA, query = "select registro.idRegistro,registro.especie.nombre, registro.especie.generoPlanta.nombre, registro.trabajador.email, registro.trabajador.idPersona from RegistroEspecie registro where registro.fecha=:fecha"),
-		@NamedQuery(name = RegistroEspecie.REGISTRO_ESTADO_TRABAJADOR, query = "select registro.trabajador from RegistroEspecie registro where (registro.estado=:est and registro.trabajador.idPersona=:per)")
-		
+		@NamedQuery(name = RegistroEspecie.REGISTRO_ESTADO_TRABAJADOR, query = "select registro.trabajador from RegistroEspecie registro where (registro.estado=:est and registro.trabajador.idPersona=:per)"),
+		@NamedQuery(name = RegistroEspecie.REGISTRO_POR_ID, query = "select registro from RegistroEspecie registro where registro.idRegistro=:id")
+
 })
 public class RegistroEspecie implements Serializable {
 
@@ -32,6 +33,8 @@ public class RegistroEspecie implements Serializable {
 	public static final String TRABAJADOR_WITH_REGISTERS = "TrabajadorConRegistros";
 	public static final String REGISTRO_FECHA = "RegistroPorFecha";
 	public static final String REGISTRO_FECHA_DTO = "RegistroPorFechaDTO";
+	public static final String REGISTRO_POR_ID = "RegistroPorID";
+
 
 	/**
 	 * Muchos Registros pertenecen a un Trabajador
