@@ -72,10 +72,10 @@ public class VistaValidarRegistroControlador {
 	@FXML
 	public void insertarImagen() {
 
-		ImagenPlanta x = miEscenario.obtenerImagen(51);
-		InputStream in = new ByteArrayInputStream(x.getImagen());
-		Image z = new Image(in);
-		imagenPlanta.setImage(z);
+//		ImagenPlanta x = miEscenario.obtenerImagen(51);
+//		InputStream in = new ByteArrayInputStream(x.getImagen());
+//		Image z = new Image(in);
+//		imagenPlanta.setImage(z);
 
 	}
 
