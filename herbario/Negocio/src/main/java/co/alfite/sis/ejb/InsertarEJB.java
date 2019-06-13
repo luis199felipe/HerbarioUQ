@@ -65,6 +65,9 @@ public class InsertarEJB implements InsertarEJBRemote {
 	public RegistroEspecie insertarRegistroEspecie(RegistroEspecie registro) {
 
 		try {
+			
+			insertarEspecie(registro.getEspecie());
+			insertarImagenPlanta(registro.getImagenPlanta());
 			entityManager.persist(registro);
 			return registro;
 		} catch (Exception e) {
@@ -128,23 +131,10 @@ public class InsertarEJB implements InsertarEJBRemote {
 			return null;
 		}
 	}
-	
-	private FamiliaPlanta buscarFamiliaPorNombre(FamiliaPlanta familia) {
-
-		try {
-			TypedQuery<FamiliaPlanta> query = entityManager.createNamedQuery(FamiliaPlanta.FAMILIA_NOMBRE, FamiliaPlanta.class);
-			
-			query.setParameter("var", familia);
-
-			return query.getSingleResult();
-		} catch (NoResultException e) {
-			return null;
-		}
-	}
 
 	public FamiliaPlanta insertarFamilia(FamiliaPlanta familia) throws ElementoRepetidoExcepcion {
 
-		if (buscarFamiliaPorNombre(familia)!= null) {
+		if (entityManager.find(FamiliaPlanta.class, familia.getIdFamilia()) != null) {
 			throw new ElementoRepetidoExcepcion("La familia con el id ya fue registrado");
 
 		}

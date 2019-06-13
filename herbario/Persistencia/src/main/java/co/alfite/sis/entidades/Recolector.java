@@ -12,15 +12,16 @@ import javax.persistence.*;
  */
 
 @NamedQueries({
-	@NamedQuery(name=Recolector.RECOLECTOR_GET_ALL ,query="select recolector from Recolector recolector")
-})
+		@NamedQuery(name = Recolector.RECOLECTOR_GET_ALL, query = "select recolector from Recolector recolector"),
+		@NamedQuery(name = Recolector.RECOLECTOR_GET_NUMBER, query = "select count(recolector) from Recolector recolector") })
 
 @Entity
 public class Recolector extends Trabajador implements Serializable {
 
 	public static final String RECOLECTOR_GET_ALL = "RecolectorGetAll";
+	public static final String RECOLECTOR_GET_NUMBER = "RecolectorGetNUmber";
 
-	
+
 	/**
 	 * Entidad que hereda de Trabajador
 	 */

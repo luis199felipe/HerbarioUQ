@@ -12,13 +12,17 @@ import javax.persistence.*;
 @Entity
 @NamedQueries({ 
 	@NamedQuery(name = Resenia.RESENIA_GET_ALL, query = "select resenia from Resenia resenia"), 
-	@NamedQuery(name = Resenia.RESENIA_ESPECIE, query = "select resenia from Resenia resenia where resenia.especie.idEspecie = :esp")
+	@NamedQuery(name = Resenia.RESENIA_ESPECIE, query = "select resenia from Resenia resenia where resenia.especie.idEspecie = :esp"), 
+	@NamedQuery(name = Resenia.RESENIA_ESPECIE_NOMBRECIENTIFICO, query = "select resenia from Resenia resenia where resenia.especie.nombreCientifico = :nom"), 
+	@NamedQuery(name = Resenia.RESENIA_USUARIO, query = "select resenia from Resenia resenia where resenia.usuario.idPersona = :per")
 })
 
 public class Resenia implements Serializable {
 
 	public static final String RESENIA_GET_ALL = "ReseniaGetAll";
 	public static final String RESENIA_ESPECIE = "ReseniaDeUnaEspecieEspecifica";
+	public static final String RESENIA_ESPECIE_NOMBRECIENTIFICO = "ReseniaDeUnaEspecieEspecificaPorNombreCientifico";
+	public static final String RESENIA_USUARIO = "ReseniasDeUnUsuarioEspecifico";
 
 	/**
 	 * Muchos Resenia pertenecen a un Usuario
@@ -56,7 +60,6 @@ public class Resenia implements Serializable {
 	private Estado estado;
 
 	private static final long serialVersionUID = 1L;
-
 	public Resenia() {
 		super();
 	}

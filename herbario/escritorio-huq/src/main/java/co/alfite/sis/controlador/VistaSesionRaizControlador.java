@@ -1,5 +1,6 @@
 package co.alfite.sis.controlador;
 
+import co.alfite.sis.entidades.Persona;
 import co.alfite.sis.util.Utilidades;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert.AlertType;
@@ -23,6 +24,7 @@ public class VistaSesionRaizControlador {
 	private ManejadorEscenarios manejador;
 	private Stage miEscenario;
 	private BorderPane pane;
+	private Persona personaEnSesion;
 
 	@FXML
 	private void initialize() {
@@ -41,7 +43,7 @@ public class VistaSesionRaizControlador {
 	@FXML
 	private void actualizarInformacion() {
 
-		manejador.cargarEscenarioRegistro();
+		manejador.cargarEscenarioRegistro("actualizar","vistaSesionRaiz",personaEnSesion);
 	}
 
 	@FXML
@@ -67,5 +69,11 @@ public class VistaSesionRaizControlador {
 	public void setStage(Stage stage) {
 		this.miEscenario = stage;
 
+	}
+
+	public void setPersonaEnSesion(Persona p) {
+		this.personaEnSesion=p;
+		
+		control.setText(p.getNombre());
 	}
 }

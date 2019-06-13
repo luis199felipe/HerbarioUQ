@@ -21,8 +21,11 @@ public class ImagenPlanta implements Serializable {
 	/**
 	 * Muchas ImagenesPlanta pertenecen a una EspecePlanta
 	 */
-//	@ManyToOne
-//	private EspeciePlanta especie;
+	@ManyToOne
+	private EspeciePlanta especie;
+	
+	@OneToOne
+	private RegistroEspecie registro;
 
 	/**
 	 * Identificacion unica de una ImagenPlanta
@@ -52,13 +55,13 @@ public class ImagenPlanta implements Serializable {
 		super();
 	}
 
-//	public EspeciePlanta getEspecie() {
-//		return especie;
-//	}
-//
-//	public void setEspecie(EspeciePlanta especie) {
-//		this.especie = especie;
-//	}
+	public EspeciePlanta getEspecie() {
+		return especie;
+	}
+
+	public void setEspecie(EspeciePlanta especie) {
+		this.especie = especie;
+	}
 
 	public Integer getIdImagen() {
 		return this.idImagen;
@@ -66,6 +69,14 @@ public class ImagenPlanta implements Serializable {
 
 	public void setIdImagen(Integer idImagen) {
 		this.idImagen = idImagen;
+	}
+
+	public RegistroEspecie getRegistro() {
+		return registro;
+	}
+
+	public void setRegistro(RegistroEspecie registro) {
+		this.registro = registro;
 	}
 
 }

@@ -9,13 +9,7 @@ public class VistaGestionarGFEControlador {
 
 	@FXML
 	private void initialize() {
-//la idea es reutilizar varias vistas para acciones parecidas, para eso es el 
-		// elementoAGestionar
-		// la validacion de todos lo componenetes que tambien falta por declarar se hace
-		//lo mismo se hace en la ventana gestionar
-		// por codigo
 
-	
 	}
 
 	public void setManejador(ManejadorEscenarios manejadorEscenarios) {
@@ -23,7 +17,11 @@ public class VistaGestionarGFEControlador {
 
 	}
 
-	
+	/**
+	 * Adapta las etiquetas de la vista a genero, familia o especie
+	 * 
+	 * @param elementoAGestionar puede ser un genero ,familia,especie
+	 */
 	public void adaptarVista(String elementoAGestionar) {
 		this.elementoAGestionar = elementoAGestionar;
 	}

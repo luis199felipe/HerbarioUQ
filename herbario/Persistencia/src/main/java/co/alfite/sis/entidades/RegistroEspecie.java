@@ -19,16 +19,17 @@ import javax.persistence.*;
 		@NamedQuery(name = RegistroEspecie.REGISTRO_MAX, query = "select max(registro.fecha) from RegistroEspecie registro "),
 		@NamedQuery(name = RegistroEspecie.TRABAJADOR_WITH_REGISTERS, query = "select distinct registro.trabajador from RegistroEspecie registro "),
 		@NamedQuery(name = RegistroEspecie.REGISTRO_FECHA, query = "select registro.idRegistro,registro.especie.nombre, registro.especie.generoPlanta.nombre, registro.trabajador.email, registro.trabajador.idPersona from RegistroEspecie registro where registro.fecha=:fecha"),
-
+		@NamedQuery(name = RegistroEspecie.REGISTRO_ESTADO_TRABAJADOR, query = "select registro.trabajador from RegistroEspecie registro where (registro.estado=:est and registro.trabajador.idPersona=:per)")
+		
 })
 public class RegistroEspecie implements Serializable {
 
 	public static final String REGISTRO_GET_ALL = "RegistroGetAll";
-
+	public static final String REGISTRO_ESTADO_TRABAJADOR = "registrosTrabajadorPorEstados";
 	public static final String TRABAJADOR_GET_REGISTERS = "registrosTrabajador";
 	public static final String TRABAJADOR_GET_ENVIOS = "cantidadRegistrosDia";
 	public static final String REGISTRO_MAX = "PRUEBA AL MAX";
-	public static final String TRABAJADOR_WITH_REGISTERS = "TrabajadorCONREGISTROS";
+	public static final String TRABAJADOR_WITH_REGISTERS = "TrabajadorConRegistros";
 	public static final String REGISTRO_FECHA = "RegistroPorFecha";
 	public static final String REGISTRO_FECHA_DTO = "RegistroPorFechaDTO";
 
@@ -44,6 +45,8 @@ public class RegistroEspecie implements Serializable {
 	@OneToOne(mappedBy = "registro")
 	private EspeciePlanta especie;
 
+	@OneToOne(mappedBy = "registro")
+	private ImagenPlanta imagen;
 	/**
 	 * identificacion unica de un registro
 	 */
@@ -126,6 +129,19 @@ public class RegistroEspecie implements Serializable {
 
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
+	}
+
+	public ImagenPlanta getImagenPlanta() {
+		// TODO Auto-generated method stub
+		return imagen;
+	}
+
+	public ImagenPlanta getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(ImagenPlanta imagen) {
+		this.imagen = imagen;
 	}
 
 }

@@ -27,7 +27,9 @@ public class GeneroPlanta implements Serializable {
 	public static final String FAMILIA_MAX_TWO = "familiamas Especies 2";
 
 	
-
+	@OneToOne
+	private RegistroEspecie registro;
+	
 	@OneToMany(mappedBy = "generoPlanta")
 	private List<EspeciePlanta> especies;
 
@@ -83,6 +85,14 @@ public class GeneroPlanta implements Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public RegistroEspecie getRegistro() {
+		return registro;
+	}
+
+	public void setRegistro(RegistroEspecie registro) {
+		this.registro = registro;
 	}
 
 }

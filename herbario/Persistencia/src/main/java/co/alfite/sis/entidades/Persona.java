@@ -23,7 +23,7 @@ import co.alfite.sis.entidades.RegistroEspecie.Estado;
 
 public class Persona implements Serializable {
 
-	public static final String LISTAR_TODOS = "ListarClientes";
+	public static final String LISTAR_TODOS = "ListarPersonas";
 	public static final String PERSONA_POR_EMAIL = "personaPorEmail";
 
 	/**

@@ -24,45 +24,42 @@
          <children>
             <GridPane prefHeight="204.0" prefWidth="357.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <Label prefHeight="19.0" prefWidth="170.0" text="Correo Electronico:" textFill="#a49e9e">
+                  <Label prefHeight="19.0" prefWidth="170.0" text="Correo Electronico:">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Label>
                   <TextField fx:id="campoCorreo" prefHeight="25.0" prefWidth="170.0" promptText="example@gmail.com" GridPane.columnIndex="1" />
-                  <Label prefHeight="19.0" prefWidth="130.0" text="Contraseña:" textFill="#aeaeae" GridPane.rowIndex="1">
+                  <Label prefHeight="19.0" prefWidth="130.0" text="Contraseña:" GridPane.rowIndex="1">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Label>
                   <PasswordField fx:id="campoContrasenia" prefHeight="25.0" prefWidth="170.0" promptText="12345678" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <ComboBox fx:id="comboBoxCargo" prefHeight="25.0" prefWidth="189.0" promptText="Seleccione el cargo" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Label prefHeight="17.0" prefWidth="160.0" text="Seleccione Cargo:" textFill="#b5b5b5" GridPane.rowIndex="2">
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                  </Label>
                </children>
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="174.0" minWidth="10.0" prefWidth="168.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="280.0" minWidth="10.0" prefWidth="172.0" />
                </columnConstraints>
                <rowConstraints>
-                  <RowConstraints maxHeight="51.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="56.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="53.0" minHeight="10.0" prefHeight="49.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="59.0" minHeight="10.0" prefHeight="59.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="63.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="53.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
                </rowConstraints>
+               <effect>
+                  <DropShadow color="#a8ffb0" />
+               </effect>
             </GridPane>
             <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <top>
-                  <Button fx:id="botonIniciar" mnemonicParsing="false" onAction="#iniciarSesion" text="iniciar sesion" BorderPane.alignment="CENTER">
+                  <Button fx:id="botonIniciar" mnemonicParsing="false" onAction="#iniciarSesion" text="Iniciar Sesion" BorderPane.alignment="CENTER">
                      <effect>
                         <InnerShadow color="#007910" />
                      </effect>
                   </Button>
                </top>
                <left>
-                  <Hyperlink onAction="#registrarTrabajador" text="Registrarse  en el Herbario" BorderPane.alignment="CENTER" />
+                  <Hyperlink onAction="#registrarTrabajador" text="Registrarse  en el herbario" BorderPane.alignment="CENTER" />
                </left>
                <right>
                   <Hyperlink onAction="#recuperarContrasenia" prefHeight="23.0" prefWidth="148.0" text="Olvido su contraseña" BorderPane.alignment="CENTER_LEFT" />
@@ -73,9 +70,9 @@
             </BorderPane>
             <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                <center>
-                  <ImageView fx:id="logoHerbario" fitHeight="128.0" fitWidth="156.0" pickOnBounds="true" preserveRatio="true" x="6.0" BorderPane.alignment="CENTER">
+                  <ImageView fx:id="logoHerbario" fitHeight="160.0" fitWidth="278.0" pickOnBounds="true" preserveRatio="true" x="6.0" BorderPane.alignment="CENTER">
                      <effect>
-                        <DropShadow />
+                        <DropShadow color="#c3c3c3" />
                      </effect>
                      <image>
                         <Image url="@../util/logoHerbario.png" />

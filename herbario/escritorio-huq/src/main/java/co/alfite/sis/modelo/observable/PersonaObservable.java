@@ -19,15 +19,28 @@ public class PersonaObservable {
 	private StringProperty estado;
 	private StringProperty telefono;
 	private ObjectProperty<Date> fechaNacimiento;
-	
+
 	public PersonaObservable(Persona p) {
 		this.idPersona = new SimpleStringProperty(p.getIdPersona());
-		this.nombre = new SimpleStringProperty(p.getIdPersona());
-		this.email = new SimpleStringProperty(p.getIdPersona());
-		this.password = new SimpleStringProperty(p.getIdPersona());
-		this.estado = new SimpleStringProperty(p.getIdPersona());
-		this.telefono = new SimpleStringProperty(p.getIdPersona());
+		this.nombre = new SimpleStringProperty(p.getNombre());
+		this.email = new SimpleStringProperty(p.getEmail());
+		this.password = new SimpleStringProperty(p.getPassword());
+		this.estado = new SimpleStringProperty(String.valueOf(p.getEstado()));
+		this.telefono = new SimpleStringProperty(p.getTelefono());
 		this.fechaNacimiento = new SimpleObjectProperty<>(p.getFechaNacimiento());
+	}
+
+	public PersonaObservable(StringProperty idPersona, StringProperty nombre, StringProperty email,
+			StringProperty password, StringProperty estado, StringProperty telefono,
+			ObjectProperty<Date> fechaNacimiento) {
+
+		this.idPersona = idPersona;
+		this.nombre = nombre;
+		this.email = email;
+		this.password = password;
+		this.estado = estado;
+		this.telefono = telefono;
+		this.fechaNacimiento = fechaNacimiento;
 	}
 
 	public StringProperty getIdPersona() {
@@ -85,20 +98,5 @@ public class PersonaObservable {
 	public void setFechaNacimiento(ObjectProperty<Date> fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
-
-	public PersonaObservable(StringProperty idPersona, StringProperty nombre, StringProperty email,
-			StringProperty password, StringProperty estado, StringProperty telefono,
-			ObjectProperty<Date> fechaNacimiento) {
-		
-		this.idPersona = idPersona;
-		this.nombre = nombre;
-		this.email = email;
-		this.password = password;
-		this.estado = estado;
-		this.telefono = telefono;
-		this.fechaNacimiento = fechaNacimiento;
-	}
-	
-	
 
 }

@@ -15,19 +15,17 @@ import javax.persistence.*;
 @Entity
 @NamedQueries({ @NamedQuery(name = FamiliaPlanta.FAMILIA_GET_ALL, query = "select familia from FamiliaPlanta familia"),
 		@NamedQuery(name = FamiliaPlanta.FAMILIA_GET_NUMBER, query = "SELECT COUNT(p) from FamiliaPlanta p "),
-		@NamedQuery(name = FamiliaPlanta.FAMILIA_GET_MAX, query = "SELECT  p from FamiliaPlanta p "),
-		@NamedQuery(name = FamiliaPlanta.FAMILIA_NOMBRE, query = "SELECT  p from FamiliaPlanta p where p.nombre = :var") 
-})
+		@NamedQuery(name = FamiliaPlanta.FAMILIA_GET_MAX, query = "SELECT  p from FamiliaPlanta p ") })
 public class FamiliaPlanta implements Serializable {
 
 	public static final String FAMILIA_GET_ALL = "FamiliaGetAll";
 	public static final String FAMILIA_GET_NUMBER = "FamiliaGetNumber";
 	public static final String FAMILIA_GET_MAX = "FamiliaGetmax";
 	public static final String FAMILIA_MAX_ESP = "familiaMasEspecies";
-	public static final String FAMILIA_NOMBRE = "FamiliaNombre";
 
-	
-	
+	@OneToOne
+	private RegistroEspecie registro;
+
 	@ManyToOne
 	private HerbarioUQ herbario;
 
@@ -38,7 +36,7 @@ public class FamiliaPlanta implements Serializable {
 	 * identificacion unica de una familia
 	 */
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO) 
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(length = 10)
 	private Integer idFamilia;
 	/**
@@ -83,6 +81,14 @@ public class FamiliaPlanta implements Serializable {
 
 	public void setGeneros(List<GeneroPlanta> generos) {
 		this.generos = generos;
+	}
+
+	public RegistroEspecie getRegistro() {
+		return registro;
+	}
+
+	public void setRegistro(RegistroEspecie registro) {
+		this.registro = registro;
 	}
 
 }

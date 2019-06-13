@@ -13,10 +13,6 @@ import javafx.beans.property.StringProperty;
 
 public class ReseniaObservable {
 
-	private ObjectProperty<EspeciePlanta> especie;
-
-	private ObjectProperty<Usuario> usuario;
-
 	private IntegerProperty id;
 
 	private StringProperty texto;
@@ -30,24 +26,6 @@ public class ReseniaObservable {
 		this.id = new SimpleIntegerProperty(resenia.getIdResenia());
 		this.texto = new SimpleStringProperty(resenia.getTexto());
 		this.estado = new SimpleObjectProperty<>(resenia.getEstado());
-		this.especie = new SimpleObjectProperty<>(resenia.getEspecie());
-		this.usuario = new SimpleObjectProperty<>(resenia.getUsuario());
-	}
-
-	public ObjectProperty<EspeciePlanta> getEspecie() {
-		return especie;
-	}
-
-	public void setEspecie(ObjectProperty<EspeciePlanta> especie) {
-		this.especie = especie;
-	}
-
-	public ObjectProperty<Usuario> getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(ObjectProperty<Usuario> usuario) {
-		this.usuario = usuario;
 	}
 
 	public IntegerProperty getId() {
