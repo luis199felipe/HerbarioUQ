@@ -53,10 +53,11 @@ public interface AdministradorEJBRemote {
 	boolean inactivarEmpleado(Empleado empleado);
 
 	boolean inactivarRecolector(Recolector recolector);
+	boolean actualizarEstadoPersona(String id,co.alfite.sis.entidades.Persona.Estado est);
 
-	boolean eliminarFamilia(FamiliaPlanta fam);
+	boolean eliminarFamilia(String fam);
 
-	boolean eliminarGenero(GeneroPlanta gen);
+	boolean eliminarGenero(String gen);
 
 	boolean eliminarEspecie(EspeciePlanta esp);
 

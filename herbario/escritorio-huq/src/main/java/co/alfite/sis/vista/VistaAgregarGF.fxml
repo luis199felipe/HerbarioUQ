@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane prefHeight="314.0" prefWidth="314.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Vista">
+<BorderPane prefHeight="314.0" prefWidth="314.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.alfite.sis.controlador.VistaAgregarGFControlador">
    <center>
       <GridPane prefHeight="434.0" prefWidth="382.0" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -18,16 +18,17 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="165.0" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="161.0" text="Button" GridPane.rowIndex="2" />
+            <Button fx:id="botonAgregar" mnemonicParsing="false" onAction="#agregar" prefHeight="25.0" prefWidth="165.0" text="Agregar" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button fx:id="botonDescartar" mnemonicParsing="false" onAction="#descartar" prefHeight="25.0" prefWidth="161.0" text="Descartar" GridPane.rowIndex="2" />
             <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="117.0" text="Nombre Familia:" />
-            <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="118.0" text="Nombre Genero:" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="labelNombreGenero" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="118.0" text="Nombre Genero:" GridPane.rowIndex="1" />
+            <TextField fx:id="campoNombreFamilia" GridPane.columnIndex="1" />
+            <TextField fx:id="campoNombreGenero" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ComboBox fx:id="comboBoxNombreFamilia" prefWidth="150.0" promptText="seleccione una familia" GridPane.columnIndex="1" />
          </children>
       </GridPane>
    </center>
    <top>
-      <Label prefHeight="41.0" prefWidth="82.0" text="Agregar %" BorderPane.alignment="CENTER" />
+      <Label fx:id="labelTitulo" prefHeight="41.0" prefWidth="82.0" text="Agregar %" BorderPane.alignment="CENTER" />
    </top>
 </BorderPane>

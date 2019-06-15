@@ -99,11 +99,11 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 	}
 
 	public FamiliaPlanta insertarFamilia(FamiliaPlanta familia) throws ElementoRepetidoExcepcion {
-
-		if (entityManager.find(FamiliaPlanta.class, familia.getIdFamilia()) != null) {
-			throw new ElementoRepetidoExcepcion("La familia con el id ya fue registrado");
-
-		}
+//		if (entityManager.find(FamiliaPlanta.class, familia.getNombre()) != null) {
+//			throw new ElementoRepetidoExcepcion("La familia con el id ya fue registrado");
+//
+//		}
+		System.out.println(familia.getNombre());
 		try {
 			entityManager.persist(familia);
 			return familia;
@@ -115,10 +115,10 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 
 	public GeneroPlanta insertarGenero(GeneroPlanta genero) throws ElementoRepetidoExcepcion {
 
-		if (entityManager.find(GeneroPlanta.class, genero.getIdGenero()) != null) {
-			throw new ElementoRepetidoExcepcion("El genero con el id ya fue registrado");
-
-		}
+//		if (entityManager.find(GeneroPlanta.class, genero.getNombre()) != null) {
+//			throw new ElementoRepetidoExcepcion("El genero con el id ya fue registrado");
+//
+//		}
 		try {
 			entityManager.persist(genero);
 			return genero;
@@ -322,39 +322,30 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 
 	}
 
-	public boolean eliminarGenero(GeneroPlanta gen) {
+	public boolean eliminarGenero(String nombre) {
 
-		EspeciePlanta e = entityManager.find(EspeciePlanta.class, gen.getIdGenero());
-		if (e != null) {
+		
+		
 			try {
-				entityManager.remove(e);
+				entityManager.remove(buscarGeneroPlanta(nombre));
 				return true;
 			} catch (Exception e1) {
 				e1.printStackTrace();
 				return false;
 			}
-		} else {
-
-			return false;
-		}
 
 	}
 
-	public boolean eliminarFamilia(FamiliaPlanta fam) {
+	public boolean eliminarFamilia(String nombre) {
 
-		EspeciePlanta e = entityManager.find(EspeciePlanta.class, fam.getIdFamilia());
-		if (e != null) {
-			try {
-				entityManager.remove(e);
+	try {
+			entityManager.remove(buscarFamiliaPlanta(nombre));
 				return true;
 			} catch (Exception e1) {
 				e1.printStackTrace();
 				return false;
 			}
-		} else {
-
-			return false;
-		}
+		
 
 	}
 
@@ -364,6 +355,24 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 		if (r != null) {
 			try {
 				r.setEstado(co.alfite.sis.entidades.Persona.Estado.inactivo);
+				entityManager.merge(r);
+				return true;
+			} catch (Exception e) {
+				e.printStackTrace();
+				return false;
+			}
+
+		} else {
+			return false;
+		}
+	}
+	
+	public boolean actualizarEstadoPersona(String id,co.alfite.sis.entidades.Persona.Estado est) {
+
+		Persona r = entityManager.find(Persona.class, id);
+		if (r != null) {
+			try {
+				r.setEstado(est);
 				entityManager.merge(r);
 				return true;
 			} catch (Exception e) {
@@ -540,7 +549,10 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 				RegistroEspecie.class);
 
 		query.setParameter("id", id);
-		actualizarRegistroEspecie(query.getSingleResult());
+		
+		RegistroEspecie x=query.getSingleResult();
+		x.setEstado(est);
+		actualizarRegistroEspecie(x);
 
 	}
 
@@ -562,7 +574,6 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 		registro.setEstado(Estado.enviado);
 
 		try {
-			insertarEspecie(registro.getEspecie());
 			insertarImagenPlanta(registro.getImagenPlanta());
 			entityManager.persist(registro);
 			return registro;

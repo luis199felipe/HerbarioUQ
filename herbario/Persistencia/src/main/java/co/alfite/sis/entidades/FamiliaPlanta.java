@@ -39,7 +39,6 @@ public class FamiliaPlanta implements Serializable {
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(length = 10)
 	private Integer idFamilia;
 	/**
 	 * nombre de la familiaPlanta

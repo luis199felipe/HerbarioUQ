@@ -66,6 +66,7 @@ public class VistaLoginControlador {
 
 			Utilidades.mostrarMensaje("Error", "el correo o la contraseña son icorrectos", AlertType.ERROR);
 		}
+
 	}
 
 	/**

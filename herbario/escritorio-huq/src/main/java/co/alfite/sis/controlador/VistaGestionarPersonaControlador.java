@@ -4,14 +4,22 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.sun.xml.ws.api.FeatureConstructor;
+
+import co.alfite.sis.entidades.Empleado;
 import co.alfite.sis.entidades.Persona;
+import co.alfite.sis.entidades.Persona.Estado;
+import co.alfite.sis.entidades.Recolector;
 import co.alfite.sis.modelo.AdministradorDelegado;
 import co.alfite.sis.modelo.observable.PersonaObservable;
+import co.alfite.sis.util.Utilidades;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -22,7 +30,7 @@ public class VistaGestionarPersonaControlador {
 	@FXML
 	private TextField campoNombre;
 	@FXML
-	private TextField campoFechaNacimiento;
+	private DatePicker campoFechaNacimiento;
 	@FXML
 	private TextField campoCorreo;
 	@FXML
@@ -30,9 +38,8 @@ public class VistaGestionarPersonaControlador {
 	@FXML
 	private TextField campoTelefono;
 	@FXML
-	private Button botonCambiarEstadoPersona;
-	@FXML
-	private TextField campoCargo;
+	private Button botonActualizarDatosPersona;
+
 	@FXML
 	private TableColumn<PersonaObservable, String> columnaNombre;
 	@FXML
@@ -42,12 +49,16 @@ public class VistaGestionarPersonaControlador {
 
 	@FXML
 	private TextField campoBuscar;
+	@FXML
+	private TextField campoContrasenia;
 
 	@FXML
 	private TextField campoEstado;
 
 	@FXML
 	private Button botonBuscar;
+	@FXML
+	private Button botonCambiarEstadoPersona;
 
 	@FXML
 	private ComboBox<String> botonFiltraPor;
@@ -61,6 +72,7 @@ public class VistaGestionarPersonaControlador {
 	private ManejadorEscenarios manejador;
 	private String persona;
 	private AdministradorDelegado adminDelegado;
+	private ObservableList<Estado> listaItems;
 
 	public VistaGestionarPersonaControlador() {
 		adminDelegado = adminDelegado.administradorDelegado;
@@ -74,31 +86,36 @@ public class VistaGestionarPersonaControlador {
 
 		tablaPersonas.getSelectionModel().selectedItemProperty()
 				.addListener((observable, oldValue, newValue) -> verPersonaDetalle(newValue));
+
 	}
 
 	private void verPersonaDetalle(PersonaObservable persona) {
 		if (persona != null) {
-
-			try {
-				Date fecha = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S").parse("1999-10-14 00:00:00.0");
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			campoNombre.setText(persona.getNombre().getValue());
 			campoCedula.setText(persona.getIdPersona().getValue());
 			campoCorreo.setText(persona.getEmail().getValue());
-			campoFechaNacimiento.setText(persona.getFechaNacimiento().getValue().toString());
+			campoFechaNacimiento.getEditor().setText(persona.getFechaNacimiento().getValue().toString());
 			campoTelefono.setText(persona.getTelefono().getValue());
-			campoCargo.setText(this.persona);
-			campoEstado.setText(String.valueOf(persona.getEstado().getValue()));
+			campoContrasenia.setText(persona.getPassword().getValue());
+			campoEstado.setText(persona.getEstado().getValue());
+			if (campoEstado.getText().equals("inactivo")) {
+
+				botonCambiarEstadoPersona.setText("Activar Persona");
+			} else {
+				botonCambiarEstadoPersona.setText("Inactivar Persona");
+
+			}
 
 		}
 	}
 
 	public void setManejador(ManejadorEscenarios m) {
 		this.manejador = m;
+		llenarTabla();
 
+	}
+
+	private void llenarTabla() {
 		if (this.persona.equals("recolector")) {
 			tablaPersonas.setItems((ObservableList<PersonaObservable>) adminDelegado.listarRecolectoresObservables());
 		} else {
@@ -126,7 +143,19 @@ public class VistaGestionarPersonaControlador {
 	}
 
 	@FXML
-	void cambiarEstadoPersona() {
+	void actualizarDatosPersona() {
+
+		if (persona.equals("empleado")) {
+
+			Empleado e = adminDelegado.buscarEmpleado(campoCedula.getText());
+			manejador.cargarEscenarioRegistro("actualizar", "vistaGestionarPersona", e);
+
+		} else {
+
+			Recolector r = adminDelegado.buscarRecolector(campoCedula.getText());
+			manejador.cargarEscenarioRegistro("actualizar", " vistaGestionarPersona", r);
+
+		}
 
 	}
 
@@ -136,8 +165,25 @@ public class VistaGestionarPersonaControlador {
 	}
 
 	@FXML
+	private void cambiarEstadoPersona() {
+
+		if (campoEstado.getText().equals("inactivo")) {
+
+			adminDelegado.actualizarEstadoPersona(campoCedula.getText(), Estado.activo);
+		} else {
+
+			adminDelegado.actualizarEstadoPersona(campoCedula.getText(), Estado.inactivo);
+
+		}
+	}
+
+	@FXML
 	void actualizarLista() {
 
+		int ant = tablaPersonas.getSelectionModel().getSelectedIndex();
+		llenarTabla();
+		tablaPersonas.getSelectionModel().clearSelection();
+		tablaPersonas.getSelectionModel().select(ant);
 	}
 
 	@FXML

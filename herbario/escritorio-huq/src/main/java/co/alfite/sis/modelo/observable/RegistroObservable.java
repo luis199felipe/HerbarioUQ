@@ -1,60 +1,59 @@
 package co.alfite.sis.modelo.observable;
 
-import java.util.Date;
 
-import com.sun.prism.RectShadowGraphics;
 
+
+import co.alfite.sis.entidades.ImagenPlanta;
 import co.alfite.sis.entidades.RegistroEspecie;
-import co.alfite.sis.entidades.RegistroEspecie.Estado;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleObjectProperty;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class RegistroObservable {
-	private IntegerProperty idRegistro;
-	private ObjectProperty<Estado> estado;
-	private ObjectProperty<Date> fecha;
+	private StringProperty idRegistro;
+	private StringProperty estado;
+	private StringProperty fecha;
 	private StringProperty mensaje;
+	private ImagenPlanta imagen;
+	private SimpleStringProperty nombreEspecie;
+	private SimpleStringProperty nombreGenero;
+	private SimpleStringProperty nombreFamilia;
+	
 
 	public RegistroObservable(RegistroEspecie registro) {
-		this.idRegistro = new SimpleIntegerProperty(registro.getIdRegistro());
-		this.estado = new SimpleObjectProperty<>(registro.getEstado());
-		this.fecha = new SimpleObjectProperty<>(registro.getFecha());
+		this.idRegistro = new SimpleStringProperty(String.valueOf(registro.getIdRegistro()));
+		this.estado = new SimpleStringProperty(String.valueOf(registro.getEstado()));
+		this.fecha = new SimpleStringProperty(String.valueOf(registro.getFecha()));
 		this.mensaje = new SimpleStringProperty(registro.getMensaje());
-	}
-	
-	public RegistroObservable(IntegerProperty idRegistro, ObjectProperty<Estado> estado, ObjectProperty<Date> fecha,
-			StringProperty mensaje) {
-		this.idRegistro = idRegistro;
-		this.estado = estado;
-		this.fecha = fecha;
-		this.mensaje = mensaje;
+		this.imagen=registro.getImagen();
+		this.nombreEspecie=new SimpleStringProperty(registro.getNombreEspecie());
+		this.nombreGenero=new SimpleStringProperty(registro.getNombreGenero());
+		this.nombreFamilia=new SimpleStringProperty(registro.getNombreFamilia());
 	}
 
-	public IntegerProperty getIdRegistro() {
+	
+
+	public StringProperty getIdRegistro() {
 		return idRegistro;
 	}
 
-	public void setIdRegistro(IntegerProperty idRegistro) {
+	public void setIdRegistro(StringProperty idRegistro) {
 		this.idRegistro = idRegistro;
 	}
 
-	public ObjectProperty<Estado> getEstado() {
+	public StringProperty getEstado() {
 		return estado;
 	}
 
-	public void setEstado(ObjectProperty<Estado> estado) {
+	public void setEstado(StringProperty estado) {
 		this.estado = estado;
 	}
 
-	public ObjectProperty<Date> getFecha() {
+	public StringProperty getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(ObjectProperty<Date> fecha) {
+	public void setFecha(StringProperty fecha) {
 		this.fecha = fecha;
 	}
 
@@ -65,5 +64,55 @@ public class RegistroObservable {
 	public void setMensaje(StringProperty mensaje) {
 		this.mensaje = mensaje;
 	}
+
+
+
+	public ImagenPlanta getImagen() {
+		return imagen;
+	}
+
+
+
+	public void setImagen(ImagenPlanta imagen) {
+		this.imagen = imagen;
+	}
+
+
+
+	public SimpleStringProperty getNombreEspecie() {
+		return nombreEspecie;
+	}
+
+
+
+	public void setNombreEspecie(SimpleStringProperty nombreEspecie) {
+		this.nombreEspecie = nombreEspecie;
+	}
+
+
+
+	public SimpleStringProperty getNombreGenero() {
+		return nombreGenero;
+	}
+
+
+
+	public void setNombreGenero(SimpleStringProperty nombreGenero) {
+		this.nombreGenero = nombreGenero;
+	}
+
+
+
+	public SimpleStringProperty getNombreFamilia() {
+		return nombreFamilia;
+	}
+
+
+
+	public void setNombreFamilia(SimpleStringProperty nombreFamilia) {
+		this.nombreFamilia = nombreFamilia;
+	}
+
+	
 
 }

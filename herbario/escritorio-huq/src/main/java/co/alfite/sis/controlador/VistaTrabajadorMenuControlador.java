@@ -38,7 +38,7 @@ public class VistaTrabajadorMenuControlador {
 	 */
 	@FXML
 	private void gestionarFamilias() {
-		miEscenario.iniciarVistaGestionarGFE(pane, "familia");
+		miEscenario.iniciarVistaGestionarFamilia(pane);
 	}
 
 	/**
@@ -46,7 +46,7 @@ public class VistaTrabajadorMenuControlador {
 	 */
 	@FXML
 	private void gestionarGeneros() {
-		miEscenario.iniciarVistaGestionarGFE(pane, "genero");
+		miEscenario.iniciarVistaGestionarGenero(pane);
 	}
 
 	/**
@@ -55,7 +55,7 @@ public class VistaTrabajadorMenuControlador {
 
 	@FXML
 	private void gestionarEspecies() {
-		miEscenario.iniciarVistaGestionarGFE(pane, "especie");
+		miEscenario.iniciarVistaGestionarEspecie(pane);
 	}
 
 	/**

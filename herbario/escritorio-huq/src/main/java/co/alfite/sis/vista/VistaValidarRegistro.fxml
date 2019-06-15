@@ -31,9 +31,11 @@
             <TableView fx:id="tablaRegistros" prefHeight="200.0" prefWidth="200.0">
               <columns>
                 <TableColumn fx:id="columnaIdRegistro" prefWidth="75.0" text="idRegistro" />
-                <TableColumn fx:id="columnaEstadoRegistro" prefWidth="75.0" text="Estado" />
-                  <TableColumn fx:id="columnaNombreTrabajador" prefWidth="149.0" text="Trabajador " />
+                <TableColumn fx:id="columnaEstadoRegistro" prefWidth="64.0" text="Estado" />
               </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
             </TableView>
             <GridPane GridPane.columnIndex="1">
               <columnConstraints>
@@ -41,11 +43,11 @@
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="284.0" minWidth="10.0" prefWidth="160.0" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints maxHeight="55.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="63.0" minHeight="0.0" prefHeight="60.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="134.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="150.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="145.0" minHeight="10.0" prefHeight="123.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="55.0" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="63.0" minHeight="0.0" prefHeight="49.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="134.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="150.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="145.0" minHeight="10.0" prefHeight="132.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="57.0" minHeight="10.0" prefHeight="57.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
@@ -77,13 +79,18 @@
                   </BorderPane>
                   <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                      <center>
-                        <Button fx:id="botonActualizarEstado" mnemonicParsing="false" onAction="#insertarImagen" text="Actualizar Estado" BorderPane.alignment="CENTER" />
+                        <Button fx:id="actualizarEstado" mnemonicParsing="false" onAction="#actualizarEstado" text="ActualizarEstado" BorderPane.alignment="CENTER" />
                      </center>
                   </BorderPane>
                   <Label fx:id="nombrePlanta" text="Label" GridPane.columnIndex="1" />
                   <Label fx:id="familiaPlanta" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label fx:id="genaroPlanta" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label fx:id="generoPlanta" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <ComboBox fx:id="comoBoxEstado" prefHeight="27.0" prefWidth="161.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5">
+                     <center>
+                        <Button mnemonicParsing="false" text="Tomar imagen" BorderPane.alignment="CENTER" />
+                     </center>
+                  </BorderPane>
                </children>
             </GridPane>
          </children>

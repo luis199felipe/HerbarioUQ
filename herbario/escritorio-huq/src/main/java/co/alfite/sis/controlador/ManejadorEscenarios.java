@@ -54,11 +54,6 @@ public class ManejadorEscenarios {
 	}
 
 	/**
-	 * conexion con capa de negocio
-	 */
-	//private AdministradorDelegado adminDelegado;
-
-	/**
 	 * recibe el escenario principla de la aplicacion
 	 * 
 	 * @param escenario inicial
@@ -66,8 +61,6 @@ public class ManejadorEscenarios {
 	public ManejadorEscenarios(Stage escenario) {
 
 		this.escenario = escenario;
-//		adminDelegado = adminDelegado.administradorDelegado;
-		
 
 		try {
 
@@ -243,22 +236,85 @@ public class ManejadorEscenarios {
 		}
 	}
 
-	public void iniciarVistaGestionarGFE(BorderPane pane, String elementoAGestionar) {
+	public void iniciarVistaGestionarFamilia(BorderPane pane) {
 		try {
 
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(Main.class.getResource("./vista/VistaGestionarGFE.fxml"));
+			loader.setLocation(Main.class.getResource("./vista/VistaGestionarFamilia.fxml"));
 			BorderPane subVista = (BorderPane) loader.load();
 
 			pane.setCenter(subVista);
 
-			VistaGestionarGFEControlador controladorGestionGFE = loader.getController();
-			controladorGestionGFE.setManejador(this);
-			controladorGestionGFE.adaptarVista(elementoAGestionar);
+			VistaGestionarFamiliaControlador controladorGestionFamilia = loader.getController();
+			controladorGestionFamilia.setManejador(this);
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void iniciarVistaGestionarGenero(BorderPane pane) {
+		try {
+
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(Main.class.getResource("./vista/VistaGestionarGenero.fxml"));
+			BorderPane subVista = (BorderPane) loader.load();
+
+			pane.setCenter(subVista);
+
+			VistaGestionarGeneroControlador controladorGestionGenero = loader.getController();
+			controladorGestionGenero.setManejador(this);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void iniciarVistaGestionarEspecie(BorderPane pane) {
+		try {
+
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(Main.class.getResource("./vista/VistaGestionarEspecie.fxml"));
+			BorderPane subVista = (BorderPane) loader.load();
+
+			pane.setCenter(subVista);
+
+			VistaGestionarEspecieControlador controladorGestionEspecie = loader.getController();
+			controladorGestionEspecie.setManejador(this);
+			
+			controladorGestionEspecie.setPane(pane);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void cargarEscenarioAgregarGF(String tipoObjeto) {
+		try {
+
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(Main.class.getResource("./vista/VistaAgregarGF.fxml"));
+			BorderPane vista = (BorderPane) loader.load();
+
+			VistaAgregarGFControlador controladorVistaAgregarGF = loader.getController();
+			// importante
+			//controladorVistaRegistroEspecie.setManejador(this);
+
+			Scene scene = new Scene(vista);
+			Stage stage = new Stage();
+			stage.setTitle("Herbario/registro");
+
+			stage.getIcons().add(new Image(Main.class.getResourceAsStream(ruta)));
+			stage.setScene(scene);
+			stage.show();
+			// importante
+			controladorVistaAgregarGF.setStage(stage);
+			controladorVistaAgregarGF.adaptarVista(tipoObjeto);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	public void cargarEscenarioRegistroEspecie() {
@@ -311,5 +367,5 @@ public class ManejadorEscenarios {
 	public Stage getEscenario() {
 		return escenario;
 	}
-	
+
 }

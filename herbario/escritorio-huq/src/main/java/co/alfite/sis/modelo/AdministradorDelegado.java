@@ -8,6 +8,7 @@ import java.util.List;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import co.alfite.sis.ejb.AdministradorEJBRemote;
+import co.alfite.sis.entidades.Administrador;
 import co.alfite.sis.entidades.Empleado;
 import co.alfite.sis.entidades.EspeciePlanta;
 import co.alfite.sis.entidades.FamiliaPlanta;
@@ -255,16 +256,12 @@ public class AdministradorDelegado implements AdministradorEJBRemote {
 		return adminEJB.listarEspeciesPorEstado(est);
 	}
 
-	
-
-
 	@Override
 	public Usuario insertarUsuario(Usuario nuevoUsuario) throws ElementoRepetidoExcepcion {
 		// TODO Auto-generated method stub
 		return adminEJB.insertarUsuario(nuevoUsuario);
 	}
 
-	@Override
 	public FamiliaPlanta insertarFamilia(FamiliaPlanta familia) throws ElementoRepetidoExcepcion {
 		// TODO Auto-generated method stub
 		return adminEJB.insertarFamilia(familia);
@@ -292,6 +289,12 @@ public class AdministradorDelegado implements AdministradorEJBRemote {
 	public Recolector actualizarRecolector(Recolector recolector) {
 		// TODO Auto-generated method stub
 		return adminEJB.actualizarRecolector(recolector);
+	}
+
+	public void actualizarAdministrador(Administrador nuevo) {
+	
+		//return adminEJB
+
 	}
 
 	@Override
@@ -331,13 +334,13 @@ public class AdministradorDelegado implements AdministradorEJBRemote {
 	}
 
 	@Override
-	public boolean eliminarFamilia(FamiliaPlanta fam) {
+	public boolean eliminarFamilia(String nombre) {
 		// TODO Auto-generated method stub
-		return adminEJB.eliminarFamilia(fam);
+		return adminEJB.eliminarFamilia(nombre);
 	}
 
 	@Override
-	public boolean eliminarGenero(GeneroPlanta gen) {
+	public boolean eliminarGenero(String gen) {
 		// TODO Auto-generated method stub
 		return adminEJB.eliminarGenero(gen);
 	}
@@ -369,7 +372,7 @@ public class AdministradorDelegado implements AdministradorEJBRemote {
 	@Override
 	public FamiliaPlanta buscarFamiliaPlanta(String nombre) {
 		// TODO Auto-generated method stub
-		return  adminEJB.buscarFamiliaPlanta(nombre);
+		return adminEJB.buscarFamiliaPlanta(nombre);
 	}
 
 	@Override
@@ -398,8 +401,14 @@ public class AdministradorDelegado implements AdministradorEJBRemote {
 
 	@Override
 	public EspeciePlanta verDetalleEspecie(int id) {
-		
+
 		return adminEJB.verDetalleEspecie(id);
+	}
+
+	@Override
+	public boolean actualizarEstadoPersona(String id, co.alfite.sis.entidades.Persona.Estado est) {
+		// TODO Auto-generated method stub
+		return adminEJB.actualizarEstadoPersona(id, est);
 	}
 
 }

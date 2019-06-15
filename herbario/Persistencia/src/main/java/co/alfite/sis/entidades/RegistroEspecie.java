@@ -35,13 +35,20 @@ public class RegistroEspecie implements Serializable {
 	public static final String REGISTRO_FECHA_DTO = "RegistroPorFechaDTO";
 	public static final String REGISTRO_POR_ID = "RegistroPorID";
 
-
 	/**
 	 * Muchos Registros pertenecen a un Trabajador
 	 */
 	@ManyToOne
 	private Trabajador trabajador;
 
+	@Column(length = 10)
+	private String nombreEspecie;
+	
+	@Column(length = 10)
+	private String nombreGenero;
+	
+	@Column(length = 10)
+	private String nombreFamilia;
 	/**
 	 * Un registro tiene una Especie
 	 */
@@ -145,6 +152,30 @@ public class RegistroEspecie implements Serializable {
 
 	public void setImagen(ImagenPlanta imagen) {
 		this.imagen = imagen;
+	}
+
+	public String getNombreFamilia() {
+		return nombreFamilia;
+	}
+
+	public void setNombreFamilia(String nombreFamilia) {
+		this.nombreFamilia = nombreFamilia;
+	}
+
+	public String getNombreEspecie() {
+		return nombreEspecie;
+	}
+
+	public void setNombreEspecie(String nombreEspecie) {
+		this.nombreEspecie = nombreEspecie;
+	}
+
+	public String getNombreGenero() {
+		return nombreGenero;
+	}
+
+	public void setNombreGenero(String nombreGenero) {
+		this.nombreGenero = nombreGenero;
 	}
 
 }

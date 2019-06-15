@@ -23,8 +23,11 @@ import co.alfite.sis.entidades.RegistroEspecie.Estado;
 import co.alfite.sis.entidades.Trabajador;
 import co.alfite.sis.excepciones.ElementoRepetidoExcepcion;
 import co.alfite.sis.modelo.AdministradorDelegado;
+import co.alfite.sis.util.Utilidades;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
@@ -46,9 +49,15 @@ public class VistaRegistroEspecieControlador {
 //	@FXML
 //    private ComboBox<?> comboBoxFamilia;
 
-//	  @FXML
-//	    private TextField campoNombre;
-	private Path rutaImagen;
+	@FXML
+	private TextField campoNombre;
+
+	@FXML
+	private TextField campoNombreFamilia;
+
+	@FXML
+	private TextField campoNombreGenero;
+	
 
 	private AdministradorDelegado adminDelegado;
 
@@ -57,6 +66,8 @@ public class VistaRegistroEspecieControlador {
 	private ManejadorEscenarios miEscenario;
 	private byte[] buffers;
 	private int readers;
+	private Path rutaImagen;
+	
 
 	public VistaRegistroEspecieControlador() {
 		adminDelegado = adminDelegado.administradorDelegado;
@@ -73,10 +84,6 @@ public class VistaRegistroEspecieControlador {
 		RegistroEspecie nuevoRegistro = new RegistroEspecie();
 		ImagenPlanta nuevaImagen = new ImagenPlanta();
 		nuevaImagen.setImagen(buffers);
-
-		EspeciePlanta nuevaEspecie = new EspeciePlanta();
-		nuevaEspecie.setNombre("esp9000");
-
 		Persona p = miEscenario.getPersonaEnSesion();
 		Trabajador trabajadorEnSesion = new Trabajador();
 
@@ -92,12 +99,21 @@ public class VistaRegistroEspecieControlador {
 		nuevoRegistro.setFecha(new Date());
 		nuevoRegistro.setTrabajador(trabajadorEnSesion);
 		nuevoRegistro.setImagen(nuevaImagen);
-		nuevoRegistro.setEspecie(nuevaEspecie);
 
-		// nuevoRegistro.setGenero(genero);
-		// nuevoRegistro.setFamilia(familia);
+		// en la validacion es donde se debe persistir la espcie asociada al registro y
+		// el genero y la familia a esa especie tambien
 
-		adminDelegado.insertarRegistro(nuevoRegistro);
+		nuevoRegistro.setNombreGenero(campoNombreGenero.getText());
+		nuevoRegistro.setNombreEspecie(campoNombre.getText());
+		nuevoRegistro.setNombreFamilia(campoNombreFamilia.getText());
+
+		boolean r=(adminDelegado.insertarRegistro(nuevoRegistro)!=null);
+		if(r) {
+			Utilidades.mostrarMensaje("OK", "El registro se envio correctamente", AlertType.INFORMATION);
+
+		}else {
+			Utilidades.mostrarMensaje("Error", "no se pudo enviar el registro", AlertType.ERROR);
+		}
 
 	}
 
@@ -139,6 +155,11 @@ public class VistaRegistroEspecieControlador {
 	public void setManejador(ManejadorEscenarios manejadorEscenarios) {
 
 		this.miEscenario = manejadorEscenarios;
+	}
+
+	@FXML
+	private void descartar() {
+		stage.close();
 	}
 
 }

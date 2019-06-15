@@ -7,24 +7,24 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class FamiliaObservable {
-	private IntegerProperty idFamilia;
+	private StringProperty idFamilia;
 	private StringProperty nombre;
 
 	public FamiliaObservable(FamiliaPlanta familia) {
-		this.idFamilia = new SimpleIntegerProperty(familia.getIdFamilia());
+		this.idFamilia = new SimpleStringProperty(String.valueOf(familia.getIdFamilia()));
 		this.nombre = new SimpleStringProperty(familia.getNombre());
 	}
 
-	public FamiliaObservable(IntegerProperty idFamilia, StringProperty nombre) {
-		this.idFamilia = idFamilia;
-		this.nombre = nombre;
-	}
+//	public FamiliaObservable(StringProperty idFamilia, StringProperty nombre) {
+//		this.idFamilia = idFamilia;
+//		this.nombre = nombre;
+//	}
 
-	public IntegerProperty getIdFamilia() {
+	public StringProperty getIdFamilia() {
 		return idFamilia;
 	}
 
-	public void setIdFamilia(IntegerProperty idFamilia) {
+	public void setIdFamilia(StringProperty idFamilia) {
 		this.idFamilia = idFamilia;
 	}
 

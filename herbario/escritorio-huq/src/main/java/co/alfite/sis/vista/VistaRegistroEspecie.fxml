@@ -38,15 +38,15 @@
                   <Label text="Nombre de la especie:" />
                   <Label text="Nombre de la familia a la que pertenece:" GridPane.rowIndex="1" />
                   <Label text="Nombre del genero a la que pertenece:" GridPane.rowIndex="2" />
-                  <TextField GridPane.columnIndex="1" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="campoNombre" GridPane.columnIndex="1" />
+                  <TextField fx:id="campoNombreFamilia" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="campoNombreGenero" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
             </GridPane>
             <Label text="Se debe adjuntar una imagen a continuacion:  " GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <BorderPane prefHeight="212.0" prefWidth="475.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <center>
-                  <ImageView fx:id="imagenPlanta" fitHeight="186.0" fitWidth="235.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+                  <ImageView fx:id="imagenPlanta" fitHeight="186.0" fitWidth="288.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
                </center>
                <right>
                   <Button fx:id="botonCargarImagen" mnemonicParsing="false" onAction="#cargarImagen" text="Adjutar Imagen" BorderPane.alignment="CENTER" />
@@ -54,7 +54,7 @@
             </BorderPane>
             <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <left>
-                  <Button mnemonicParsing="false" text="Descartar y regresar" BorderPane.alignment="CENTER" />
+                  <Button fx:id="botonDescartar" mnemonicParsing="false" onAction="#descartar" text="Descartar y regresar" BorderPane.alignment="CENTER" />
                </left>
                <right>
                   <Button fx:id="botonRealizarRegistro" mnemonicParsing="false" onAction="#insertarRegistro" text="Enviar Registro" BorderPane.alignment="CENTER" />

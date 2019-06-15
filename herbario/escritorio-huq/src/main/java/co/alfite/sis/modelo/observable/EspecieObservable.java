@@ -7,65 +7,68 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class EspecieObservable {
-	private IntegerProperty idEspecie;
-	private IntegerProperty cantidad;
+	private StringProperty idEspecie;
+	private StringProperty cantidad;
 	private StringProperty nombre;
 	private StringProperty nombreCientifico;
-	
+	private SimpleStringProperty nombreGenero;
+	private SimpleStringProperty nombreFamilia;
+
 	public EspecieObservable(EspeciePlanta especie) {
-		this.idEspecie = new SimpleIntegerProperty(especie.getIdEspecie());
-		//this.cantidad = new SimpleIntegerProperty(especie.getCantidad());
+		this.idEspecie = new SimpleStringProperty(String.valueOf(especie.getIdEspecie()));
 		this.nombre = new SimpleStringProperty(especie.getNombre());
 		this.nombreCientifico = new SimpleStringProperty(especie.getNombreCientifico());
-	}
-	
-	public EspecieObservable(IntegerProperty idEspecie, IntegerProperty cantidad, StringProperty nombre,
-			StringProperty nombreCientifico) {
-		this.idEspecie = idEspecie;
-		this.cantidad = cantidad;
-		this.nombre = nombre;
-		this.nombreCientifico = nombreCientifico;
+		this.nombreGenero = new SimpleStringProperty(especie.getGeneroPlanta().getNombre());
+		this.nombreFamilia = new SimpleStringProperty(especie.getGeneroPlanta().getFamiliaPlanta().getNombre());
+
 	}
 
-
-	public IntegerProperty getIdEspecie() {
+	public StringProperty getIdEspecie() {
 		return idEspecie;
 	}
 
-
-	public void setIdEspecie(IntegerProperty idEspecie) {
+	public void setIdEspecie(StringProperty idEspecie) {
 		this.idEspecie = idEspecie;
 	}
 
-
-	public IntegerProperty getCantidad() {
+	public StringProperty getCantidad() {
 		return cantidad;
 	}
 
-
-	public void setCantidad(IntegerProperty cantidad) {
+	public void setCantidad(StringProperty cantidad) {
 		this.cantidad = cantidad;
 	}
-
 
 	public StringProperty getNombre() {
 		return nombre;
 	}
 
-
 	public void setNombre(StringProperty nombre) {
 		this.nombre = nombre;
 	}
-
 
 	public StringProperty getNombreCientifico() {
 		return nombreCientifico;
 	}
 
-
 	public void setNombreCientifico(StringProperty nombreCientifico) {
 		this.nombreCientifico = nombreCientifico;
 	}
-	
-	
+
+	public SimpleStringProperty getNombreGenero() {
+		return nombreGenero;
+	}
+
+	public void setNombreGenero(SimpleStringProperty nombreGenero) {
+		this.nombreGenero = nombreGenero;
+	}
+
+	public SimpleStringProperty getNombreFamilia() {
+		return nombreFamilia;
+	}
+
+	public void setNombreFamilia(SimpleStringProperty nombreFamilia) {
+		this.nombreFamilia = nombreFamilia;
+	}
+
 }
