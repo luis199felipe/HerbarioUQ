@@ -28,6 +28,7 @@ public class PersonaObservable {
 		this.estado = new SimpleStringProperty(String.valueOf(p.getEstado()));
 		this.telefono = new SimpleStringProperty(p.getTelefono());
 		this.fechaNacimiento = new SimpleObjectProperty<>(p.getFechaNacimiento());
+		System.out.println(p.toString());
 	}
 
 	public PersonaObservable(StringProperty idPersona, StringProperty nombre, StringProperty email,
@@ -97,6 +98,11 @@ public class PersonaObservable {
 
 	public void setFechaNacimiento(ObjectProperty<Date> fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
+	}
+
+	public Date getFechaNacimientoDate() {
+		Date d = fechaNacimiento.getValue();
+		return d;
 	}
 
 }

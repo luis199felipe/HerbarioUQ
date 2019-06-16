@@ -1,6 +1,9 @@
 package co.alfite.sis.controlador;
 
+import java.time.LocalDate;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import co.alfite.sis.entidades.Administrador;
 import co.alfite.sis.entidades.Empleado;
@@ -79,10 +82,9 @@ public class VistaRegistroControlador {
 				boolean registroValido = false;
 				if (validarCampos()) {
 					String cargoPersona = comboboxCargo.getSelectionModel().getSelectedItem();
-
+					
 					if (cargoPersona.equals("Empleado")) {
 						Empleado persona = new Empleado();
-
 						persona.setIdPersona(campoCedula.getText());
 						persona.setNombre(campoNombre.getText());
 						persona.setPassword(campoContrasenia.getText());
@@ -118,13 +120,12 @@ public class VistaRegistroControlador {
 						registroValido = adminDelegado.insertarUsusario(nuevoUsuario);
 					}
 
-				} else {
-					Utilidades.mostrarMensaje("Error", "Debe llenar todos los campos", AlertType.ERROR);
-				}
+				} 
 				if (registroValido) {
+					
 					Utilidades.mostrarMensaje("Bienvenida", "Bienvenido al Herbario de la universidad del quindio",
 							AlertType.INFORMATION);
-
+					regresar();
 				}
 			} catch (ElementoRepetidoExcepcion e) {
 				Utilidades.mostrarMensaje("Error", e.getMessage(), AlertType.ERROR);
@@ -139,39 +140,40 @@ public class VistaRegistroControlador {
 	private void actualizarDatosPersona() {
 
 		boolean actualiza = false;
-		String tipoPersona = persona.getClass().getSimpleName();
-		if (tipoPersona.equals("Recolector")) {
-			Recolector nuevo = new Recolector();
-			nuevo.setEmail(campoCorreo.getText());
-			nuevo.setNombre(campoNombre.getText());
-			nuevo.setPassword(campoContrasenia.getText());
-			nuevo.setTelefono(campoTelefono.getText());
-			nuevo.setFechaNacimiento(Utilidades.pasarADate(fechaNacimiento.getValue()));
-			nuevo.setIdPersona(campoCedula.getText());
-			nuevo.setEstado(persona.getEstado());
-			actualiza = (adminDelegado.actualizarRecolector(nuevo) != null);
-		} else if (tipoPersona.equals("Administrador")) {
-			Administrador nuevo = new Administrador();
-			nuevo.setEmail(campoCorreo.getText());
-			nuevo.setNombre(campoNombre.getText());
-			nuevo.setPassword(campoContrasenia.getText());
-			nuevo.setTelefono(campoTelefono.getText());
-			nuevo.setFechaNacimiento(Utilidades.pasarADate(fechaNacimiento.getValue()));
-			nuevo.setIdPersona(campoCedula.getText());
-			nuevo.setEstado(persona.getEstado());
-			// actualiza= (adminDelegado.actualizarAdministrador(nuevo)!=null);
-		} else if (tipoPersona.equals("Empleado")) {
-			Empleado nuevo = new Empleado();
-			nuevo.setEmail(campoCorreo.getText());
-			nuevo.setNombre(campoNombre.getText());
-			nuevo.setPassword(campoContrasenia.getText());
-			nuevo.setTelefono(campoTelefono.getText());
-			nuevo.setFechaNacimiento(Utilidades.pasarADate(fechaNacimiento.getValue()));
-			nuevo.setIdPersona(campoCedula.getText());
-			nuevo.setEstado(persona.getEstado());
-			actualiza = (adminDelegado.actualizarEmpleado(nuevo) != null);
+		if (validarCampos()) {
+			String tipoPersona = persona.getClass().getSimpleName();
+			if (tipoPersona.equals("Recolector")) {
+				Recolector nuevo = new Recolector();
+				nuevo.setEmail(campoCorreo.getText());
+				nuevo.setNombre(campoNombre.getText());
+				nuevo.setPassword(campoContrasenia.getText());
+				nuevo.setTelefono(campoTelefono.getText());
+				nuevo.setFechaNacimiento(Utilidades.pasarADate(fechaNacimiento.getValue()));
+				nuevo.setIdPersona(campoCedula.getText());
+				nuevo.setEstado(persona.getEstado());
+				actualiza = (adminDelegado.actualizarRecolector(nuevo) != null);
+			} else if (tipoPersona.equals("Administrador")) {
+				Administrador nuevo = new Administrador();
+				nuevo.setEmail(campoCorreo.getText());
+				nuevo.setNombre(campoNombre.getText());
+				nuevo.setPassword(campoContrasenia.getText());
+				nuevo.setTelefono(campoTelefono.getText());
+				nuevo.setFechaNacimiento(Utilidades.pasarADate(fechaNacimiento.getValue()));
+				nuevo.setIdPersona(campoCedula.getText());
+				nuevo.setEstado(persona.getEstado());
+				// actualiza= (adminDelegado.actualizarAdministrador(nuevo)!=null);
+			} else if (tipoPersona.equals("Empleado")) {
+				Empleado nuevo = new Empleado();
+				nuevo.setEmail(campoCorreo.getText());
+				nuevo.setNombre(campoNombre.getText());
+				nuevo.setPassword(campoContrasenia.getText());
+				nuevo.setTelefono(campoTelefono.getText());
+				nuevo.setFechaNacimiento(Utilidades.pasarADate(fechaNacimiento.getValue()));
+				nuevo.setIdPersona(campoCedula.getText());
+				nuevo.setEstado(persona.getEstado());
+				actualiza = (adminDelegado.actualizarEmpleado(nuevo) != null);
+			}
 		}
-
 		if (actualiza) {
 			Utilidades.mostrarMensaje("OK", "La actualizacion de datos se ha completado satisfactoriamente",
 					AlertType.INFORMATION);
@@ -199,8 +201,26 @@ public class VistaRegistroControlador {
 				|| campoNombre.getText().isEmpty() || campoContrasenia.getText().isEmpty()
 				|| campoCorreo.getText().isEmpty() || campoTelefono.getText().isEmpty()
 				|| Utilidades.pasarADate(fechaNacimiento.getValue()) == null) {
+			Utilidades.mostrarMensaje("Error", "Debe llenar todos los campos", AlertType.ERROR);
 			valido = false;
 		}
+		
+		
+		if(valido && !Utilidades.verificarFecha(fechaNacimiento.getValue()) ) {
+			Utilidades.mostrarMensaje("Error", "La edad valida minima es de 15 años ", AlertType.ERROR);
+			valido = false;
+		}
+		
+		if(valido && !Utilidades.verificarCorreo(campoCorreo.getText()) ) {
+			Utilidades.mostrarMensaje("Error", "El formato del correo es incorrecto.", AlertType.ERROR);
+			valido = false;
+		}
+		
+		if(valido && !Utilidades.verificarNumero(campoTelefono.getText()) ) {
+			Utilidades.mostrarMensaje("Error", "El telefono debe ser solo numeros", AlertType.ERROR);
+			valido = false;
+		}
+		
 		return valido;
 	}
 
@@ -219,8 +239,7 @@ public class VistaRegistroControlador {
 		this.persona = p;
 		if (tipo.equals("actualizar")) {
 			labelTitulo.setText("Actualizacion de datos");
-
-			comboboxCargo.setPromptText(p.getClass().getSimpleName());
+			
 
 			campoNombre.setText(p.getNombre());
 			campoCedula.setText(p.getIdPersona());
@@ -232,14 +251,13 @@ public class VistaRegistroControlador {
 			fechaNacimiento.valueProperty().set((Utilidades.pasarALocalDate(p.getFechaNacimiento())));
 
 			botonRealizarRegistro.setText("Actualizar Datos");
-			listaItems.clear();
-
 		}
 
 		if (origen.equals("vistaLogin")) {
 
 			listaItems.remove(3);
 			listaItems.remove(2);
+			
 		}
 		if (origen.equals("vistaAdministradorRecolector")) {
 			listaItems.clear();
@@ -249,9 +267,12 @@ public class VistaRegistroControlador {
 			listaItems.add("Empleado");
 		} else if (origen.equals("vistaGestionarPersona")) {
 			listaItems.clear();
+			listaItems.add(p.getClass().getSimpleName());
 			comboboxCargo.setEditable(false);
 		}
-
+		
+		System.out.println(origen);
+		comboboxCargo.setItems(listaItems);
 	}
 
 }

@@ -59,16 +59,20 @@ public class VistaLoginControlador {
 
 	@FXML
 	private void iniciarSesion() {
-		Persona p = adminDelegado.personaPorCredenciales(campoCorreo.getText(), campoContrasenia.getText());
 
-		if (p != null) {
+		String email = campoCorreo.getText();
+		if (Utilidades.verificarCorreo(email)) {
+			Persona p = adminDelegado.personaPorCredenciales(email, campoContrasenia.getText());
 
-			manejador.cargarEscenarioSesion(p);
+			if (p != null) {
+				manejador.cargarEscenarioSesion(p);
+				miEscenario.close();
+			} else {
 
-			miEscenario.close();
+				Utilidades.mostrarMensaje("Error", "el correo o la contraseña son icorrectos", AlertType.ERROR);
+			}
 		} else {
-
-			Utilidades.mostrarMensaje("Error", "el correo o la contraseña son icorrectos", AlertType.ERROR);
+			Utilidades.mostrarMensaje("Error", "Formato de correo invalido", AlertType.ERROR);
 		}
 
 	}
@@ -87,7 +91,7 @@ public class VistaLoginControlador {
 	@FXML
 	private void recuperarContrasenia() {
 
-		if (!campoCorreo.getText().isEmpty()) {
+		if (!campoCorreo.getText().isEmpty() && Utilidades.verificarCorreo(campoCorreo.getText())) {
 			String p = adminDelegado.recuperarContrasenia(campoCorreo.getText());
 			if (p != null) {
 				enviarConGMail("herbariouq@gmail.com", "alfite12345", campoCorreo.getText(), p);
@@ -100,7 +104,7 @@ public class VistaLoginControlador {
 			}
 
 		} else {
-			Utilidades.mostrarMensaje("Error", "Para recuperar la contraseña deba ingresar al menos su correo",
+			Utilidades.mostrarMensaje("Error", "Para recuperar la contraseña deba ingresar al menos su correo y tener un formato valido.",
 					AlertType.ERROR);
 		}
 
