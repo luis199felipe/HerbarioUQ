@@ -17,6 +17,7 @@ import co.alfite.sis.entidades.GeneroPlanta;
 import co.alfite.sis.entidades.Recolector;
 import co.alfite.sis.entidades.RegistroEspecie;
 import co.alfite.sis.entidades.RegistroEspecie.Estado;
+import co.alfite.sis.entidades.Usuario;
 
 /**
  * Se encarga de verificar la configuaracion por defecto
@@ -93,7 +94,20 @@ public class ConfigEJB {
 			entityManager.persist(nuevoRecolector);
 		}
 		
-		
+		TypedQuery<Long> query5 = entityManager.createNamedQuery(Usuario.USUARIO_GET_NUMBER, Long.class);
+		Long numUsuarios = query5.getSingleResult();
+		if(numUsuarios==0) {
+			
+			Usuario nuevoUsuario=new Usuario();
+			nuevoUsuario.setNombre("User");
+			nuevoUsuario.setEmail("user@gmail.com");
+			nuevoUsuario.setFechaNacimiento(new Date());
+			nuevoUsuario.setIdPersona("1234567");
+			nuevoUsuario.setPassword("user");
+			nuevoUsuario.setEstado(co.alfite.sis.entidades.Persona.Estado.activo);
+			nuevoUsuario.setTelefono("45566766");
+			entityManager.persist(nuevoUsuario);
+		}
 
 		TypedQuery<Long> q = entityManager.createNamedQuery(FamiliaPlanta.FAMILIA_GET_NUMBER, Long.class);
 		Long numFamilias = q.getSingleResult();

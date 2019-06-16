@@ -17,8 +17,8 @@ import javax.persistence.OneToMany;
  */
 
 @NamedQueries({ @NamedQuery(name = Usuario.USUARIO_GET_ALL, query = "select u from Usuario u"),
-				@NamedQuery(name = Usuario.USUARIO_POR_ID, query = "select u from Usuario u where u.idPersona=:id") 
-})
+		@NamedQuery(name = Usuario.USUARIO_POR_ID, query = "select u from Usuario u where u.idPersona=:id"),
+		@NamedQuery(name = Usuario.USUARIO_GET_NUMBER, query = "select count(u) from Usuario u") })
 
 @Entity
 public class Usuario extends Persona implements Serializable {
@@ -35,6 +35,8 @@ public class Usuario extends Persona implements Serializable {
 
 	public static final String USUARIO_GET_ALL = "UsuarioGetAll";
 	public static final String USUARIO_POR_ID = "UsuarioID";
+	public static final String USUARIO_GET_NUMBER = "UsuarioNumber";
+
 
 	/**
 	 * Un Usuario tiene muchas MeGusta de una EspeciePlanta (0..*)

@@ -6,6 +6,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 import co.alfite.sis.entidades.Persona;
+import co.alfite.sis.entidades.Usuario;
 import co.alfite.sis.modelo.AdministradorDelegado;
 import co.alfite.sis.util.Utilidades;
 import javafx.collections.FXCollections;
@@ -59,8 +60,11 @@ public class VistaLoginControlador {
 	@FXML
 	private void iniciarSesion() {
 		Persona p = adminDelegado.personaPorCredenciales(campoCorreo.getText(), campoContrasenia.getText());
+
 		if (p != null) {
-			manejador.cargarEscenarioTrabajador(p);
+
+			manejador.cargarEscenarioSesion(p);
+
 			miEscenario.close();
 		} else {
 

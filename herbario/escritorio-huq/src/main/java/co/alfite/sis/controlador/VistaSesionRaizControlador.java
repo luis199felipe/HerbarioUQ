@@ -52,8 +52,13 @@ public class VistaSesionRaizControlador {
 		manejador.iniciarVistaMenuTrabajador(pane);
 	}
 
-	public void cargarMenu() {
+	public void cargarMenuTrabajador() {
 		manejador.iniciarVistaMenuTrabajador(pane);
+	}
+	
+	public void cargarMenuUsuario() {
+		manejador.iniciarVistaUsuario(pane);
+		
 	}
 
 	public void setManejador(ManejadorEscenarios manejadorEscenarios) {
@@ -73,7 +78,12 @@ public class VistaSesionRaizControlador {
 
 	public void setPersonaEnSesion(Persona p) {
 		this.personaEnSesion=p;
-		
+		if(personaEnSesion.getClass().getSimpleName().equals("Usuario")) {
+			
+			botonHome.setVisible(false);
+		}
 		control.setText(p.getNombre());
 	}
+
+	
 }

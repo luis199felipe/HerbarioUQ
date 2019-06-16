@@ -2,8 +2,13 @@ package co.alfite.sis.modelo;
 
 import java.util.List;
 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
+import co.alfite.sis.ejb.AdministradorEJBRemote;
 import co.alfite.sis.ejb.UsuarioEJBRemote;
 import co.alfite.sis.entidades.Empleado;
+import co.alfite.sis.entidades.ImagenPlanta;
 import co.alfite.sis.entidades.MeGustaEspeciePlanta;
 import co.alfite.sis.entidades.Resenia;
 import co.alfite.sis.modelo.observable.MeGustaObservable;
@@ -24,6 +29,14 @@ public class UsuarioDelegado {
 	 */
 	public static UsuarioDelegado UsuarioDelegado = instancia();
 
+	
+	private UsuarioDelegado() {
+		try {
+			usuEJB = (UsuarioEJBRemote) new InitialContext().lookup(UsuarioEJBRemote.JNDI);
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 	/**
 	 * Permite devolver una unica instancia de delegado
 	 * 
@@ -68,8 +81,8 @@ public class UsuarioDelegado {
 	 * Genera una lista de me gusta observables
 	 * @return todos los megustas observables
 	 */
-	public ObservableList<MeGustaObservable> listarMegustasObservables() {
-		List<MeGustaEspeciePlanta> meGusta = listarMeGusta();
+	public ObservableList<MeGustaObservable> listarMegustasObservables(String id) {
+		List<MeGustaEspeciePlanta> meGusta = listarMeGusta(id);
 		ObservableList<MeGustaObservable> meGustaObservables = FXCollections.observableArrayList();
 		for (MeGustaEspeciePlanta like : meGusta) {
 			meGustaObservables.add(new MeGustaObservable(like));
@@ -82,17 +95,16 @@ public class UsuarioDelegado {
 	 * 
 	 * @return todos los me gustas
 	 */
-	public List<MeGustaEspeciePlanta> listarMeGusta() {
-		//QUERY a la base de datos 
-		return null;
+	public List<MeGustaEspeciePlanta> listarMeGusta(String id) {
+		return  usuEJB.obtenerListaMeGusta(id);
 	}
 
 	/**
 	 * Genera una lista de resenias observables
 	 * @return todas las resenias observables
 	 */
-	public ObservableList<ReseniaObservable> listarReseniasObservables() {
-		List<Resenia> resenia = listarResenias();
+	public ObservableList<ReseniaObservable> listarReseniasObservables(String id) {
+		List<Resenia> resenia = listarResenias(id);
 		ObservableList<ReseniaObservable> reseniaObservables = FXCollections.observableArrayList();
 		for (Resenia comentario : resenia) {
 			reseniaObservables.add(new ReseniaObservable(comentario));
@@ -105,8 +117,11 @@ public class UsuarioDelegado {
 	 * 
 	 * @return todas las resenias
 	 */
-	public List<Resenia> listarResenias() {
-		//QUERY a la base de datos
-		return null;
+	public List<Resenia> listarResenias(String id) {
+		return usuEJB.obtenerListaResenias(id);
+	}
+	
+	public List<ImagenPlanta> listarImagenes() {
+		return usuEJB.obtenerListaImagenes();
 	}
 }

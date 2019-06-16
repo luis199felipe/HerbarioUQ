@@ -14,12 +14,15 @@ import co.alfite.sis.entidades.RegistroEspecie;
 import co.alfite.sis.entidades.Usuario;
 import co.alfite.sis.excepciones.ElementoRepetidoExcepcion;
 import co.alfite.sis.modelo.AdministradorDelegado;
-
+import co.alfite.sis.modelo.DisplayShelf;
+import javafx.animation.Timeline;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 /**
@@ -113,7 +116,7 @@ public class ManejadorEscenarios {
 		}
 	}
 
-	public void cargarEscenarioTrabajador(Persona p) {
+	public void cargarEscenarioSesion(Persona p) {
 		try {
 
 			FXMLLoader loader = new FXMLLoader();
@@ -127,15 +130,26 @@ public class ManejadorEscenarios {
 			Stage stage = new Stage();
 			stage.getIcons().add(new Image(Main.class.getResourceAsStream(ruta)));
 			stage.setTitle("Herbario");
+
+			this.personaEnSesion = p;
 			VistaSesionRaizControlador controladorVistaSesionRaiz = loader.getController();
 			controladorVistaSesionRaiz.setManejador(this);
 			controladorVistaSesionRaiz.setStage(vista);
 			controladorVistaSesionRaiz.setStage(stage);
 			controladorVistaSesionRaiz.setPersonaEnSesion(p);
-			this.personaEnSesion = p;
+			stage.setMaximized(true);
+
+			System.out.println(personaEnSesion.getClass().getSimpleName());
+			if (personaEnSesion.getClass().getSimpleName().equals("Administrador")) {
+
+				controladorVistaSesionRaiz.cargarMenuTrabajador();
+			} else {
+				controladorVistaSesionRaiz.cargarMenuUsuario();
+
+			}
+
 			stage.setScene(scene);
 			stage.show();
-			controladorVistaSesionRaiz.cargarMenu();
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -181,7 +195,6 @@ public class ManejadorEscenarios {
 			Scene scene = new Scene(vista);
 			Stage stage = new Stage();
 			stage.setTitle("Herbario/registro");
-
 			stage.getIcons().add(new Image(Main.class.getResourceAsStream(ruta)));
 			stage.setScene(scene);
 			stage.show();
@@ -281,14 +294,14 @@ public class ManejadorEscenarios {
 
 			VistaGestionarEspecieControlador controladorGestionEspecie = loader.getController();
 			controladorGestionEspecie.setManejador(this);
-			
+
 			controladorGestionEspecie.setPane(pane);
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void cargarEscenarioAgregarGF(String tipoObjeto) {
 		try {
 
@@ -298,7 +311,7 @@ public class ManejadorEscenarios {
 
 			VistaAgregarGFControlador controladorVistaAgregarGF = loader.getController();
 			// importante
-			//controladorVistaRegistroEspecie.setManejador(this);
+			// controladorVistaRegistroEspecie.setManejador(this);
 
 			Scene scene = new Scene(vista);
 			Stage stage = new Stage();
@@ -366,6 +379,25 @@ public class ManejadorEscenarios {
 
 	public Stage getEscenario() {
 		return escenario;
+	}
+
+	public void iniciarVistaUsuario(BorderPane pane) {
+
+		try {
+
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(Main.class.getResource("./vista/VistaUsuario.fxml"));
+			BorderPane subVista = (BorderPane) loader.load();
+
+			pane.setCenter(subVista);
+
+			VistaUsuarioControlador controladorVistaUsuario = loader.getController();
+
+			controladorVistaUsuario.setManejador(this);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 }

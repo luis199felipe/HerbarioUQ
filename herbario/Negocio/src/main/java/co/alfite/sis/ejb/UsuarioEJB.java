@@ -1,17 +1,21 @@
 package co.alfite.sis.ejb;
 
-import javax.ejb.LocalBean;
+import java.util.List;
 
+import javax.ejb.LocalBean;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import co.alfite.sis.entidades.Empleado;
+import co.alfite.sis.entidades.ImagenPlanta;
 import co.alfite.sis.entidades.MeGustaEspeciePlanta;
 import co.alfite.sis.entidades.Persona;
 import co.alfite.sis.entidades.Recolector;
 import co.alfite.sis.entidades.Resenia;
+import co.alfite.sis.entidades.Usuario;
 import co.alfite.sis.excepciones.ElementoRepetidoExcepcion;
 
 /**
@@ -66,8 +70,31 @@ public class UsuarioEJB implements UsuarioEJBRemote {
 			return null;
 		}
 	}
+
+	public List<ImagenPlanta> obtenerListaImagenes() {
+
+		TypedQuery<ImagenPlanta> query = entityManager.createNamedQuery(ImagenPlanta.IMAGEN_GET_ALL, ImagenPlanta.class);
+		return query.getResultList();
+	}
 	
+	/*
+	 * reseñas de un usuario
+	 */
+	public List<Resenia> obtenerListaResenias(String id) {
 
+		TypedQuery<Resenia> query = entityManager.createNamedQuery(Resenia.RESENIA_USUARIO, Resenia.class);
 
+		query.setParameter("esp", id);
+		return query.getResultList();
+	}
+	
+	/*
+	 * likes de un usuario
+	 */
+	public List<MeGustaEspeciePlanta> obtenerListaMeGusta(String id) {
 
+		TypedQuery<MeGustaEspeciePlanta> query = entityManager.createNamedQuery(MeGustaEspeciePlanta.MEGUSTAESPECIE_USUARIO, MeGustaEspeciePlanta.class);
+		query.setParameter("esp", id);
+		return query.getResultList();
+	}
 }

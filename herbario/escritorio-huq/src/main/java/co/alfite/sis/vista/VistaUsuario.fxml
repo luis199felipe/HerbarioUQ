@@ -6,21 +6,58 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane prefHeight="570.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Vco.alfite.sis.controlador.VistaUsuarioControlador">
-   <bottom>
-      <Pagination prefHeight="56.0" prefWidth="750.0" BorderPane.alignment="CENTER" />
-   </bottom>
+<BorderPane prefHeight="570.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.alfite.sis.controlador.VistaUsuarioControlador">
    <center>
-      <GridPane BorderPane.alignment="CENTER">
+      <GridPane fx:id="gridPane" BorderPane.alignment="CENTER">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="184.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="236.0" minHeight="10.0" prefHeight="215.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="137.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="137.0" minHeight="0.0" prefHeight="21.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="274.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="269.0" minHeight="10.0" prefHeight="226.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="225.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
         </rowConstraints>
+         <children>
+            <BorderPane prefHeight="200.0" prefWidth="200.0">
+               <center>
+                  <Label text="Imagenes mas gustadas" BorderPane.alignment="CENTER" />
+               </center>
+            </BorderPane>
+            <BorderPane prefHeight="40.0" prefWidth="750.0" GridPane.rowIndex="4">
+               <center>
+                  <Label text="Todas las imagenes" BorderPane.alignment="CENTER" />
+               </center>
+            </BorderPane>
+            <Separator prefHeight="11.0" prefWidth="750.0" GridPane.rowIndex="3" />
+            <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="6">
+               <right>
+                  <Button fx:id="leer_2" mnemonicParsing="false" text="Leer mas" BorderPane.alignment="CENTER" />
+               </right>
+               <center>
+                  <Label fx:id="resenia_2" text="esta es una ................" BorderPane.alignment="CENTER" />
+               </center>
+               <left>
+                  <ToggleButton fx:id="like_2" mnemonicParsing="false" text="Me Gusta" BorderPane.alignment="CENTER" />
+               </left>
+            </BorderPane>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+               <right>
+                  <Button fx:id="leer_1" mnemonicParsing="false" text="Leer mas" BorderPane.alignment="CENTER" />
+               </right>
+               <center>
+                  <Label fx:id="resenia_1" text="Esta es una..................." BorderPane.alignment="CENTER" />
+               </center>
+               <left>
+                  <ToggleButton fx:id="like_1" mnemonicParsing="false" text="Me Gusta" BorderPane.alignment="CENTER" />
+               </left>
+            </BorderPane>
+            <BorderPane fx:id="paneMasGustadas" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+            <BorderPane fx:id="paneTodas" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5" />
+         </children>
       </GridPane>
    </center>
 </BorderPane>
