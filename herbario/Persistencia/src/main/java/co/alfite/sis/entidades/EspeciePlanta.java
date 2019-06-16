@@ -26,7 +26,7 @@ import javax.persistence.*;
 		@NamedQuery(name = EspeciePlanta.ESPECIES_GENERO_NOMBRE, query = "SELECT especie FROM EspeciePlanta especie where especie.generoPlanta.nombre= :gen "),
 		@NamedQuery(name = EspeciePlanta.ESPECIES_FAMILIA_NOMBRE, query = "SELECT especie FROM EspeciePlanta especie where especie.generoPlanta.familiaPlanta.nombre = :fam "),
 		@NamedQuery(name = EspeciePlanta.ESPECIES_POR_ID, query = "SELECT especie FROM EspeciePlanta especie where especie.idEspecie= :id "),
-		@NamedQuery(name = EspeciePlanta.ESPECIES_POR_NOMBRECIENTIFICO, query = "SELECT especie FROM EspeciePlanta especie where especie.nombreCientifico= :nomCien ")
+		@NamedQuery(name = EspeciePlanta.ESPECIES_POR_NOMBRECIENTIFICO, query = "SELECT especie FROM EspeciePlanta especie where especie.nombreCientifico= :nomCien "),
 
 })
 
@@ -47,18 +47,6 @@ public class EspeciePlanta implements Serializable {
 	public static final String ESPECIES_FAMILIA_NOMBRE = "EspeciesFamiliaListarPorNombreGenero";
 
 	/**
-	 * Una EspeciePlanta tiene muchas resenias de Usuarios
-	 */
-	@OneToMany(mappedBy = "especie")
-	private List<Resenia> resenias;
-
-	/**
-	 * Una EspeciePlanta tiene muchas MeGusta de Usuarios
-	 */
-	@OneToMany(mappedBy = "especie")
-	private List<MeGustaEspeciePlanta> megustas;
-
-	/**
 	 * Una EspeciePlanta tiene un RegistroEspecie
 	 */
 	@OneToOne
@@ -73,8 +61,8 @@ public class EspeciePlanta implements Serializable {
 	/**
 	 * Una EspeciePlanta tiene muchas ImagenesPlanta (1..*)
 	 */
-//	@OneToMany(mappedBy = "especie")
-//	private List<ImagenPlanta> imagenes;
+	@OneToMany(mappedBy = "especie")
+	private List<ImagenPlanta> imagenes;
 
 	/**
 	 * identificacion unica de una EspeciePlanta
@@ -120,28 +108,12 @@ public class EspeciePlanta implements Serializable {
 		this.generoPlanta = generoPlanta;
 	}
 
-//	public List<ImagenPlanta> getImagenes() {
-//		return imagenes;
-//	}
-//
-//	public void setImagenes(List<ImagenPlanta> imagenes) {
-//		this.imagenes = imagenes;
-//	}
-
-	public List<Resenia> getResenias() {
-		return resenias;
+	public List<ImagenPlanta> getImagenes() {
+		return imagenes;
 	}
 
-	public void setResenias(List<Resenia> resenias) {
-		this.resenias = resenias;
-	}
-
-	public List<MeGustaEspeciePlanta> getMegustas() {
-		return megustas;
-	}
-
-	public void setMegustas(List<MeGustaEspeciePlanta> megustas) {
-		this.megustas = megustas;
+	public void setImagenes(List<ImagenPlanta> imagenes) {
+		this.imagenes = imagenes;
 	}
 
 	public int getIdEspecie() {

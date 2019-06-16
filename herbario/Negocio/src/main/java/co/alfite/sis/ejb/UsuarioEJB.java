@@ -64,6 +64,9 @@ public class UsuarioEJB implements UsuarioEJBRemote {
 
 		try {
 			entityManager.persist(meGusta);
+
+			insertarMegusta(meGusta.getImagen());
+
 			return meGusta;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -71,12 +74,20 @@ public class UsuarioEJB implements UsuarioEJBRemote {
 		}
 	}
 
+	private void insertarMegusta(ImagenPlanta img) {
+
+		//probando la taoria de pipe
+		img.setNumeroLikes(img.getNumeroLikes() + 1);
+		entityManager.merge(img);
+	}
+
 	public List<ImagenPlanta> obtenerListaImagenes() {
 
-		TypedQuery<ImagenPlanta> query = entityManager.createNamedQuery(ImagenPlanta.IMAGEN_GET_ALL, ImagenPlanta.class);
+		TypedQuery<ImagenPlanta> query = entityManager.createNamedQuery(ImagenPlanta.IMAGEN_GET_ALL,
+				ImagenPlanta.class);
 		return query.getResultList();
 	}
-	
+
 	/*
 	 * reseñas de un usuario
 	 */
@@ -87,13 +98,38 @@ public class UsuarioEJB implements UsuarioEJBRemote {
 		query.setParameter("esp", id);
 		return query.getResultList();
 	}
-	
+
 	/*
 	 * likes de un usuario
 	 */
 	public List<MeGustaEspeciePlanta> obtenerListaMeGusta(String id) {
 
-		TypedQuery<MeGustaEspeciePlanta> query = entityManager.createNamedQuery(MeGustaEspeciePlanta.MEGUSTAESPECIE_USUARIO, MeGustaEspeciePlanta.class);
+		TypedQuery<MeGustaEspeciePlanta> query = entityManager
+				.createNamedQuery(MeGustaEspeciePlanta.MEGUSTAESPECIE_USUARIO, MeGustaEspeciePlanta.class);
+		query.setParameter("esp", id);
+		return query.getResultList();
+	}
+
+	public List<ImagenPlanta> obtenerListaImagenesOrdenadasPorLikes() {
+
+		TypedQuery<ImagenPlanta> query = entityManager.createNamedQuery(ImagenPlanta.ESPECIES_POR_LIKES_DES,
+				ImagenPlanta.class);
+		return query.getResultList();
+	}
+
+	public List<Resenia> obtenerListaReseniasPorEspecie(String id) {
+
+		TypedQuery<Resenia> query = entityManager.createNamedQuery(Resenia.RESENIA_ESPECIE, Resenia.class);
+
+		query.setParameter("esp", id);
+		return query.getResultList();
+	}
+
+	public List<MeGustaEspeciePlanta> obtenerListaLikesPorEspecie(String id) {
+
+		TypedQuery<MeGustaEspeciePlanta> query = entityManager
+				.createNamedQuery(MeGustaEspeciePlanta.MEGUSTAESPECIE_ESPECIE, MeGustaEspeciePlanta.class);
+
 		query.setParameter("esp", id);
 		return query.getResultList();
 	}

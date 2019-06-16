@@ -14,10 +14,9 @@ import javax.persistence.*;
 @Entity
 @NamedQueries({
 		@NamedQuery(name = MeGustaEspeciePlanta.MEGUSTAESPECIE_GET_ALL, query = "select megustaEspecie from MeGustaEspeciePlanta megustaEspecie"),
-		@NamedQuery(name = MeGustaEspeciePlanta.MEGUSTAESPECIE_ESPECIE, query = "select megusta from MeGustaEspeciePlanta megusta where megusta.especie.idEspecie = :esp "),
-		@NamedQuery(name = MeGustaEspeciePlanta.MEGUSTAESPECIE_ESPECIE_NOMBRECIENTIFICO, query = "select megusta from MeGustaEspeciePlanta megusta where megusta.especie.nombreCientifico = :nom "),
-		@NamedQuery(name = MeGustaEspeciePlanta.MEGUSTAESPECIE_USUARIO, query = "select megusta from MeGustaEspeciePlanta megusta where megusta.usuario.idPersona = :esp "),
-		@NamedQuery(name = MeGustaEspeciePlanta.MEGUSTAESPECIE_ESPECIEMASMEGUSTAS, query = "select count(megusta.especie.idEspecie) as n from MeGustaEspeciePlanta megusta group by megusta.especie order by n desc") })
+		@NamedQuery(name = MeGustaEspeciePlanta.MEGUSTAESPECIE_ESPECIE, query = "select megusta from MeGustaEspeciePlanta megusta where megusta.imagen.especie.idEspecie = :esp "),
+		@NamedQuery(name = MeGustaEspeciePlanta.MEGUSTAESPECIE_ESPECIE_NOMBRECIENTIFICO, query = "select megusta from MeGustaEspeciePlanta megusta where megusta.imagen.especie.nombreCientifico = :nom "),
+		@NamedQuery(name = MeGustaEspeciePlanta.MEGUSTAESPECIE_USUARIO, query = "select megusta from MeGustaEspeciePlanta megusta where megusta.usuario.idPersona = :esp "), })
 public class MeGustaEspeciePlanta implements Serializable {
 
 	public static final String MEGUSTAESPECIE_GET_ALL = "MeGustaEspecieGetAll";
@@ -37,7 +36,7 @@ public class MeGustaEspeciePlanta implements Serializable {
 	 * Muchos MeGustaEspeciePlanta pertenecen a una EspeciePlanta
 	 */
 	@ManyToOne
-	private EspeciePlanta especie;
+	private ImagenPlanta imagen;
 
 	/**
 	 * Identificacion unica de MegustaEspeciePlanta
@@ -65,14 +64,6 @@ public class MeGustaEspeciePlanta implements Serializable {
 		this.usuario = usuario;
 	}
 
-	public EspeciePlanta getEspecie() {
-		return especie;
-	}
-
-	public void setEspecie(EspeciePlanta especie) {
-		this.especie = especie;
-	}
-
 	public Integer getIdMegusta() {
 		return idMegusta;
 	}
@@ -87,6 +78,14 @@ public class MeGustaEspeciePlanta implements Serializable {
 
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
+	}
+
+	public ImagenPlanta getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(ImagenPlanta imagen) {
+		this.imagen = imagen;
 	}
 
 }

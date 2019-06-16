@@ -260,10 +260,8 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 			// plant.setCantidad(esp.getCantidad());
 			plant.setGeneroPlanta(esp.getGeneroPlanta());
 			// plant.setImagenes(esp.getImagenes());
-			// plant.setMegustas(esp.get());
 			plant.setNombre(esp.getNombre());
 			plant.setNombreCientifico(esp.getNombreCientifico());
-			plant.setResenias(esp.getResenias());
 
 			try {
 				entityManager.merge(plant);

@@ -31,4 +31,10 @@ public interface UsuarioEJBRemote {
 	List<Resenia> obtenerListaResenias(String id);
 
 	List<MeGustaEspeciePlanta> obtenerListaMeGusta(String id);
+
+	List<ImagenPlanta> obtenerListaImagenesOrdenadasPorLikes();
+
+	List<Resenia> obtenerListaReseniasPorEspecie(String id);
+
+	List<MeGustaEspeciePlanta> obtenerListaLikesPorEspecie(String id);
 }

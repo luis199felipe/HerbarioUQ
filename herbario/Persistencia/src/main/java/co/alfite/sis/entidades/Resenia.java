@@ -10,12 +10,10 @@ import javax.persistence.*;
  * @version 1.0
  */
 @Entity
-@NamedQueries({ 
-	@NamedQuery(name = Resenia.RESENIA_GET_ALL, query = "select resenia from Resenia resenia"), 
-	@NamedQuery(name = Resenia.RESENIA_ESPECIE, query = "select resenia from Resenia resenia where resenia.especie.idEspecie = :esp"), 
-	@NamedQuery(name = Resenia.RESENIA_ESPECIE_NOMBRECIENTIFICO, query = "select resenia from Resenia resenia where resenia.especie.nombreCientifico = :nom"), 
-	@NamedQuery(name = Resenia.RESENIA_USUARIO, query = "select resenia from Resenia resenia where resenia.usuario.idPersona = :per")
-})
+@NamedQueries({ @NamedQuery(name = Resenia.RESENIA_GET_ALL, query = "select resenia from Resenia resenia"),
+		@NamedQuery(name = Resenia.RESENIA_ESPECIE, query = "select resenia from Resenia resenia where resenia.imagen.especie.idEspecie = :esp"),
+		@NamedQuery(name = Resenia.RESENIA_ESPECIE_NOMBRECIENTIFICO, query = "select resenia from Resenia resenia where resenia.imagen.especie.nombreCientifico = :nom"),
+		@NamedQuery(name = Resenia.RESENIA_USUARIO, query = "select resenia from Resenia resenia where resenia.usuario.idPersona = :per") })
 
 public class Resenia implements Serializable {
 
@@ -34,7 +32,7 @@ public class Resenia implements Serializable {
 	 * Muchos Resenia pertenecen a una EspeciePlanta
 	 */
 	@ManyToOne
-	private EspeciePlanta especie;
+	private ImagenPlanta imagen;
 
 	/**
 	 * identificacion unica de una Resenia
@@ -60,6 +58,7 @@ public class Resenia implements Serializable {
 	private Estado estado;
 
 	private static final long serialVersionUID = 1L;
+
 	public Resenia() {
 		super();
 	}
@@ -96,12 +95,12 @@ public class Resenia implements Serializable {
 		this.usuario = usuario;
 	}
 
-	public EspeciePlanta getEspecie() {
-		return especie;
+	public ImagenPlanta getImagen() {
+		return imagen;
 	}
 
-	public void setEspecie(EspeciePlanta especie) {
-		this.especie = especie;
+	public void setImagen(ImagenPlanta imagen) {
+		this.imagen = imagen;
 	}
 
 }

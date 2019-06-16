@@ -3,6 +3,7 @@ package co.alfite.sis.entidades;
 import java.io.Serializable;
 import java.lang.String;
 import java.sql.Blob;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -13,20 +14,33 @@ import javax.persistence.*;
  * @version 1.0
  */
 @Entity
-@NamedQueries({ @NamedQuery(name = ImagenPlanta.IMAGEN_GET_ALL, query = "select imagen from ImagenPlanta imagen") })
+@NamedQueries({ @NamedQuery(name = ImagenPlanta.IMAGEN_GET_ALL, query = "select imagen from ImagenPlanta imagen"),
+		@NamedQuery(name = ImagenPlanta.ESPECIES_POR_LIKES_DES, query = "SELECT img FROM ImagenPlanta img order by img.numeroLikes DESC") })
 public class ImagenPlanta implements Serializable {
 
 	public static final String IMAGEN_GET_ALL = "ImagenGetAll";
+	public static final String ESPECIES_POR_LIKES_DES = "EspeciesNumeroLikeDes";
 
 	/**
 	 * Muchas ImagenesPlanta pertenecen a una EspecePlanta
 	 */
+
+	@OneToMany(mappedBy = "imagen")
+	private List<Resenia> resenias;
+
+	/**
+	 * Una EspeciePlanta tiene muchas MeGusta de Usuarios
+	 */
+	@OneToMany(mappedBy = "imagen")
+	private List<MeGustaEspeciePlanta> megustas;
+
 	@ManyToOne
 	private EspeciePlanta especie;
-	
+
 	@OneToOne
 	private RegistroEspecie registro;
 
+	private Long numeroLikes;
 	/**
 	 * Identificacion unica de una ImagenPlanta
 	 */
@@ -77,6 +91,30 @@ public class ImagenPlanta implements Serializable {
 
 	public void setRegistro(RegistroEspecie registro) {
 		this.registro = registro;
+	}
+
+	public Long getNumeroLikes() {
+		return numeroLikes;
+	}
+
+	public void setNumeroLikes(Long numeroLikes) {
+		this.numeroLikes = numeroLikes;
+	}
+
+	public List<Resenia> getResenias() {
+		return resenias;
+	}
+
+	public void setResenias(List<Resenia> resenias) {
+		this.resenias = resenias;
+	}
+
+	public List<MeGustaEspeciePlanta> getMegustas() {
+		return megustas;
+	}
+
+	public void setMegustas(List<MeGustaEspeciePlanta> megustas) {
+		this.megustas = megustas;
 	}
 
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import javax.persistence.TypedQuery;
 
 import co.alfite.sis.ejb.AdministradorEJBRemote;
 import co.alfite.sis.ejb.UsuarioEJBRemote;
@@ -123,5 +124,25 @@ public class UsuarioDelegado {
 	
 	public List<ImagenPlanta> listarImagenes() {
 		return usuEJB.obtenerListaImagenes();
+	}
+	
+	
+	
+	public List<ImagenPlanta> obtenerListaImagenesOrdenadasPorLikes() {
+
+		
+		return usuEJB.obtenerListaImagenesOrdenadasPorLikes();
+	}
+
+	public List<Resenia> obtenerListaReseniasPorEspecie(String id) {
+
+		
+		return usuEJB.obtenerListaReseniasPorEspecie(id);
+	}
+
+	public List<MeGustaEspeciePlanta> obtenerListaLikesPorEspecie(String id) {
+
+		
+		return usuEJB.obtenerListaLikesPorEspecie(id);
 	}
 }
