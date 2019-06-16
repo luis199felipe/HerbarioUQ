@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -18,7 +19,7 @@ import javafx.scene.paint.Color;
 public class VistaGestionarFamiliaControlador {
 
 	@FXML
-	private TextField campoNumeroEspecies;
+	private Label campoNumeroEspecies;
 
 	@FXML
 	private Button botonActualizarDatos;
@@ -33,7 +34,7 @@ public class VistaGestionarFamiliaControlador {
 	private Button botonBuscar;
 
 	@FXML
-	private TextField campoID;
+	private Label campoID;
 
 	@FXML
 	private ComboBox<?> comboBoxFiltrar;
@@ -45,7 +46,7 @@ public class VistaGestionarFamiliaControlador {
 	private Button botonAgregar;
 
 	@FXML
-	private TextField campoNumeroGeneros;
+	private Label campoNumeroGeneros;
 
 	@FXML
 	private TableView<FamiliaObservable> tabla;
@@ -90,6 +91,7 @@ public class VistaGestionarFamiliaControlador {
 	private void verFamiliaDetalle(FamiliaObservable fam) {
 		campoID.setText(fam.getIdFamilia().getValue());
 		campoNombre.setText(fam.getNombre().getValue());
+		campoNumeroGeneros.setText(fam.getNumeroGeneros());
 	}
 
 	/**
@@ -131,7 +133,9 @@ public class VistaGestionarFamiliaControlador {
 		boolean  elim=adminDelegado.eliminarFamilia(campoNombre.getText());
 		if(elim) {
 			Utilidades.mostrarMensaje("Eliminar", "la familia se ha eliminado correctamente", AlertType.INFORMATION);
-
+			actualizarLista();
+		}else {
+			Utilidades.mostrarMensaje("ERROR", "la familia NO se ha podido eliminar", AlertType.ERROR);
 		}
 
 	}

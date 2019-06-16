@@ -371,9 +371,12 @@ public class AdministradorDelegado implements AdministradorEJBRemote {
 
 	@Override
 	public FamiliaPlanta buscarFamiliaPlanta(String nombre) {
-		// TODO Auto-generated method stub
 		return adminEJB.buscarFamiliaPlanta(nombre);
 	}
+
+
+	
+	
 
 	@Override
 	public GeneroPlanta buscarGeneroPlanta(String nombre) {
@@ -410,5 +413,6 @@ public class AdministradorDelegado implements AdministradorEJBRemote {
 		// TODO Auto-generated method stub
 		return adminEJB.actualizarEstadoPersona(id, est);
 	}
+
 
 }

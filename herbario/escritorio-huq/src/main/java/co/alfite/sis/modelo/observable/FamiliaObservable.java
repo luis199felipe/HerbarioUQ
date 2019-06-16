@@ -9,10 +9,14 @@ import javafx.beans.property.SimpleStringProperty;
 public class FamiliaObservable {
 	private StringProperty idFamilia;
 	private StringProperty nombre;
+	private StringProperty numeroGeneros;
+	private StringProperty numeroEspecies;
 
 	public FamiliaObservable(FamiliaPlanta familia) {
 		this.idFamilia = new SimpleStringProperty(String.valueOf(familia.getIdFamilia()));
 		this.nombre = new SimpleStringProperty(familia.getNombre());
+		//int nGen = 
+		this.numeroGeneros = new SimpleStringProperty();
 	}
 
 //	public FamiliaObservable(StringProperty idFamilia, StringProperty nombre) {
@@ -34,6 +38,11 @@ public class FamiliaObservable {
 
 	public void setNombre(StringProperty nombre) {
 		this.nombre = nombre;
+	}
+
+	public String getNumeroGeneros() {
+		
+		return null;
 	}
 
 }

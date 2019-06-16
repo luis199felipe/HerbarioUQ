@@ -6,6 +6,7 @@ import co.alfite.sis.excepciones.ElementoRepetidoExcepcion;
 import co.alfite.sis.modelo.AdministradorDelegado;
 import co.alfite.sis.modelo.observable.FamiliaObservable;
 import co.alfite.sis.modelo.observable.GeneroObservable;
+import co.alfite.sis.util.Utilidades;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 public class VistaAgregarGFControlador {
@@ -80,9 +82,11 @@ public class VistaAgregarGFControlador {
 				FamiliaPlanta nuevaFam = new FamiliaPlanta();
 				nuevaFam.setNombre(campoNombreFamilia.getText());
 				adminDelegado.insertarFamilia(nuevaFam);
+				Utilidades.mostrarMensaje("OK", "Se agregó correctamente el genero, por favor actualice la lista.", AlertType.INFORMATION);
+				stage.close();
 			} catch (ElementoRepetidoExcepcion e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
+				Utilidades.mostrarMensaje("Error", "No se pudo agregar el genero", AlertType.ERROR);
 			}
 		} else {
 
@@ -93,9 +97,15 @@ public class VistaAgregarGFControlador {
 						comboBoxNombreFamilia.getSelectionModel().getSelectedItem()));
 				nuevoGen.setNombre(campoNombreGenero.getText());
 				adminDelegado.insertarGenero(nuevoGen);
+				
+				Utilidades.mostrarMensaje("OK", "Se agregó correctamente el genero, por favor actualice la lista.", AlertType.INFORMATION);
+				
+				stage.close();
+				
 			} catch (ElementoRepetidoExcepcion e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				Utilidades.mostrarMensaje("Error", "No se pudo agregar el genero", AlertType.ERROR);
 			}
 		}
 

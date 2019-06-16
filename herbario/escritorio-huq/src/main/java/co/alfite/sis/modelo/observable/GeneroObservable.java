@@ -9,12 +9,22 @@ import javafx.beans.property.StringProperty;
 public class GeneroObservable {
 	private StringProperty idGenero;
 	private StringProperty nombre;
+	private StringProperty familia;
 	
 	public GeneroObservable(GeneroPlanta genero) {
 		this.idGenero = new SimpleStringProperty(String.valueOf(genero.getIdGenero()));
 		this.nombre = new SimpleStringProperty(genero.getNombre());
+		this.familia = new SimpleStringProperty(genero.getFamiliaPlanta().getNombre());
 	}
 	
+	public StringProperty getFamilia() {
+		return familia;
+	}
+
+	public void setFamilia(StringProperty familia) {
+		this.familia = familia;
+	}
+
 	public GeneroObservable(StringProperty idGenero, StringProperty nombre) {
 		this.idGenero = idGenero;
 		this.nombre = nombre;

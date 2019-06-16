@@ -1,15 +1,21 @@
 package co.alfite.sis.controlador;
 
+import java.util.Iterator;
+import java.util.List;
+
 import co.alfite.sis.entidades.FamiliaPlanta;
 import co.alfite.sis.entidades.GeneroPlanta;
 import co.alfite.sis.modelo.AdministradorDelegado;
 import co.alfite.sis.modelo.observable.FamiliaObservable;
 import co.alfite.sis.modelo.observable.GeneroObservable;
 import co.alfite.sis.util.Utilidades;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -18,10 +24,10 @@ import javafx.scene.control.Alert.AlertType;
 public class VistaGestionarGeneroControlador {
 
 	@FXML
-	private TextField campoNumeroEspecies;
+	private Label campoNumeroEspecies;
 
 	@FXML
-	private TextField campoNombreFamilia;
+	private ChoiceBox<String> campoNombreFamilia;
 
 	@FXML
 	private TableColumn<GeneroObservable, String> columnaId;
@@ -36,7 +42,7 @@ public class VistaGestionarGeneroControlador {
 	private Button botonAgregarGenero;
 
 	@FXML
-	private TextField campoID;
+	private Label campoID;
 
 	@FXML
 	private Button botonBuscar;
@@ -58,6 +64,9 @@ public class VistaGestionarGeneroControlador {
 
 	@FXML
 	private TextField campoNombre;
+	
+	@FXML
+	private ObservableList<String> listaItems;
 
 	private AdministradorDelegado adminDelegado;
 
@@ -79,7 +88,21 @@ public class VistaGestionarGeneroControlador {
 	}
 
 	private void verGeneroDetalle(GeneroObservable gen) {
-		// TODO Auto-generated method stub
+		campoID.setText(gen.getIdGenero().getValue());
+		campoNombre.setText(gen.getNombre().getValue());
+		listaItems = FXCollections.observableArrayList();
+		/*List<FamiliaObservable> fams = adminDelegado.listarFamiliasObservables();
+		
+		Iterator<FamiliaObservable> it = fams.iterator();
+		while (it.hasNext()) {
+			String ff = it.next().getNombre().getValue();
+			listaItems.add(ff);
+		}
+		*/
+		listaItems.add(gen.getFamilia().getValue());
+		campoNombreFamilia.setItems(listaItems);
+		//campoNombreFamilia.setDisable(false);
+		
 	}
 
 	@FXML
@@ -95,7 +118,10 @@ public class VistaGestionarGeneroControlador {
 
 			ac.setIdGenero(Integer.parseInt(campoID.getText()));
 			ac.setNombre(campoNombre.getText());
-			ac.setFamiliaPlanta(adminDelegado.buscarFamiliaPlanta(campoNombreFamilia.getText()));
+			//String familia = campoNombreFamilia.getSelectionModel().getSelectedItem();
+
+			//FamiliaPlanta f = adminDelegado.buscarFamiliaPlanta(familia);
+			//ac.setFamiliaPlanta(f);
 			adminDelegado.actualizarGeneroPlanta(ac);
 			botonActualizarDatos.setText("Actualizar los Datos");
 			campoNombre.setEditable(false);
