@@ -2,3 +2,4 @@
 /herbario/.settings
 .recommenders/index/
 /.recommenders/
+.recommenders/caches/identified-project-coordinates.json
