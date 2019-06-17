@@ -253,6 +253,19 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 		}
 	}
 
+	public ImagenPlanta actualizarImagenPlanta(ImagenPlanta g) {
+		ImagenPlanta gen = entityManager.find(ImagenPlanta.class, g.getIdImagen());
+
+		if (gen != null) {
+
+			entityManager.merge(g);
+			return gen;
+
+		} else {
+			return null;
+		}
+	}
+
 	public EspeciePlanta actualizarEspeciePlanta(EspeciePlanta esp) {
 		EspeciePlanta plant = entityManager.find(EspeciePlanta.class, esp.getIdEspecie());
 
@@ -489,6 +502,14 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 		return query.getResultList();
 	}
 
+	public List<RegistroEspecie> listarRegsitrosPorEstado(Estado estado) {
+
+		TypedQuery<RegistroEspecie> query = entityManager.createNamedQuery(RegistroEspecie.REGISTRO_POR_ESTADO,
+				RegistroEspecie.class);
+		query.setParameter("est", estado);
+		return query.getResultList();
+	}
+
 	/**
 	 * METODOS BUSCAR(CONSULTA)
 	 */
@@ -520,7 +541,8 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 		TypedQuery<FamiliaPlanta> query = entityManager.createNamedQuery(FamiliaPlanta.FAMILIA_POR_NOMBRE,
 				FamiliaPlanta.class);
 		query.setParameter("nom", nombre);
-		return query.getSingleResult();
+		FamiliaPlanta f=query.getSingleResult();
+		return f;
 	}
 
 	public GeneroPlanta buscarGeneroPlanta(String nombre) {
@@ -530,10 +552,10 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 		return query.getSingleResult();
 	}
 
-	public EspeciePlanta buscarEspeciePlanta(String nombreCientifico) {
-		TypedQuery<EspeciePlanta> query = entityManager.createNamedQuery(EspeciePlanta.ESPECIES_POR_NOMBRECIENTIFICO,
+	public EspeciePlanta buscarEspeciePlanta(String nombre) {
+		TypedQuery<EspeciePlanta> query = entityManager.createNamedQuery(EspeciePlanta.ESPECIES_POR_NOMBRE,
 				EspeciePlanta.class);
-		query.setParameter("nomCien", nombreCientifico);
+		query.setParameter("nomCien", nombre);
 		return query.getSingleResult();
 	}
 
@@ -586,11 +608,10 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 	 * @throws ElementoRepetidoExcepcion
 	 */
 
-	private boolean insertarEspecie(EspeciePlanta especie) {
+	public boolean insertarEspecie(EspeciePlanta especie) {
 
 		boolean i = false;
 		if (entityManager.find(EspeciePlanta.class, especie.getNombre()) == null) {
-
 			i = true;
 			entityManager.persist(especie);
 		}
@@ -651,6 +672,19 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 		try {
 			entityManager.persist(img);
 			return img;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	public ImagenPlanta buscarImagenPlanta(Integer id) {
+
+		try {
+			TypedQuery<ImagenPlanta> query = entityManager.createNamedQuery(ImagenPlanta.IMAGEN_POR_ID,
+					ImagenPlanta.class);
+			query.setParameter("id", id);
+
+			return query.getSingleResult();
 		} catch (Exception e) {
 			return null;
 		}

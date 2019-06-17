@@ -1,19 +1,16 @@
 package co.alfite.sis.controlador;
 
 import javax.mail.internet.InternetAddress;
+
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 import co.alfite.sis.entidades.Persona;
-import co.alfite.sis.entidades.Usuario;
 import co.alfite.sis.modelo.AdministradorDelegado;
 import co.alfite.sis.util.Utilidades;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;

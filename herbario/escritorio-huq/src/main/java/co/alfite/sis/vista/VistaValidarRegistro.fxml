@@ -40,8 +40,8 @@
             <GridPane GridPane.columnIndex="1">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="204.0" minWidth="10.0" prefWidth="134.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="204.0" minWidth="10.0" prefWidth="21.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="284.0" minWidth="10.0" prefWidth="150.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="204.0" minWidth="10.0" prefWidth="15.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="284.0" minWidth="10.0" prefWidth="140.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="284.0" minWidth="10.0" prefWidth="27.0" />
               </columnConstraints>
               <rowConstraints>
@@ -90,7 +90,7 @@
                   <ComboBox fx:id="comoBoxEstado" prefHeight="27.0" prefWidth="161.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                   <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5">
                      <center>
-                        <Button mnemonicParsing="false" text="Tomar imagen" BorderPane.alignment="CENTER" />
+                        <Button fx:id="botonTomarImagen" mnemonicParsing="false" onAction="#tomarImagen" text="Tomar imagen" BorderPane.alignment="CENTER" />
                      </center>
                   </BorderPane>
                </children>
@@ -116,9 +116,12 @@
                      </center>
                   </BorderPane>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
-                     <center>
+                     <right>
                         <ComboBox fx:id="filtrarPor" prefHeight="25.0" prefWidth="190.0" promptText="Ver Todos los Registros" BorderPane.alignment="CENTER" />
-                     </center>
+                     </right>
+                     <left>
+                        <Button fx:id="botonActualizar" mnemonicParsing="false" onAction="#actualizarLista" prefHeight="25.0" prefWidth="90.0" text="Actualizar" BorderPane.alignment="CENTER" />
+                     </left>
                   </BorderPane>
                </children>
             </GridPane>

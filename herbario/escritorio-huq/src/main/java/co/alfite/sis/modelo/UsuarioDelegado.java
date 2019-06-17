@@ -11,6 +11,8 @@ import co.alfite.sis.ejb.UsuarioEJBRemote;
 import co.alfite.sis.entidades.Empleado;
 import co.alfite.sis.entidades.ImagenPlanta;
 import co.alfite.sis.entidades.MeGustaEspeciePlanta;
+import co.alfite.sis.entidades.RegistroEspecie;
+import co.alfite.sis.entidades.RegistroEspecie.Estado;
 import co.alfite.sis.entidades.Resenia;
 import co.alfite.sis.modelo.observable.MeGustaObservable;
 import co.alfite.sis.modelo.observable.ReseniaObservable;
@@ -151,4 +153,6 @@ public class UsuarioDelegado {
 		return usuEJB.listaReseniasPorImagen(idImagen);
 		
 	}
+	
+
 }

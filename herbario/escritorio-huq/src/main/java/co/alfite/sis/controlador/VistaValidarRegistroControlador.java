@@ -10,9 +10,13 @@ import java.nio.file.Files;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
+import co.alfite.sis.entidades.EspeciePlanta;
+import co.alfite.sis.entidades.FamiliaPlanta;
+import co.alfite.sis.entidades.GeneroPlanta;
 import co.alfite.sis.entidades.ImagenPlanta;
 import co.alfite.sis.entidades.RegistroEspecie;
 import co.alfite.sis.entidades.RegistroEspecie.Estado;
+import co.alfite.sis.excepciones.ElementoRepetidoExcepcion;
 import co.alfite.sis.modelo.AdministradorDelegado;
 import co.alfite.sis.modelo.observable.FamiliaObservable;
 import co.alfite.sis.modelo.observable.RegistroObservable;
@@ -62,6 +66,8 @@ public class VistaValidarRegistroControlador {
 
 	private AdministradorDelegado adminDelegado;
 	private ObservableList<String> listaItems;
+	private ObservableList<String> listaItems2;
+
 	private RegistroObservable registro;
 
 	public VistaValidarRegistroControlador() {
@@ -70,13 +76,6 @@ public class VistaValidarRegistroControlador {
 
 	@FXML
 	private void initialize() {
-		tablaRegistros.setItems((ObservableList<RegistroObservable>) adminDelegado.listarRegistrosObservables());
-
-		columnaIdRegistro.setCellValueFactory(cellData -> cellData.getValue().getIdRegistro());
-		columnaEstadoRegistro.setCellValueFactory(cellData -> cellData.getValue().getEstado());
-
-		tablaRegistros.getSelectionModel().selectedItemProperty()
-				.addListener((observable, oldValue, newValue) -> verRegistroDetalle(newValue));
 
 		listaItems = FXCollections.observableArrayList();
 		listaItems.add("enviado");
@@ -84,16 +83,41 @@ public class VistaValidarRegistroControlador {
 		listaItems.add("rechazado");
 		comoBoxEstado.setItems(listaItems);
 
+		listaItems2 = FXCollections.observableArrayList();
+		listaItems2.add("Todos");
+		listaItems2.add("Aprobados");
+		listaItems2.add("Rechazados");
+		listaItems2.add("enviados");
+
+		filtrarPor.setItems(listaItems2);
+		filtrarPor.getSelectionModel().select(0);
+		filtrarPor.getSelectionModel().selectedItemProperty()
+				.addListener((observable, oldValue, newValue) -> filtrarPor(newValue));
+
+		actualizarLista();
+		columnaIdRegistro.setCellValueFactory(cellData -> cellData.getValue().getIdRegistro());
+		columnaEstadoRegistro.setCellValueFactory(cellData -> cellData.getValue().getEstado());
+
+		tablaRegistros.getSelectionModel().selectedItemProperty()
+				.addListener((observable, oldValue, newValue) -> verRegistroDetalle(newValue));
+
+	}
+
+	private void filtrarPor(String newValue) {
+		actualizarLista();
+
 	}
 
 	private void verRegistroDetalle(RegistroObservable registro) {
 
 		this.registro = registro;
-		ImagenPlanta x = registro.getImagen();
-		InputStream in = new ByteArrayInputStream(x.getImagen());
-		Image z = new Image(in);
-		imagenPlanta.setImage(z);
+		if (registro.getImagen() != null) {
+			ImagenPlanta x = registro.getImagen();
+			InputStream in = new ByteArrayInputStream(x.getImagen());
+			Image z = new Image(in);
+			imagenPlanta.setImage(z);
 
+		}
 		nombrePlanta.setText(registro.getNombreEspecie().getValue());
 		familiaPlanta.setText(registro.getNombreFamilia().getValue());
 		generoPlanta.setText(registro.getNombreGenero().getValue());
@@ -127,8 +151,87 @@ public class VistaValidarRegistroControlador {
 //la idea es que cuando cambie el estado a aprobado se persista una especie nueva
 		// y ademas debe haber una opcion de si la espceie ya existe tomar la imagen del
 		// registro y agregarla a la lista de imagenes de la especie
+
 		adminDelegado.validarRegistro(Integer.parseInt(registro.getIdRegistro().getValue()),
 				Estado.valueOf(comoBoxEstado.getSelectionModel().getSelectedItem()));
+
+		
+		if (comoBoxEstado.getSelectionModel().getSelectedItem().equals(Estado.aprobado.toString())) {
+			System.out.println("busca familia");
+			FamiliaPlanta fam = adminDelegado.buscarFamiliaPlanta(familiaPlanta.getText());
+			System.out.println(fam.getNombre());
+			if (fam == null) {
+
+				FamiliaPlanta nuevaFamilia = new FamiliaPlanta();
+				nuevaFamilia.setNombre(familiaPlanta.getText());
+				try {
+					fam = adminDelegado.insertarFamilia(nuevaFamilia);
+				} catch (ElementoRepetidoExcepcion e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+			GeneroPlanta gen = adminDelegado.buscarGeneroPlanta(generoPlanta.getText());
+
+			if (gen == null) {
+				GeneroPlanta nuevoGenero = new GeneroPlanta();
+				nuevoGenero.setNombre(generoPlanta.getText());
+				nuevoGenero.setFamiliaPlanta(fam);
+				try {
+					gen = adminDelegado.insertarGenero(nuevoGenero);
+				} catch (ElementoRepetidoExcepcion e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			EspeciePlanta esp = adminDelegado.buscarEspeciePlanta(nombrePlanta.getText());
+
+			if (esp == null) {
+
+				EspeciePlanta nuevaEspecie = new EspeciePlanta();
+				nuevaEspecie.setGeneroPlanta(gen);
+				nuevaEspecie.setNombre(nombrePlanta.getText());
+				adminDelegado.insertarEspecie(nuevaEspecie);
+
+				ImagenPlanta im = adminDelegado.buscarImagenPlanta(registro.getImagen().getIdImagen());
+				
+				im.setEspecie(nuevaEspecie);
+				adminDelegado.actualizarImagenPlanta(im);
+
+			}
+
+		}
+
+	}
+
+	@FXML
+	void actualizarLista() {
+
+		tablaRegistros.getItems().clear();
+		if (filtrarPor.getSelectionModel().getSelectedIndex() == 0) {
+			tablaRegistros.setItems((ObservableList<RegistroObservable>) adminDelegado.listarRegistrosObservables());
+
+		} else if (filtrarPor.getSelectionModel().getSelectedIndex() == 1) {
+			tablaRegistros.setItems(
+					(ObservableList<RegistroObservable>) adminDelegado.listarRegistrosObservables(Estado.aprobado));
+
+		} else if (filtrarPor.getSelectionModel().getSelectedIndex() == 2) {
+			tablaRegistros.setItems(
+					(ObservableList<RegistroObservable>) adminDelegado.listarRegistrosObservables(Estado.rechazado));
+
+		} else {
+			tablaRegistros.setItems(
+					(ObservableList<RegistroObservable>) adminDelegado.listarRegistrosObservables(Estado.enviado));
+		}
+
+	}
+
+	@FXML
+	void tomarImagen() {
+
+//		tablaRegistros.setItems((ObservableList<RegistroObservable>) adminDelegado.listarRegistrosObservables());
 
 	}
 

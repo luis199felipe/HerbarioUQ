@@ -9,6 +9,7 @@ import co.alfite.sis.entidades.Empleado;
 import co.alfite.sis.entidades.EspeciePlanta;
 import co.alfite.sis.entidades.FamiliaPlanta;
 import co.alfite.sis.entidades.GeneroPlanta;
+import co.alfite.sis.entidades.ImagenPlanta;
 import co.alfite.sis.entidades.Persona;
 import co.alfite.sis.entidades.Recolector;
 import co.alfite.sis.entidades.RegistroEspecie;
@@ -34,7 +35,8 @@ public interface AdministradorEJBRemote {
 
 	GeneroPlanta insertarGenero(GeneroPlanta genero) throws ElementoRepetidoExcepcion;
 
-	//EspeciePlanta insertarEspecie(EspeciePlanta especie) throws ElementoRepetidoExcepcion;
+	// EspeciePlanta insertarEspecie(EspeciePlanta especie) throws
+	// ElementoRepetidoExcepcion;
 
 	Usuario actualizarUsuario(Usuario us);
 
@@ -53,7 +55,8 @@ public interface AdministradorEJBRemote {
 	boolean inactivarEmpleado(Empleado empleado);
 
 	boolean inactivarRecolector(Recolector recolector);
-	boolean actualizarEstadoPersona(String id,co.alfite.sis.entidades.Persona.Estado est);
+
+	boolean actualizarEstadoPersona(String id, co.alfite.sis.entidades.Persona.Estado est);
 
 	boolean eliminarFamilia(String fam);
 
@@ -93,6 +96,8 @@ public interface AdministradorEJBRemote {
 
 	List<EspeciePlanta> listarEspeciesPorEstado(Estado estado);
 
+	List<RegistroEspecie> listarRegsitrosPorEstado(Estado estado);
+
 	void validarRegistro(int id, Estado est);
 
 	/**
@@ -123,5 +128,11 @@ public interface AdministradorEJBRemote {
 	 * @return
 	 */
 	EspeciePlanta verDetalleEspecie(int id);
+
+	ImagenPlanta buscarImagenPlanta(Integer id);
+
+	boolean insertarEspecie(EspeciePlanta especie);
+
+	ImagenPlanta actualizarImagenPlanta(ImagenPlanta g);
 
 }

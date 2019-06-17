@@ -27,6 +27,7 @@ import javax.persistence.*;
 		@NamedQuery(name = EspeciePlanta.ESPECIES_FAMILIA_NOMBRE, query = "SELECT especie FROM EspeciePlanta especie where especie.generoPlanta.familiaPlanta.nombre = :fam "),
 		@NamedQuery(name = EspeciePlanta.ESPECIES_POR_ID, query = "SELECT especie FROM EspeciePlanta especie where especie.idEspecie= :id "),
 		@NamedQuery(name = EspeciePlanta.ESPECIES_POR_NOMBRECIENTIFICO, query = "SELECT especie FROM EspeciePlanta especie where especie.nombreCientifico= :nomCien "),
+		@NamedQuery(name = EspeciePlanta.ESPECIES_POR_NOMBRE, query = "SELECT especie FROM EspeciePlanta especie where especie.nombre= :nomCien "),
 
 })
 
@@ -43,6 +44,8 @@ public class EspeciePlanta implements Serializable {
 	public static final String ESPECIES_POR_NOMBRE_FAMILIA = "especiesPorNombreFamilia";
 	public static final String ESPECIES_POR_ID = "especiesPorID";
 	public static final String ESPECIES_POR_NOMBRECIENTIFICO = "especiesPorNombreCientifico";
+	public static final String ESPECIES_POR_NOMBRE= "especiesPorNombre";
+
 	public static final String ESPECIES_GENERO_NOMBRE = "EspeciesGeneroListarPorNombreFamilia";
 	public static final String ESPECIES_FAMILIA_NOMBRE = "EspeciesFamiliaListarPorNombreGenero";
 
@@ -61,7 +64,7 @@ public class EspeciePlanta implements Serializable {
 	/**
 	 * Una EspeciePlanta tiene muchas ImagenesPlanta (1..*)
 	 */
-	@OneToMany(mappedBy = "especie", orphanRemoval=true)
+	@OneToMany(mappedBy = "especie", orphanRemoval = true)
 	private List<ImagenPlanta> imagenes;
 
 	/**

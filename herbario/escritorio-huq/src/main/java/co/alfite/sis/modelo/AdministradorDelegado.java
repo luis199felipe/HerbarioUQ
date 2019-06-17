@@ -13,6 +13,7 @@ import co.alfite.sis.entidades.Empleado;
 import co.alfite.sis.entidades.EspeciePlanta;
 import co.alfite.sis.entidades.FamiliaPlanta;
 import co.alfite.sis.entidades.GeneroPlanta;
+import co.alfite.sis.entidades.ImagenPlanta;
 import co.alfite.sis.entidades.Persona;
 import co.alfite.sis.entidades.Recolector;
 import co.alfite.sis.entidades.RegistroEspecie;
@@ -292,8 +293,8 @@ public class AdministradorDelegado implements AdministradorEJBRemote {
 	}
 
 	public void actualizarAdministrador(Administrador nuevo) {
-	
-		//return adminEJB
+
+		// return adminEJB
 
 	}
 
@@ -374,10 +375,6 @@ public class AdministradorDelegado implements AdministradorEJBRemote {
 		return adminEJB.buscarFamiliaPlanta(nombre);
 	}
 
-
-	
-	
-
 	@Override
 	public GeneroPlanta buscarGeneroPlanta(String nombre) {
 		// TODO Auto-generated method stub
@@ -414,5 +411,38 @@ public class AdministradorDelegado implements AdministradorEJBRemote {
 		return adminEJB.actualizarEstadoPersona(id, est);
 	}
 
+	@Override
+	public List<RegistroEspecie> listarRegsitrosPorEstado(Estado estado) {
+		// TODO Auto-generated method stub
+		return adminEJB.listarRegsitrosPorEstado(estado);
+	}
 
+
+	public List<RegistroObservable> listarRegistrosObservables(Estado estado) {
+			List<RegistroEspecie> registros = listarRegsitrosPorEstado(estado);
+			ObservableList<RegistroObservable> registrosObservables = FXCollections.observableArrayList();
+
+			for (RegistroEspecie registro : registros) {
+				registrosObservables.add(new RegistroObservable(registro));
+			}
+			return registrosObservables;
+	}
+
+	@Override
+	public ImagenPlanta buscarImagenPlanta(Integer id) {
+		// TODO Auto-generated method stub
+		return adminEJB.buscarImagenPlanta(id);
+	}
+
+	@Override
+	public boolean insertarEspecie(EspeciePlanta especie) {
+		// TODO Auto-generated method stub
+		return adminEJB.insertarEspecie(especie);
+	}
+
+	@Override
+	public ImagenPlanta actualizarImagenPlanta(ImagenPlanta g) {
+		// TODO Auto-generated method stub
+		return adminEJB.actualizarImagenPlanta(g);
+	}
 }
