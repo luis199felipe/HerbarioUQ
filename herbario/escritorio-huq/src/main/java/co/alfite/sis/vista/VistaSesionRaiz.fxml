@@ -12,7 +12,7 @@
      <top>
       <ToolBar prefHeight="29.0" prefWidth="766.0">
         <items>
-            <SplitMenuButton fx:id="control" mnemonicParsing="false" prefHeight="30.0" prefWidth="135.0" text="User@root">
+            <SplitMenuButton fx:id="control" mnemonicParsing="false" prefHeight="30.0" prefWidth="224.0" text="User@root">
               <items>
                 <MenuItem fx:id="mnActualizarInf" mnemonicParsing="false" onAction="#actualizarInformacion" onMenuValidation="#actualizarInformacion" text="Actualizar Informacion" />
                 <MenuItem fx:id="mnCerrarSesion" mnemonicParsing="false" onAction="#cerrarSesion" onMenuValidation="#cerrarSesion" text="cerrar sesion" />
@@ -21,21 +21,11 @@
                   <Font size="14.0" />
                </font>
             </SplitMenuButton>
-            <Button fx:id="botonHome" mnemonicParsing="false" onAction="#irAHome" prefHeight="27.0" prefWidth="57.0" text="Inicio">
+            <Button fx:id="botonHome" mnemonicParsing="false" onAction="#irAHome" prefHeight="30.0" prefWidth="90.0" text="Inicio">
                <font>
                   <Font size="14.0" />
                </font></Button>
         </items>
-         <effect>
-            <Lighting specularExponent="5.12" surfaceScale="0.0">
-               <bumpInput>
-                  <Shadow />
-               </bumpInput>
-               <light>
-                  <Light.Distant color="#c3c3c3" />
-               </light>
-            </Lighting>
-         </effect>
       </ToolBar>
    </top>
 </BorderPane>
