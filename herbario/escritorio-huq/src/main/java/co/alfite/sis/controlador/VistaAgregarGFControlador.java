@@ -78,32 +78,42 @@ public class VistaAgregarGFControlador {
 		if (tipoObjeto.equals("familia")) {
 
 			try {
-
-				FamiliaPlanta nuevaFam = new FamiliaPlanta();
-				nuevaFam.setNombre(campoNombreFamilia.getText());
-				adminDelegado.insertarFamilia(nuevaFam);
-				Utilidades.mostrarMensaje("OK", "Se agregó correctamente el genero, por favor actualice la lista.", AlertType.INFORMATION);
-				stage.close();
+				String familia =campoNombreFamilia.getText();
+				System.out.println(familia);
+				System.out.println(adminDelegado.buscarFamiliaPlanta(familia));
+				if(adminDelegado.buscarFamiliaPlanta(familia)==null) {
+					FamiliaPlanta nuevaFam = new FamiliaPlanta();
+					nuevaFam.setNombre(campoNombreFamilia.getText());
+					adminDelegado.insertarFamilia(nuevaFam);
+					Utilidades.mostrarMensaje("OK", "Se agregó correctamente la familia, por favor actualice la lista.", AlertType.INFORMATION);
+					stage.close();	
+				}else {
+					Utilidades.mostrarMensaje("Error", "No se pudo agregar la familia porque ya existe", AlertType.ERROR);	
+				}
+				
 			} catch (ElementoRepetidoExcepcion e) {
 				e.printStackTrace();
-				Utilidades.mostrarMensaje("Error", "No se pudo agregar el genero", AlertType.ERROR);
+				Utilidades.mostrarMensaje("Error", "No se pudo agregar la familia", AlertType.ERROR);
 			}
 		} else {
 
 			try {
-
-				GeneroPlanta nuevoGen = new GeneroPlanta();
-				nuevoGen.setFamiliaPlanta(adminDelegado.buscarFamiliaPlanta(
-						comboBoxNombreFamilia.getSelectionModel().getSelectedItem()));
-				nuevoGen.setNombre(campoNombreGenero.getText());
-				adminDelegado.insertarGenero(nuevoGen);
+				String g = campoNombreGenero.getText();
+				if (adminDelegado.buscarGeneroPlanta(g)==null) {
+					GeneroPlanta nuevoGen = new GeneroPlanta();
+					String fam = comboBoxNombreFamilia.getSelectionModel().getSelectedItem();
+					FamiliaPlanta f = adminDelegado.buscarFamiliaPlanta(fam);
+					nuevoGen.setFamiliaPlanta(f);
+					nuevoGen.setNombre(g);
+					adminDelegado.insertarGenero(nuevoGen);
+					Utilidades.mostrarMensaje("OK", "Se agregó correctamente el genero, por favor actualice la lista.", AlertType.INFORMATION);
+					stage.close();
+				}else {
+					Utilidades.mostrarMensaje("Error", "No se pudo agregar el genero por que ya existe", AlertType.ERROR);	
+				}
 				
-				Utilidades.mostrarMensaje("OK", "Se agregó correctamente el genero, por favor actualice la lista.", AlertType.INFORMATION);
-				
-				stage.close();
 				
 			} catch (ElementoRepetidoExcepcion e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				Utilidades.mostrarMensaje("Error", "No se pudo agregar el genero", AlertType.ERROR);
 			}

@@ -538,25 +538,39 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 	}
 
 	public FamiliaPlanta buscarFamiliaPlanta(String nombre) {
-		TypedQuery<FamiliaPlanta> query = entityManager.createNamedQuery(FamiliaPlanta.FAMILIA_POR_NOMBRE,
-				FamiliaPlanta.class);
-		query.setParameter("nom", nombre);
-		FamiliaPlanta f=query.getSingleResult();
-		return f;
+		try {
+			TypedQuery<FamiliaPlanta> query = entityManager.createNamedQuery(FamiliaPlanta.FAMILIA_POR_NOMBRE,
+					FamiliaPlanta.class);
+			query.setParameter("nom", nombre);
+			FamiliaPlanta f=query.getSingleResult();
+			return f;	
+		} catch (Exception e) {
+			return null;
+		}
+		
 	}
 
 	public GeneroPlanta buscarGeneroPlanta(String nombre) {
-		TypedQuery<GeneroPlanta> query = entityManager.createNamedQuery(GeneroPlanta.GENERO_POR_NOMBRE,
-				GeneroPlanta.class);
-		query.setParameter("nom", nombre);
-		return query.getSingleResult();
+		try {
+			TypedQuery<GeneroPlanta> query = entityManager.createNamedQuery(GeneroPlanta.GENERO_POR_NOMBRE,
+					GeneroPlanta.class);
+			query.setParameter("nom", nombre);
+			return query.getSingleResult();	
+		} catch (Exception e) {
+			return null;
+		}
+		
 	}
 
 	public EspeciePlanta buscarEspeciePlanta(String nombre) {
-		TypedQuery<EspeciePlanta> query = entityManager.createNamedQuery(EspeciePlanta.ESPECIES_POR_NOMBRE,
-				EspeciePlanta.class);
-		query.setParameter("nomCien", nombre);
-		return query.getSingleResult();
+		try {
+			TypedQuery<EspeciePlanta> query = entityManager.createNamedQuery(EspeciePlanta.ESPECIES_POR_NOMBRE,
+					EspeciePlanta.class);
+			query.setParameter("nomCien", nombre);
+			return query.getSingleResult();
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	// OTROS METODOS
