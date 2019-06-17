@@ -159,7 +159,6 @@ public class VistaValidarRegistroControlador {
 		if (comoBoxEstado.getSelectionModel().getSelectedItem().equals(Estado.aprobado.toString())) {
 			System.out.println("busca familia");
 			FamiliaPlanta fam = adminDelegado.buscarFamiliaPlanta(familiaPlanta.getText());
-			System.out.println(fam.getNombre());
 			if (fam == null) {
 
 				FamiliaPlanta nuevaFamilia = new FamiliaPlanta();
