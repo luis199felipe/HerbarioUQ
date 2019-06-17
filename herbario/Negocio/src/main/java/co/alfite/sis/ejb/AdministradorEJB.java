@@ -503,38 +503,63 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 	}
 
 	public List<RegistroEspecie> listarRegsitrosPorEstado(Estado estado) {
+		try {
+			TypedQuery<RegistroEspecie> query = entityManager.createNamedQuery(RegistroEspecie.REGISTRO_POR_ESTADO,
+					RegistroEspecie.class);
+			query.setParameter("est", estado);
+			return query.getResultList();
+		} catch (Exception e) {
+			return null;
+		}
 
-		TypedQuery<RegistroEspecie> query = entityManager.createNamedQuery(RegistroEspecie.REGISTRO_POR_ESTADO,
-				RegistroEspecie.class);
-		query.setParameter("est", estado);
-		return query.getResultList();
 	}
 
 	/**
 	 * METODOS BUSCAR(CONSULTA)
 	 */
 	public Persona buscarPersona(String idPersona) {
-		TypedQuery<Persona> query = entityManager.createNamedQuery(Persona.PERSONA_POR_ID, Persona.class);
-		query.setParameter("id", idPersona);
-		return query.getSingleResult();
+		try {
+			TypedQuery<Persona> query = entityManager.createNamedQuery(Persona.PERSONA_POR_ID, Persona.class);
+			query.setParameter("id", idPersona);
+			return query.getSingleResult();
+		} catch (Exception e) {
+			return null;
+		}
+
 	}
 
 	public Usuario buscarUsuario(String idPersona) {
-		TypedQuery<Usuario> query = entityManager.createNamedQuery(Usuario.USUARIO_POR_ID, Usuario.class);
-		query.setParameter("id", idPersona);
-		return query.getSingleResult();
+		try {
+			TypedQuery<Usuario> query = entityManager.createNamedQuery(Usuario.USUARIO_POR_ID, Usuario.class);
+			query.setParameter("id", idPersona);
+			return query.getSingleResult();
+		} catch (Exception e) {
+			return null;
+		}
+
 	}
 
 	public Empleado buscarEmpleado(String idPersona) {
-		TypedQuery<Empleado> query = entityManager.createNamedQuery(Empleado.EMPLEADO_POR_ID, Empleado.class);
-		query.setParameter("id", idPersona);
-		return query.getSingleResult();
+		try {
+			TypedQuery<Empleado> query = entityManager.createNamedQuery(Empleado.EMPLEADO_POR_ID, Empleado.class);
+			query.setParameter("id", idPersona);
+			return query.getSingleResult();
+		} catch (Exception e) {
+			return null;
+		}
+
 	}
 
 	public Recolector buscarRecolector(String idPersona) {
-		TypedQuery<Recolector> query = entityManager.createNamedQuery(Recolector.RECOLECTOR_POR_ID, Recolector.class);
-		query.setParameter("id", idPersona);
-		return query.getSingleResult();
+		try {
+			TypedQuery<Recolector> query = entityManager.createNamedQuery(Recolector.RECOLECTOR_POR_ID,
+					Recolector.class);
+			query.setParameter("id", idPersona);
+			return query.getSingleResult();
+		} catch (Exception e) {
+			return null;
+		}
+
 	}
 
 	public FamiliaPlanta buscarFamiliaPlanta(String nombre) {
@@ -542,12 +567,12 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 			TypedQuery<FamiliaPlanta> query = entityManager.createNamedQuery(FamiliaPlanta.FAMILIA_POR_NOMBRE,
 					FamiliaPlanta.class);
 			query.setParameter("nom", nombre);
-			FamiliaPlanta f=query.getSingleResult();
-			return f;	
+			FamiliaPlanta f = query.getSingleResult();
+			return f;
 		} catch (Exception e) {
 			return null;
 		}
-		
+
 	}
 
 	public GeneroPlanta buscarGeneroPlanta(String nombre) {
@@ -555,11 +580,11 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 			TypedQuery<GeneroPlanta> query = entityManager.createNamedQuery(GeneroPlanta.GENERO_POR_NOMBRE,
 					GeneroPlanta.class);
 			query.setParameter("nom", nombre);
-			return query.getSingleResult();	
+			return query.getSingleResult();
 		} catch (Exception e) {
 			return null;
 		}
-		
+
 	}
 
 	public EspeciePlanta buscarEspeciePlanta(String nombre) {
@@ -575,15 +600,19 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 
 	// OTROS METODOS
 	public void validarRegistro(int id, Estado est) {
+		try {
+			TypedQuery<RegistroEspecie> query = entityManager.createNamedQuery(RegistroEspecie.REGISTRO_POR_ID,
+					RegistroEspecie.class);
 
-		TypedQuery<RegistroEspecie> query = entityManager.createNamedQuery(RegistroEspecie.REGISTRO_POR_ID,
-				RegistroEspecie.class);
+			query.setParameter("id", id);
 
-		query.setParameter("id", id);
+			RegistroEspecie x = query.getSingleResult();
+			x.setEstado(est);
+			actualizarRegistroEspecie(x);
 
-		RegistroEspecie x = query.getSingleResult();
-		x.setEstado(est);
-		actualizarRegistroEspecie(x);
+		} catch (Exception e) {
+
+		}
 
 	}
 
@@ -627,7 +656,12 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 		boolean i = false;
 		if (entityManager.find(EspeciePlanta.class, especie.getNombre()) == null) {
 			i = true;
-			entityManager.persist(especie);
+			try {
+				entityManager.persist(especie);
+			} catch (Exception e) {
+				i = false;
+			}
+
 		}
 
 		return i;
@@ -674,11 +708,15 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 	}
 
 	public EspeciePlanta verDetalleEspecie(int id) {
+		try {
+			TypedQuery<EspeciePlanta> query = entityManager.createNamedQuery(EspeciePlanta.ESPECIES_POR_ID,
+					EspeciePlanta.class);
 
-		TypedQuery<EspeciePlanta> query = entityManager.createNamedQuery(EspeciePlanta.ESPECIES_POR_ID,
-				EspeciePlanta.class);
+			return query.getSingleResult();
 
-		return query.getSingleResult();
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	private ImagenPlanta insertarImagenPlanta(ImagenPlanta img) {
