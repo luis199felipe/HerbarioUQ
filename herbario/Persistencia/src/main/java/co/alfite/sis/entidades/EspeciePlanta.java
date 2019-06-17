@@ -61,7 +61,7 @@ public class EspeciePlanta implements Serializable {
 	/**
 	 * Una EspeciePlanta tiene muchas ImagenesPlanta (1..*)
 	 */
-	@OneToMany(mappedBy = "especie")
+	@OneToMany(mappedBy = "especie", orphanRemoval=true)
 	private List<ImagenPlanta> imagenes;
 
 	/**

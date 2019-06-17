@@ -25,13 +25,13 @@ public class ImagenPlanta implements Serializable {
 	 * Muchas ImagenesPlanta pertenecen a una EspecePlanta
 	 */
 
-	@OneToMany(mappedBy = "imagen")
+	@OneToMany(mappedBy = "imagen", orphanRemoval=true)
 	private List<Resenia> resenias;
 
 	/**
 	 * Una EspeciePlanta tiene muchas MeGusta de Usuarios
 	 */
-	@OneToMany(mappedBy = "imagen")
+	@OneToMany(mappedBy = "imagen", orphanRemoval=true)
 	private List<MeGustaEspeciePlanta> megustas;
 
 	@ManyToOne

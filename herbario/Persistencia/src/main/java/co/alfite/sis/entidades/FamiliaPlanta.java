@@ -33,7 +33,7 @@ public class FamiliaPlanta implements Serializable {
 	@ManyToOne
 	private HerbarioUQ herbario;
 
-	@OneToMany(mappedBy = "familiaPlanta")
+	@OneToMany(mappedBy = "familiaPlanta", orphanRemoval=true)
 	private List<GeneroPlanta> generos;
 
 	/**

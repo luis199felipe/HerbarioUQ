@@ -86,14 +86,14 @@ public class VistaGestionarGeneroControlador {
 	private void verGeneroDetalle(GeneroObservable gen) {
 		campoId.setText(gen.getIdGenero().getValue());
 		campoNombre.setText(gen.getNombre().getValue());
-		listaItems = FXCollections.observableArrayList();
+		//listaItems = FXCollections.observableArrayList();
 
 		List<FamiliaPlanta> fams = adminDelegado.listarFamilias();
 
-		listaItems.add("holis");
-		comoboBoxFam.setItems(listaItems);
-
-		comoboBoxFam.getSelectionModel().select(0);
+		//listaItems.add("holis");
+//		comoboBoxFam.setItems(listaItems);
+//
+//		comoboBoxFam.getSelectionModel().select(0);
 //		GeneroPlanta g=
 //		FamiliaPlanta f= adminDelegado.buscarFamiliaPlanta(nombre)
 //		for (int i = 0; i < fams.size(); i++) {

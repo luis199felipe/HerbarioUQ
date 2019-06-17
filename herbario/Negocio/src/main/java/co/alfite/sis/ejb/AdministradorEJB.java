@@ -322,28 +322,25 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 
 	public boolean eliminarGenero(String nombre) {
 
-		
-		
-			try {
-				entityManager.remove(buscarGeneroPlanta(nombre));
-				return true;
-			} catch (Exception e1) {
-				e1.printStackTrace();
-				return false;
-			}
+		try {
+			entityManager.remove(buscarGeneroPlanta(nombre));
+			return true;
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			return false;
+		}
 
 	}
 
 	public boolean eliminarFamilia(String nombre) {
 
-	try {
+		try {
 			entityManager.remove(buscarFamiliaPlanta(nombre));
-				return true;
-			} catch (Exception e1) {
-				e1.printStackTrace();
-				return false;
-			}
-		
+			return true;
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			return false;
+		}
 
 	}
 
@@ -364,8 +361,8 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 			return false;
 		}
 	}
-	
-	public boolean actualizarEstadoPersona(String id,co.alfite.sis.entidades.Persona.Estado est) {
+
+	public boolean actualizarEstadoPersona(String id, co.alfite.sis.entidades.Persona.Estado est) {
 
 		Persona r = entityManager.find(Persona.class, id);
 		if (r != null) {
@@ -547,8 +544,8 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 				RegistroEspecie.class);
 
 		query.setParameter("id", id);
-		
-		RegistroEspecie x=query.getSingleResult();
+
+		RegistroEspecie x = query.getSingleResult();
 		x.setEstado(est);
 		actualizarRegistroEspecie(x);
 

@@ -33,7 +33,7 @@ public class GeneroPlanta implements Serializable {
 	@OneToOne
 	private RegistroEspecie registro;
 	
-	@OneToMany(mappedBy = "generoPlanta")
+	@OneToMany(mappedBy = "generoPlanta", orphanRemoval=true)
 	private List<EspeciePlanta> especies;
 
 	@ManyToOne
