@@ -91,6 +91,7 @@ public class VistaGestionarFamiliaControlador {
 	private void verFamiliaDetalle(FamiliaObservable fam) {
 		campoID.setText(fam.getIdFamilia().getValue());
 		campoNombre.setText(fam.getNombre().getValue());
+		campoNombre.setEditable(false);
 		//campoNumeroGeneros.setText(fam.getNumeroGeneros());
 	}
 
@@ -112,6 +113,7 @@ public class VistaGestionarFamiliaControlador {
 			Utilidades.mostrarMensaje("Editar Datos",
 					"se hablitara el campo  nombre familia para que pueda modificar el dato, depues de esto debe volver a presionar el boton actualizar para guardar los cambiios",
 					AlertType.INFORMATION);
+			
 			botonActualizarDatos.setText("Guardar Cambios");
 			campoNombre.setEditable(true);
 		} else {

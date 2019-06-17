@@ -28,7 +28,7 @@ public class VistaGestionarGeneroControlador {
 	private TextField campoNumEspecies;
 
 	@FXML
-	private ComboBox<String> comoboBoxFam;
+	private ComboBox<String> comboBoxFam;
 
 	@FXML
 	private TableColumn<GeneroObservable, String> columnaId;
@@ -86,20 +86,12 @@ public class VistaGestionarGeneroControlador {
 	private void verGeneroDetalle(GeneroObservable gen) {
 		campoId.setText(gen.getIdGenero().getValue());
 		campoNombre.setText(gen.getNombre().getValue());
-		//listaItems = FXCollections.observableArrayList();
-
-		List<FamiliaPlanta> fams = adminDelegado.listarFamilias();
-
-		//listaItems.add("holis");
-//		comoboBoxFam.setItems(listaItems);
-//
-//		comoboBoxFam.getSelectionModel().select(0);
-//		GeneroPlanta g=
-//		FamiliaPlanta f= adminDelegado.buscarFamiliaPlanta(nombre)
-//		for (int i = 0; i < fams.size(); i++) {
-//			listaItems.add(fams.get(i).getNombre());
-//		}
-
+		
+		listaItems = FXCollections.observableArrayList();
+		String fam = gen.getFamilia().getValue();
+		System.out.println("La familia es "+fam);
+		listaItems.add(fam);
+		comboBoxFam.setItems(listaItems);
 
 	}
 
@@ -109,6 +101,24 @@ public class VistaGestionarGeneroControlador {
 			Utilidades.mostrarMensaje("Editar Datos",
 					"se hablitara el campo  nombre familia para que pueda modificar el dato, depues de esto debe volver a presionar el boton actualizar para guardar los cambiios",
 					AlertType.INFORMATION);
+			comboBoxFam.getSelectionModel().clearSelection();
+			
+			listaItems = FXCollections.observableArrayList();
+
+			ObservableList<FamiliaObservable> x = (ObservableList<FamiliaObservable>) adminDelegado
+					.listarFamiliasObservables();
+
+			for (int i = 0; i < x.size(); i++) {
+
+				listaItems.add(x.get(i).getNombre().getValue());
+
+			}
+			comboBoxFam.setItems(listaItems);
+//			List<FamiliaPlanta> fams = adminDelegado.listarFamilias();
+//			for (int i = 0; i < fams.size(); i++) {
+//				listaItems.add(fams.get(i).getNombre());
+//			}
+//			comboBoxFam.setItems(listaItems);
 			botonActualizarDatos.setText("Guardar Cambios");
 			campoNombre.setEditable(true);
 		} else {
@@ -116,10 +126,10 @@ public class VistaGestionarGeneroControlador {
 
 			ac.setIdGenero(Integer.parseInt(campoId.getText()));
 			ac.setNombre(campoNombre.getText());
-			// String familia = campoNombreFamilia.getSelectionModel().getSelectedItem();
-
-			// FamiliaPlanta f = adminDelegado.buscarFamiliaPlanta(familia);
-			// ac.setFamiliaPlanta(f);
+			FamiliaPlanta f = adminDelegado.buscarFamiliaPlanta(comboBoxFam.getSelectionModel().getSelectedItem());
+			System.out.println("Va a buscar a la famliia "+f.getNombre());
+			ac.setFamiliaPlanta(f);
+			
 			adminDelegado.actualizarGeneroPlanta(ac);
 			botonActualizarDatos.setText("Actualizar los Datos");
 			campoNombre.setEditable(false);
