@@ -46,9 +46,6 @@
                   <RowConstraints maxHeight="63.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="53.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
                </rowConstraints>
-               <effect>
-                  <DropShadow color="#a8ffb0" />
-               </effect>
             </GridPane>
             <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <top>
@@ -71,9 +68,6 @@
             <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                <center>
                   <ImageView fx:id="logoHerbario" fitHeight="160.0" fitWidth="278.0" pickOnBounds="true" preserveRatio="true" x="6.0" BorderPane.alignment="CENTER">
-                     <effect>
-                        <DropShadow color="#c3c3c3" />
-                     </effect>
                      <image>
                         <Image url="@../util/logoHerbario.png" />
                      </image>

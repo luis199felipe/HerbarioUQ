@@ -35,24 +35,24 @@
             <Separator prefHeight="11.0" prefWidth="750.0" GridPane.rowIndex="3" />
             <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="6">
                <right>
-                  <Button fx:id="leer_2" mnemonicParsing="false" text="Leer mas" BorderPane.alignment="CENTER" />
+                  <Button fx:id="leer_2" mnemonicParsing="false" onAction="#verResenias2" text="Leer Reseñas" BorderPane.alignment="CENTER" />
                </right>
                <center>
-                  <Label fx:id="resenia_2" text="esta es una ................" BorderPane.alignment="CENTER" />
+                  <Label fx:id="numeroLikes_1" text="esta es una ................" BorderPane.alignment="CENTER" />
                </center>
                <left>
-                  <ToggleButton fx:id="like_2" mnemonicParsing="false" text="Me Gusta" BorderPane.alignment="CENTER" />
+                  <ToggleButton fx:id="like_2" mnemonicParsing="false" onAction="#accionarLike2" text="Me Gusta" BorderPane.alignment="CENTER" />
                </left>
             </BorderPane>
             <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
                <right>
-                  <Button fx:id="leer_1" mnemonicParsing="false" text="Leer mas" BorderPane.alignment="CENTER" />
+                  <Button fx:id="leer_1" mnemonicParsing="false" onAction="#verResenias1" text="Leer Reseñas" BorderPane.alignment="CENTER" />
                </right>
                <center>
-                  <Label fx:id="resenia_1" text="Esta es una..................." BorderPane.alignment="CENTER" />
+                  <Label fx:id="numeroLikes_1" text="Esta es una..................." BorderPane.alignment="CENTER" />
                </center>
                <left>
-                  <ToggleButton fx:id="like_1" mnemonicParsing="false" text="Me Gusta" BorderPane.alignment="CENTER" />
+                  <ToggleButton fx:id="like_1" mnemonicParsing="false" onAction="#accionarLike1" text="Me Gusta" BorderPane.alignment="CENTER" />
                </left>
             </BorderPane>
             <BorderPane fx:id="paneMasGustadas" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />

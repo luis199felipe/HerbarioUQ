@@ -2,12 +2,15 @@ package co.alfite.sis.controlador;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.util.Date;
 import java.util.List;
 
 import com.sun.faces.application.applicationimpl.Stage;
 
 import co.alfite.sis.Main;
 import co.alfite.sis.entidades.ImagenPlanta;
+import co.alfite.sis.entidades.MeGustaEspeciePlanta;
+import co.alfite.sis.entidades.Usuario;
 import co.alfite.sis.modelo.AdministradorDelegado;
 import co.alfite.sis.modelo.DisplayShelf;
 import co.alfite.sis.modelo.UsuarioDelegado;
@@ -24,7 +27,7 @@ import javafx.scene.layout.GridPane;
 public class VistaUsuarioControlador {
 
 	@FXML
-	private Label resenia_2;
+	private Label numeroLikes_2;
 
 	@FXML
 	private Button leer_1;
@@ -33,7 +36,7 @@ public class VistaUsuarioControlador {
 	private Button leer_2;
 
 	@FXML
-	private Label resenia_1;
+	private Label numeroLikes_1;
 
 	@FXML
 	private ToggleButton like_1;
@@ -49,27 +52,20 @@ public class VistaUsuarioControlador {
 	@FXML
 	private ToggleButton like_2;
 
-	private BorderPane x = new BorderPane();
-
-	private Timeline animation;
-
 	private UsuarioDelegado usuarioDelegado;
 
 	private ManejadorEscenarios manejadorEscenario;
 
 	private static final double WIDTH = 50, HEIGHT = 1000;
 
-	private static final String[] urls = {
+	private List<ImagenPlanta> todasLasImagenes;
+	private List<ImagenPlanta> imagenesPorLikes;
 
-			"./util/Animal1.jpg",
+	private double indiceMasGustadas;
 
-			"./util/Animal2.jpg",
+	private List<MeGustaEspeciePlanta> misLikes;
 
-			"./util/Animal3.jpg",
-
-			"./util/Animal4.jpg"
-
-	};
+	private double indiceTodas;
 
 	public VistaUsuarioControlador() {
 
@@ -79,10 +75,14 @@ public class VistaUsuarioControlador {
 	@FXML
 	private void initialize() {
 
-//		x.setCenter(createContent());
-//		paneMasGustadas=x;
-//		paneTodas=new BorderPane();
 		iniciarVistaGaleria();
+
+	}
+
+	private void insertarMisLikes() {
+
+		misLikes = usuarioDelegado.listarMeGusta(manejadorEscenario.getPersonaEnSesion().getIdPersona());
+
 	}
 
 	public void setStage(Stage stage) {
@@ -92,6 +92,7 @@ public class VistaUsuarioControlador {
 	public void setManejador(ManejadorEscenarios manejadorEscenarios) {
 
 		this.manejadorEscenario = manejadorEscenarios;
+		insertarMisLikes();
 	}
 
 	public void iniciarVistaGaleria() {
@@ -105,51 +106,167 @@ public class VistaUsuarioControlador {
 
 		// load images
 
-		List<ImagenPlanta> allImages = usuarioDelegado.listarImagenes();
+		InputStream in;
+		Image[] images = null;
+		boolean existenImagenes = false;
+		if (imagenesMostrar.equals("todas")) {
+			todasLasImagenes = usuarioDelegado.listarImagenes();
+			images = new Image[todasLasImagenes.size()];
 
-		if (!allImages.isEmpty()) {
-			InputStream in;
-			if (imagenesMostrar.equals("todas")) {
-				Image[] images = new Image[allImages.size()];
-
+			if (!todasLasImagenes.isEmpty()) {
 				for (int i = 0; i < images.length; i++) {
 
-					in = new ByteArrayInputStream(allImages.get(i).getImagen());
+					in = new ByteArrayInputStream(todasLasImagenes.get(i).getImagen());
 					images[i] = new Image(in);
 
 				}
+				existenImagenes = true;
+			} else {
+				like_1.setVisible(false);
+			}
+		} else {
+			imagenesPorLikes = usuarioDelegado.obtenerListaImagenesOrdenadasPorLikes();
+			images = new Image[imagenesPorLikes.size()];
 
-				// create display shelf
+			if (!imagenesPorLikes.isEmpty()) {
+				for (int i = 0; i < images.length; i++) {
 
-				DisplayShelf displayShelf = new DisplayShelf(images, imagenesMostrar, this);
+					in = new ByteArrayInputStream(imagenesPorLikes.get(i).getImagen());
+					images[i] = new Image(in);
 
-				displayShelf.setPrefSize(WIDTH, HEIGHT);
+				}
+				existenImagenes = true;
 
-//		String css = getClass().getResource("./util/DisplayShelf.css").toExternalForm();
-//
-//		displayShelf.getStylesheets().add(css);
-
-				return displayShelf;
-				
-			} 
+			} else {
+				like_2.setVisible(false);
+			}
 		}
-		return new BorderPane();
+
+		if (existenImagenes) {
+			DisplayShelf displayShelf = new DisplayShelf(images, imagenesMostrar, this);
+			displayShelf.setPrefSize(WIDTH, HEIGHT);
+			return displayShelf;
+		}
+
+//	String css = getClass().getResource("./util/DisplayShelf.css").toExternalForm();
+//
+//	displayShelf.getStylesheets().add(css);	
+
+		Label info = new Label("No hay imagenes para mostrar");
+		return info;
 
 	}
 
 	@FXML
-	void insertarLike1() {
+	void accionarLike1() {
 
-		System.out.println("GGG");
+		// hay que validar que el like no este
+		if (like_1.isSelected()) {
+			ImagenPlanta img = imagenesPorLikes.get((int) indiceMasGustadas);
+
+			if (validarLike(img)) {
+				System.out.println("VALIDA");
+				MeGustaEspeciePlanta nuevoLike = new MeGustaEspeciePlanta();
+				nuevoLike.setFecha(new Date());
+				Usuario n = (Usuario) manejadorEscenario.getPersonaEnSesion();
+				nuevoLike.setUsuario(n);
+				nuevoLike.setImagen(img);
+				usuarioDelegado.registrarMeGusta(nuevoLike);
+				misLikes.add(nuevoLike);
+			}
+
+		} else {
+			if (!misLikes.isEmpty()) {
+				ImagenPlanta x = imagenesPorLikes.get((int) indiceMasGustadas);
+				MeGustaEspeciePlanta likeEliminar = null;
+				for (int i = 0; i < misLikes.size(); i++) {
+					ImagenPlanta im = misLikes.get(i).getImagen();
+					if (x.getIdImagen().equals(im.getIdImagen())) {
+						likeEliminar = misLikes.get(i);
+						break;
+					}
+				}
+				System.out.println(usuarioDelegado.eliminarMegusta(likeEliminar));
+
+			}
+
+		}
+
+		actualizarGaleriaMasMeGusta(indiceMasGustadas);
+
+	}
+
+	private boolean validarLike(ImagenPlanta img) {
+		boolean valido = true;
+		for (int i = 0; i < misLikes.size() && valido; i++) {
+
+			if (img.getIdImagen().equals(misLikes.get(i).getImagen().getIdImagen())) {
+				valido = false;
+			}
+		}
+		return valido;
+	}
+
+	@FXML
+	void accionarLike2() {
+
+		if (like_2.isSelected()) {
+			System.out.println("inserta");
+
+		} else {
+			System.out.println("retira");
+
+		}
 	}
 
 	public void actualizarGaleriaMasMeGusta(double index) {
-		resenia_1.setText(index + "");
+		indiceMasGustadas = index;
+
+		ImagenPlanta temp = imagenesPorLikes.get((int) index);
+
+		int id = temp.getIdImagen();
+		if (misLikes != null && !misLikes.isEmpty()) {
+			for (int i = 0; i < misLikes.size(); i++) {
+				if (id == misLikes.get(i).getImagen().getIdImagen()) {
+
+					like_1.setSelected(true);
+					break;
+				}
+			}
+		}
+		numeroLikes_1.setText("le gusta a " + temp.getNumeroLikes() + " usuarios");
 
 	}
 
 	public void actualizarGaleriaTodas(double index) {
-		resenia_2.setText(index + "");
+		indiceTodas = index;
+
+		ImagenPlanta temp = todasLasImagenes.get((int) index);
+
+		int id = temp.getIdImagen();
+		if (misLikes != null && !misLikes.isEmpty()) {
+			for (int i = 0; i < misLikes.size(); i++) {
+				if (id == misLikes.get(i).getImagen().getIdImagen()) {
+
+					like_2.setSelected(true);
+					break;
+				}
+			}
+		}
+		numeroLikes_2.setText("le gusta a " + temp.getNumeroLikes() + " usuarios");
+
+	}
+
+	@FXML
+	private void verResenias1() {
+
+		System.out.println(imagenesPorLikes.get((int) indiceMasGustadas) + "poiuytyui");
+		manejadorEscenario.cargarEscenarioResenias(imagenesPorLikes.get((int) indiceMasGustadas));
+	}
+
+	@FXML
+	private void verResenias2() {
+		manejadorEscenario.cargarEscenarioResenias(todasLasImagenes.get((int) indiceTodas));
 
 	}
 

@@ -16,7 +16,7 @@ import javax.persistence.*;
 		@NamedQuery(name = MeGustaEspeciePlanta.MEGUSTAESPECIE_GET_ALL, query = "select megustaEspecie from MeGustaEspeciePlanta megustaEspecie"),
 		@NamedQuery(name = MeGustaEspeciePlanta.MEGUSTAESPECIE_ESPECIE, query = "select megusta from MeGustaEspeciePlanta megusta where megusta.imagen.especie.idEspecie = :esp "),
 		@NamedQuery(name = MeGustaEspeciePlanta.MEGUSTAESPECIE_ESPECIE_NOMBRECIENTIFICO, query = "select megusta from MeGustaEspeciePlanta megusta where megusta.imagen.especie.nombreCientifico = :nom "),
-		@NamedQuery(name = MeGustaEspeciePlanta.MEGUSTAESPECIE_USUARIO, query = "select megusta from MeGustaEspeciePlanta megusta where megusta.usuario.idPersona = :esp "), })
+		@NamedQuery(name = MeGustaEspeciePlanta.MEGUSTAESPECIE_USUARIO, query = "select megusta from MeGustaEspeciePlanta megusta where megusta.usuario.idPersona = :esp"), })
 public class MeGustaEspeciePlanta implements Serializable {
 
 	public static final String MEGUSTAESPECIE_GET_ALL = "MeGustaEspecieGetAll";

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+
+<BorderPane prefHeight="600.0" prefWidth="400.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="co.alfite.sis.controlador.VistaReseniaControlador">
+   <bottom>
+      <BorderPane prefHeight="68.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+         <right>
+            <Button fx:id="botonEnviarResenia" mnemonicParsing="false" onAction="#enviarResenia" text="Enviar Resenia" BorderPane.alignment="CENTER" />
+         </right>
+         <center>
+            <TextArea fx:id="campoResenia" prefHeight="57.0" prefWidth="348.0" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
+   </bottom>
+   <top>
+      <Label prefHeight="29.0" prefWidth="118.0" text="Resenias de la imagen" BorderPane.alignment="CENTER" />
+   </top>
+   <center>
+      <ScrollPane hbarPolicy="NEVER" hmax="10.0" pannable="true" prefViewportHeight="515.0" prefViewportWidth="400.0" vbarPolicy="ALWAYS">
+         <content>
+            <VBox fx:id="vBoxResenias" prefHeight="496.0" prefWidth="383.0" />
+         </content>
+      </ScrollPane>
+   </center>
+</BorderPane>

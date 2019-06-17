@@ -2,27 +2,13 @@ package co.alfite.sis.controlador;
 
 import java.io.IOException;
 
-import java.util.List;
-
 import co.alfite.sis.Main;
-import co.alfite.sis.entidades.Empleado;
-import co.alfite.sis.entidades.EspeciePlanta;
 import co.alfite.sis.entidades.ImagenPlanta;
 import co.alfite.sis.entidades.Persona;
-import co.alfite.sis.entidades.Recolector;
-import co.alfite.sis.entidades.RegistroEspecie;
-import co.alfite.sis.entidades.Usuario;
-import co.alfite.sis.excepciones.ElementoRepetidoExcepcion;
-import co.alfite.sis.modelo.AdministradorDelegado;
-import co.alfite.sis.modelo.DisplayShelf;
-import javafx.animation.Timeline;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 /**
@@ -33,7 +19,8 @@ import javafx.stage.Stage;
  */
 public class ManejadorEscenarios {
 
-	private final static String ruta = "./util/iconH.png";
+	private final static String ruta ="file:src/resources/imagenes/iconH.png";
+
 	/**
 	 * contenedor prinpipal de la aplicacion
 	 */
@@ -67,7 +54,8 @@ public class ManejadorEscenarios {
 
 		try {
 
-			escenario.getIcons().add(new Image(Main.class.getResourceAsStream(ruta)));
+			escenario.getIcons().add(new Image(ruta));
+			
 			// se inicializa el escenario
 			escenario.setTitle("Herbario");
 
@@ -128,7 +116,7 @@ public class ManejadorEscenarios {
 
 			Scene scene = new Scene(root);
 			Stage stage = new Stage();
-			stage.getIcons().add(new Image(Main.class.getResourceAsStream(ruta)));
+			stage.getIcons().add(new Image(ruta));
 			stage.setTitle("Herbario");
 
 			this.personaEnSesion = p;
@@ -195,7 +183,7 @@ public class ManejadorEscenarios {
 			Scene scene = new Scene(vista);
 			Stage stage = new Stage();
 			stage.setTitle("Herbario/registro");
-			stage.getIcons().add(new Image(Main.class.getResourceAsStream(ruta)));
+			stage.getIcons().add(new Image(ruta));
 			stage.setScene(scene);
 			stage.show();
 			// importante
@@ -317,7 +305,7 @@ public class ManejadorEscenarios {
 			Stage stage = new Stage();
 			stage.setTitle("Herbario/registro");
 
-			stage.getIcons().add(new Image(Main.class.getResourceAsStream(ruta)));
+			stage.getIcons().add(new Image(ruta));
 			stage.setScene(scene);
 			stage.show();
 			// importante
@@ -345,7 +333,7 @@ public class ManejadorEscenarios {
 			Stage stage = new Stage();
 			stage.setTitle("Herbario/registro");
 
-			stage.getIcons().add(new Image(Main.class.getResourceAsStream(ruta)));
+			stage.getIcons().add(new Image(ruta));
 			stage.setScene(scene);
 			stage.show();
 			// importante
@@ -368,7 +356,7 @@ public class ManejadorEscenarios {
 
 			Stage stage = new Stage();
 			stage.setTitle("Herbario/dialogo");
-			stage.getIcons().add(new Image(Main.class.getResourceAsStream(ruta)));
+			stage.getIcons().add(new Image(ruta));
 			stage.setScene(scene);
 			stage.show();
 
@@ -377,6 +365,28 @@ public class ManejadorEscenarios {
 		}
 	}
 
+	
+	public void cargarEscenarioResenias(ImagenPlanta img) {
+		try {
+
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(Main.class.getResource("./vista/VistaResenia.fxml"));
+			BorderPane vista = (BorderPane) loader.load();
+
+			VistaReseniaControlador controladorResenia=loader.getController();
+			controladorResenia.setImagen(img);
+			controladorResenia.setManejador(this);
+			Scene scene = new Scene(vista);
+			Stage stage = new Stage();
+			stage.setTitle("Herbario");
+			stage.getIcons().add(new Image(ruta));
+			stage.setScene(scene);
+			stage.show();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	public Stage getEscenario() {
 		return escenario;
 	}

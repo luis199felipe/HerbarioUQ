@@ -30,7 +30,6 @@ public class UsuarioDelegado {
 	 */
 	public static UsuarioDelegado UsuarioDelegado = instancia();
 
-	
 	private UsuarioDelegado() {
 		try {
 			usuEJB = (UsuarioEJBRemote) new InitialContext().lookup(UsuarioEJBRemote.JNDI);
@@ -38,6 +37,7 @@ public class UsuarioDelegado {
 			e.printStackTrace();
 		}
 	}
+
 	/**
 	 * Permite devolver una unica instancia de delegado
 	 * 
@@ -80,6 +80,7 @@ public class UsuarioDelegado {
 
 	/**
 	 * Genera una lista de me gusta observables
+	 * 
 	 * @return todos los megustas observables
 	 */
 	public ObservableList<MeGustaObservable> listarMegustasObservables(String id) {
@@ -90,18 +91,19 @@ public class UsuarioDelegado {
 		}
 		return meGustaObservables;
 	}
-	
+
 	/**
 	 * devuelve la lista de me gustas que estan en la base de datos
 	 * 
 	 * @return todos los me gustas
 	 */
 	public List<MeGustaEspeciePlanta> listarMeGusta(String id) {
-		return  usuEJB.obtenerListaMeGusta(id);
+		return usuEJB.obtenerListaMeGusta(id);
 	}
 
 	/**
 	 * Genera una lista de resenias observables
+	 * 
 	 * @return todas las resenias observables
 	 */
 	public ObservableList<ReseniaObservable> listarReseniasObservables(String id) {
@@ -112,7 +114,7 @@ public class UsuarioDelegado {
 		}
 		return reseniaObservables;
 	}
-	
+
 	/**
 	 * devuelve la lista de resenias que estan en la base de datos
 	 * 
@@ -121,28 +123,32 @@ public class UsuarioDelegado {
 	public List<Resenia> listarResenias(String id) {
 		return usuEJB.obtenerListaResenias(id);
 	}
-	
+
 	public List<ImagenPlanta> listarImagenes() {
 		return usuEJB.obtenerListaImagenes();
 	}
-	
-	
-	
+
 	public List<ImagenPlanta> obtenerListaImagenesOrdenadasPorLikes() {
 
-		
 		return usuEJB.obtenerListaImagenesOrdenadasPorLikes();
 	}
 
-	public List<Resenia> obtenerListaReseniasPorEspecie(String id) {
-
-		
-		return usuEJB.obtenerListaReseniasPorEspecie(id);
-	}
+	
 
 	public List<MeGustaEspeciePlanta> obtenerListaLikesPorEspecie(String id) {
 
-		
 		return usuEJB.obtenerListaLikesPorEspecie(id);
+	}
+
+	public MeGustaEspeciePlanta eliminarMegusta(MeGustaEspeciePlanta likeEliminar) {
+
+		return usuEJB.eliminarMegusta(likeEliminar);
+
+	}
+
+	public List<Resenia> listarReseniasPorImagen(Integer idImagen) {
+		
+		return usuEJB.listaReseniasPorImagen(idImagen);
+		
 	}
 }

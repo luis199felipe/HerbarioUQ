@@ -68,7 +68,6 @@ public class TestOpcionUnica {
 		meGusta.setFecha(new Date());
 		meGusta.setIdMegusta(7);
 		meGusta.setUsuario(usuario);
-		meGusta.setEspecie(especie);
 
 		entityManager.persist(meGusta);
 
@@ -92,7 +91,6 @@ public class TestOpcionUnica {
 		resenia.setEstado(Estado.aprobado);
 		resenia.setTexto("La especie tambien se conoce como plenauseaces");
 		resenia.setUsuario(usuario);
-		resenia.setEspecie(especie);
 
 		entityManager.persist(resenia);
 
@@ -120,18 +118,18 @@ public class TestOpcionUnica {
 	 * un usuario puede ver un listado de las personas que hicieron una reseña de
 	 * una especie
 	 */
-	@Test
-	@UsingDataSet({ "resenia.json", "persona.json" })
-	@Transactional(value = TransactionMode.ROLLBACK)
-	public void ReadReseniasDeUnaEspecie() {
-
-		TypedQuery<Resenia> query = entityManager.createNamedQuery(Resenia.RESENIA_ESPECIE, Resenia.class);
-		query.setParameter("esp", 12);
-		List<Resenia> resenias = query.getResultList();
-
-		Assert.assertEquals("El tamanio no coincide", 3, resenias.size());
-
-	}
+//	@Test
+//	@UsingDataSet({ "resenia.json", "persona.json" })
+//	@Transactional(value = TransactionMode.ROLLBACK)
+//	public void ReadReseniasDeUnaEspecie() {
+//
+//		TypedQuery<Resenia> query = entityManager.createNamedQuery(Resenia.RESENIA_ESPECIE, Resenia.class);
+//		query.setParameter("esp", 12);
+//		List<Resenia> resenias = query.getResultList();
+//
+//		Assert.assertEquals("El tamanio no coincide", 3, resenias.size());
+//
+//	}
 
 	/**
 	 * un usuario puede eliminar su megusta de una especie

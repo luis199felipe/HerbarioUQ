@@ -74,10 +74,42 @@ public class UsuarioEJB implements UsuarioEJBRemote {
 		}
 	}
 
+	public MeGustaEspeciePlanta eliminarMegusta(MeGustaEspeciePlanta meGusta) {
+
+		try {
+			MeGustaEspeciePlanta x = entityManager.find(MeGustaEspeciePlanta.class, meGusta.getIdMegusta());
+
+			eliminarMegusta(meGusta.getImagen());
+			entityManager.remove(x);
+
+			return meGusta;
+		} catch (
+
+		Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 	private void insertarMegusta(ImagenPlanta img) {
 
-		//probando la taoria de pipe
-		img.setNumeroLikes(img.getNumeroLikes() + 1);
+		// probando la taoria de pipe
+		if (img.getNumeroLikes() == null) {
+
+			img.setNumeroLikes(1l);
+		} else {
+			Long x = img.getNumeroLikes();
+			img.setNumeroLikes(x + 1l);
+		}
+
+		entityManager.merge(img);
+	}
+
+	private void eliminarMegusta(ImagenPlanta img) {
+
+		// probando la taoria de pipe
+
+		img.setNumeroLikes(img.getNumeroLikes() - 1);
 		entityManager.merge(img);
 	}
 
@@ -96,6 +128,14 @@ public class UsuarioEJB implements UsuarioEJBRemote {
 		TypedQuery<Resenia> query = entityManager.createNamedQuery(Resenia.RESENIA_USUARIO, Resenia.class);
 
 		query.setParameter("esp", id);
+		return query.getResultList();
+	}
+	
+	public List<Resenia> listaReseniasPorImagen(Integer id) {
+
+		TypedQuery<Resenia> query = entityManager.createNamedQuery(Resenia.RESENIA_IMAGEN, Resenia.class);
+
+		query.setParameter("id", id);
 		return query.getResultList();
 	}
 
@@ -117,13 +157,7 @@ public class UsuarioEJB implements UsuarioEJBRemote {
 		return query.getResultList();
 	}
 
-	public List<Resenia> obtenerListaReseniasPorEspecie(String id) {
 
-		TypedQuery<Resenia> query = entityManager.createNamedQuery(Resenia.RESENIA_ESPECIE, Resenia.class);
-
-		query.setParameter("esp", id);
-		return query.getResultList();
-	}
 
 	public List<MeGustaEspeciePlanta> obtenerListaLikesPorEspecie(String id) {
 
