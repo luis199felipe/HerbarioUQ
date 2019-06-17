@@ -19,7 +19,7 @@ import javafx.stage.Stage;
  */
 public class ManejadorEscenarios {
 
-	private final static String ruta ="file:src/resources/imagenes/iconH.png";
+	private final static String ruta = "file:src/resources/imagenes/iconH.png";
 
 	/**
 	 * contenedor prinpipal de la aplicacion
@@ -55,7 +55,7 @@ public class ManejadorEscenarios {
 		try {
 
 			escenario.getIcons().add(new Image(ruta));
-			
+
 			// se inicializa el escenario
 			escenario.setTitle("Herbario");
 
@@ -65,8 +65,11 @@ public class ManejadorEscenarios {
 
 			bordePanel = (BorderPane) loader.load();
 
+			//bordePanel.getStylesheets().add();
+			
 			// se carga la escena
 			Scene scene = new Scene(bordePanel);
+			scene.getStylesheets().add("file:src/resources/root.css");
 			escenario.setScene(scene);
 			escenario.show();
 
@@ -116,6 +119,8 @@ public class ManejadorEscenarios {
 
 			Scene scene = new Scene(root);
 			Stage stage = new Stage();
+			scene.getStylesheets().add("file:src/resources/root.css");
+
 			stage.getIcons().add(new Image(ruta));
 			stage.setTitle("Herbario");
 
@@ -182,6 +187,8 @@ public class ManejadorEscenarios {
 
 			Scene scene = new Scene(vista);
 			Stage stage = new Stage();
+			scene.getStylesheets().add("file:src/resources/root.css");
+
 			stage.setTitle("Herbario/registro");
 			stage.getIcons().add(new Image(ruta));
 			stage.setScene(scene);
@@ -304,6 +311,7 @@ public class ManejadorEscenarios {
 			Scene scene = new Scene(vista);
 			Stage stage = new Stage();
 			stage.setTitle("Herbario/registro");
+			scene.getStylesheets().add("file:src/resources/root.css");
 
 			stage.getIcons().add(new Image(ruta));
 			stage.setScene(scene);
@@ -331,6 +339,8 @@ public class ManejadorEscenarios {
 
 			Scene scene = new Scene(vista);
 			Stage stage = new Stage();
+			scene.getStylesheets().add("file:src/resources/root.css");
+
 			stage.setTitle("Herbario/registro");
 
 			stage.getIcons().add(new Image(ruta));
@@ -345,27 +355,8 @@ public class ManejadorEscenarios {
 
 	}
 
-	public void cargarEscenarioDialogo() {
-		try {
 
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(Main.class.getResource("./vista/VistaDialogo.fxml"));
-			BorderPane vista = (BorderPane) loader.load();
 
-			Scene scene = new Scene(vista);
-
-			Stage stage = new Stage();
-			stage.setTitle("Herbario/dialogo");
-			stage.getIcons().add(new Image(ruta));
-			stage.setScene(scene);
-			stage.show();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	
 	public void cargarEscenarioResenias(ImagenPlanta img) {
 		try {
 
@@ -373,11 +364,13 @@ public class ManejadorEscenarios {
 			loader.setLocation(Main.class.getResource("./vista/VistaResenia.fxml"));
 			BorderPane vista = (BorderPane) loader.load();
 
-			VistaReseniaControlador controladorResenia=loader.getController();
+			VistaReseniaControlador controladorResenia = loader.getController();
 			controladorResenia.setImagen(img);
 			controladorResenia.setManejador(this);
 			Scene scene = new Scene(vista);
 			Stage stage = new Stage();
+			scene.getStylesheets().add("file:src/resources/root.css");
+
 			stage.setTitle("Herbario");
 			stage.getIcons().add(new Image(ruta));
 			stage.setScene(scene);
@@ -387,6 +380,7 @@ public class ManejadorEscenarios {
 			e.printStackTrace();
 		}
 	}
+
 	public Stage getEscenario() {
 		return escenario;
 	}

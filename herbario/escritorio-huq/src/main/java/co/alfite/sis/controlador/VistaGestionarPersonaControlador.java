@@ -49,15 +49,11 @@ public class VistaGestionarPersonaControlador {
 	private TableView<PersonaObservable> tablaPersonas;
 
 	@FXML
-	private TextField campoBuscar;
-	@FXML
 	private TextField campoContrasenia;
 
 	@FXML
 	private TextField campoEstado;
 
-	@FXML
-	private Button botonBuscar;
 	@FXML
 	private Button botonCambiarEstadoPersona;
 
@@ -140,11 +136,9 @@ public class VistaGestionarPersonaControlador {
 
 		if (personaGestionar.equals("recolector")) {
 			botonAgregarTrabajador.setText("Agregar nuevo Recolector");
-			campoBuscar.setPromptText("Busca un Recolector");
 
 		} else {
 			botonAgregarTrabajador.setText("Agregar nuevo Empleado");
-			campoBuscar.setPromptText("Busca un Empleado");
 		}
 	}
 

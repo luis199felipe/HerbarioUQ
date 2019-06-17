@@ -3,6 +3,7 @@ package co.alfite.sis.controlador;
 import java.util.Iterator;
 import java.util.List;
 
+import co.alfite.sis.entidades.EspeciePlanta;
 import co.alfite.sis.entidades.FamiliaPlanta;
 import co.alfite.sis.entidades.GeneroPlanta;
 import co.alfite.sis.modelo.AdministradorDelegado;
@@ -24,10 +25,10 @@ import javafx.scene.control.Alert.AlertType;
 public class VistaGestionarGeneroControlador {
 
 	@FXML
-	private Label campoNumeroEspecies;
+	private TextField campoNumEspecies;
 
 	@FXML
-	private ChoiceBox<String> campoNombreFamilia;
+	private ComboBox<String> comoboBoxFam;
 
 	@FXML
 	private TableColumn<GeneroObservable, String> columnaId;
@@ -42,16 +43,10 @@ public class VistaGestionarGeneroControlador {
 	private Button botonAgregarGenero;
 
 	@FXML
-	private Label campoID;
+	private TextField campoId;
 
 	@FXML
-	private Button botonBuscar;
-
-	@FXML
-	private TextField campoBuscar;
-
-	@FXML
-	private ComboBox<?> cmoboBoxFiltrar;
+	private TextField campoNumESpecies;
 
 	@FXML
 	private TableView<GeneroObservable> tabla;
@@ -64,7 +59,7 @@ public class VistaGestionarGeneroControlador {
 
 	@FXML
 	private TextField campoNombre;
-	
+
 	@FXML
 	private ObservableList<String> listaItems;
 
@@ -85,24 +80,27 @@ public class VistaGestionarGeneroControlador {
 
 		tabla.getSelectionModel().selectedItemProperty()
 				.addListener((observable, oldValue, newValue) -> verGeneroDetalle(newValue));
+		
 	}
 
 	private void verGeneroDetalle(GeneroObservable gen) {
-		campoID.setText(gen.getIdGenero().getValue());
+		campoId.setText(gen.getIdGenero().getValue());
 		campoNombre.setText(gen.getNombre().getValue());
 		listaItems = FXCollections.observableArrayList();
-		/*List<FamiliaObservable> fams = adminDelegado.listarFamiliasObservables();
-		
-		Iterator<FamiliaObservable> it = fams.iterator();
-		while (it.hasNext()) {
-			String ff = it.next().getNombre().getValue();
-			listaItems.add(ff);
-		}
-		*/
-		listaItems.add(gen.getFamilia().getValue());
-		campoNombreFamilia.setItems(listaItems);
-		//campoNombreFamilia.setDisable(false);
-		
+
+		List<FamiliaPlanta> fams = adminDelegado.listarFamilias();
+
+		listaItems.add("holis");
+		comoboBoxFam.setItems(listaItems);
+
+		comoboBoxFam.getSelectionModel().select(0);
+//		GeneroPlanta g=
+//		FamiliaPlanta f= adminDelegado.buscarFamiliaPlanta(nombre)
+//		for (int i = 0; i < fams.size(); i++) {
+//			listaItems.add(fams.get(i).getNombre());
+//		}
+
+
 	}
 
 	@FXML
@@ -116,12 +114,12 @@ public class VistaGestionarGeneroControlador {
 		} else {
 			GeneroPlanta ac = new GeneroPlanta();
 
-			ac.setIdGenero(Integer.parseInt(campoID.getText()));
+			ac.setIdGenero(Integer.parseInt(campoId.getText()));
 			ac.setNombre(campoNombre.getText());
-			//String familia = campoNombreFamilia.getSelectionModel().getSelectedItem();
+			// String familia = campoNombreFamilia.getSelectionModel().getSelectedItem();
 
-			//FamiliaPlanta f = adminDelegado.buscarFamiliaPlanta(familia);
-			//ac.setFamiliaPlanta(f);
+			// FamiliaPlanta f = adminDelegado.buscarFamiliaPlanta(familia);
+			// ac.setFamiliaPlanta(f);
 			adminDelegado.actualizarGeneroPlanta(ac);
 			botonActualizarDatos.setText("Actualizar los Datos");
 			campoNombre.setEditable(false);
@@ -132,8 +130,8 @@ public class VistaGestionarGeneroControlador {
 
 	@FXML
 	private void eliminar() {
-		boolean  elim=adminDelegado.eliminarGenero(campoNombre.getText());
-		if(elim) {
+		boolean elim = adminDelegado.eliminarGenero(campoNombre.getText());
+		if (elim) {
 			Utilidades.mostrarMensaje("Eliminar", "El genero se ha eliminado correctamente", AlertType.INFORMATION);
 
 		}
@@ -143,11 +141,12 @@ public class VistaGestionarGeneroControlador {
 	private void buscar() {
 
 	}
+
 	@FXML
 	void agregarGenero() {
 		miEscenario.cargarEscenarioAgregarGF("genero");
 	}
-	
+
 	@FXML
 	void actualizarLista() {
 		int ant = tabla.getSelectionModel().getSelectedIndex();
@@ -157,8 +156,8 @@ public class VistaGestionarGeneroControlador {
 	}
 
 	public void setManejador(ManejadorEscenarios manejadorEscenarios) {
-		this.miEscenario=manejadorEscenarios;
-		
+		this.miEscenario = manejadorEscenarios;
+
 	}
 
 }

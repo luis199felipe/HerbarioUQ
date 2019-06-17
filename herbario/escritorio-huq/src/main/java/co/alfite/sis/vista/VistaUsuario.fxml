@@ -38,7 +38,7 @@
                   <Button fx:id="leer_2" mnemonicParsing="false" onAction="#verResenias2" text="Leer Reseñas" BorderPane.alignment="CENTER" />
                </right>
                <center>
-                  <Label fx:id="numeroLikes_1" text="esta es una ................" BorderPane.alignment="CENTER" />
+                  <Label fx:id="numeroLikes_2" text="esta es una ................" BorderPane.alignment="CENTER" />
                </center>
                <left>
                   <ToggleButton fx:id="like_2" mnemonicParsing="false" onAction="#accionarLike2" text="Me Gusta" BorderPane.alignment="CENTER" />

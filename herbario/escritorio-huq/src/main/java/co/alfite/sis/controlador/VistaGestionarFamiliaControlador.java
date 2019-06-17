@@ -91,7 +91,7 @@ public class VistaGestionarFamiliaControlador {
 	private void verFamiliaDetalle(FamiliaObservable fam) {
 		campoID.setText(fam.getIdFamilia().getValue());
 		campoNombre.setText(fam.getNombre().getValue());
-		campoNumeroGeneros.setText(fam.getNumeroGeneros());
+		//campoNumeroGeneros.setText(fam.getNumeroGeneros());
 	}
 
 	/**

@@ -17,6 +17,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
@@ -51,7 +52,11 @@ public class VistaLoginControlador {
 
 	@FXML
 	private void initialize() {
-
+//
+//		campoCorreo.setText("user@gmail.com");
+//		campoContrasenia.setText("user");
+		
+		logoHerbario.setImage(new Image("file:src/resources/imagenes/logoHerbario.png"));
 		campoCorreo.setText("nfigueroas@uqvirtual.edu.co");
 		campoContrasenia.setText("root");
 

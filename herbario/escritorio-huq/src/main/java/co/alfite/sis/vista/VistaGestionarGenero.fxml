@@ -24,11 +24,13 @@
                         <Label text="Nombre del genero" />
                         <Label text="ID  del genero:" GridPane.rowIndex="1" />
                         <Label text="Numero de Especies" GridPane.rowIndex="2" />
-                        <TextField fx:id="campoNombre" GridPane.columnIndex="1" />
+                        <TextField fx:id="campoNombre" editable="false" GridPane.columnIndex="1" />
                         <Label text="Familia a la que pertenece:" GridPane.rowIndex="3" />
                         <Label fx:id="campoID" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Label fx:id="campoNumeroEspecies" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <ChoiceBox fx:id="campoNombreFamilia" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <TextField fx:id="campoNumEspecies" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField fx:id="campoId" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <ComboBox fx:id="comboBoxFam" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                      </children>
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -98,17 +100,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
-                     <left>
-                        <TextField fx:id="campoBuscar" prefHeight="25.0" prefWidth="212.0" promptText="BUSQUEDA" BorderPane.alignment="CENTER" />
-                     </left>
-                     <center>
-                        <ComboBox fx:id="cmoboBoxFiltrar" prefHeight="25.0" prefWidth="154.0" promptText="Buscar por nombre" BorderPane.alignment="CENTER" />
-                     </center>
-                     <right>
-                        <Button fx:id="botonBuscar" mnemonicParsing="false" onAction="#buscar" text="Buscar" BorderPane.alignment="CENTER" />
-                     </right>
-                  </BorderPane>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
                         <Button fx:id="botonActualizarLista" mnemonicParsing="false" onAction="#actualizarLista" text="Actualizar Lista" BorderPane.alignment="CENTER" />

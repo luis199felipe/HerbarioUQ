@@ -76,9 +76,9 @@ public class DisplayShelf extends Region {
 	private VistaUsuarioControlador vistaUsuarioControlador;
 
 	public DisplayShelf(Image[] images, String imagenesMostrar, VistaUsuarioControlador vistaUsuarioControlador) {
-		this.imagenesMostrar=imagenesMostrar;
-		
-		this.vistaUsuarioControlador=vistaUsuarioControlador;
+		this.imagenesMostrar = imagenesMostrar;
+
+		this.vistaUsuarioControlador = vistaUsuarioControlador;
 		// set clip
 		setClip(clip);
 		// set ids for styling via CSS
@@ -90,13 +90,17 @@ public class DisplayShelf extends Region {
 			final PerspectiveImage item = items[i] = new PerspectiveImage(images[i]);
 			final double index = i;
 			item.setOnMouseClicked((MouseEvent me) -> {
-				mover(index, item);
+				localChange = true;
+				scrollBar.setValue(index);
+				localChange = false;
+				shiftToCenter(item);
 				enviarDato(index);
 				requestFocus();
-				
+
 			});
 		}
 		// setup scroll bar
+		scrollBar.setVisible(false);
 		scrollBar.setMax(items.length - 1);
 		scrollBar.setVisibleAmount(1);
 		scrollBar.setUnitIncrement(1);
@@ -127,24 +131,17 @@ public class DisplayShelf extends Region {
 		// update
 		update();
 	}
-	
+
 	private void enviarDato(double index) {
-		
-		if(imagenesMostrar.equals("masMegusta")) {
-		vistaUsuarioControlador.actualizarGaleriaMasMeGusta(index);
-		}else {
-		vistaUsuarioControlador.actualizarGaleriaTodas(index);
+
+		if (imagenesMostrar.equals("masMegusta")) {
+			vistaUsuarioControlador.actualizarGaleriaMasMeGusta(index);
+		} else {
+			vistaUsuarioControlador.actualizarGaleriaTodas(index);
 		}
-		
+
 	}
 
-	private  void mover(double index,PerspectiveImage item) {
-		localChange = true;
-		scrollBar.setValue(index);
-		localChange = false;
-		shiftToCenter(item);
-		System.out.println("se mueve " + index);
-	}
 
 	@Override
 	protected void layoutChildren() {

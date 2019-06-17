@@ -240,9 +240,9 @@ public class VistaUsuarioControlador {
 
 	public void actualizarGaleriaTodas(double index) {
 		indiceTodas = index;
-
+		
 		ImagenPlanta temp = todasLasImagenes.get((int) index);
-
+System.out.println(index+"#######################");
 		int id = temp.getIdImagen();
 		if (misLikes != null && !misLikes.isEmpty()) {
 			for (int i = 0; i < misLikes.size(); i++) {
