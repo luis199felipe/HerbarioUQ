@@ -1,8 +1,11 @@
 package co.alfite.sis.controlador;
 
+import co.alfite.sis.entidades.RegistroEspecie.Estado;
 import co.alfite.sis.modelo.AdministradorDelegado;
 import co.alfite.sis.modelo.observable.EspecieObservable;
+import co.alfite.sis.modelo.observable.FamiliaObservable;
 import co.alfite.sis.modelo.observable.GeneroObservable;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -39,7 +42,7 @@ public class VistaGestionarEspecieControlador {
 	private TextField campoID;
 
 	@FXML
-	private ComboBox<?> comboBoxFiltrar;
+	private ComboBox<String> comboBoxFiltrar;
 
 	@FXML
 	private TableColumn<EspecieObservable, String> columnaId;
@@ -58,6 +61,9 @@ public class VistaGestionarEspecieControlador {
 
 	@FXML
 	private TableColumn<EspecieObservable, String> columnaNombre;
+
+	@FXML
+	private ObservableList<String> listaItems;
 	private AdministradorDelegado adminDelegado;
 
 	private ManejadorEscenarios miEscenario;
@@ -77,6 +83,14 @@ public class VistaGestionarEspecieControlador {
 
 		tabla.getSelectionModel().selectedItemProperty()
 				.addListener((observable, oldValue, newValue) -> verEspecieDetalle(newValue));
+
+		listaItems = FXCollections.observableArrayList();
+		listaItems.add("Filtrar por familia");
+		listaItems.add("Filtrar por genero");
+		listaItems.add("Filtrar por esp aceptadas");
+		listaItems.add("Filtrar por esp rechazadas");
+		comboBoxFiltrar.setItems(listaItems);
+
 	}
 
 	private void verEspecieDetalle(EspecieObservable esp) {
@@ -90,22 +104,28 @@ public class VistaGestionarEspecieControlador {
 
 	@FXML
 	void actualizarDatos() {
-
+		
 	}
 
 	@FXML
 	void eliminar() {
-
+			adminDelegado.eliminarEspecie(adminDelegado.buscarEspeciePlanta(campoNombreEspecie.getText()));
 	}
 
 	@FXML
 	void buscar() {
-
+		String filtro = campoBuscar.getText();
+		String opcion = comboBoxFiltrar.getSelectionModel().getSelectedItem();
+		if (opcion.equals("Filtrar por familia")) {
+			tabla.setItems((ObservableList<EspecieObservable>) adminDelegado.listarEspeciesPorFamiliaObservables(filtro));
+		}else if (opcion.equals("Filtrar por genero")) {
+			tabla.setItems((ObservableList<EspecieObservable>) adminDelegado.listarEspeciesPorGeneroObservables(filtro));
+		}
 	}
 
 	@FXML
 	void actualizarLista() {
-
+		tabla.setItems((ObservableList<EspecieObservable>) adminDelegado.listarEspeciesObservables());
 	}
 
 	@FXML
@@ -119,7 +139,7 @@ public class VistaGestionarEspecieControlador {
 	}
 
 	public void setPane(BorderPane pane) {
-	this.pane=pane;
-		
+		this.pane = pane;
+
 	}
 }
