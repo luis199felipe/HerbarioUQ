@@ -134,5 +134,7 @@ public interface AdministradorEJBRemote {
 	boolean insertarEspecie(EspeciePlanta especie);
 
 	ImagenPlanta actualizarImagenPlanta(ImagenPlanta g);
+	
+	ImagenPlanta insertarImagenPlanta(ImagenPlanta img);
 
 }

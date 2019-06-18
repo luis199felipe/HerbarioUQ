@@ -75,8 +75,7 @@ public class DisplayShelf extends Region {
 	private String imagenesMostrar;
 	private VistaUsuarioControlador vistaUsuarioControlador;
 
-	public DisplayShelf(Image[] images, String imagenesMostrar, VistaUsuarioControlador vistaUsuarioControlador) {
-		this.imagenesMostrar = imagenesMostrar;
+	public DisplayShelf(Image[] images, VistaUsuarioControlador vistaUsuarioControlador) {
 
 		this.vistaUsuarioControlador = vistaUsuarioControlador;
 		// set clip
@@ -134,11 +133,7 @@ public class DisplayShelf extends Region {
 
 	private void enviarDato(double index) {
 
-		if (imagenesMostrar.equals("masMegusta")) {
-			vistaUsuarioControlador.actualizarGaleriaMasMeGusta(index);
-		} else {
 			vistaUsuarioControlador.actualizarGaleriaTodas(index);
-		}
 
 	}
 

@@ -14,6 +14,7 @@ import co.alfite.sis.entidades.ImagenPlanta;
 import co.alfite.sis.entidades.MeGustaEspeciePlanta;
 import co.alfite.sis.entidades.Persona;
 import co.alfite.sis.entidades.Recolector;
+import co.alfite.sis.entidades.RegistroEspecie.Estado;
 import co.alfite.sis.entidades.Resenia;
 import co.alfite.sis.entidades.Usuario;
 import co.alfite.sis.excepciones.ElementoRepetidoExcepcion;
@@ -119,6 +120,18 @@ public class UsuarioEJB implements UsuarioEJBRemote {
 				ImagenPlanta.class);
 		return query.getResultList();
 	}
+	
+	public List<ImagenPlanta> obtenerListaImagenesAceptadas() {
+
+		try {
+		TypedQuery<ImagenPlanta> query = entityManager.createNamedQuery(ImagenPlanta.IMAGENES_ACEPTADAS,
+				ImagenPlanta.class);
+		query.setParameter("est", Estado.aprobado);
+		return query.getResultList();
+		}catch (Exception e) {
+			return null;
+		}
+	}
 
 	/*
 	 * reseñas de un usuario
@@ -126,7 +139,6 @@ public class UsuarioEJB implements UsuarioEJBRemote {
 	public List<Resenia> obtenerListaResenias(String id) {
 
 		TypedQuery<Resenia> query = entityManager.createNamedQuery(Resenia.RESENIA_USUARIO, Resenia.class);
-
 		query.setParameter("esp", id);
 		return query.getResultList();
 	}
@@ -154,6 +166,8 @@ public class UsuarioEJB implements UsuarioEJBRemote {
 
 		TypedQuery<ImagenPlanta> query = entityManager.createNamedQuery(ImagenPlanta.ESPECIES_POR_LIKES_DES,
 				ImagenPlanta.class);
+		
+		query.setParameter("est", Estado.aprobado);
 		return query.getResultList();
 	}
 

@@ -13,27 +13,17 @@
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints maxHeight="184.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="236.0" minHeight="10.0" prefHeight="215.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="137.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="137.0" minHeight="0.0" prefHeight="21.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="274.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="269.0" minHeight="10.0" prefHeight="226.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="225.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="274.0" minHeight="3.0" prefHeight="62.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="427.0" minHeight="10.0" prefHeight="399.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="225.0" minHeight="10.0" prefHeight="78.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <BorderPane prefHeight="200.0" prefWidth="200.0">
-               <center>
-                  <Label text="Imagenes mas gustadas" BorderPane.alignment="CENTER" />
-               </center>
-            </BorderPane>
-            <BorderPane prefHeight="40.0" prefWidth="750.0" GridPane.rowIndex="4">
+            <BorderPane prefHeight="40.0" prefWidth="750.0">
                <center>
                   <Label text="Todas las imagenes" BorderPane.alignment="CENTER" />
                </center>
             </BorderPane>
-            <Separator prefHeight="11.0" prefWidth="750.0" GridPane.rowIndex="3" />
-            <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="6">
+            <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
                <right>
                   <Button fx:id="leer_2" mnemonicParsing="false" onAction="#verResenias2" text="Leer Reseñas" BorderPane.alignment="CENTER" />
                </right>
@@ -41,22 +31,10 @@
                   <Label fx:id="numeroLikes_2" text="esta es una ................" BorderPane.alignment="CENTER" />
                </center>
                <left>
-                  <ToggleButton fx:id="like_2" mnemonicParsing="false" onAction="#accionarLike2" text="Me Gusta" BorderPane.alignment="CENTER" />
+                  <ToggleButton fx:id="like_2" mnemonicParsing="false" onAction="#accionarLike2" text="No me gusta" BorderPane.alignment="CENTER" />
                </left>
             </BorderPane>
-            <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
-               <right>
-                  <Button fx:id="leer_1" mnemonicParsing="false" onAction="#verResenias1" text="Leer Reseñas" BorderPane.alignment="CENTER" />
-               </right>
-               <center>
-                  <Label fx:id="numeroLikes_1" text="Esta es una..................." BorderPane.alignment="CENTER" />
-               </center>
-               <left>
-                  <ToggleButton fx:id="like_1" mnemonicParsing="false" onAction="#accionarLike1" text="Me Gusta" BorderPane.alignment="CENTER" />
-               </left>
-            </BorderPane>
-            <BorderPane fx:id="paneMasGustadas" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
-            <BorderPane fx:id="paneTodas" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5" />
+            <BorderPane fx:id="paneTodas" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
          </children>
       </GridPane>
    </center>

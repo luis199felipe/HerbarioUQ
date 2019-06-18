@@ -292,13 +292,8 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 		RegistroEspecie rs = entityManager.find(RegistroEspecie.class, registro.getIdRegistro());
 
 		if (rs != null) {
-			rs.setEspecie(registro.getEspecie());
-			rs.setEstado(registro.getEstado());
-			rs.setFecha(registro.getFecha());
-			rs.setMensaje(registro.getMensaje());
-
 			try {
-				entityManager.merge(rs);
+				entityManager.merge(registro);
 				return registro;
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -654,15 +649,16 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 	public boolean insertarEspecie(EspeciePlanta especie) {
 
 		boolean i = false;
-		if (entityManager.find(EspeciePlanta.class, especie.getNombre()) == null) {
-			i = true;
-			try {
-				entityManager.persist(especie);
-			} catch (Exception e) {
-				i = false;
-			}
-
+		// if (entityManager.find(EspeciePlanta.class, especie.getIdEspecie()) == null)
+		// {
+		i = true;
+		try {
+			entityManager.persist(especie);
+		} catch (Exception e) {
+			i = false;
 		}
+
+		// }
 
 		return i;
 
@@ -719,7 +715,7 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 		}
 	}
 
-	private ImagenPlanta insertarImagenPlanta(ImagenPlanta img) {
+	public ImagenPlanta insertarImagenPlanta(ImagenPlanta img) {
 
 		try {
 			entityManager.persist(img);

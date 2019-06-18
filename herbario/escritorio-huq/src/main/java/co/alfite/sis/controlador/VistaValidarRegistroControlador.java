@@ -20,9 +20,11 @@ import co.alfite.sis.excepciones.ElementoRepetidoExcepcion;
 import co.alfite.sis.modelo.AdministradorDelegado;
 import co.alfite.sis.modelo.observable.FamiliaObservable;
 import co.alfite.sis.modelo.observable.RegistroObservable;
+import co.alfite.sis.util.Utilidades;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -192,12 +194,12 @@ public class VistaValidarRegistroControlador {
 				EspeciePlanta nuevaEspecie = new EspeciePlanta();
 				nuevaEspecie.setGeneroPlanta(gen);
 				nuevaEspecie.setNombre(nombrePlanta.getText());
-				adminDelegado.insertarEspecie(nuevaEspecie);
+//				adminDelegado.insertarEspecie(nuevaEspecie);
 
 				ImagenPlanta im = adminDelegado.buscarImagenPlanta(registro.getImagen().getIdImagen());
 				
 				im.setEspecie(nuevaEspecie);
-				adminDelegado.actualizarImagenPlanta(im);
+			System.out.println(adminDelegado.actualizarImagenPlanta(im)!=null);
 
 			}
 
@@ -230,7 +232,15 @@ public class VistaValidarRegistroControlador {
 	@FXML
 	void tomarImagen() {
 
-//		tablaRegistros.setItems((ObservableList<RegistroObservable>) adminDelegado.listarRegistrosObservables());
+		EspeciePlanta esp= adminDelegado.buscarEspeciePlanta(nombrePlanta.getText());
+		if(esp==null) {
+			Utilidades.mostrarMensaje("Error", "no se puede tomar la imagen", AlertType.ERROR);
+		}else {
+			ImagenPlanta img= new ImagenPlanta();
+			img.setImagen(registro.getImagen().getImagen());
+			img.setEspecie(esp);
+			adminDelegado.insertarImagenPlanta(img);
+		}
 
 	}
 

@@ -30,22 +30,10 @@ public class VistaUsuarioControlador {
 	private Label numeroLikes_2;
 
 	@FXML
-	private Button leer_1;
-
-	@FXML
 	private Button leer_2;
 
 	@FXML
-	private Label numeroLikes_1;
-
-	@FXML
-	private ToggleButton like_1;
-
-	@FXML
 	private GridPane gridPane;
-
-	@FXML
-	private BorderPane paneMasGustadas;
 
 	@FXML
 	private BorderPane paneTodas;
@@ -59,9 +47,6 @@ public class VistaUsuarioControlador {
 	private static final double WIDTH = 50, HEIGHT = 1000;
 
 	private List<ImagenPlanta> todasLasImagenes;
-	private List<ImagenPlanta> imagenesPorLikes;
-
-	private double indiceMasGustadas;
 
 	private List<MeGustaEspeciePlanta> misLikes;
 
@@ -97,60 +82,37 @@ public class VistaUsuarioControlador {
 
 	public void iniciarVistaGaleria() {
 
-		paneMasGustadas.setCenter(createContent("masMegusta"));
-		paneTodas.setCenter(createContent("todas"));
+		paneTodas.setCenter(createContent());
 
 	}
 
-	public Parent createContent(String imagenesMostrar) {
+	public Parent createContent() {
 
 		// load images
 
 		InputStream in;
 		Image[] images = null;
 		boolean existenImagenes = false;
-		if (imagenesMostrar.equals("todas")) {
-			todasLasImagenes = usuarioDelegado.listarImagenes();
-			images = new Image[todasLasImagenes.size()];
+		todasLasImagenes = usuarioDelegado.listarImagenes();
+		images = new Image[todasLasImagenes.size()];
 
-			if (!todasLasImagenes.isEmpty()) {
-				for (int i = 0; i < images.length; i++) {
+		if (!todasLasImagenes.isEmpty()) {
+			for (int i = 0; i < images.length; i++) {
 
-					in = new ByteArrayInputStream(todasLasImagenes.get(i).getImagen());
-					images[i] = new Image(in);
+				in = new ByteArrayInputStream(todasLasImagenes.get(i).getImagen());
+				images[i] = new Image(in);
 
-				}
-				existenImagenes = true;
-			} else {
-				like_1.setVisible(false);
 			}
+			existenImagenes = true;
 		} else {
-			imagenesPorLikes = usuarioDelegado.obtenerListaImagenesOrdenadasPorLikes();
-			images = new Image[imagenesPorLikes.size()];
-
-			if (!imagenesPorLikes.isEmpty()) {
-				for (int i = 0; i < images.length; i++) {
-
-					in = new ByteArrayInputStream(imagenesPorLikes.get(i).getImagen());
-					images[i] = new Image(in);
-
-				}
-				existenImagenes = true;
-
-			} else {
-				like_2.setVisible(false);
-			}
+			like_2.setVisible(false);
 		}
 
 		if (existenImagenes) {
-			DisplayShelf displayShelf = new DisplayShelf(images, imagenesMostrar, this);
+			DisplayShelf displayShelf = new DisplayShelf(images, this);
 			displayShelf.setPrefSize(WIDTH, HEIGHT);
 			return displayShelf;
 		}
-
-//	String css = getClass().getResource("./util/DisplayShelf.css").toExternalForm();
-//
-//	displayShelf.getStylesheets().add(css);	
 
 		Label info = new Label("No hay imagenes para mostrar");
 		return info;
@@ -159,40 +121,6 @@ public class VistaUsuarioControlador {
 
 	@FXML
 	void accionarLike1() {
-
-		// hay que validar que el like no este
-		if (like_1.isSelected()) {
-			ImagenPlanta img = imagenesPorLikes.get((int) indiceMasGustadas);
-
-			if (validarLike(img)) {
-				System.out.println("VALIDA");
-				MeGustaEspeciePlanta nuevoLike = new MeGustaEspeciePlanta();
-				nuevoLike.setFecha(new Date());
-				Usuario n = (Usuario) manejadorEscenario.getPersonaEnSesion();
-				nuevoLike.setUsuario(n);
-				nuevoLike.setImagen(img);
-				usuarioDelegado.registrarMeGusta(nuevoLike);
-				misLikes.add(nuevoLike);
-			}
-
-		} else {
-			if (!misLikes.isEmpty()) {
-				ImagenPlanta x = imagenesPorLikes.get((int) indiceMasGustadas);
-				MeGustaEspeciePlanta likeEliminar = null;
-				for (int i = 0; i < misLikes.size(); i++) {
-					ImagenPlanta im = misLikes.get(i).getImagen();
-					if (x.getIdImagen().equals(im.getIdImagen())) {
-						likeEliminar = misLikes.get(i);
-						break;
-					}
-				}
-				System.out.println(usuarioDelegado.eliminarMegusta(likeEliminar));
-
-			}
-
-		}
-
-		actualizarGaleriaMasMeGusta(indiceMasGustadas);
 
 	}
 
@@ -210,58 +138,74 @@ public class VistaUsuarioControlador {
 	@FXML
 	void accionarLike2() {
 
+		// hay que validar que el like no este
 		if (like_2.isSelected()) {
-			System.out.println("inserta");
+			ImagenPlanta img = todasLasImagenes.get((int) indiceTodas);
+
+			if (validarLike(img)) {
+				System.out.println("VALIDA");
+				MeGustaEspeciePlanta nuevoLike = new MeGustaEspeciePlanta();
+				nuevoLike.setFecha(new Date());
+				Usuario n = (Usuario) manejadorEscenario.getPersonaEnSesion();
+				nuevoLike.setUsuario(n);
+				nuevoLike.setImagen(img);
+				usuarioDelegado.registrarMeGusta(nuevoLike);
+				misLikes.add(nuevoLike);
+				like_2.setText("Me gusta");
+
+			}
 
 		} else {
-			System.out.println("retira");
-
-		}
-	}
-
-	public void actualizarGaleriaMasMeGusta(double index) {
-		indiceMasGustadas = index;
-
-		ImagenPlanta temp = imagenesPorLikes.get((int) index);
-
-		int id = temp.getIdImagen();
-		if (misLikes != null && !misLikes.isEmpty()) {
-			for (int i = 0; i < misLikes.size(); i++) {
-				if (id == misLikes.get(i).getImagen().getIdImagen()) {
-
-					like_1.setSelected(true);
-					break;
+			if (!misLikes.isEmpty()) {
+				ImagenPlanta x = todasLasImagenes.get((int) indiceTodas);
+				MeGustaEspeciePlanta likeEliminar = null;
+				for (int i = 0; i < misLikes.size(); i++) {
+					ImagenPlanta im = misLikes.get(i).getImagen();
+					if (x.getIdImagen().equals(im.getIdImagen())) {
+						likeEliminar = misLikes.get(i);
+						break;
+					}
 				}
+				System.out.println(usuarioDelegado.eliminarMegusta(likeEliminar));
+
+				like_2.setText(" No me gusta");
+
 			}
+
 		}
-		numeroLikes_1.setText("le gusta a " + temp.getNumeroLikes() + " usuarios");
+
+		actualizarGaleriaTodas(indiceTodas);
 
 	}
 
 	public void actualizarGaleriaTodas(double index) {
 		indiceTodas = index;
-		
+		boolean esta = false;
 		ImagenPlanta temp = todasLasImagenes.get((int) index);
-System.out.println(index+"#######################");
 		int id = temp.getIdImagen();
 		if (misLikes != null && !misLikes.isEmpty()) {
 			for (int i = 0; i < misLikes.size(); i++) {
 				if (id == misLikes.get(i).getImagen().getIdImagen()) {
 
 					like_2.setSelected(true);
+					like_2.setText("Me gusta");
+					esta = true;
 					break;
 				}
 			}
 		}
-		numeroLikes_2.setText("le gusta a " + temp.getNumeroLikes() + " usuarios");
+		Long n = temp.getNumeroLikes();
 
-	}
+		if (n == null) {
+			n = 0l;
+		}
 
-	@FXML
-	private void verResenias1() {
+		if (!esta) {
+			like_2.setText("No me gusta");
 
-		System.out.println(imagenesPorLikes.get((int) indiceMasGustadas) + "poiuytyui");
-		manejadorEscenario.cargarEscenarioResenias(imagenesPorLikes.get((int) indiceMasGustadas));
+		}
+		numeroLikes_2.setText("le gusta a " + n + " usuarios");
+
 	}
 
 	@FXML

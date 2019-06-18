@@ -154,5 +154,10 @@ public class UsuarioDelegado {
 		
 	}
 	
+	public List<ImagenPlanta> obtenerListaImagenesAceptadas(){
+		
+		return usuEJB.obtenerListaImagenesAceptadas();
+	}
+	
 
 }

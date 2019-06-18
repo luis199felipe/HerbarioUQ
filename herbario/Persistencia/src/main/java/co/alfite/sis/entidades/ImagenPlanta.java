@@ -15,14 +15,15 @@ import javax.persistence.*;
  */
 @Entity
 @NamedQueries({ @NamedQuery(name = ImagenPlanta.IMAGEN_GET_ALL, query = "select imagen from ImagenPlanta imagen"),
-		@NamedQuery(name = ImagenPlanta.ESPECIES_POR_LIKES_DES, query = "SELECT img FROM ImagenPlanta img order by img.numeroLikes DESC"),
-		@NamedQuery(name = ImagenPlanta.IMAGEN_POR_ID, query = "select imagen from ImagenPlanta imagen where imagen.idImagen=:id") })
+		@NamedQuery(name = ImagenPlanta.ESPECIES_POR_LIKES_DES, query = "SELECT img FROM ImagenPlanta img  where img.especie.registro.estado=:est  order by img.numeroLikes DESC"),
+		@NamedQuery(name = ImagenPlanta.IMAGEN_POR_ID, query = "select imagen from ImagenPlanta imagen where imagen.idImagen=:id"),
+		@NamedQuery(name = ImagenPlanta.IMAGENES_ACEPTADAS, query = "select imagen from ImagenPlanta imagen where imagen.especie.registro.estado=:est") })
 public class ImagenPlanta implements Serializable {
 
 	public static final String IMAGEN_GET_ALL = "ImagenGetAll";
 	public static final String ESPECIES_POR_LIKES_DES = "EspeciesNumeroLikeDes";
 	public static final String IMAGEN_POR_ID = "EspeciesPorId";
-
+	public static final String IMAGENES_ACEPTADAS = "imagenesAceptadas";
 
 	/**
 	 * Muchas ImagenesPlanta pertenecen a una EspecePlanta

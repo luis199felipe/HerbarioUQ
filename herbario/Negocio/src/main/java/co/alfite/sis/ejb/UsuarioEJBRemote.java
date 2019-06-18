@@ -39,4 +39,6 @@ public interface UsuarioEJBRemote {
 	List<MeGustaEspeciePlanta> obtenerListaLikesPorEspecie(String id);
 	
 	MeGustaEspeciePlanta eliminarMegusta(MeGustaEspeciePlanta meGusta);
+	
+	List<ImagenPlanta> obtenerListaImagenesAceptadas();
 }

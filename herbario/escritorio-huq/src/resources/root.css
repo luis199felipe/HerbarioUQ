@@ -137,16 +137,14 @@
 }
 
 .tool-bar{
-		 -fx-padding: 5 22 5 22;
-	-fx-border-color: #ffffff;
-	-fx-background-radius: 0;
-	-fx-background-color: #3a3a3a ;
-	-fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-	-fx-font-size: 11pt;
-	-fx-text-fill: #ffffff;
-	-fx-background-insets: 0 0 0 0, 0, 1, 2;
+	
+	-fx-background-color: #000000 ;
 }
 
+.tool-bar .label{
+	
+	-fx-background-color: #000000 ;
+}
 
 .combo-box .list-cell 
 {
@@ -211,16 +209,4 @@
 
 .combo-box-base:disabled {
     -fx-opacity: .4;
-}
-
-.split-menu-button{
-		 -fx-padding: 5 22 5 22;
-	-fx-border-color: #ffffff;
-	-fx-border-width: 2;
-	-fx-background-radius: 0;
-	-fx-background-color: linear-gradient(transparent,transparent);
-	-fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-	-fx-font-size: 11pt;
-	-fx-text-fill: #ffffff;
-	-fx-background-insets: 0 0 0 0, 0, 1, 2;
 }

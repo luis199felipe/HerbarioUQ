@@ -53,7 +53,7 @@ public class VistaReseniaControlador {
 			nuevaResenia.setTexto(campoResenia.getText());
 			if (usuarioDelegado.registrarResenia(nuevaResenia)) {
 				Utilidades.mostrarMensaje("Exito",
-						"su reseña ha sido enviada ahora debe esperar a que sea validada y de aprobarse sera publicada, de lo contrario sera descartada",
+						"su reseña sera publicada",
 						AlertType.INFORMATION);
 			}
 		}else {
@@ -75,7 +75,7 @@ public class VistaReseniaControlador {
 
 		for (int i = 0; i < resenias.size(); i++) {
 			Resenia temp=resenias.get(i);
-			String texto=String.format("Creada por:  %s",temp.getUsuario().getNombre()+"%t",temp.getTexto());
+			String texto="Creada por: "+temp.getUsuario().getNombre()+":"+"\n"+temp.getTexto();
 			TextArea nuevaResenia = new TextArea(texto);
 			nuevaResenia.setPrefSize(380, 150);
 			nuevaResenia.setMinSize(380, 150);

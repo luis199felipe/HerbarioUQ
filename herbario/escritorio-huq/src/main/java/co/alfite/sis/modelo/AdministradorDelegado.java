@@ -445,4 +445,10 @@ public class AdministradorDelegado implements AdministradorEJBRemote {
 		// TODO Auto-generated method stub
 		return adminEJB.actualizarImagenPlanta(g);
 	}
+
+	@Override
+	public ImagenPlanta insertarImagenPlanta(ImagenPlanta img) {
+		// TODO Auto-generated method stub
+		return adminEJB.insertarImagenPlanta(img);
+	}
 }
