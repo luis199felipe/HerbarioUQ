@@ -654,7 +654,7 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 	public boolean insertarEspecie(EspeciePlanta especie) {
 
 		boolean i = false;
-		if (entityManager.find(EspeciePlanta.class, especie.getNombre()) == null) {
+		//if (entityManager.find(EspeciePlanta.class, especie.getNombre()) == null) {
 			i = true;
 			try {
 				entityManager.persist(especie);
@@ -662,7 +662,7 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 				i = false;
 			}
 
-		}
+//		}
 
 		return i;
 
