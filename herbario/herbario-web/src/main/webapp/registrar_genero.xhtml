@@ -13,10 +13,10 @@
 	<h:form>
 		<h:panelGrid columns="2" border="1">
 			<label for="nombreGenero">Nombre:</label>
-			<h:input id="nombreGenero" value=#{GeneroBean.nombre} />
+			<h:input id="nombreGenero" value="#{GeneroBean.nombre}" />
 			<label for="familiaGenero">Familia:</label>
 
-			<h:selectOneMenu value="#{generoBean.familia}">
+			<h:selectOneMenu value="#{generoBean.familia}" converter="selectItemObjectConverter">
 				<f:selectItem itemLabel="Seleccione una familia" noSelectionOption="true" />
 				<f:selectItems value="#{GeneroBean.familias}" />
 			</h:selectOneMenu>

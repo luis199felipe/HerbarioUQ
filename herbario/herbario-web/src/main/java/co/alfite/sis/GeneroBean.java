@@ -31,6 +31,11 @@ public class GeneroBean {
 		
 	}
 	
+	public String registrar() {
+		System.out.println(familia);
+		return null;
+	}
+	
 	/**
 	 * inicializa la lista de familias
 	 */
