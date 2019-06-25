@@ -12,26 +12,27 @@
 <body>
 	<form jsf:id="formEmpleado">
 		<label for="nombreEmpleado">Nombre:</label>
-		 <input id="nombreEmpleado" type="text" jsf:value="#{empleadoBean.nombre}" />
+		 <h:input id="nombreEmpleado" value="#{empleadoBean.nombre}" />
 		 <br></br>
 		 <label for="idEmpleado">id:</label>
-		 <input id="idEmpleado" type="text" required="required" jsf:value="#{empleadoBean.idPersona}" />
+		 <h:input id="idEmpleado" type="text" value="#{empleadoBean.idPersona}" />
 		 		 <br></br>
 		 
 		 <label for="emailEmpleado">Email:</label>
-		 <input id="emailEmpleado" type="text"  required="required" jsf:value="#{empleadoBean.email}" />
+		 <h:input id="emailEmpleado" type="text"  required="required" jsf:value="#{empleadoBean.email}" />
 		 		 <br></br>
 		 
 		 <label for="passwordEmpleado">Password:</label>
-		 <input id="passwordEmpleado" type="text"   jsf:value="#{empleadoBean.password}" />
+		 <h:input id="passwordEmpleado" type="text"   jsf:value="#{empleadoBean.password}" />
 		 		 <br></br>
 		 
-		 <label for="fechaNacimientoEmpleado">Fechadenacimiento:</label>
-		 <input id="fechaNacimientoEmpleado" type="date" jsf:value="#{empleadoBean.fechaNacimiento}" />
+		 <label for="fechaNacimientoEmpleado">FechadeNacimiento:</label>
+		 <h:input id="fechaNacimientoEmpleado" type="date" jsf:value="#{empleadoBean.fechaNacimiento}" />
+		 
 		 		 <br></br>
 		 
-		 <label for="telefonoEmpleado">telefono:</label>
-		 <input id="telefonoEmpleado" type="text" jsf:value="#{empleadoBean.telefono}" />
+		 <label for="telefonoEmpleado">Telefono:</label>
+		 <h:input id="telefonoEmpleado" type="text" jsf:value="#{empleadoBean.telefono}" />
 		 
 		<input type="submit" jsf:action="#{empleadoBean.registrar}"	value="Aceptar" />
 		<h:messages/>
