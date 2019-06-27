@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.alfite.sis.controlador.VistaRegistroControlador">
+   <center>
+      <GridPane BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="371.0" minWidth="0.0" prefWidth="146.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="600.0" minWidth="10.0" prefWidth="274.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="376.0" minWidth="0.0" prefWidth="180.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="129.0" minHeight="8.0" prefHeight="8.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="259.0" minHeight="10.0" prefHeight="259.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <BorderPane prefHeight="92.0" prefWidth="200.0" />
+            <GridPane prefHeight="216.0" prefWidth="384.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <children>
+                  <Label text="Nombre" />
+                  <Label text="Fecha de nacimiento:" GridPane.rowIndex="1" />
+                  <Label text="Telefono:" GridPane.rowIndex="2" />
+                  <Label text="Correo Electronico:" GridPane.rowIndex="3" />
+                  <Label text="Contraseña:" GridPane.rowIndex="4" />
+                  <TextField fx:id="campoNombre" GridPane.columnIndex="1" />
+                  <TextField fx:id="campoTelefono" layoutX="190.0" layoutY="54.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="campoCorreo" layoutX="190.0" layoutY="88.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="campoContrasenia" layoutX="190.0" layoutY="123.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Label text="Cargo:" GridPane.rowIndex="5" />
+                  <ComboBox fx:id="comboboxCargo" prefHeight="25.0" prefWidth="179.0" promptText="Seleccione" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <DatePicker fx:id="fechaNacimiento" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label text="Cedula:" GridPane.rowIndex="6" />
+                  <TextField fx:id="campoCedula" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+               </children>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="91.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="199.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="403.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="403.0" minHeight="2.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="403.0" minHeight="0.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="403.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="403.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <left>
+                  <Button fx:id="botonRegresar" mnemonicParsing="false" onAction="#regresar" text="Descartar y regresar" BorderPane.alignment="CENTER" />
+               </left>
+               <right>
+                  <Button fx:id="botonRealizarRegistro" mnemonicParsing="false" onAction="#registrarPersona" prefHeight="25.0" prefWidth="111.0" text="Realizar registro" BorderPane.alignment="CENTER" />
+               </right>
+            </BorderPane>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" />
+            <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+               <center>
+                  <Label fx:id="labelTitulo" text="Formulario de registro para personas" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+               </center>
+            </BorderPane>
+         </children>
+      </GridPane>
+   </center>
+      </BorderPane>

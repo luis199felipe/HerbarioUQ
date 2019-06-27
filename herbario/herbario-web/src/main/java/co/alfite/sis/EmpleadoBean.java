@@ -19,7 +19,6 @@ import co.alfite.sis.excepciones.ElementoRepetidoExcepcion;
 @ApplicationScoped
 public class EmpleadoBean {
 
-	//@Size(min = 10, max = 15, message = "El tamaño no corresponde")
 	private String idPersona;
 
 	/**

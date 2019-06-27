@@ -1,0 +1,55 @@
+{
+	"GENEROPLANTA": [
+		{
+			"idgenero": 1,
+			"nombre": "Barnadesioideae",
+			"familiaplanta_idfamilia": 1
+		},
+		{
+			"idgenero": 2,
+			"nombre": "Mutisioideae",
+			"familiaplanta_idfamilia": 1
+			
+		},
+		{
+			"idgenero": 3,
+			"nombre": "Maranta",
+			"familiaplanta_idfamilia": 2
+		},
+		{
+			"idgenero": 4,
+			"nombre": "Impatiens",
+			"familiaplanta_idfamilia": 2
+		},
+		{
+			"idgenero": 5,
+			"nombre": "Calathea",
+			"familiaplanta_idfamilia": 3
+		},
+		{
+			"idgenero": 6,
+			"nombre": "Saintpaulia",
+			"familiaplanta_idfamilia": 3
+		},
+		{
+			"idgenero": 7,
+			"nombre": "Begonia",
+			"familiaplanta_idfamilia": 4
+		},
+		{
+			"idgenero": 8,
+			"nombre": "Erythroxylum",
+			"familiaplanta_idfamilia": 4
+		},
+		{
+			"idgenero": 9,
+			"nombre": "Solanum",
+			"familiaplanta_idfamilia": 5
+		},
+		{
+			"idgenero": 10,
+			"nombre": "Tillandsia",
+			"familiaplanta_idfamilia": 5
+		}
+	]
+}

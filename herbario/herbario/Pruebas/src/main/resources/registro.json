@@ -1,0 +1,144 @@
+{
+	"REGISTROESPECIE": [
+		{
+			"idregistro": 1,
+			"estado": "aprobado",
+			"mensaje": "muy buen trabajo",
+			"trabajador_idpersona": "1",
+			"fecha": "1999-10-12"
+		},
+		{
+			"idregistro": 2,
+			"estado": "enviado",
+			"mensaje": "Sigue en revision",
+			"trabajador_idpersona": "2",
+			"fecha": "1999-10-12"
+		},
+		{
+			"idregistro": 3,
+			"estado": "rechazado",
+			"mensaje": "campos mal diligenciados",
+			"trabajador_idpersona": "3",
+			"fecha": "1999-10-12"
+		},
+		{
+			"idregistro": 4,
+			"estado": "enviado",
+			"mensaje": "espere...",
+			"trabajador_idpersona": "1",
+			"fecha": "1999-10-12"
+		},
+		{
+			"idregistro": 5,
+			"estado": "aprobado",
+			"mensaje": "Buena investigacion",
+			"trabajador_idpersona": "2",
+			"fecha": "1999-10-12"
+		},
+		{
+			"idregistro": 6,
+			"estado": "enviado",
+			"mensaje": "espere...",
+			"trabajador_idpersona": "3",
+			"fecha": "1999-10-12"
+		},
+		{
+			"idregistro": 7,
+			"estado": "aprobado",
+			"mensaje": "muy buen trabajo",
+			"trabajador_idpersona": "1",
+			"fecha": "1999-10-13"
+		},
+		{
+			"idregistro": 8,
+			"estado": "enviado",
+			"mensaje": "Sigue en revision",
+			"trabajador_idpersona": "3",
+			"fecha": "1999-10-13"
+		},
+		{
+			"idregistro": 9,
+			"estado": "rechazado",
+			"mensaje": "campos mal diligenciados",
+			"trabajador_idpersona": "2",
+			"fecha": "1999-10-13"
+		},
+		{
+			"idregistro": 10,
+			"estado": "enviado",
+			"mensaje": "espere...",
+			"trabajador_idpersona": "1",
+			"fecha": "1999-10-13"
+		},
+		{
+			"idregistro": 11,
+			"estado": "aprobado",
+			"mensaje": "Buena investigacion",
+			"trabajador_idpersona": "1",
+			"fecha": "1999-10-13"
+		},
+		{
+			"idregistro": 12,
+			"estado": "enviado",
+			"mensaje": "espere...",
+			"trabajador_idpersona": "3",
+			"fecha": "1999-10-13"
+		},
+		{
+			"idregistro": 13,
+			"estado": "aprobado",
+			"mensaje": "muy buen trabajo",
+			"trabajador_idpersona": "3",
+			"fecha": "1999-10-13"
+		},
+		{
+			"idregistro": 14,
+			"estado": "enviado",
+			"mensaje": "Sigue en revision",
+			"trabajador_idpersona": "2",
+			"fecha": "1999-10-13"
+		},
+		{
+			"idregistro": 15,
+			"estado": "rechazado",
+			"mensaje": "campos mal diligenciados",
+			"trabajador_idpersona": "2",
+			"fecha": "1999-10-13"
+		},
+		{
+			"idregistro": 16,
+			"estado": "enviado",
+			"mensaje": "espere...",
+			"trabajador_idpersona": "2",
+			"fecha": "1999-10-14"
+		},
+		{
+			"idregistro": 17,
+			"estado": "aprobado",
+			"mensaje": "Buena investigacion",
+			"trabajador_idpersona": "1",
+			"fecha": "1999-10-14"
+		},
+		{
+			"idregistro": 18,
+			"estado": "enviado",
+			"mensaje": "espere...",
+			"trabajador_idpersona": "3",
+			"fecha": "1999-10-14"
+		},
+		{
+			"idregistro": 19,
+			"estado": "aprobado",
+			"mensaje": "Buena investigacion",
+			"trabajador_idpersona": "3",
+			"fecha": "1999-10-14"
+		},
+		{
+			"idregistro": 20,
+			"estado": "enviado",
+			"mensaje": "espere...",
+			"trabajador_idpersona": "1",
+			"fecha": "1999-10-14"
+		}
+	]
+}
