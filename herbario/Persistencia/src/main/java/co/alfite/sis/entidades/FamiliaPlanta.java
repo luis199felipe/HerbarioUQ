@@ -94,4 +94,9 @@ public class FamiliaPlanta implements Serializable {
 		this.registro = registro;
 	}
 
+	@Override
+	public String toString() {
+		return  nombre;
+	}
+
 }
