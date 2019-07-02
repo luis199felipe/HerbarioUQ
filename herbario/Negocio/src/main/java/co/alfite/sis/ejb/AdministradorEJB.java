@@ -61,6 +61,9 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 		}
 	}
 
+	/**
+	 * inserta empleado
+	 */
 	public Empleado insertarEmpleado(Empleado empleado) throws ElementoRepetidoExcepcion {
 
 		if (entityManager.find(Empleado.class, empleado.getIdPersona()) != null) {
@@ -128,20 +131,30 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 		}
 	}
 
-//	public EspeciePlanta insertarEspecie(EspeciePlanta especie) throws ElementoRepetidoExcepcion {
-//
-//		if (entityManager.find(EspeciePlanta.class, especie.getIdEspecie()) != null) {
-//			throw new ElementoRepetidoExcepcion("El genero con el id ya fue registrado");
-//
-//		}
-//		try {
-//			entityManager.persist(especie);
-//			return especie;
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			return null;
-//		}
-//	}
+	/**
+	 * 
+	 * @param especie
+	 * @return
+	 * @throws ElementoRepetidoExcepcion
+	 */
+
+	public boolean insertarEspecie(EspeciePlanta especie) {
+
+		boolean i = false;
+		// if (entityManager.find(EspeciePlanta.class, especie.getIdEspecie()) == null)
+		// {
+		i = true;
+		try {
+			entityManager.persist(especie);
+		} catch (Exception e) {
+			i = false;
+		}
+
+		// }
+
+		return i;
+
+	}
 
 	/**
 	 * METODOS DE MODIFICAR(ACTUALIZAR)
@@ -150,16 +163,10 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 	public Usuario actualizarUsuario(Usuario us) {
 		Usuario u = entityManager.find(Usuario.class, us.getIdPersona());
 		if (u != null) {
-			u.setEmail(us.getEmail());
-			u.setEstado(us.getEstado());
-			u.setFechaNacimiento(us.getFechaNacimiento());
-			u.setNombre(us.getNombre());
-			u.setPassword(us.getPassword());
-			u.setTelefono(us.getTelefono());
 
 			try {
-				entityManager.merge(u);
-				return u;
+				entityManager.merge(us);
+				return us;
 			} catch (Exception e) {
 				e.printStackTrace();
 				return null;
@@ -173,16 +180,9 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 	public Empleado actualizarEmpleado(Empleado em) {
 		Empleado ps = entityManager.find(Empleado.class, em.getIdPersona());
 		if (ps != null) {
-			ps.setEmail(em.getEmail());
-			ps.setEstado(em.getEstado());
-			ps.setFechaNacimiento(em.getFechaNacimiento());
-			ps.setNombre(em.getNombre());
-			ps.setPassword(em.getPassword());
-			ps.setTelefono(em.getTelefono());
-
 			try {
-				entityManager.merge(ps);
-				return ps;
+				entityManager.merge(em);
+				return em;
 			} catch (Exception e) {
 				e.printStackTrace();
 				return null;
@@ -196,16 +196,9 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 	public Recolector actualizarRecolector(Recolector rc) {
 		Recolector ps = entityManager.find(Recolector.class, rc.getIdPersona());
 		if (ps != null) {
-			ps.setEmail(rc.getEmail());
-			ps.setEstado(rc.getEstado());
-			ps.setFechaNacimiento(rc.getFechaNacimiento());
-			ps.setNombre(rc.getNombre());
-			ps.setPassword(rc.getPassword());
-			ps.setTelefono(rc.getTelefono());
-
 			try {
-				entityManager.merge(ps);
-				return ps;
+				entityManager.merge(rc);
+				return rc;
 			} catch (Exception e) {
 				e.printStackTrace();
 				return null;
@@ -220,11 +213,9 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 		FamiliaPlanta fam = entityManager.find(FamiliaPlanta.class, f.getIdFamilia());
 
 		if (fam != null) {
-			fam.setGeneros(f.getGeneros());
-			fam.setNombre(f.getNombre());
 			try {
-				entityManager.merge(fam);
-				return fam;
+				entityManager.merge(f);
+				return f;
 			} catch (Exception e) {
 				e.printStackTrace();
 				return null;
@@ -238,12 +229,9 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 		GeneroPlanta gen = entityManager.find(GeneroPlanta.class, g.getIdGenero());
 
 		if (gen != null) {
-			gen.setEspecies(g.getEspecies());
-			gen.setFamiliaPlanta(g.getFamiliaPlanta());
-			gen.setNombre(g.getNombre());
 			try {
-				entityManager.merge(gen);
-				return gen;
+				entityManager.merge(g);
+				return g;
 			} catch (Exception e) {
 				e.printStackTrace();
 				return null;
@@ -270,15 +258,10 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 		EspeciePlanta plant = entityManager.find(EspeciePlanta.class, esp.getIdEspecie());
 
 		if (plant != null) {
-			// plant.setCantidad(esp.getCantidad());
-			plant.setGeneroPlanta(esp.getGeneroPlanta());
-			// plant.setImagenes(esp.getImagenes());
-			plant.setNombre(esp.getNombre());
-			plant.setNombreCientifico(esp.getNombreCientifico());
 
 			try {
-				entityManager.merge(plant);
-				return plant;
+				entityManager.merge(esp);
+				return esp;
 			} catch (Exception e) {
 				e.printStackTrace();
 				return null;
@@ -509,6 +492,63 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 
 	}
 
+	public List<RegistroEspecie> listarRegistrosRecolector(String idRecolector) {
+		try {
+			TypedQuery<RegistroEspecie> query = entityManager.createNamedQuery(RegistroEspecie.REGISTRO_RECOLECTOR_ALL,
+					RegistroEspecie.class);
+			query.setParameter("id", idRecolector);
+			return query.getResultList();
+		} catch (Exception e) {
+			return null;
+		}
+
+	}
+
+	public List<RegistroEspecie> listarRegistrosAcetpadosRecolector(String idRecolector) {
+		try {
+			TypedQuery<RegistroEspecie> query = entityManager
+					.createNamedQuery(RegistroEspecie.REGISTRO_RECOLECTOR_ACEPTADO, RegistroEspecie.class);
+
+			query.setParameter("est", Estado.aprobado);
+			query.setParameter("id", idRecolector);
+			return query.getResultList();
+		} catch (Exception e) {
+			return null;
+		}
+
+	}
+
+	public List<RegistroEspecie> listarRegistrosRecolectorAG(String idRecolector, String idGen) {
+		try {
+			TypedQuery<RegistroEspecie> query = entityManager
+					.createNamedQuery(RegistroEspecie.REGISTRO_RECOLECTOR_ACEPTADO, RegistroEspecie.class);
+
+			query.setParameter("est", Estado.aprobado);
+			query.setParameter("id", idRecolector);
+			query.setParameter("idGen", idGen);
+
+			return query.getResultList();
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	public List<RegistroEspecie> listarRegistrosRecolectorAF(String idRecolector, String idFam) {
+		try {
+			TypedQuery<RegistroEspecie> query = entityManager
+					.createNamedQuery(RegistroEspecie.REGISTRO_RECOLECTOR_ACEPTADO, RegistroEspecie.class);
+
+			query.setParameter("est", Estado.aprobado);
+			query.setParameter("id", idRecolector);
+			query.setParameter("idFam", idFam);
+
+			return query.getResultList();
+		} catch (Exception e) {
+			return null;
+		}
+
+	}
+
 	/**
 	 * METODOS BUSCAR(CONSULTA)
 	 */
@@ -629,6 +669,7 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 		registro.setEstado(Estado.enviado);
 
 		try {
+			// deberia insertar la imagen hasta que se valide el registro
 			insertarImagenPlanta(registro.getImagenPlanta());
 			entityManager.persist(registro);
 			return registro;
@@ -636,31 +677,6 @@ public class AdministradorEJB implements AdministradorEJBRemote {
 			e.printStackTrace();
 			return null;
 		}
-
-	}
-
-	/**
-	 * 
-	 * @param especie
-	 * @return
-	 * @throws ElementoRepetidoExcepcion
-	 */
-
-	public boolean insertarEspecie(EspeciePlanta especie) {
-
-		boolean i = false;
-		// if (entityManager.find(EspeciePlanta.class, especie.getIdEspecie()) == null)
-		// {
-		i = true;
-		try {
-			entityManager.persist(especie);
-		} catch (Exception e) {
-			i = false;
-		}
-
-		// }
-
-		return i;
 
 	}
 

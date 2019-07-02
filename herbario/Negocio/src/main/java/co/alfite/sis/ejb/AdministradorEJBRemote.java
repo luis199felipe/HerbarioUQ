@@ -134,7 +134,15 @@ public interface AdministradorEJBRemote {
 	boolean insertarEspecie(EspeciePlanta especie);
 
 	ImagenPlanta actualizarImagenPlanta(ImagenPlanta g);
-	
+
 	ImagenPlanta insertarImagenPlanta(ImagenPlanta img);
+
+	List<RegistroEspecie> listarRegistrosAcetpadosRecolector(String idRecolector);
+
+	List<RegistroEspecie> listarRegistrosRecolectorAG(String idRecolector, String idGen);
+
+	List<RegistroEspecie> listarRegistrosRecolectorAF(String idRecolector, String idFam);
+
+	List<RegistroEspecie> listarRegistrosRecolector(String idRecolector);
 
 }
