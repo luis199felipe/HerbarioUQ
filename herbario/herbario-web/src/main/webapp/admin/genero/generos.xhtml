@@ -15,7 +15,7 @@
 				<p:dataTable id="listageneros" var="genero" value="#{generoBean.generos}">
 				
 					<p:column headerText="Id">
-						<h:outputText value="#{genero.id}" />
+						<h:outputText value="#{genero.idGenero}" />
 					</p:column>
 				
 					<p:column headerText="Nombre">
@@ -23,7 +23,7 @@
 					</p:column>
 					
 					<p:column headerText="Familia">
-						<h:outputText value="#{genero.familia.nombre}" />
+						<h:outputText value="#{genero.familiaPlanta.nombre}" />
 					</p:column>
 					
 					<p:column style="width:32px">
@@ -42,13 +42,13 @@
 		            <h:panelGrid columns="2" cellpadding="4" rendered="#{not empty generoBean.genero}">
 		                
 		                <h:outputText value="Id" />
-		                <h:outputText value="#{generoBean.genero.id}" style="font-weight:bold"/>
+		                <h:outputText value="#{generoBean.genero.idGenero}" style="font-weight:bold"/>
 		 
 		                <h:outputText value="Nombre:" />
 		                <h:outputText value="#{generoBean.genero.nombre}" style="font-weight:bold"/>
 
 		                <h:outputText value="Familia" />
-		                <h:outputText value="#{generoBean.genero.familia.nombre}" style="font-weight:bold"/>
+		                <h:outputText value="#{generoBean.genero.familiaPlanta.nombre}" style="font-weight:bold"/>
 		 		                
 		                <f:facet name="footer">
 							<p:commandButton value="Eliminar" ajax="false" action="#" />

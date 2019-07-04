@@ -15,7 +15,7 @@
 				<p:dataTable id="listafamilias" var="familia" value="#{familiaBean.familias}">
 				
 					<p:column headerText="Id">
-						<h:outputText value="#{familia.id}" />
+						<h:outputText value="#{familia.idFamilia}" />
 					</p:column>
 				
 					<p:column headerText="Nombre">
@@ -38,7 +38,7 @@
 		            <h:panelGrid columns="2" cellpadding="4" rendered="#{not empty familiaBean.familia}">
 		                
 		                <h:outputText value="Id" />
-		                <h:outputText value="#{familiaBean.familia.id}" style="font-weight:bold"/>
+		                <h:outputText value="#{familiaBean.familia.idFamilia}" style="font-weight:bold"/>
 		 
 		                <h:outputText value="Nombre:" />
 		                <h:outputText value="#{familiaBean.familia.nombre}" style="font-weight:bold"/>

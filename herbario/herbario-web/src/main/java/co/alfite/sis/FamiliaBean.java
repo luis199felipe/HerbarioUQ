@@ -2,6 +2,7 @@ package co.alfite.sis;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.annotation.FacesConfig;
@@ -23,6 +24,14 @@ public class FamiliaBean {
 
 	private List<FamiliaPlanta> familias;
 
+	private FamiliaPlanta familia;
+
+	@PostConstruct
+	public void init() {
+		familias = trabajadorEJB.listarFamilias();
+
+	}
+
 	public void registrarFamilia() {
 
 		FamiliaPlanta f = new FamiliaPlanta();
@@ -34,6 +43,12 @@ public class FamiliaBean {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+	}
+
+	public void elininarFamilia() {
+
+		trabajadorEJB.eliminarFamilia(familia.getNombre());
 
 	}
 
@@ -63,6 +78,14 @@ public class FamiliaBean {
 	 */
 	public void setFamilias(List<FamiliaPlanta> familias) {
 		this.familias = familias;
+	}
+
+	public FamiliaPlanta getFamilia() {
+		return familia;
+	}
+
+	public void setFamilia(FamiliaPlanta familia) {
+		this.familia = familia;
 	}
 
 }

@@ -11,9 +11,9 @@
 </head>
 <body>
 	<h:dataTable value="#{generoBean.generos}" var="genero" border="1">
-		<h:column><f:facet name="header">Id</f:facet>  <h:outputText value="#{genero.id}" /> </h:column>
+		<h:column><f:facet name="header">Id</f:facet>  <h:outputText value="#{genero.idGenero}" /> </h:column>
 		<h:column><f:facet name="header">Nombre</f:facet> <h:outputText value="#{genero.nombre}" /> </h:column>
-		<h:column><f:facet name="header">Familia</f:facet> <h:outputText value="#{genero.familia.nombre}" /> </h:column>
+		<h:column><f:facet name="header">Familia</f:facet> <h:outputText value="#{genero.familiaPlanta.nombre}" /> </h:column>
 	</h:dataTable>
 </body>
 </html>

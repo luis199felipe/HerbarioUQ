@@ -6,25 +6,54 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:head>
-	<title><ui:insert name="title">Default title</ui:insert></title>
+	<title><ui:insert name="title">Herbario UQ</ui:insert></title>
+	<link rel="icon" href="resources/favicon.ico"></link>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
+    <meta name="description" content="au theme template"></meta>
+    <meta name="author" content="Hau Nguyen"></meta>
+    <meta name="keywords" content="au theme template"></meta>
+    
+    <!-- Fontfaces CSS-->
+    <link href="resources/css/font-face.css" rel="stylesheet" media="all"></link>
+    <link href="resources/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all"></link>
+    <link href="resources/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all"></link>
+    <link href="resources/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all"></link>
+
+    <!-- Bootstrap CSS-->
+    <link href="resources/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all"></link>
+
+    <!-- Vendor CSS-->
+    <link href="resources/vendor/animsition/animsition.min.css" rel="stylesheet" media="all"></link>
+    <link href="resources/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all"></link>
+    <link href="resources/vendor/wow/animate.css" rel="stylesheet" media="all"></link>
+    <link href="resources/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all"></link>
+    <link href="resources/vendor/slick/slick.css" rel="stylesheet" media="all"></link>
+    <link href="resources/vendor/select2/select2.min.css" rel="stylesheet" media="all"></link>
+    <link href="resources/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all"></link>
+
+    <!-- Main CSS-->
+    <link href="resources/css/theme.css" rel="stylesheet" media="all"></link>
 </h:head>
 <h:body>
 	<div align="center">
 		<div name="cabecera">
-			<p:graphicImage value="#{resource['herbariumheader.jpg']}"
+		<ui:insert name="ImagenPrincipal">
+			<p:graphicImage value="#{resource['logoHerbario.png']}"
 				stream="false" />
+				</ui:insert>
 		</div>
+		
 		<h:panelGroup rendered="#{!seguridadBean.autenticado}">
 			<ui:insert name="login">
-				<h:form>
+				<h:form action="" method="post">
 					<p:panelGrid columns="2">
-						<f:facet name="header">Iniciar sesion</f:facet>
-						<p:outputLabel value="Login" />
-						<p:inputText value="#{seguridadBean.persona.email}" />
-						<p:outputLabel value="Clave" />
-						<p:password value="#{seguridadBean.persona.password}" />
+						
+						<p:outputLabel value="Correo" />
+						<h:inputText  class="au-input au-input--full" value="#{seguridadBean.persona.email}" />
+						<h:outputLabel value="Clave" />
+						<h:inputSecret  class="au-input au-input--full" value="#{seguridadBean.persona.password}" />
 						<f:facet name="footer">
-							<p:commandButton value="Aceptar"
+							<h:commandButton  class="au-btn au-btn--block au-btn--green m-b-20" value="Aceptar"
 								action="#{seguridadBean.iniciarSesion}" ajax="false" />
 						</f:facet>
 					</p:panelGrid>
@@ -32,9 +61,9 @@
 				<p:growl id="growl" life="2000" />
 			</ui:insert>
 		</h:panelGroup>
-		<h:panelGroup rendered="#{seguridadBean.autenticado}">
+		<h:panelGroup rendered="#{seguridadBean.autenticado}" value="#{seguridadBean.prueba}">
 			<ui:insert name="menu">
-				<h:form>
+					<h:form >
 					<p:menubar>
 						<f:facet name="options">
 							<p:commandButton value="Inicio" action="/index" ajax="false" />
@@ -61,5 +90,29 @@
 			<ui:insert name="contenido" />
 		</h:panelGroup>
 	</div>
+	
+	    <!-- Jquery JS-->
+    <script src="vendor/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap JS-->
+    <script src="vendor/bootstrap-4.1/popper.min.js"></script>
+    <script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
+    <!-- Vendor JS       -->
+    <script src="vendor/slick/slick.min.js">
+    </script>
+    <script src="vendor/wow/wow.min.js"></script>
+    <script src="vendor/animsition/animsition.min.js"></script>
+    <script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+    </script>
+    <script src="vendor/counter-up/jquery.waypoints.min.js"></script>
+    <script src="vendor/counter-up/jquery.counterup.min.js">
+    </script>
+    <script src="vendor/circle-progress/circle-progress.min.js"></script>
+    <script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="vendor/chartjs/Chart.bundle.min.js"></script>
+    <script src="vendor/select2/select2.min.js">
+    </script>
+
+    <!-- Main JS-->
+    <script src="js/main.js"></script>
 </h:body>
 </html>

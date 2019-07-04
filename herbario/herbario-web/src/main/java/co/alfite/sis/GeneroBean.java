@@ -26,6 +26,7 @@ public class GeneroBean {
 	private FamiliaPlanta familia;
 	private List<FamiliaPlanta> familias;
 	private List<GeneroPlanta> generos;
+	private GeneroPlanta genero;
 
 	
 	
@@ -35,6 +36,7 @@ public class GeneroBean {
 	@PostConstruct
 	private void init() {
 		familias = admiEJB.listarFamilias();
+		generos=admiEJB.listarGeneros();
 	}
 	
 	public String registrar() {
@@ -87,6 +89,14 @@ public class GeneroBean {
 
 	public void setGeneros(List<GeneroPlanta> generos) {
 		this.generos = generos;
+	}
+
+	public GeneroPlanta getGenero() {
+		return genero;
+	}
+
+	public void setGenero(GeneroPlanta genero) {
+		this.genero = genero;
 	}
 	
 	

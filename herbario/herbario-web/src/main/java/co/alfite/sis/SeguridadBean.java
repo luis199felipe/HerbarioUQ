@@ -63,6 +63,12 @@ public class SeguridadBean implements Serializable {
 		
 		
 	}
+	
+	public String prueba() {
+		
+		System.out.println("puedo redireccionar");
+		return "admin/registrar_empleado";
+	}
 	public String cerrarSesion() {
 		
 		
