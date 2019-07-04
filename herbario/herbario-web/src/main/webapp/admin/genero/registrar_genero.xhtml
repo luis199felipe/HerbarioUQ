@@ -13,7 +13,7 @@
 				<p:outputLabel value="Nombre" />
 				<p:inputText value="#{generoBean.nombre}" />
 				<p:outputLabel value="Familias" />
-				<p:selectOneMenu value="#{generoBean.familia}" converter="#{familiaConverter}" effect="fade" filter="true" filterMatchMode="startsWith">
+				<p:selectOneMenu value="#{generoBean.familia}" converter="selectItemObjectConverter" effect="fade" filter="true" filterMatchMode="startsWith">
 					<f:selectItem itemLabel="Seleccione una familia" noSelectionOption="true"/>
 					<f:selectItems value="#{generoBean.familias}"/>
 				</p:selectOneMenu>

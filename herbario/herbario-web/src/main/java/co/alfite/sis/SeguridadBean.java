@@ -63,6 +63,17 @@ public class SeguridadBean implements Serializable {
 		
 		
 	}
+	public String cerrarSesion() {
+		
+		
+			persona=new Persona();
+			autenticado=false;
+			System.out.println("sale");
+			return "index?faces-redirect=true";
+		
+		
+		
+	}
 
 	public Persona getPersona() {
 		return persona;
