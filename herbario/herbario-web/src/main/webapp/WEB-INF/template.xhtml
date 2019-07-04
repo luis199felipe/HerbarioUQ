@@ -20,9 +20,9 @@
 					<p:panelGrid columns="2">
 						<f:facet name="header">Iniciar sesion</f:facet>
 						<p:outputLabel value="Login" />
-						<p:inputText value="#{seguridadBean.usuario.email}" />
+						<p:inputText value="#{seguridadBean.persona.email}" />
 						<p:outputLabel value="Clave" />
-						<p:password value="#{seguridadBean.usuario.clave}" />
+						<p:password value="#{seguridadBean.persona.password}" />
 						<f:facet name="footer">
 							<p:commandButton value="Aceptar"
 								action="#{seguridadBean.iniciarSesion}" ajax="false" />
