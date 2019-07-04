@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<head>
+<meta charset="UTF-8" />
+<title>Insert title here</title>
+</head>
+<body>
+	<h:form>
+		<h:panelGrid columns="2" border="1">
+			<label for="cedulaFamilia">Cedula:</label>
+			<h:inputText for="cedulaFamilia" value="#{empleadoBean.cedula}"/>
+			<label for="nombreFamilia">Nombre:</label>
+			<h:inputText for="nombreFamilia" value="#{empleadoBean.nombre}"/>
+			<label for="apellidoFamilia">Apellido:</label>
+			<h:inputText for="apellidoFamilia" value="#{empleadoBean.apellido}"/>
+			<label for="emailFamilia">Email:</label>
+			<h:inputText for="emailFamilia" value="#{empleadoBean.email}"/>
+			<label for="claveFamilia">Clave:</label>
+			<h:inputText for="claveFamilia" value="#{empleadoBean.clave}"/>
+			<label for="fechaFamilia">Fecha:</label>
+			<h:inputText for="fechaFamilia" value="#{empleadoBean.fechaNacimiento}">
+				<f:convertDateTime pattern="yyyy-MM-dd"/>
+			</h:inputText>
+			<label for="salarioFamilia">Salario:</label>
+			<h:inputText for="salarioFamilia" value="#{empleadoBean.salario}"/>
+			<h:commandButton action="#{empleadoBean.agregarEmpleado}" value="Aceptar" />		
+		</h:panelGrid>
+	</h:form>
+	<h:messages />
+</body>
+</html>

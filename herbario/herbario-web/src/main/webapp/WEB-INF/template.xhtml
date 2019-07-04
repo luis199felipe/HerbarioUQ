@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+	<title><ui:insert name="title">Default title</ui:insert></title>
+</h:head>
+<h:body>
+	<div align="center">
+		<div name="cabecera">
+			<p:graphicImage value="#{resource['herbariumheader.jpg']}"
+				stream="false" />
+		</div>
+		<h:panelGroup rendered="#{!seguridadBean.autenticado}">
+			<ui:insert name="login">
+				<h:form>
+					<p:panelGrid columns="2">
+						<f:facet name="header">Iniciar sesion</f:facet>
+						<p:outputLabel value="Login" />
+						<p:inputText value="#{seguridadBean.usuario.email}" />
+						<p:outputLabel value="Clave" />
+						<p:password value="#{seguridadBean.usuario.clave}" />
+						<f:facet name="footer">
+							<p:commandButton value="Aceptar"
+								action="#{seguridadBean.iniciarSesion}" ajax="false" />
+						</f:facet>
+					</p:panelGrid>
+				</h:form>
+				<p:growl id="growl" life="2000" />
+			</ui:insert>
+		</h:panelGroup>
+		<h:panelGroup rendered="#{seguridadBean.autenticado}">
+			<ui:insert name="menu">
+				<h:form>
+					<p:menubar>
+						<f:facet name="options">
+							<p:commandButton value="Inicio" action="/index" ajax="false" />
+						</f:facet>
+						<p:submenu label="Empleado">
+						</p:submenu>
+						<p:submenu label="Cliente">
+						</p:submenu>
+						<p:submenu label="Especies">
+							<p:menuitem value="Familias" action="/admin/familia/familias"
+								ajax="false" />
+							<p:menuitem value="Registrar familia"
+								action="/admin/familia/registrar_familia" ajax="false" />
+							<p:menuitem value="Generos" action="/admin/genero/generos"
+								ajax="false" />
+							<p:menuitem value="Registrar generos"
+								action="/admin/genero/registrar_genero" ajax="false" />
+						</p:submenu>
+						<p:menuitem value="Cerrar sesión" ajax="false"
+							action="#{seguridadBean.cerrarSesion}" />
+					</p:menubar>
+				</h:form>
+			</ui:insert>
+			<ui:insert name="contenido" />
+		</h:panelGroup>
+	</div>
+</h:body>
+</html>

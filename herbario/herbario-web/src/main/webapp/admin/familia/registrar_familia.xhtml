@@ -1,16 +1,25 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <ui:composition template="/WEB-INF/template.xhtml">
 	<ui:define name="contenido">
+		<h:form>
+			<p:panelGrid columns="2">
+				<f:facet name="header">Registrar familia</f:facet>
+				<p:outputLabel value="Nombre" />
+				<p:inputText value="#{familiaBean.nombre}" />
+				<f:facet name="footer">
+					<p:commandButton action="#{familiaBean.agregarFamilia}" value="Aceptar" ajax="false" />		
+				</f:facet>
+			</p:panelGrid>		
+		</h:form>
 		<p:growl />
-		<h1>Bienvenido al Herbario HUQ</h1>
-		<h1>La base de datos de hojas más grande del mundo</h1>
 	</ui:define>
 </ui:composition>
 </html>

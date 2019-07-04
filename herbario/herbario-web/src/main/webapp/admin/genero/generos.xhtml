@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/WEB-INF/template.xhtml">
+		<ui:define name="contenido">
+	    <h:form id="generoForm">
+			
+			<p:fieldset id="generos" legend="generos registrados">
+				<p:dataTable id="listageneros" var="genero" value="#{generoBean.generos}">
+				
+					<p:column headerText="Id">
+						<h:outputText value="#{genero.id}" />
+					</p:column>
+				
+					<p:column headerText="Nombre">
+						<h:outputText value="#{genero.nombre}" />
+					</p:column>
+					
+					<p:column headerText="Familia">
+						<h:outputText value="#{genero.familia.nombre}" />
+					</p:column>
+					
+					<p:column style="width:32px">
+	                    <p:commandButton update=":generoForm:display" oncomplete="PF('generoDialog').show()" icon="pi pi-search">
+	                        <f:setPropertyActionListener value="#{genero}" target="#{generoBean.genero}" />
+	                    </p:commandButton>
+                	</p:column>
+					
+				</p:dataTable>
+			</p:fieldset>
+			
+			
+			<p:dialog header="Detalle de genero" widgetVar="generoDialog" resizable="false" draggable="false"
+              showEffect="fade" hideEffect="fade" modal="true">
+		        <p:outputPanel id="display">
+		            <h:panelGrid columns="2" cellpadding="4" rendered="#{not empty generoBean.genero}">
+		                
+		                <h:outputText value="Id" />
+		                <h:outputText value="#{generoBean.genero.id}" style="font-weight:bold"/>
+		 
+		                <h:outputText value="Nombre:" />
+		                <h:outputText value="#{generoBean.genero.nombre}" style="font-weight:bold"/>
+
+		                <h:outputText value="Familia" />
+		                <h:outputText value="#{generoBean.genero.familia.nombre}" style="font-weight:bold"/>
+		 		                
+		                <f:facet name="footer">
+							<p:commandButton value="Eliminar" ajax="false" action="#" />
+							<p:commandButton value="Actualizar" ajax="false" action="#" />							
+						</f:facet>
+		                
+		            </h:panelGrid>
+		        </p:outputPanel>
+    		</p:dialog>
+			
+			
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
