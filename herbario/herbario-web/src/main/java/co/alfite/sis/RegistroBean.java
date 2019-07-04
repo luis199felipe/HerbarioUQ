@@ -18,7 +18,7 @@ import co.alfite.sis.entidades.RegistroEspecie;
 import co.alfite.sis.entidades.RegistroEspecie.Estado;
 
 @FacesConfig(version=Version.JSF_2_3)
-@Named("generoBean")
+@Named("registroBean")
 @ApplicationScoped
 public class RegistroBean {
 	
