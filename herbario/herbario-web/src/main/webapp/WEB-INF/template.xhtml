@@ -61,9 +61,10 @@
 				<p:growl id="growl" life="2000" />
 			</ui:insert>
 		</h:panelGroup>
-		<h:panelGroup rendered="#{seguridadBean.autenticado}" value="#{seguridadBean.prueba}">
+		<h:panelGroup rendered="#{seguridadBean.autenticado}">
 			<ui:insert name="menu">
-					<h:form >
+			
+				<h:form>
 					<p:menubar>
 						<f:facet name="options">
 							<p:commandButton value="Inicio" action="/index" ajax="false" />

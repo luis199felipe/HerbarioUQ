@@ -2,7 +2,6 @@ package co.alfite.sis;
 
 import java.io.Serializable;
 
-
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -13,6 +12,7 @@ import javax.inject.Named;
 import co.alfite.sis.ejb.AdministradorEJB;
 import co.alfite.sis.entidades.Persona;
 import co.alfite.sis.util.Util;
+
 /**
  * permite manejar la sesion en la pagina web
  * 
@@ -28,7 +28,7 @@ public class SeguridadBean implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * 
 	 */
@@ -39,46 +39,59 @@ public class SeguridadBean implements Serializable {
 	private boolean autenticado;
 	@EJB
 	private AdministradorEJB adminEJB;
-	
+
 	/**
 	 * inicializa la informacion base
 	 */
 	@PostConstruct
 	private void init() {
-		persona=new Persona();
-		autenticado=false;
-		
+		persona = new Persona();
+		autenticado = false;
+
 	}
-	
-	public void iniciarSesion() {
-		
-		Persona u=adminEJB.personaPorCredenciales(persona.getEmail(), persona.getPassword());
-		if(u!=null) {
-			persona=u;
+
+	public String iniciarSesion() {
+
+		Persona u = adminEJB.personaPorCredenciales(persona.getEmail(), persona.getPassword());
+		if (u != null) {
+			persona = u;
 			System.out.println(persona.getNombre());
-			autenticado=true;
-		}else {
+			autenticado = true;
+
+			String user = persona.getClass().getSimpleName();
+
+			switch (user) {
+			case "Administrador":
+				return "admin/contenido_administrador";
+			case "Empleado":
+				return "admin/contenido_empleado";
+			case "Recolector":
+				return "admin/contenido_recolector";
+
+			default:
+			}
+
+		} else {
 			Util.mostrarMensaje("Verifique sus credenciales", "Verifique sus credenciales");
 		}
-		
-		
+
+		return "";
+
 	}
-	
+
 	public String prueba() {
-		
+
 		System.out.println("puedo redireccionar");
 		return "admin/registrar_empleado";
 	}
+
 	public String cerrarSesion() {
-		
-		
-			persona=new Persona();
-			autenticado=false;
-			System.out.println("sale");
-			return "index?faces-redirect=true";
-		
-		
-		
+
+		persona = new Persona();
+		autenticado = false;
+		System.out.println("sale");
+		return "index?faces-redirect=true";
+
 	}
 
 	public Persona getPersona() {
@@ -96,7 +109,5 @@ public class SeguridadBean implements Serializable {
 	public void setAutenticado(boolean autenticado) {
 		this.autenticado = autenticado;
 	}
-	
-	
 
 }
