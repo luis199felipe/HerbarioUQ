@@ -35,33 +35,54 @@
     <link href="resources/css/theme.css" rel="stylesheet" media="all"></link>
 </h:head>
 <h:body>
-	<div align="center">
-		<div name="cabecera">
-		<ui:insert name="ImagenPrincipal">
-			<p:graphicImage value="#{resource['logoHerbario.png']}"
-				stream="false" />
-				</ui:insert>
-		</div>
-		
 		<h:panelGroup rendered="#{!seguridadBean.autenticado}">
-			<ui:insert name="login">
-				<h:form action="" method="post">
-					<p:panelGrid columns="2">
-						
-						<p:outputLabel value="Correo" />
-						<h:inputText  class="au-input au-input--full" value="#{seguridadBean.persona.email}" />
-						<h:outputLabel value="Clave" />
-						<h:inputSecret  class="au-input au-input--full" value="#{seguridadBean.persona.password}" />
-						<f:facet name="footer">
-							<h:commandButton  class="au-btn au-btn--block au-btn--green m-b-20" value="Aceptar"
-								action="#{seguridadBean.iniciarSesion}" ajax="false" />
-						</f:facet>
-					</p:panelGrid>
-				</h:form>
-				<p:growl id="growl" life="2000" />
-			</ui:insert>
-		</h:panelGroup>
-		<h:panelGroup rendered="#{seguridadBean.autenticado}">
+
+<div class="page-wrapper">
+        <div class="page-content--bge5">
+            <div class="container">
+                <div class="login-wrap">
+                    <div class="login-content">
+                        <div class="login-logo">
+                            <a href="#">
+                                <img src="resources/logoHerbario.png" alt="CoolAdmin" width="200" height="100"></img>
+                            </a>
+                        </div>
+                        <div class="login-form">
+                            <h:form>
+                                <div class="form-group">
+                                    <label for="email">Email:</label>
+								<h:inputText  class="au-input au-input--full" id="email"  value="#{seguridadBean.persona.email}" />
+                                </div>
+                                <div class="form-group">
+                                
+                                <label for="contrasenia">Contraseña:</label>
+                                 <h:inputSecret class="au-input au-input--full" id="contrasenia" value="#{seguridadBean.persona.password}"/>
+                                </div>
+                          		 <div class="login-checkbox">
+                               
+                                    <label>
+                                        <a href="#">Olvide mi contraseña</a>
+                                    </label>
+                                </div>
+                               <h:commandButton  class="au-btn au-btn--block au-btn--green m-b-20"  action="#{seguridadBean.iniciarSesion}" value="Ingresar" />
+        
+                            </h:form>
+                            <div class="register-link">
+                                <p>
+                          
+                                    ¿No tienes cuenta?
+                                    <a href="#">Registrate aqui</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+	</h:panelGroup>
+	<h:panelGroup rendered="#{seguridadBean.autenticado}">
 			<ui:insert name="menu">
 			
 				<h:form>
@@ -90,8 +111,6 @@
 			</ui:insert>
 			<ui:insert name="contenido" />
 		</h:panelGroup>
-	</div>
-	
 	    <!-- Jquery JS-->
     <script src="vendor/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap JS-->
