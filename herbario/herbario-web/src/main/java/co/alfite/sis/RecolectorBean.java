@@ -44,7 +44,6 @@ public class RecolectorBean {
 
 	private EspeciePlanta especieDetalle;
 
-
 	private String famTemp;
 	private FamiliaPlanta familiaTemp;
 	private GeneroPlanta generoTemp;
@@ -63,8 +62,6 @@ public class RecolectorBean {
 	private boolean flagListarFamilias;
 	private String tituloTabla;
 
-
-
 	private List<RegistroEspecie> misRegistrosAceptadosG;
 
 	private List<RegistroEspecie> misRegistrosAceptadosF;
@@ -79,10 +76,10 @@ public class RecolectorBean {
 
 		flagListarFamilias = false;
 		flagListarRegistros = false;
-		flagSelectorF= false;
-		familiaTemp=new FamiliaPlanta();
+		flagSelectorF = false;
+		familiaTemp = new FamiliaPlanta();
 		familiaTemp.setIdFamilia(-1);
-		generoTemp=new GeneroPlanta();
+		generoTemp = new GeneroPlanta();
 		generoTemp.setIdGenero(-1);
 
 	}
@@ -97,33 +94,39 @@ public class RecolectorBean {
 
 		switch (tipo) {
 		case 0:
+			flagSelectorF = false;
+			flagSelectorG = false;
 			misRegistros = trabajadorEJB.listarRegistrosRecolector(recolector.getIdPersona());
-			tituloTabla="Lista de registros";
+			tituloTabla = "Lista de registros";
 			break;
 		case 1:
+			flagSelectorF = false;
+			flagSelectorG = false;
 			misRegistros = trabajadorEJB.listarRegistrosAcetpadosRecolector(recolector.getIdPersona());
-			tituloTabla="Lista de registros Aceptados";
+			tituloTabla = "Lista de registros Aceptados";
 			break;
 		case 2:
 			try {
-				flagSelectorF= true;
-				tituloTabla="Lista de registros Aceptados Por familia";
-			misRegistros = trabajadorEJB.listarRegistrosRecolectorAF(recolector.getIdPersona(),""+ familiaTemp.getIdFamilia());
-			}catch (Exception e) {
+				flagSelectorF = true;
+				flagSelectorG = false;
+				tituloTabla = "Lista de registros Aceptados Por familia";
+				misRegistros = trabajadorEJB.listarRegistrosRecolectorAF(recolector.getIdPersona(),
+						"" + familiaTemp.getIdFamilia());
+			} catch (Exception e) {
 				// TODO: handle exception
 			}
 			break;
 		case 3:
 			try {
-				tituloTabla="Lista de registros Aceptados Por Genero";
-				flagSelectorG= true;
-				flagSelectorF=false;
-			misRegistros = trabajadorEJB.listarRegistrosRecolectorAG(recolector.getIdPersona(), generoTemp.getIdGenero()+"");
-			}catch (Exception e) {
+				tituloTabla = "Lista de registros Aceptados Por Genero";
+				flagSelectorG = true;
+				flagSelectorF = false;
+				misRegistros = trabajadorEJB.listarRegistrosRecolectorAG(recolector.getIdPersona(),
+						generoTemp.getIdGenero() + "");
+			} catch (Exception e) {
 				// TODO: handle exception
-			}	
+			}
 			break;
-					
 
 		default:
 			break;
@@ -132,16 +135,14 @@ public class RecolectorBean {
 		return "/index?faces-redirect=true";
 	}
 
-	
-
 	public void actualizarDatos() {
 
 	}
 
 	public String realizarNuevoRegistro() {
 
-		//registroEspecie.setTrabajador(recolector);
-		//trabajadorEJB.insertarRegistro(registroEspecie);
+		// registroEspecie.setTrabajador(recolector);
+		// trabajadorEJB.insertarRegistro(registroEspecie);
 
 //		familias = trabajadorEJB.listarFamilias();
 //		generos = trabajadorEJB.listarGeneros();
@@ -149,7 +150,7 @@ public class RecolectorBean {
 //		misRegistrosAceptados = trabajadorEJB.listarRegistrosAcetpadosRecolector(recolector.getIdPersona());
 
 		System.err.println("A registro");
-		return "/index?faces-redirect=true";
+		return "/admin/registro_especie";
 	}
 
 	/**
@@ -209,8 +210,6 @@ public class RecolectorBean {
 	public void setEspecieDetalle(EspeciePlanta especieDetalle) {
 		this.especieDetalle = especieDetalle;
 	}
-
-
 
 	/**
 	 * @return the famTemp
