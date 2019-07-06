@@ -1,9 +1,12 @@
 package co.alfite.sis;
 
+import java.io.Serializable;
 import java.util.Date;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.annotation.FacesConfig;
 import javax.faces.annotation.FacesConfig.Version;
 import javax.inject.Named;
@@ -15,9 +18,14 @@ import co.alfite.sis.entidades.Recolector;
 import co.alfite.sis.util.Util;
 
 @FacesConfig(version = Version.JSF_2_3)
-@Named("registroPersonaBean")
+@Named("gestionPersonaBean")
 @ApplicationScoped
-public class GestionPersonaBean {
+public class GestionPersonaBean implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private String idPersona;
 
@@ -54,16 +62,25 @@ public class GestionPersonaBean {
 	 * @param tipo es para identificar si se va a insertar una empleado o un
 	 *             recolector
 	 */
+	
+	
+	@PostConstruct
+	public  void init () {
+		
+		nombre="LUcas";
+	}
 	public void registrarPersona(int tipo) {
 
+		tipo=1;
 		Persona r = new Persona();
 		r.setNombre(nombre);
 		r.setEmail(email);
 		r.setPassword(password);
 		r.setTelefono(telefono);
 		r.setEstado(co.alfite.sis.entidades.Persona.Estado.activo);
-		r.setFechaNacimiento(fechaNacimiento);
+		r.setFechaNacimiento(new Date());
 
+		System.out.println("Registra");
 		try {
 			switch (tipo) {
 			case 0:
@@ -87,7 +104,11 @@ public class GestionPersonaBean {
 		} catch (Exception e) {
 			Util.mostrarMensaje("No se pudo hacer el registro", "Error");
 		}
+	
 
+	}
+	public void prueba() {
+		System.out.println("prueba");
 	}
 
 	public void eliminarPersona(int tipo) {

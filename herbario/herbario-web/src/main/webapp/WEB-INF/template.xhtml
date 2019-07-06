@@ -5,134 +5,139 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
 <h:head>
-	<title><ui:insert name="title">Herbario UQ</ui:insert></title>
+
+
+	<title>Herbario UQ</title>
 	<link rel="icon" href="resources/favicon.ico"></link>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
-    <meta name="description" content="au theme template"></meta>
-    <meta name="author" content="Hau Nguyen"></meta>
-    <meta name="keywords" content="au theme template"></meta>
-    
-    <!-- Fontfaces CSS-->
-    <link href="resources/css/font-face.css" rel="stylesheet" media="all"></link>
-    <link href="resources/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all"></link>
-    <link href="resources/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all"></link>
-    <link href="resources/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all"></link>
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
+	<meta name="description" content="au theme template"></meta>
+	<meta name="author" content="Hau Nguyen"></meta>
+	<meta name="keywords" content="au theme template"></meta>
 
-    <!-- Bootstrap CSS-->
-    <link href="resources/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all"></link>
+	<!-- Fontfaces CSS-->
+	<link href="resources/css/font-face.css" rel="stylesheet" media="all"></link>
+	<link href="resources/vendor/font-awesome-4.7/css/font-awesome.min.css"
+		rel="stylesheet" media="all"></link>
+	<link
+		href="resources/vendor/font-awesome-5/css/fontawesome-all.min.css"
+		rel="stylesheet" media="all"></link>
+	<link
+		href="resources/vendor/mdi-font/css/material-design-iconic-font.min.css"
+		rel="stylesheet" media="all"></link>
 
-    <!-- Vendor CSS-->
-    <link href="resources/vendor/animsition/animsition.min.css" rel="stylesheet" media="all"></link>
-    <link href="resources/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all"></link>
-    <link href="resources/vendor/wow/animate.css" rel="stylesheet" media="all"></link>
-    <link href="resources/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all"></link>
-    <link href="resources/vendor/slick/slick.css" rel="stylesheet" media="all"></link>
-    <link href="resources/vendor/select2/select2.min.css" rel="stylesheet" media="all"></link>
-    <link href="resources/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all"></link>
+	<!-- Bootstrap CSS-->
+	<link href="resources/vendor/bootstrap-4.1/bootstrap.min.css"
+		rel="stylesheet" media="all"></link>
 
-    <!-- Main CSS-->
-    <link href="resources/css/theme.css" rel="stylesheet" media="all"></link>
+	<!-- Vendor CSS-->
+	<link href="resources/vendor/animsition/animsition.min.css"
+		rel="stylesheet" media="all"></link>
+	<link
+		href="resources/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css"
+		rel="stylesheet" media="all"></link>
+	<link href="resources/vendor/wow/animate.css" rel="stylesheet"
+		media="all"></link>
+	<link href="resources/vendor/css-hamburgers/hamburgers.min.css"
+		rel="stylesheet" media="all"></link>
+	<link href="resources/vendor/slick/slick.css" rel="stylesheet"
+		media="all"></link>
+	<link href="resources/vendor/select2/select2.min.css" rel="stylesheet"
+		media="all"></link>
+	<link href="resources/vendor/perfect-scrollbar/perfect-scrollbar.css"
+		rel="stylesheet" media="all"></link>
+
+	<!-- Main CSS-->
+	<link href="resources/css/theme.css" rel="stylesheet" media="all"></link>
+
 </h:head>
 <h:body>
+	<ui:insert name="login">
 		<h:panelGroup rendered="#{!seguridadBean.autenticado}">
 
-<div class="page-wrapper">
-        <div class="page-content--bge5">
-            <div class="container">
-                <div class="login-wrap">
-                    <div class="login-content">
-                        <div class="login-logo">
-                            <a href="#">
-                                <img src="resources/logoHerbario.png" alt="CoolAdmin" width="200" height="100"></img>
-                            </a>
-                        </div>
-                        <div class="login-form">
-                            <h:form>
-                                <div class="form-group">
-                                    <label for="email">Email:</label>
-								<h:inputText  class="au-input au-input--full" id="email"  value="#{seguridadBean.persona.email}" />
-                                </div>
-                                <div class="form-group">
-                                
-                                <label for="contrasenia">Contraseña:</label>
-                                 <h:inputSecret class="au-input au-input--full" id="contrasenia" value="#{seguridadBean.persona.password}"/>
-                                </div>
-                          		 <div class="login-checkbox">
-                               
-                                    <label>
-                                        <a href="#">Olvide mi contraseña</a>
-                                    </label>
-                                </div>
-                               <h:commandButton  class="au-btn au-btn--block au-btn--green m-b-20"  action="#{seguridadBean.iniciarSesion}" value="Ingresar" />
-        
-                            </h:form>
-                            <div class="register-link">
-                                <p>
-                          
-                                    ¿No tienes cuenta?
-                                    <a href="#">Registrate aqui</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+			<div class="page-wrapper">
+				<div class="page-content--bge5">
+					<div class="container">
+						<div class="login-wrap">
+							<div class="login-content">
+								<div class="login-logo">
+									<a href="#"> <img src="resources/logoHerbario.png"
+										alt="CoolAdmin" width="200" height="100"></img>
+									</a>
+								</div>
+								<div class="login-form">
+									<h:form>
+										<div class="form-group">
+											<label for="email">Email:</label>
+											<h:inputText class="au-input au-input--full" id="email"
+												value="#{seguridadBean.persona.email}" />
+										</div>
+										<div class="form-group">
 
-    </div>
-	</h:panelGroup>
-	<h:panelGroup rendered="#{seguridadBean.autenticado}">
-			<ui:insert name="menu">
-			
-				<h:form>
-					<p:menubar>
-						<f:facet name="options">
-							<p:commandButton value="Inicio" action="/index" ajax="false" />
-						</f:facet>
-						<p:submenu label="Empleado">
-						</p:submenu>
-						<p:submenu label="Cliente">
-						</p:submenu>
-						<p:submenu label="Especies">
-							<p:menuitem value="Familias" action="/admin/familia/familias"
-								ajax="false" />
-							<p:menuitem value="Registrar familia"
-								action="/admin/familia/registrar_familia" ajax="false" />
-							<p:menuitem value="Generos" action="/admin/genero/generos"
-								ajax="false" />
-							<p:menuitem value="Registrar generos"
-								action="/admin/genero/registrar_genero" ajax="false" />
-						</p:submenu>
-						<p:menuitem value="Cerrar sesión" ajax="false"
-							action="#{seguridadBean.cerrarSesion}" />
-					</p:menubar>
-				</h:form>
-			</ui:insert>
-			<ui:insert name="contenido" />
+											<label for="contrasenia">Contraseña:</label>
+											<h:inputSecret class="au-input au-input--full"
+												id="contrasenia" value="#{seguridadBean.persona.password}" />
+										</div>
+										<div class="login-checkbox">
+
+											<label> <h:link outcome="/admin/contenido_recolector">Olvide mi contraseña</h:link>
+											</label>
+										</div>
+										<h:commandButton
+											class="au-btn au-btn--block au-btn--green m-b-20"
+											action="#{seguridadBean.iniciarSesion}" value="Ingresar" />
+
+
+									</h:form>
+									<h:form>
+										<p>
+											¿No tienes cuenta?
+											<h:commandLink action="admin/registrar_persona"
+												value="registrate aqui" />
+
+										</p>
+									</h:form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
 		</h:panelGroup>
-	    <!-- Jquery JS-->
-    <script src="vendor/jquery-3.2.1.min.js"></script>
-    <!-- Bootstrap JS-->
-    <script src="vendor/bootstrap-4.1/popper.min.js"></script>
-    <script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
-    <!-- Vendor JS       -->
-    <script src="vendor/slick/slick.min.js">
-    </script>
-    <script src="vendor/wow/wow.min.js"></script>
-    <script src="vendor/animsition/animsition.min.js"></script>
-    <script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
-    </script>
-    <script src="vendor/counter-up/jquery.waypoints.min.js"></script>
-    <script src="vendor/counter-up/jquery.counterup.min.js">
-    </script>
-    <script src="vendor/circle-progress/circle-progress.min.js"></script>
-    <script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="vendor/chartjs/Chart.bundle.min.js"></script>
-    <script src="vendor/select2/select2.min.js">
-    </script>
+	</ui:insert>
 
-    <!-- Main JS-->
-    <script src="js/main.js"></script>
+
+	<ui:insert name="contenido" />
+
+	<!-- Jquery JS-->
+	<script src="vendor/jquery-3.2.1.min.js"></script>
+	<!-- Bootstrap JS-->
+	<script src="vendor/bootstrap-4.1/popper.min.js"></script>
+	<script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
+	<!-- Vendor JS       -->
+	<script src="vendor/slick/slick.min.js">
+		
+	</script>
+	<script src="vendor/wow/wow.min.js"></script>
+	<script src="vendor/animsition/animsition.min.js"></script>
+	<script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+		
+	</script>
+	<script src="vendor/counter-up/jquery.waypoints.min.js"></script>
+	<script src="vendor/counter-up/jquery.counterup.min.js">
+		
+	</script>
+	<script src="vendor/circle-progress/circle-progress.min.js"></script>
+	<script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+	<script src="vendor/chartjs/Chart.bundle.min.js"></script>
+	<script src="vendor/select2/select2.min.js">
+		
+	</script>
+
+	<!-- Main JS-->
+	<script src="js/main.js"></script>
 </h:body>
 </html>

@@ -9,38 +9,114 @@
 
 <ui:composition template="/WEB-INF/template.xhtml">
 
-<ui:define name="ImagenPrincipal">
-<div></div>
-</ui:define>
 
-	<ui:define name="menu">
-	    <h:form>
-					<p:menubar>
-						<f:facet name="options">
-							<p:commandButton value="Inicio" action="/index" ajax="false" />
-						</f:facet>
-						<p:submenu label="Empleado">
-						</p:submenu>
-						<p:submenu label="Cliente">
-						</p:submenu>
-						<p:submenu label="Mis Especies">
-							<p:menuitem value="ListarEspecies" action="/admin/familia/familias"
-								ajax="false" />
-							<p:menuitem value="Nuevo Registro"
-								action="#{recolectorBean.hola(6)}" ajax="false" />
-							<p:menuitem value="Generos" action="/admin/genero/generos"
-								ajax="false" />
-							<p:menuitem value="Registrar generos"
-								action="/admin/genero/registrar_genero" ajax="false" />
-						</p:submenu>
-						<p:menuitem value="Cerrar sesión" ajax="false"
-							action="#{seguridadBean.cerrarSesion}" />
-					</p:menubar>
-				</h:form>
-	</ui:define>
 	<ui:define name="contenido">
-	    Add your content here or delete to use the default
-	</ui:define>
+	<div class="header-desktop3 d-none d-lg-block">
+            <div class="section__content section__content--p35">
+                <div class="header3-wrap">
+                    <div class="header__logo">
+                        <a href="#">
+                            <img src="resources/images/icon/logo-mini.png"  />
+                        </a>
+                    </div>
+                    <div class="header__navbar">
+                        <ul class="list-unstyled">
+                        
+                          <li class="has-sub">
+                                <a href="#">
+                                    <i class="fas fa-leaf"></i>
+                                    <span class="bot-line"></span>Especie</a>
+                                <ul class="header3-sub-list list-unstyled">
+                                    <li>
+                                        <a href="button.html">Crear Nuevo Registro</a>
+                                    </li>
+                                   
+                               
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a href="#">
+                                    <i class="fas fa-desktop"></i>
+                                    <span class="bot-line"></span>Mi Actividad</a>
+                                <ul class="header3-sub-list list-unstyled">
+                                    <li>
+                                       
+                                        <h:commandButton
+											action="#{recolectorBean.listar}" value="Ingresar" />
+                                    </li>
+                                   
+                               
+                                </ul>
+                            </li>
+                            
+                              <li class="has-sub">
+                                <a href="#">
+                                    <i class="fas fa-user"></i>
+                                    <span class="bot-line"></span>User@root</a>
+                                <ul class="header3-sub-list list-unstyled">
+                                    <li>
+                                        <a href="button.html">Actualizar mi Informacion</a>
+                                    </li>
+                                    <li>
+                                        <a href="badge.html">Cerrar sesion</a>
+                                    </li>
+                                
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    </div>
+                </div>
+	</div>
 	
+	<h:panelGroup rendered="#{!recolectorBean.flagListarRegistros}">
+	
+	 <div class="main-content">
+	 <center><h2>Listado de Registros</h2></center>
+	<br></br>
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-12">
+	 							<div class="table-responsive table--no-card m-b-30">
+	<p:dataTable value="#{recolectorBean.misRegistros}" var="r" class="table table-borderless table-striped table-earning">
+	
+		<p:column><f:facet name="header">Id</f:facet>  <h:outputText value="#{r.idRegistro}" /> </p:column>
+		<p:column><f:facet name="header">Fecha</f:facet> <h:outputText value="#{r.fecha}" /> </p:column>
+		<p:column><f:facet name="header">Estado</f:facet> <h:outputText value="#{r.estado}" /> </p:column>
+		<p:column><f:facet name="header">Mensaje</f:facet> <h:commandLink value="Ver mensaje" action="#{recolectorBean.hola}" /> </p:column>
+	
+
+	</p:dataTable>
+			</div>
+			</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	
+	</h:panelGroup>
+	
+	<h:panelGroup rendered="#{recolectorBean.flagListarFamilias}">
+	 <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-12">
+	 <div class="table-responsive table--no-card m-b-30">
+	<p:dataTable value="#{recolectorBean.familias}" var="f"  class="table table-borderless table-striped table-earning">
+		<p:column><f:facet name="header">Id</f:facet>  <h:outputText value="#{f.idFamilia}" /> </p:column>
+		<p:column><f:facet name="header">nombre</f:facet> <h:outputText value="#{f.nombre}" /> </p:column>
+	</p:dataTable>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</h:panelGroup>
+		
+	</ui:define>
+
 </ui:composition>
 </html>

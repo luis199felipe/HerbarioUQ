@@ -62,7 +62,7 @@ public class SeguridadBean implements Serializable {
 
 			switch (user) {
 			case "Administrador":
-				return "admin/contenido_administrador";
+				return "admin/contenido_recolector";
 			case "Empleado":
 				return "admin/contenido_empleado";
 			case "Recolector":
@@ -79,6 +79,11 @@ public class SeguridadBean implements Serializable {
 
 	}
 
+	public String olvide() {
+
+		return "admin/registrar_persona";
+
+	}
 	public String prueba() {
 
 		System.out.println("puedo redireccionar");
