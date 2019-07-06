@@ -62,7 +62,7 @@ public class SeguridadBean implements Serializable {
 
 			switch (user) {
 			case "Administrador":
-				return "admin/contenido_recolector";
+				return "admin/contenido_administrador";
 			case "Empleado":
 				return "admin/contenido_empleado";
 			case "Recolector":
