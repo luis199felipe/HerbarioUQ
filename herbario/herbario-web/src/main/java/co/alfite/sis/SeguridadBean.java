@@ -98,6 +98,13 @@ public class SeguridadBean implements Serializable {
 		return "index?faces-redirect=true";
 
 	}
+	
+	public String redirect() {
+
+	
+		return "admin/contenido_recolector";
+
+	}
 
 	public Persona getPersona() {
 		return persona;

@@ -7,8 +7,12 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.annotation.FacesConfig;
+import javax.faces.annotation.ManagedProperty;
 import javax.faces.annotation.FacesConfig.Version;
+import javax.inject.Inject;
 import javax.inject.Named;
+
+import com.sun.prism.RectShadowGraphics;
 
 import co.alfite.sis.ejb.AdministradorEJB;
 import co.alfite.sis.entidades.EspeciePlanta;
@@ -22,7 +26,10 @@ import co.alfite.sis.entidades.RegistroEspecie.Estado;
 @ApplicationScoped
 public class RegistroEspecieBean {
 
+	@Inject
+	@ManagedProperty(value = "#{seguridadBean.persona}")
 	private Trabajador trabajador;
+	
 	private String nombreEspecie;
 	private String nombreGenero;
 	private String nombreFamilia;
@@ -33,6 +40,7 @@ public class RegistroEspecieBean {
 	private String mensaje;
 	private Date fecha;
 	private RegistroEspecie registroEspecie;
+	
 	
 
 	private List<RegistroEspecie> registros;
@@ -64,6 +72,7 @@ public class RegistroEspecieBean {
 		registroEspecie.setNombreEspecie(nombreEspecie);
 		registroEspecie.setNombreFamilia(nombreFamilia);
 		registroEspecie.setNombreGenero(nombreGenero);
+	
 		//debe quedas asi
 		//la persistencia se hace desde el rol solicitante
 	}

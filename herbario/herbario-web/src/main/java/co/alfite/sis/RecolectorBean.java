@@ -30,7 +30,7 @@ public class RecolectorBean {
 
 	@Inject
 	@ManagedProperty(value = "#{seguridadBean.persona}")
-	private Administrador recolector;
+	private Recolector recolector;
 
 	// duda con el registro, siemre que la instancia cambie en registro bean
 	// cambiara aaqui tambien?
@@ -43,9 +43,11 @@ public class RecolectorBean {
 	private AdministradorEJB trabajadorEJB;
 
 	private EspeciePlanta especieDetalle;
-	
-	private String generoTemp;
+
+
 	private String famTemp;
+	private FamiliaPlanta familiaTemp;
+	private GeneroPlanta generoTemp;
 
 	private List<FamiliaPlanta> familias;
 	private List<GeneroPlanta> generos;
@@ -53,10 +55,19 @@ public class RecolectorBean {
 	private List<RegistroEspecie> misRegistrosAceptados;
 	private List<RegistroEspecie> misRegistrosAG;
 	private List<RegistroEspecie> misRegistrosAF;
-	
+
 	private boolean flagListarRegistros;
-	
+	private boolean flagSelectorF;
+	private boolean flagSelectorG;
+
 	private boolean flagListarFamilias;
+	private String tituloTabla;
+
+
+
+	private List<RegistroEspecie> misRegistrosAceptadosG;
+
+	private List<RegistroEspecie> misRegistrosAceptadosF;
 
 	@PostConstruct
 	public void init() {
@@ -66,8 +77,14 @@ public class RecolectorBean {
 		misRegistros = trabajadorEJB.listarRegistrosRecolector(recolector.getIdPersona());
 		misRegistrosAceptados = trabajadorEJB.listarRegistrosAcetpadosRecolector(recolector.getIdPersona());
 
-		flagListarFamilias=false;
-		flagListarRegistros=false;
+		flagListarFamilias = false;
+		flagListarRegistros = false;
+		flagSelectorF= false;
+		familiaTemp=new FamiliaPlanta();
+		familiaTemp.setIdFamilia(-1);
+		generoTemp=new GeneroPlanta();
+		generoTemp.setIdGenero(-1);
+
 	}
 
 	public void hola(int a) {
@@ -75,55 +92,79 @@ public class RecolectorBean {
 		System.out.println(a);
 
 	}
-	
-	public void listar() {
 
-		System.out.println("puedo listar");
+	public String listarRegistros(int tipo) {
 
+		switch (tipo) {
+		case 0:
+			misRegistros = trabajadorEJB.listarRegistrosRecolector(recolector.getIdPersona());
+			tituloTabla="Lista de registros";
+			break;
+		case 1:
+			misRegistros = trabajadorEJB.listarRegistrosAcetpadosRecolector(recolector.getIdPersona());
+			tituloTabla="Lista de registros Aceptados";
+			break;
+		case 2:
+			try {
+				flagSelectorF= true;
+				tituloTabla="Lista de registros Aceptados Por familia";
+			misRegistros = trabajadorEJB.listarRegistrosRecolectorAF(recolector.getIdPersona(),""+ familiaTemp.getIdFamilia());
+			}catch (Exception e) {
+				// TODO: handle exception
+			}
+			break;
+		case 3:
+			try {
+				tituloTabla="Lista de registros Aceptados Por Genero";
+				flagSelectorG= true;
+				flagSelectorF=false;
+			misRegistros = trabajadorEJB.listarRegistrosRecolectorAG(recolector.getIdPersona(), generoTemp.getIdGenero()+"");
+			}catch (Exception e) {
+				// TODO: handle exception
+			}	
+			break;
+					
+
+		default:
+			break;
+		}
+		flagListarRegistros = true;
+		return "/index?faces-redirect=true";
 	}
 
+	
 
 	public void actualizarDatos() {
 
 	}
 
-	public void realizarNuevoRegistro() {
+	public String realizarNuevoRegistro() {
 
-		registroEspecie.setTrabajador(recolector);
-		trabajadorEJB.insertarRegistro(registroEspecie);
+		//registroEspecie.setTrabajador(recolector);
+		//trabajadorEJB.insertarRegistro(registroEspecie);
 
-		familias = trabajadorEJB.listarFamilias();
-		generos = trabajadorEJB.listarGeneros();
-		misRegistros = trabajadorEJB.listarRegistrosRecolector(recolector.getIdPersona());
-		misRegistrosAceptados = trabajadorEJB.listarRegistrosAcetpadosRecolector(recolector.getIdPersona());
+//		familias = trabajadorEJB.listarFamilias();
+//		generos = trabajadorEJB.listarGeneros();
+//		misRegistros = trabajadorEJB.listarRegistrosRecolector(recolector.getIdPersona());
+//		misRegistrosAceptados = trabajadorEJB.listarRegistrosAcetpadosRecolector(recolector.getIdPersona());
 
+		System.err.println("A registro");
+		return "/index?faces-redirect=true";
 	}
 
 	/**
-	 * @return the usuario
-	 */
-	public Administrador getUsuario() {
-		return recolector;
-	}
-
-	/**
-	 * @param usuario the usuario to set
-	 */
-	public void setUsuario(Administrador usuario) {
-		this.recolector = usuario;
-	}
-
-	/**
+	 * /**
+	 * 
 	 * @return the recolector
 	 */
-	public Administrador getRecolector() {
+	public Recolector getRecolector() {
 		return recolector;
 	}
 
 	/**
 	 * @param recolector the recolector to set
 	 */
-	public void setRecolector(Administrador recolector) {
+	public void setRecolector(Recolector recolector) {
 		this.recolector = recolector;
 	}
 
@@ -169,19 +210,7 @@ public class RecolectorBean {
 		this.especieDetalle = especieDetalle;
 	}
 
-	/**
-	 * @return the generoTemp
-	 */
-	public String getGeneroTemp() {
-		return generoTemp;
-	}
 
-	/**
-	 * @param generoTemp the generoTemp to set
-	 */
-	public void setGeneroTemp(String generoTemp) {
-		this.generoTemp = generoTemp;
-	}
 
 	/**
 	 * @return the famTemp
@@ -307,6 +336,68 @@ public class RecolectorBean {
 	 */
 	public void setFlagListarFamilias(boolean flagListarFamilias) {
 		this.flagListarFamilias = flagListarFamilias;
+	}
+
+	public List<RegistroEspecie> getMisRegistrosAceptadosG() {
+		return misRegistrosAceptadosG;
+	}
+
+	public void setMisRegistrosAceptadosG(List<RegistroEspecie> misRegistrosAceptadosG) {
+		this.misRegistrosAceptadosG = misRegistrosAceptadosG;
+	}
+
+	public List<RegistroEspecie> getMisRegistrosAceptadosF() {
+		return misRegistrosAceptadosF;
+	}
+
+	public void setMisRegistrosAceptadosF(List<RegistroEspecie> misRegistrosAceptadosF) {
+		this.misRegistrosAceptadosF = misRegistrosAceptadosF;
+	}
+
+	public String getTituloTabla() {
+		return tituloTabla;
+	}
+
+	public void setTituloTabla(String tituloTabla) {
+		this.tituloTabla = tituloTabla;
+	}
+
+	public FamiliaPlanta getFamiliaTemp() {
+		return familiaTemp;
+	}
+
+	public void setFamiliaTemp(FamiliaPlanta familiaTemp) {
+		this.familiaTemp = familiaTemp;
+	}
+
+	public boolean isFlagSelectorF() {
+		return flagSelectorF;
+	}
+
+	public void setFlagSelectorF(boolean flagSelectorF) {
+		this.flagSelectorF = flagSelectorF;
+	}
+
+	public boolean isFlagSelectorG() {
+		return flagSelectorG;
+	}
+
+	public void setFlagSelectorG(boolean flagSelectorG) {
+		this.flagSelectorG = flagSelectorG;
+	}
+
+	/**
+	 * @return the generoTemp
+	 */
+	public GeneroPlanta getGeneroTemp() {
+		return generoTemp;
+	}
+
+	/**
+	 * @param generoTemp the generoTemp to set
+	 */
+	public void setGeneroTemp(GeneroPlanta generoTemp) {
+		this.generoTemp = generoTemp;
 	}
 
 }

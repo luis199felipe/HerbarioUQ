@@ -8,17 +8,14 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="/WEB-INF/template.xhtml">
-
-	<ui:define name="login">
- 
-	</ui:define>
+	
 	<ui:define name="contenido">
-		<div class="main-content">
+			<div class="main-content">
 			<div class="section__content section__content--p30">
 				<div class="container">
 					<div class="card">
 						<div class="card-header">
-							<center><h2>Formulario de registro</h2></center>
+							<center><h2>Formulario para Registro de Especies</h2></center>
 						</div>
 						<div class="card-body">
 
@@ -28,51 +25,36 @@
 									<div class="login-form">
 										<h:form >
 											<div class="form-group">
-												<h:outputLabel value="Nombre"/>
+												<h:outputLabel value="Nombre  de la Especie"/>
 												<p:inputText class="au-input au-input--full"
-													value="#{gestionPersonaBean.nombre}" />
+													value="#{registroBean.nombreEspecie}" />
 											</div>
 
 											<div class="form-group">
-												<label>Cedula</label>
+												<label>Familia a la que pertenece</label>
 												<p:inputText class="au-input au-input--full"
-													value="#{gestionPersonaBean.idPersona}" />
+													value="#{registroBean.nombreFamilia}" />
 											</div>
 											<div class="form-group">
-												<label>Correo</label>
+												<label>Genero al que pertenece</label>
 												<p:inputText class="au-input au-input--full"
-													value="#{gestionPersonaBean.email}" />
+													value="#{registroBean.nombreGenero}" />
 											</div>
-											<div class="form-group">
-												<label>Password</label>
-												<p:inputText class="au-input au-input--full"
-													value="#{gestionPersonaBean.password}" />
-											</div>
-											<div class="form-group">
-												<label>Telefono</label>
-												<p:inputText class="au-input au-input--full"
-													value="#{gestionPersonaBean.telefono}" />
-											</div>
-
-											<div class="form-group">
-												<label>Fecha nacimiento</label>
-												<p:inputText class="au-input au-input--full"
-													value="#{gestionPersonaBean.fechaNacimiento}" />
-
-											</div>
-											<div class="col col-md-3">
-												<label class=" form-control-label">Regitrarse Como:</label>
-											</div>
-											<div class="form-check">
-												<div class="radio">
-												
-												</div>
-											</div>
+									
+									   			<div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="file-input" class=" form-control-label">Debe anexar una Imagen:</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <h:inputFile  class="form-control-file" />
+                                                </div>
+                                            </div>
+										
 									
 									<h:form>
 									<h:commandButton
 											class="au-btn au-btn--block au-btn--green m-b-20"
-											action="#{gestionPersonaBean.registrarPersona(1)}" value="Registrarse" />
+											action="#{registroBean.nuevoRegistro}" value="Realizar Registro" />
 
 
 									</h:form>
@@ -87,6 +69,6 @@
 		</div>
 		</div>
 	</ui:define>
-	
+
 </ui:composition>
 </html>

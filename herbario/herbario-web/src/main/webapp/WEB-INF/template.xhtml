@@ -107,10 +107,24 @@
 
 			</div>
 		</h:panelGroup>
+
+
+
 	</ui:insert>
 
 
-	<ui:insert name="contenido" />
+	<ui:insert name="contenido">
+
+		<h:panelGroup rendered="#{seguridadBean.autenticado}">
+			<h:form>
+				<p>
+					¿redirect?
+					<h:commandLink action="admin/registro_especie" value="re" id="r"/>
+					
+				</p>
+			</h:form>
+		</h:panelGroup>
+	</ui:insert>
 
 	<!-- Jquery JS-->
 	<script src="vendor/jquery-3.2.1.min.js"></script>

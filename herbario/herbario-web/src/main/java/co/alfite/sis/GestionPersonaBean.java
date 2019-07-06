@@ -15,6 +15,7 @@ import co.alfite.sis.ejb.AdministradorEJB;
 import co.alfite.sis.entidades.Empleado;
 import co.alfite.sis.entidades.Persona;
 import co.alfite.sis.entidades.Recolector;
+import co.alfite.sis.excepciones.ElementoRepetidoExcepcion;
 import co.alfite.sis.util.Util;
 
 @FacesConfig(version = Version.JSF_2_3)
@@ -54,6 +55,7 @@ public class GestionPersonaBean implements Serializable {
 	 */
 	private String email;
 
+	private boolean flag;
 	@EJB
 	private AdministradorEJB trabajadorEJB;
 
@@ -62,52 +64,63 @@ public class GestionPersonaBean implements Serializable {
 	 * @param tipo es para identificar si se va a insertar una empleado o un
 	 *             recolector
 	 */
-	
-	
+
 	@PostConstruct
-	public  void init () {
+	public void init() {
+		flag = false;
+	}
+
+	public String registrarPersona(int tipo) {
+
+//		tipo = 1;
+//
+//		System.out.println("Registra");
+//
+//		try {
+//			switch (tipo) {
+//			case 0:
+//				Empleado e = new Empleado();
+//				e.setNombre(nombre);
+//				e.setEmail(email);
+//				e.setPassword(password);
+//				e.setTelefono(telefono);
+//				e.setEstado(co.alfite.sis.entidades.Persona.Estado.activo);
+//				e.setFechaNacimiento(new Date());
+//				e.setIdPersona(idPersona);
+//
+//				trabajadorEJB.insertarEmpleado(e);
+//
+//				break;
+//			case 1:
+//
+//				Recolector r = new Recolector();
+//				r.setNombre(nombre);
+//				r.setEmail(email);
+//				r.setPassword(password);
+//				r.setTelefono(telefono);
+//				r.setEstado(co.alfite.sis.entidades.Persona.Estado.activo);
+//				r.setFechaNacimiento(new Date());
+//				r.setIdPersona(idPersona);
+//				trabajadorEJB.insertarRecolector(r);
+//
+//				break;
+//
+//			default:
+//				break;
+//			}
+//
+//		} catch (Exception e1) {
+//			System.err.println(e1.getMessage());
+//			Util.mostrarMensaje("No se pudo hacer el registro", "Error");
+//		}
+//		Util.mostrarMensaje("Bienvenido al herbario de la universidad del Quindio", "Exito");
 		
-		nombre="LUcas";
-	}
-	public void registrarPersona(int tipo) {
-
-		tipo=1;
-		Persona r = new Persona();
-		r.setNombre(nombre);
-		r.setEmail(email);
-		r.setPassword(password);
-		r.setTelefono(telefono);
-		r.setEstado(co.alfite.sis.entidades.Persona.Estado.activo);
-		r.setFechaNacimiento(new Date());
-
-		System.out.println("Registra");
-		try {
-			switch (tipo) {
-			case 0:
-
-				Empleado e = (Empleado) r;
-
-				trabajadorEJB.insertarEmpleado(e);
-				break;
-			case 1:
-
-				Recolector s = (Recolector) r;
-
-				trabajadorEJB.insertarRecolector(s);
-				break;
-
-			default:
-				break;
-			}
-			Util.mostrarMensaje("Bienvenido al herbario de la universidad del Quindio", "Exito");
-
-		} catch (Exception e) {
-			Util.mostrarMensaje("No se pudo hacer el registro", "Error");
-		}
-	
+		return "/index?faces-redirect=true";
 
 	}
+
 	public void prueba() {
+		flag = true;
 		System.out.println("prueba");
 	}
 
@@ -221,5 +234,13 @@ public class GestionPersonaBean implements Serializable {
 	 */
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public boolean isFlag() {
+		return flag;
+	}
+
+	public void setFlag(boolean flag) {
+		this.flag = flag;
 	}
 }
