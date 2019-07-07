@@ -7,218 +7,84 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
 <h:head>
-
-
 	<title>Herbario UQ</title>
-	<link rel="icon" href="resources/favicon.ico"></link>
-	<meta name="viewport"
-		content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
-	<meta name="description" content="au theme template"></meta>
-	<meta name="author" content="Hau Nguyen"></meta>
-	<meta name="keywords" content="au theme template"></meta>
-
-	<!-- Fontfaces CSS-->
-	<link href="resources/css/font-face.css" rel="stylesheet" media="all"></link>
-	<link href="resources/vendor/font-awesome-4.7/css/font-awesome.min.css"
-		rel="stylesheet" media="all"></link>
-	<link
-		href="resources/vendor/font-awesome-5/css/fontawesome-all.min.css"
-		rel="stylesheet" media="all"></link>
-	<link
-		href="resources/vendor/mdi-font/css/material-design-iconic-font.min.css"
-		rel="stylesheet" media="all"></link>
-
-	<!-- Bootstrap CSS-->
-	<link href="resources/vendor/bootstrap-4.1/bootstrap.min.css"
-		rel="stylesheet" media="all"></link>
-
-	<!-- Vendor CSS-->
-	<link href="resources/vendor/animsition/animsition.min.css"
-		rel="stylesheet" media="all"></link>
-	<link
-		href="resources/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css"
-		rel="stylesheet" media="all"></link>
-	<link href="resources/vendor/wow/animate.css" rel="stylesheet"
-		media="all"></link>
-	<link href="resources/vendor/css-hamburgers/hamburgers.min.css"
-		rel="stylesheet" media="all"></link>
-	<link href="resources/vendor/slick/slick.css" rel="stylesheet"
-		media="all"></link>
-	<link href="resources/vendor/select2/select2.min.css" rel="stylesheet"
-		media="all"></link>
-	<link href="resources/vendor/perfect-scrollbar/perfect-scrollbar.css"
-		rel="stylesheet" media="all"></link>
-
-	<!-- Main CSS-->
-	<link href="resources/css/theme.css" rel="stylesheet" media="all"></link>
-
+	<link rel="icon" href="resources/favicon.ico"></link>	
 </h:head>
 <h:body>
-	<ui:insert name="login">
+	<div align="center">
+	
+	<ui:insert name="logo">
+		<div >
+			<p:graphicImage value="#{resource['herbariumheader.jpg']}"
+				stream="false" />
+		</div>
+		</ui:insert>
 		<h:panelGroup rendered="#{!seguridadBean.autenticado}">
+			<ui:insert name="login">
+				<h:form>
+					<p:panelGrid columns="2">
+						<f:facet name="header">Iniciar sesion</f:facet>
+						<p:outputLabel value="Login" />
+						<p:inputText value="#{seguridadBean.persona.email}" />
+						<p:outputLabel value="Clave" />
+						<p:password value="#{seguridadBean.persona.password}" />
+						<f:facet name="footer">
 
-			<div class="page-wrapper">
-				<div class="page-content--bge5">
-					<div class="container">
-						<div class="login-wrap">
-							<div class="login-content">
-								<div class="login-logo">
-									<a href="#"> <img src="resources/logoHerbario.png"
-										alt="CoolAdmin" width="200" height="100"></img>
-									</a>
-								</div>
-								<div class="login-form">
-									<h:form>
-										<div class="form-group">
-											<label for="email">Email:</label>
-											<h:inputText class="au-input au-input--full" id="email"
-												value="#{seguridadBean.persona.email}" />
-										</div>
-										<div class="form-group">
+							<p:commandButton value="registrarse"
+								action="/admin/registrar_persona" ajax="false" />
 
-											<label for="contrasenia">Contraseña:</label>
-											<h:inputSecret class="au-input au-input--full"
-												id="contrasenia" value="#{seguridadBean.persona.password}" />
-										</div>
-										<div class="login-checkbox">
+							<p:commandButton value="Aceptar"
+								action="#{seguridadBean.iniciarSesion}" ajax="false" />
+							<p:commandButton value="recuperar contraseña"
+								action="#{seguridadBean.recuperarContrasenia}" ajax="false" />
 
-											<label> <h:link outcome="/admin/contenido_recolector">Olvide mi contraseña</h:link>
-											</label>
-										</div>
-										<h:commandButton
-											class="au-btn au-btn--block au-btn--green m-b-20"
-											action="#{seguridadBean.iniciarSesion}" value="Ingresar" />
+							<p:tooltip />
 
+						<h:form>
+								<p:messages id="messages" showDetail="true" closable="true">
+									<p:autoUpdate />
+								</p:messages>
+								</h:form>
+						</f:facet>
 
-									</h:form>
-									<h:form>
-										<p>
-											¿No tienes cuenta?
-											<h:commandLink action="admin/registrar_persona"
-												value="registrate aqui" />
-
-										</p>
-									</h:form>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-			</div>
+					</p:panelGrid>
+				</h:form>
+				<p:growl id="growl" life="2" />
+			</ui:insert>
 		</h:panelGroup>
-
-
-
-	</ui:insert>
-
-
-	<ui:insert name="menu">
+		
 		<h:panelGroup rendered="#{seguridadBean.autenticado}">
-
-			<div class="header-desktop3 d-none d-lg-block">
-				<div class="section__content section__content--p35">
-					<div class="header3-wrap">
-						<div class="header__logo">
-							<a href="#"> <img src="resources/images/icon/logo-mini.png" />
-							</a>
-						</div>
-						<div class="header__navbar">
-							<ul class="list-unstyled">
-
-								<li class="has-sub"><a href="#"> <i class="fas fa-leaf"></i>
-										<span class="bot-line"></span>Especie
-								</a>
-									<ul class="header3-sub-list list-unstyled">
-										<li><h:form>
-
-												<h:commandLink
-													action="/admin/registro_especie?faces-redirect=true"
-													value="Nuevo Registro" />
-											</h:form></li>
-
-
-									</ul></li>
-								<ui:insert name="actividadRecolector">
-									<li class="has-sub"><a href="#"> <i
-											class="fas fa-desktop"></i> <span class="bot-line"></span>Mi
-											Actividad
-									</a>
-										<ul class="header3-sub-list list-unstyled">
-											<li><h:form>
-
-													<h:commandLink
-														action="admin/contenido_recolector"
-														value="Lista de Registros" />
-												</h:form></li>
-											<li><h:form>
-
-													<h:commandLink
-														action="#{recolectorBean.listarRegistros(1)}"
-														value="Lista de Registros Aceptados" />
-												</h:form></li>
-
-											<li><h:form>
-
-													<h:commandLink
-														action="#{recolectorBean.listarRegistros(2)}"
-														value="Registros Aceptados Por Familia" />
-												</h:form></li>
-											<li><h:form>
-
-													<h:commandLink
-														action="#{recolectorBean.listarRegistros(3)}"
-														value="Registros Aceptados Por Genero" />
-												</h:form></li>
-
-
-										</ul></li>
-								</ui:insert>
-
-								<li class="has-sub"><a href="#"> <i class="fas fa-user"></i>
-										<span class="bot-line"></span> <h:outputLabel
-											value="#{recolectorBean.recolector.nombre}" /></a>
-									<ul class="header3-sub-list list-unstyled">
-										<li><a href="button.html">Actualizar mi Informacion</a></li>
-										<li><a href="badge.html">Cerrar sesion</a></li>
-
-									</ul></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
+			<ui:insert name="menu">
+				<h:form>
+					<p:menubar>
+						<f:facet name="options">
+							<p:commandButton value="Inicio" action="/index" ajax="false" />
+						</f:facet>
+						<p:submenu label="Empleado">
+						</p:submenu>
+						<p:submenu label="Cliente">
+						</p:submenu>
+						<p:submenu label="Especies">
+							<p:menuitem value="Familias" action="/admin/familia/familias"
+								ajax="false" />
+							<p:menuitem value="Registrar familia"
+								action="/admin/familia/registrar_familia" ajax="false" />
+							<p:menuitem value="Generos" action="/admin/genero/generos"
+								ajax="false" />
+							<p:menuitem value="Registrar generos"
+								action="/admin/genero/registrar_genero" ajax="false" />
+								<p:menuitem value="Nuevo Registro de Especie"
+								action="/admin/registro_especie" ajax="false" />
+						</p:submenu>
+						<p:menuitem value="Cerrar sesión" ajax="false"
+							action="#{seguridadBean.cerrarSesion}" />
+					</p:menubar>
+					<ui:insert name="contenido" />
+				</h:form>
+			</ui:insert>
+			
 		</h:panelGroup>
-	</ui:insert>
-	<ui:insert name="contenido">
-	</ui:insert>
-
-	<!-- Jquery JS-->
-	<script src="vendor/jquery-3.2.1.min.js"></script>
-	<!-- Bootstrap JS-->
-	<script src="vendor/bootstrap-4.1/popper.min.js"></script>
-	<script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
-	<!-- Vendor JS       -->
-	<script src="vendor/slick/slick.min.js">
 		
-	</script>
-	<script src="vendor/wow/wow.min.js"></script>
-	<script src="vendor/animsition/animsition.min.js"></script>
-	<script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
-		
-	</script>
-	<script src="vendor/counter-up/jquery.waypoints.min.js"></script>
-	<script src="vendor/counter-up/jquery.counterup.min.js">
-		
-	</script>
-	<script src="vendor/circle-progress/circle-progress.min.js"></script>
-	<script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
-	<script src="vendor/chartjs/Chart.bundle.min.js"></script>
-	<script src="vendor/select2/select2.min.js">
-		
-	</script>
-
-	<!-- Main JS-->
-	<script src="js/main.js"></script>
+	</div>
 </h:body>
 </html>

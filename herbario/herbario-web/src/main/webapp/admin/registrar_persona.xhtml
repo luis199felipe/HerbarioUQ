@@ -10,83 +10,48 @@
 <ui:composition template="/WEB-INF/template.xhtml">
 
 	<ui:define name="login">
- 
+
 	</ui:define>
 	<ui:define name="contenido">
-		<div class="main-content">
-			<div class="section__content section__content--p30">
-				<div class="container">
-					<div class="card">
-						<div class="card-header">
-							<center><h2>Formulario de registro</h2></center>
-						</div>
-						<div class="card-body">
 
-							<div class="login-wrap">
-								<div class="login-content">
-									<div class="login-logo"></div>
-									<div class="login-form">
-										<h:form >
-											<div class="form-group">
-												<h:outputLabel value="Nombre"/>
-												<p:inputText class="au-input au-input--full"
-													value="#{gestionPersonaBean.nombre}" />
-											</div>
+		<h:form>
+			<p:panelGrid columns="2">
+				<f:facet name="header">Formulario de Registro</f:facet>
 
-											<div class="form-group">
-												<label>Cedula</label>
-												<p:inputText class="au-input au-input--full"
-													value="#{gestionPersonaBean.idPersona}" />
-											</div>
-											<div class="form-group">
-												<label>Correo</label>
-												<p:inputText class="au-input au-input--full"
-													value="#{gestionPersonaBean.email}" />
-											</div>
-											<div class="form-group">
-												<label>Password</label>
-												<p:inputText class="au-input au-input--full"
-													value="#{gestionPersonaBean.password}" />
-											</div>
-											<div class="form-group">
-												<label>Telefono</label>
-												<p:inputText class="au-input au-input--full"
-													value="#{gestionPersonaBean.telefono}" />
-											</div>
+				<p:outputLabel value="Nombre" />
+				<p:inputText value="#{gestionPersonaBean.nombre}" />
 
-											<div class="form-group">
-												<label>Fecha nacimiento</label>
-												<p:inputText class="au-input au-input--full"
-													value="#{gestionPersonaBean.fechaNacimiento}" />
-
-											</div>
-											<div class="col col-md-3">
-												<label class=" form-control-label">Regitrarse Como:</label>
-											</div>
-											<div class="form-check">
-												<div class="radio">
-												
-												</div>
-											</div>
-									
-									<h:form>
-									<h:commandButton
-											class="au-btn au-btn--block au-btn--green m-b-20"
-											action="#{gestionPersonaBean.registrarPersona(1)}" value="Registrarse" />
+				<p:outputLabel value="Cedula" />
+				<p:inputText value="#{gestionPersonaBean.idPersona}" />
+				<p:outputLabel value="Correo" />
+				<p:inputText value="#{gestionPersonaBean.email}" />
+				<p:outputLabel value="Contraseña" />
+				<p:inputText value="#{gestionPersonaBean.password}" />
+				<p:outputLabel value="Telefono" />
+				<p:inputText value="#{gestionPersonaBean.telefono}" />
 
 
-									</h:form>
-									</h:form>
+				<p:outputLabel value="Fecha nacimiento" />
+			
+				<p:calendar value="#{gestionPersonaBean.fechaNacimiento}"/>
 
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		</div>
+
+			<p:outputLabel value="Registrarse como" />
+		
+			  <p:selectOneRadio id="console" value="#{gestionPersonaBean.tipo}" unselectable="true">
+            <f:selectItem itemLabel="usuario" itemValue="usuario" />
+            <f:selectItem itemLabel="empleado" itemValue="empleado" />
+            <f:selectItem itemLabel="recolector" itemValue="recolector" />
+        </p:selectOneRadio>
+
+                <p:commandButton action="/index" value="atras" />
+				<p:commandButton action="#{gestionPersonaBean.registrarPersona}"
+					value="Registrarse" />
+			</p:panelGrid>
+		</h:form>
+
+
 	</ui:define>
-	
+
 </ui:composition>
 </html>

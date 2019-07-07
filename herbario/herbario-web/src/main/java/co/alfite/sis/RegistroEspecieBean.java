@@ -1,5 +1,13 @@
 package co.alfite.sis;
 
+import java.awt.Graphics2D;
+
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Date;
 import java.util.List;
 
@@ -8,9 +16,17 @@ import javax.ejb.EJB;
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.annotation.FacesConfig;
 import javax.faces.annotation.ManagedProperty;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.imageio.ImageIO;
 import javax.faces.annotation.FacesConfig.Version;
 import javax.inject.Inject;
 import javax.inject.Named;
+
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
+import org.primefaces.model.UploadedFile;
 
 import com.sun.prism.RectShadowGraphics;
 
@@ -18,6 +34,7 @@ import co.alfite.sis.ejb.AdministradorEJB;
 import co.alfite.sis.entidades.EspeciePlanta;
 import co.alfite.sis.entidades.ImagenPlanta;
 import co.alfite.sis.entidades.Trabajador;
+import co.alfite.sis.util.Util;
 import co.alfite.sis.entidades.RegistroEspecie;
 import co.alfite.sis.entidades.RegistroEspecie.Estado;
 
@@ -29,7 +46,7 @@ public class RegistroEspecieBean {
 	@Inject
 	@ManagedProperty(value = "#{seguridadBean.persona}")
 	private Trabajador trabajador;
-	
+
 	private String nombreEspecie;
 	private String nombreGenero;
 	private String nombreFamilia;
@@ -40,8 +57,10 @@ public class RegistroEspecieBean {
 	private String mensaje;
 	private Date fecha;
 	private RegistroEspecie registroEspecie;
-	
-	
+
+	private UploadedFile img;
+
+	private StreamedContent graphicImage;
 
 	private List<RegistroEspecie> registros;
 	private List<EspeciePlanta> plantas;
@@ -57,29 +76,44 @@ public class RegistroEspecieBean {
 	@PostConstruct
 	private void init() {
 		registros = admiEJB.listarRegistros();
+	
 	}
 
-	
 	public void nuevoRegistro() {
-		
-		registroEspecie=null;
-		
-		registroEspecie=new RegistroEspecie();
-		
+
+		registroEspecie = null;
+
+		registroEspecie = new RegistroEspecie();
+
 		registroEspecie.setEstado(estado.enviado);
 		registroEspecie.setFecha(new Date());
-		//registroEspecie.setImagen(imagen);
+		// registroEspecie.setImagen(imagen);
 		registroEspecie.setNombreEspecie(nombreEspecie);
 		registroEspecie.setNombreFamilia(nombreFamilia);
 		registroEspecie.setNombreGenero(nombreGenero);
-	
-		//debe quedas asi
-		//la persistencia se hace desde el rol solicitante
+
+		// debe quedas asi
+		// la persistencia se hace desde el rol solicitante
 	}
+
+	public String upload() {
+		
+		
+		return "/admin/registro_especie";
+
+	}
+
+	public void handleFileUpload(FileUploadEvent event) {
+		System.out.println(event.getFile().getFileName());
+		//File im = new File(event.getFile().getFileName());
 	
-	
-	
-	
+		img=event.getFile();
+		
+		
+		 graphicImage = new DefaultStreamedContent(new ByteArrayInputStream(img.getContents()), "image/png"); 
+		
+	}
+
 	public Trabajador getTrabajador() {
 		return trabajador;
 	}
@@ -172,6 +206,28 @@ public class RegistroEspecieBean {
 	 */
 	public void setRegistroEspecie(RegistroEspecie registroEspecie) {
 		this.registroEspecie = registroEspecie;
+	}
+
+	public UploadedFile getImg() {
+		return img;
+	}
+
+	public void setImg(UploadedFile img) {
+		this.img = img;
+	}
+
+	/**
+	 * @return the graphicImage
+	 */
+	public StreamedContent getGraphicImage() {
+		return graphicImage;
+	}
+
+	/**
+	 * @param graphicImage the graphicImage to set
+	 */
+	public void setGraphicImage(StreamedContent graphicImage) {
+		this.graphicImage = graphicImage;
 	}
 
 }

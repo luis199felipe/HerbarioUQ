@@ -12,7 +12,7 @@
 	    <h:form id="familiaForm">
 			
 			<p:fieldset id="familias" legend="familias registradas">
-				<p:dataTable id="listafamilias" var="familia" value="#{familiaBean.familias}">
+				<p:dataTable  class="table table-borderless table-striped table-earning" id="listafamilias" var="familia" value="#{familiaBean.familias}">
 				
 					<p:column headerText="Id">
 						<h:outputText value="#{familia.idFamilia}" />

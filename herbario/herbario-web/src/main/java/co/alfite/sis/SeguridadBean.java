@@ -7,6 +7,8 @@ import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.annotation.FacesConfig;
 import javax.faces.annotation.FacesConfig.Version;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 import co.alfite.sis.ejb.AdministradorEJB;
@@ -98,6 +100,12 @@ public class SeguridadBean implements Serializable {
 		return "index?faces-redirect=true";
 
 	}
+	public void recuperarContrasenia() {
+
+		 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informacion", "se enviara un correo a" + persona.getEmail()));
+
+	}
+	
 	
 	public String redirect() {
 

@@ -56,6 +56,9 @@ public class GestionPersonaBean implements Serializable {
 	private String email;
 
 	private boolean flag;
+	
+	
+	private String tipo;
 	@EJB
 	private AdministradorEJB trabajadorEJB;
 
@@ -70,50 +73,50 @@ public class GestionPersonaBean implements Serializable {
 		flag = false;
 	}
 
-	public String registrarPersona(int tipo) {
+	public String registrarPersona() {
 
-//		tipo = 1;
-//
-//		System.out.println("Registra");
-//
-//		try {
-//			switch (tipo) {
-//			case 0:
-//				Empleado e = new Empleado();
-//				e.setNombre(nombre);
-//				e.setEmail(email);
-//				e.setPassword(password);
-//				e.setTelefono(telefono);
-//				e.setEstado(co.alfite.sis.entidades.Persona.Estado.activo);
-//				e.setFechaNacimiento(new Date());
-//				e.setIdPersona(idPersona);
-//
-//				trabajadorEJB.insertarEmpleado(e);
-//
-//				break;
-//			case 1:
-//
-//				Recolector r = new Recolector();
-//				r.setNombre(nombre);
-//				r.setEmail(email);
-//				r.setPassword(password);
-//				r.setTelefono(telefono);
-//				r.setEstado(co.alfite.sis.entidades.Persona.Estado.activo);
-//				r.setFechaNacimiento(new Date());
-//				r.setIdPersona(idPersona);
-//				trabajadorEJB.insertarRecolector(r);
-//
-//				break;
-//
-//			default:
-//				break;
-//			}
-//
-//		} catch (Exception e1) {
-//			System.err.println(e1.getMessage());
-//			Util.mostrarMensaje("No se pudo hacer el registro", "Error");
-//		}
-//		Util.mostrarMensaje("Bienvenido al herbario de la universidad del Quindio", "Exito");
+	
+
+		System.out.println("Registra");
+
+		try {
+			switch (tipo) {
+			case "empleado":
+				Empleado e = new Empleado();
+				e.setNombre(nombre);
+				e.setEmail(email);
+				e.setPassword(password);
+				e.setTelefono(telefono);
+				e.setEstado(co.alfite.sis.entidades.Persona.Estado.activo);
+				e.setFechaNacimiento(fechaNacimiento);
+				e.setIdPersona(idPersona);
+
+				trabajadorEJB.insertarEmpleado(e);
+
+				break;
+			case "recolector":
+
+				Recolector r = new Recolector();
+				r.setNombre(nombre);
+				r.setEmail(email);
+				r.setPassword(password);
+				r.setTelefono(telefono);
+				r.setEstado(co.alfite.sis.entidades.Persona.Estado.activo);
+				r.setFechaNacimiento(fechaNacimiento);
+				r.setIdPersona(idPersona);
+				trabajadorEJB.insertarRecolector(r);
+
+				break;
+
+			default:
+				break;
+			}
+
+		} catch (Exception e1) {
+			System.err.println(e1.getMessage());
+			Util.mostrarMensaje("No se pudo hacer el registro", "Error");
+		}
+		Util.mostrarMensaje("Bienvenido al herbario de la universidad del Quindio", "Exito");
 		
 		return "/index?faces-redirect=true";
 
@@ -242,5 +245,13 @@ public class GestionPersonaBean implements Serializable {
 
 	public void setFlag(boolean flag) {
 		this.flag = flag;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 }

@@ -77,6 +77,8 @@ public class RecolectorBean {
 		flagListarFamilias = false;
 		flagListarRegistros = false;
 		flagSelectorF = false;
+		flagSelectorG = false;
+		
 		familiaTemp = new FamiliaPlanta();
 		familiaTemp.setIdFamilia(-1);
 		generoTemp = new GeneroPlanta();
@@ -90,7 +92,7 @@ public class RecolectorBean {
 
 	}
 
-	public String listarRegistros(int tipo) {
+	public void  listarRegistros(int tipo) {
 
 		switch (tipo) {
 		case 0:
@@ -132,7 +134,6 @@ public class RecolectorBean {
 			break;
 		}
 		flagListarRegistros = true;
-		return "/index?faces-redirect=true";
 	}
 
 	public void actualizarDatos() {
