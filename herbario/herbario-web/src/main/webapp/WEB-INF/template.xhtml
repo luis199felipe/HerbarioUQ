@@ -111,263 +111,87 @@
 
 
 	</ui:insert>
-	
-	<h:panelGroup rendered="#{seguridadBean.autenticado}">
-		<ui:insert name="menu">
-		
-<div class="header-desktop3 d-none d-lg-block">
-			<div class="section__content section__content--p35">
-				<div class="header3-wrap">
-					<div class="header__logo">
-						<a href="#"> <img src="resources/images/icon/logo-mini.png" />
-						</a>
-					</div>
-					<div class="header__navbar">
-						<ul class="list-unstyled">
 
-							<li class="has-sub"><a href="#"> <i class="fas fa-leaf"></i>
-									<span class="bot-line"></span>Especie
+
+	<ui:insert name="menu">
+		<h:panelGroup rendered="#{seguridadBean.autenticado}">
+
+			<div class="header-desktop3 d-none d-lg-block">
+				<div class="section__content section__content--p35">
+					<div class="header3-wrap">
+						<div class="header__logo">
+							<a href="#"> <img src="resources/images/icon/logo-mini.png" />
 							</a>
-								<ul class="header3-sub-list list-unstyled">
-									<li><h:form>
+						</div>
+						<div class="header__navbar">
+							<ul class="list-unstyled">
 
-											<h:commandLink action="/admin/registro_especie?faces-redirect=true"
-												value="Nuevo Registro" />
-										</h:form></li>
-
-
-								</ul></li>
-							<ui:insert name="actividadRecolector">	
-							<li class="has-sub"><a href="#"> <i
-									class="fas fa-desktop"></i> <span class="bot-line"></span>Mi
-									Actividad
-							</a>
-								<ul class="header3-sub-list list-unstyled">
-									<li><h:form>
-
-											<h:commandLink action="#{recolectorBean.listarRegistros(0)}"
-												value="Lista de Registros"/>
-										</h:form></li>
+								<li class="has-sub"><a href="#"> <i class="fas fa-leaf"></i>
+										<span class="bot-line"></span>Especie
+								</a>
+									<ul class="header3-sub-list list-unstyled">
 										<li><h:form>
 
-											<h:commandLink action="#{recolectorBean.listarRegistros(1)}"
-												value="Lista de Registros Aceptados" />
-										</h:form></li>
-										
-										<li><h:form>
-
-											<h:commandLink action="#{recolectorBean.listarRegistros(2)}"
-												value="Registros Aceptados Por Familia" />
-										</h:form></li>
-										<li><h:form>
-
-											<h:commandLink action="#{recolectorBean.listarRegistros(3)}"
-												value="Registros Aceptados Por Genero" />
-										</h:form></li>
+												<h:commandLink
+													action="/admin/registro_especie?faces-redirect=true"
+													value="Nuevo Registro" />
+											</h:form></li>
 
 
-								</ul></li>
+									</ul></li>
+								<ui:insert name="actividadRecolector">
+									<li class="has-sub"><a href="#"> <i
+											class="fas fa-desktop"></i> <span class="bot-line"></span>Mi
+											Actividad
+									</a>
+										<ul class="header3-sub-list list-unstyled">
+											<li><h:form>
+
+													<h:commandLink
+														action="admin/contenido_recolector"
+														value="Lista de Registros" />
+												</h:form></li>
+											<li><h:form>
+
+													<h:commandLink
+														action="#{recolectorBean.listarRegistros(1)}"
+														value="Lista de Registros Aceptados" />
+												</h:form></li>
+
+											<li><h:form>
+
+													<h:commandLink
+														action="#{recolectorBean.listarRegistros(2)}"
+														value="Registros Aceptados Por Familia" />
+												</h:form></li>
+											<li><h:form>
+
+													<h:commandLink
+														action="#{recolectorBean.listarRegistros(3)}"
+														value="Registros Aceptados Por Genero" />
+												</h:form></li>
+
+
+										</ul></li>
 								</ui:insert>
 
-							<li class="has-sub"><a href="#"> <i class="fas fa-user"></i>
-									<span class="bot-line"></span>
-								<h:outputLabel value="#{recolectorBean.recolector.nombre}" /></a>
-								<ul class="header3-sub-list list-unstyled">
-									<li><a href="button.html">Actualizar mi Informacion</a></li>
-									<li><a href="badge.html">Cerrar sesion</a></li>
+								<li class="has-sub"><a href="#"> <i class="fas fa-user"></i>
+										<span class="bot-line"></span> <h:outputLabel
+											value="#{recolectorBean.recolector.nombre}" /></a>
+									<ul class="header3-sub-list list-unstyled">
+										<li><a href="button.html">Actualizar mi Informacion</a></li>
+										<li><a href="badge.html">Cerrar sesion</a></li>
 
-								</ul></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<h:panelGroup rendered="#{recolectorBean.flagListarRegistros}">
-
-			<div class="main-content">
-			
-			
-		
-			
-				<center>
-					<h2><p:outputLabel   value="#{recolectorBean.tituloTabla}"/></h2>
-				</center>
-				
-					<center>
-			<h:form>
-				<br></br>
-			<p:panelGrid columns="2" border="1" rendered="#{recolectorBean.flagSelectorF}">
-				
-				<p:selectOneMenu value="#{recolectorBean.familiaTemp}"  converter="selectItemObjectConverter" effect="fade" filter="true" filterMatchMode="startsWith">
-					<f:selectItem itemLabel="Seleccione una familia" noSelectionOption="true"/>
-					<f:selectItems value="#{generoBean.familias}"/>
-				</p:selectOneMenu>
-				<p:commandButton action="#{recolectorBean.listarRegistros(2)}" value="Filtrar" ajax="false"/>		
-			</p:panelGrid>
-		</h:form>
-			</center>
-						<center>
-			<h:form>
-				<br></br>
-			<p:panelGrid columns="2" border="1" rendered="#{recolectorBean.flagSelectorG}">
-				
-				<p:selectOneMenu value="#{recolectorBean.generoTemp}"  converter="selectItemObjectConverter" effect="fade" filter="true" filterMatchMode="startsWith">
-					<f:selectItem itemLabel="Seleccione un genero" noSelectionOption="true"/>
-					<f:selectItems value="#{generoBean.generos}"/>
-				</p:selectOneMenu>
-				<p:commandButton action="#{recolectorBean.listarRegistros(3)}" value="Filtrar" ajax="false"/>		
-			</p:panelGrid>
-		</h:form>
-			</center>
-			
-			
-				<br></br>
-				<div class="section__content section__content--p30">
-					<div class="container-fluid">
-						<div class="row">
-							<div class="col-lg-12">
-								<div class="table-responsive table--no-card m-b-30">
-									<p:dataTable value="#{recolectorBean.misRegistros}" var="r"
-										class="table table-borderless table-striped table-earning">
-
-										<p:column>
-											<f:facet name="header">Id</f:facet>
-											<h:outputText value="#{r.idRegistro}" />
-										</p:column>
-										<p:column>
-											<f:facet name="header">Fecha</f:facet>
-											<h:outputText value="#{r.fecha}" />
-										</p:column>
-											<p:column>
-											<f:facet name="header">Especie</f:facet>
-											<h:outputText value="#{r.nombreEspecie}" />
-										</p:column>
-										<p:column>
-											<f:facet name="header">Estado</f:facet>
-											<h:outputText value="#{r.estado}" />
-										</p:column>
-										<p:column>
-											<f:facet name="header">Mensaje</f:facet>
-											<h:commandLink value="Ver mensaje"
-												action="#{recolectorBean.listarRegistros}" />
-										</p:column>
-
-
-									</p:dataTable>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-		</h:panelGroup>
-
-		<h:panelGroup rendered="#{recolectorBean.flagListarFamilias}">
-			<div class="main-content">
-				<div class="section__content section__content--p30">
-					<div class="container-fluid">
-						<div class="row">
-							<div class="col-lg-12">
-								<div class="table-responsive table--no-card m-b-30">
-									<p:dataTable value="#{recolectorBean.familias}" var="f"
-										class="table table-borderless table-striped table-earning">
-										<p:column>
-											<f:facet name="header">Id</f:facet>
-											<h:outputText value="#{f.idFamilia}" />
-										</p:column>
-										<p:column>
-											<f:facet name="header">nombre</f:facet>
-											<h:outputText value="#{f.nombre}" />
-										</p:column>
-									</p:dataTable>
-								</div>
-							</div>
+									</ul></li>
+							</ul>
 						</div>
 					</div>
 				</div>
 			</div>
 		</h:panelGroup>
 	</ui:insert>
-	</h:panelGroup>
-	
-		<ui:insert name="contenido">
-
-		<h:panelGroup rendered="#{seguridadBean.autenticado}">
-			<h:form>
-				<p>
-					¿redirect?
-					<h:commandLink action="admin/registro_especie" value="re" id="r" />
-
-				</p>
-			</h:form>
-		</h:panelGroup>
+	<ui:insert name="contenido">
 	</ui:insert>
-	
-	<ui:insert name="registroEspecie">
-	<h:panelGroup rendered="#{recolectorBean.flagRegistro}">
-		<div class="main-content">
-			<div class="section__content section__content--p30">
-				<div class="container">
-					<div class="card">
-						<div class="card-header">
-							<center><h2>Formulario para Registro de Especies</h2></center>
-						</div>
-						<div class="card-body">
-
-							<div class="login-wrap">
-								<div class="login-content">
-									<div class="login-logo"></div>
-									<div class="login-form">
-										<h:form >
-											<div class="form-group">
-												<h:outputLabel value="Nombre  de la Especie"/>
-												<p:inputText class="au-input au-input--full"
-													value="#{registroBean.nombreEspecie}" />
-											</div>
-
-											<div class="form-group">
-												<label>Familia a la que pertenece</label>
-												<p:inputText class="au-input au-input--full"
-													value="#{registroBean.nombreFamilia}" />
-											</div>
-											<div class="form-group">
-												<label>Genero al que pertenece</label>
-												<p:inputText class="au-input au-input--full"
-													value="#{registroBean.nombreGenero}" />
-											</div>
-									
-									   			<div class="row form-group">
-                                                <div class="col col-md-3">
-                                                    <label for="file-input" class=" form-control-label">Debe anexar una Imagen:</label>
-                                                </div>
-                                                <div class="col-12 col-md-9">
-                                                    <h:inputFile  class="form-control-file" />
-                                                </div>
-                                            </div>
-										
-									
-									<h:form>
-									<h:commandButton
-											class="au-btn au-btn--block au-btn--green m-b-20"
-											action="#{registroBean.nuevoRegistro}" value="Realizar Registro" />
-
-
-									</h:form>
-									</h:form>
-
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		</div>
-	</h:panelGroup>
-	</ui:insert>
-	
 
 	<!-- Jquery JS-->
 	<script src="vendor/jquery-3.2.1.min.js"></script>

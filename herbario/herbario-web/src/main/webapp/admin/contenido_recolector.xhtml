@@ -11,7 +11,35 @@
 
 
 	<ui:define name="contenido">
-		
+				<h:panelGroup >
+			<div class="main-content">
+				<div class="section__content section__content--p30">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="table-responsive table--no-card m-b-30">
+								
+								<center>
+					<h2><p:outputLabel   value="#{recolectorBean.tituloTabla}"/></h2>
+				</center>
+									<p:dataTable value="#{recolectorBean.familias}" var="f"
+										class="table table-borderless table-striped table-earning">
+										<p:column>
+											<f:facet name="header">Id</f:facet>
+											<h:outputText value="#{f.idFamilia}" />
+										</p:column>
+										<p:column>
+											<f:facet name="header">nombre</f:facet>
+											<h:outputText value="#{f.nombre}" />
+										</p:column>
+									</p:dataTable>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</h:panelGroup>
 		</ui:define>
 
 </ui:composition>
