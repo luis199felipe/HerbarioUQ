@@ -88,13 +88,13 @@
 							<p:menuitem value="Lista de Especies" action="/admin/especie/especies"
 								ajax="false" />
 								<p:menuitem  value="Lista de Especies aceptadas" rendered="#{seguridadBean.flagRecolector}"
-								action="/admin/registro_especie" ajax="false" />
+								action="/admin/especie/especies_aceptadas" ajax="false" />
 									<p:menuitem value="Lista de Especies Enviadas" rendered="#{seguridadBean.flagRecolector}"
-								action="/admin/registro_especie" ajax="false" />
+								action="/admin/registro/registros_recolector" ajax="false" />
 									<p:menuitem value="Lista de Especies Aceptadas Por genero" rendered="#{seguridadBean.flagRecolector}"
-								action="/admin/registro_especie" ajax="false" />
+								action="/admin/especie/especies_recolectorAG" ajax="false" />
 									<p:menuitem value="Lista de Especies Aceptadas Por Familia" rendered="#{seguridadBean.flagRecolector}"
-								action="/admin/registro_especie" ajax="false" />
+								action="/admin/especie/especies_recolectorAF" ajax="false" />
 								
 						</p:submenu>
 					</p:menubar>

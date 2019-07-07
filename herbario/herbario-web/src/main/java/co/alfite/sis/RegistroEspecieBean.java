@@ -1,13 +1,9 @@
 package co.alfite.sis;
 
-import java.awt.Graphics2D;
 
-import java.awt.image.BufferedImage;
+
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
+
 import java.util.Date;
 import java.util.List;
 
@@ -16,9 +12,6 @@ import javax.ejb.EJB;
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.annotation.FacesConfig;
 import javax.faces.annotation.ManagedProperty;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-import javax.imageio.ImageIO;
 import javax.faces.annotation.FacesConfig.Version;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -28,18 +21,17 @@ import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 
-import com.sun.prism.RectShadowGraphics;
 
 import co.alfite.sis.ejb.AdministradorEJB;
 import co.alfite.sis.entidades.EspeciePlanta;
 import co.alfite.sis.entidades.ImagenPlanta;
+import co.alfite.sis.entidades.Persona;
 import co.alfite.sis.entidades.Trabajador;
-import co.alfite.sis.util.Util;
 import co.alfite.sis.entidades.RegistroEspecie;
 import co.alfite.sis.entidades.RegistroEspecie.Estado;
 
 @FacesConfig(version = Version.JSF_2_3)
-@Named("registroBean")
+@Named("registroEspecieBean")
 @ApplicationScoped
 public class RegistroEspecieBean {
 
@@ -60,22 +52,15 @@ public class RegistroEspecieBean {
 
 	private UploadedFile img;
 
-	private StreamedContent graphicImage;
-
+	private StreamedContent graphicImage;	
 	private List<RegistroEspecie> registros;
-	private List<EspeciePlanta> plantas;
-	private List<Trabajador> trabajadores;
 
 	@EJB
 	private AdministradorEJB admiEJB;
 
-	public RegistroEspecieBean() {
-
-	}
-
 	@PostConstruct
 	private void init() {
-		registros = admiEJB.listarRegistros();
+		registros = admiEJB.listarRegistrosRecolector(trabajador.getIdPersona());
 	
 	}
 
@@ -85,13 +70,21 @@ public class RegistroEspecieBean {
 
 		registroEspecie = new RegistroEspecie();
 
-		registroEspecie.setEstado(estado.enviado);
+		registroEspecie.setEstado(Estado.enviado);
 		registroEspecie.setFecha(new Date());
-		// registroEspecie.setImagen(imagen);
+		
+		ImagenPlanta im=new ImagenPlanta();
+		im.setImagen(img.getContents());
+		im.setRegistro(registroEspecie);
+		registroEspecie.setImagen(im);
 		registroEspecie.setNombreEspecie(nombreEspecie);
 		registroEspecie.setNombreFamilia(nombreFamilia);
 		registroEspecie.setNombreGenero(nombreGenero);
+		
+		registroEspecie.setTrabajador(trabajador);
+		admiEJB.insertarRegistro(registroEspecie);
 
+		System.out.println("res");
 		// debe quedas asi
 		// la persistencia se hace desde el rol solicitante
 	}
@@ -228,6 +221,20 @@ public class RegistroEspecieBean {
 	 */
 	public void setGraphicImage(StreamedContent graphicImage) {
 		this.graphicImage = graphicImage;
+	}
+
+	/**
+	 * @return the registros
+	 */
+	public List<RegistroEspecie> getRegistros() {
+		return registros;
+	}
+
+	/**
+	 * @param registros the registros to set
+	 */
+	public void setRegistros(List<RegistroEspecie> registros) {
+		this.registros = registros;
 	}
 
 }

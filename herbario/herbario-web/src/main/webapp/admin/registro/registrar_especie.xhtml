@@ -10,43 +10,44 @@
 <ui:composition template="/WEB-INF/template.xhtml">
 
 	<ui:define name="contenido">
-		
+
 		<h:form>
 			<p:panelGrid columns="2">
 				<f:facet name="header">Crear Registro</f:facet>
 
 				<p:outputLabel value="Nombre de la Especie" />
-				<p:inputText value="#{registroBean.nombreEspecie}" />
+				<p:inputText value="#{registroEspecieBean.nombreEspecie}" />
 
 				<p:outputLabel value="Nombre de la familia a la que pertenece:" />
-				<p:inputText value="#{registroBean.nombreFamilia}" />
+				<p:inputText value="#{registroEspecieBean.nombreFamilia}" />
 				<p:outputLabel value="Nombre del genero al que pertenece:" />
 
-				<p:inputText value="#{registroBean.nombreGenero}" />
+				<p:inputText value="#{registroEspecieBean.nombreGenero}" />
 				<p:outputLabel value="Debe adjuntar Una imagen a continuacion" />
 
-				<h:form >
+				<h:form>
 					<p:growl id="messages" showDetail="true" />
 
-					<p:fileUpload fileUploadListener="#{registroBean.handleFileUpload}" mode="advanced" dragDropSupport="false"
-					
-						update="messages"  sizeLimit="100000" fileLimit="3" allowTypes="/(\.|\/)(gif|jpe?|png)$/"/>
+					<p:fileUpload
+						fileUploadListener="#{registroEspecieBean.handleFileUpload}"
+						mode="advanced" dragDropSupport="false" update="messages"
+						sizeLimit="1000000000" fileLimit="3"
+						allowTypes="/(\.|\/)(gif|jpe?|png|jpg)$/" />
 
 					<br />
 					<br />
 
-					<p:commandButton value="Subir Imagen" ajax="false"
-						action="#{registroBean.upload}" />
 				</h:form>
 
-				<p:outputLabel value=""/> 
-				<h:form >
-				<p:graphicImage value="#{registroBean.graphicImage}"  width="100" height="100" stream="false"/>
-				</h:form>
+				<p:outputLabel value="" />
+				
 
-				<p:commandButton action="/index" value="atras" />
-				<p:commandButton action="#{gestionPersonaBean.registrarPersona}"
-					value="Enviar registro" />
+				<f:facet name="footer">
+					<p:commandButton action="/index" value="atras"  ajax="false"/>
+				<p:commandButton action="#{registroEspecieBean.nuevoRegistro}"
+					value="Enviar registro" ajax="false" />
+				</f:facet>
+				
 			</p:panelGrid>
 		</h:form>
 	</ui:define>

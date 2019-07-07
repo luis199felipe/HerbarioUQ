@@ -21,11 +21,11 @@
 					<center>
 			<h:form>
 				<br></br>
-			<p:panelGrid columns="2" border="1" rendered="#{recolectorBean.flagSelectorF}">
+			<p:panelGrid columns="2" border="1">
 				
-				<p:selectOneMenu value="#{recolectorBean.familiaTemp}"  converter="selectItemObjectConverter" effect="fade" filter="true" filterMatchMode="startsWith">
+				<p:selectOneMenu value="#{especieBean.generoTemp}"  converter="selectItemObjectConverter" effect="fade" filter="true" filterMatchMode="startsWith">
 					<f:selectItem itemLabel="Seleccione una familia" noSelectionOption="true"/>
-					<f:selectItems value="#{generoBean.familias}"/>
+					<f:selectItems value="#{familiaBean.familias}"/>
 				</p:selectOneMenu>
 				<p:commandButton action="#{recolectorBean.listarRegistros(2)}" value="Filtrar" ajax="false"/>		
 			</p:panelGrid>
