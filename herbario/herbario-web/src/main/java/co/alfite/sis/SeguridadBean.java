@@ -39,8 +39,12 @@ public class SeguridadBean implements Serializable {
 	 * dice si la persona inicio sesion o no
 	 */
 	private boolean autenticado;
+	
+	private boolean flagRecolector;
 	@EJB
 	private AdministradorEJB adminEJB;
+
+	private boolean flagEmpleado;
 
 	/**
 	 * inicializa la informacion base
@@ -63,11 +67,12 @@ public class SeguridadBean implements Serializable {
 			String user = persona.getClass().getSimpleName();
 
 			switch (user) {
-			case "Administrador":
-				return "admin/contenido_administrador";
+	
 			case "Empleado":
+				setFlagEmpleado(true);
 				return "admin/contenido_empleado";
 			case "Recolector":
+				flagRecolector=true;
 				return "admin/contenido_recolector";
 
 			default:
@@ -128,6 +133,28 @@ public class SeguridadBean implements Serializable {
 
 	public void setAutenticado(boolean autenticado) {
 		this.autenticado = autenticado;
+	}
+
+	/**
+	 * @return the flagRecolector
+	 */
+	public boolean isFlagRecolector() {
+		return flagRecolector;
+	}
+
+	/**
+	 * @param flagRecolector the flagRecolector to set
+	 */
+	public void setFlagRecolector(boolean flagRecolector) {
+		this.flagRecolector = flagRecolector;
+	}
+
+	public boolean isFlagEmpleado() {
+		return flagEmpleado;
+	}
+
+	public void setFlagEmpleado(boolean flagEmpleado) {
+		this.flagEmpleado = flagEmpleado;
 	}
 
 }

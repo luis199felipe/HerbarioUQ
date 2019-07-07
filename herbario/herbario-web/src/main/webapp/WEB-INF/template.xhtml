@@ -8,17 +8,13 @@
 
 <h:head>
 	<title>Herbario UQ</title>
-	<link rel="icon" href="resources/favicon.ico"></link>	
 </h:head>
 <h:body>
 	<div align="center">
-	
-	<ui:insert name="logo">
-		<div >
+		<div>
 			<p:graphicImage value="#{resource['herbariumheader.jpg']}"
-				stream="false" />
+				rendered="#{!seguridadBean.autenticado}" stream="false" />
 		</div>
-		</ui:insert>
 		<h:panelGroup rendered="#{!seguridadBean.autenticado}">
 			<ui:insert name="login">
 				<h:form>
@@ -40,11 +36,11 @@
 
 							<p:tooltip />
 
-						<h:form>
+							<h:form>
 								<p:messages id="messages" showDetail="true" closable="true">
 									<p:autoUpdate />
 								</p:messages>
-								</h:form>
+							</h:form>
 						</f:facet>
 
 					</p:panelGrid>
@@ -52,39 +48,65 @@
 				<p:growl id="growl" life="2" />
 			</ui:insert>
 		</h:panelGroup>
-		
+
 		<h:panelGroup rendered="#{seguridadBean.autenticado}">
 			<ui:insert name="menu">
 				<h:form>
-					<p:menubar>
-						<f:facet name="options">
-							<p:commandButton value="Inicio" action="/index" ajax="false" />
+					<p:menubar style="background:transparent">
+						<f:facet name="options" >
+							<p:menuButton value="#{seguridadBean.persona.nombre}" >
+								<p:menuitem value="Actualizar Informacion"  />
+								<p:menuitem value="Cerrar Sesion"  action="#{seguridadBean.cerrarSesion}" />
+							</p:menuButton>
+
 						</f:facet>
-						<p:submenu label="Empleado">
-						</p:submenu>
-						<p:submenu label="Cliente">
-						</p:submenu>
-						<p:submenu label="Especies">
-							<p:menuitem value="Familias" action="/admin/familia/familias"
-								ajax="false" />
-							<p:menuitem value="Registrar familia"
-								action="/admin/familia/registrar_familia" ajax="false" />
-							<p:menuitem value="Generos" action="/admin/genero/generos"
-								ajax="false" />
-							<p:menuitem value="Registrar generos"
-								action="/admin/genero/registrar_genero" ajax="false" />
-								<p:menuitem value="Nuevo Registro de Especie"
+						<p:submenu label="Recolector" rendered="#{!seguridadBean.flagRecolector}">
+						<p:menuitem value="Listar recolectores"
 								action="/admin/registro_especie" ajax="false" />
 						</p:submenu>
-						<p:menuitem value="Cerrar sesión" ajax="false"
-							action="#{seguridadBean.cerrarSesion}" />
+						
+		
+						<p:submenu label="Registros">
+						
+						<p:menuitem value="Crear Registro"
+								action="/admin/registro/registrar_especie" ajax="false" />
+								
+								
+						</p:submenu>
+						<p:submenu label="Familias" rendered="#{!seguridadBean.flagRecolector}">
+							<p:menuitem value="Familias" action="/admin/familia/familias"
+								ajax="false" />
+						</p:submenu>
+							<p:submenu label="Generos" rendered="#{!seguridadBean.flagRecolector}">
+							<p:menuitem value="Lista de Generos" action="/admin/genero/generos"
+								ajax="false" />
+								<p:menuitem value="Registrar generos"
+								action="/admin/genero/registrar_genero" ajax="false" />
+						</p:submenu>
+						
+							<p:submenu label="Especie">
+							<p:menuitem value="Lista de Especies" action="/admin/especie/especies"
+								ajax="false" />
+								<p:menuitem  value="Lista de Especies aceptadas" rendered="#{seguridadBean.flagRecolector}"
+								action="/admin/registro_especie" ajax="false" />
+									<p:menuitem value="Lista de Especies Enviadas" rendered="#{seguridadBean.flagRecolector}"
+								action="/admin/registro_especie" ajax="false" />
+									<p:menuitem value="Lista de Especies Aceptadas Por genero" rendered="#{seguridadBean.flagRecolector}"
+								action="/admin/registro_especie" ajax="false" />
+									<p:menuitem value="Lista de Especies Aceptadas Por Familia" rendered="#{seguridadBean.flagRecolector}"
+								action="/admin/registro_especie" ajax="false" />
+								
+						</p:submenu>
 					</p:menubar>
-					<ui:insert name="contenido" />
+
 				</h:form>
 			</ui:insert>
-			
+
 		</h:panelGroup>
-		
+
+         <br />
+		<ui:insert name="contenido" />
+
 	</div>
 </h:body>
 </html>
