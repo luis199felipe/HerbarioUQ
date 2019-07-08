@@ -181,4 +181,14 @@ public class UsuarioEJB implements UsuarioEJBRemote {
 		query.setParameter("esp", id);
 		return query.getResultList();
 	}
+
+	@Override
+	public List<byte[]> obtenerListaImagenesByte() {
+		
+		TypedQuery<byte[]> query = entityManager
+				.createNamedQuery(ImagenPlanta.IMAGENES_BYTE, byte[].class);
+
+		return query.getResultList();
+	
+	}
 }

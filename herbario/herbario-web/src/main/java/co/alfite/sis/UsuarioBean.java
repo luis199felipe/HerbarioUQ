@@ -1,5 +1,7 @@
 package co.alfite.sis;
 
+import java.io.ByteArrayInputStream;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -8,12 +10,18 @@ import javax.ejb.EJB;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.annotation.FacesConfig;
+import javax.faces.annotation.ManagedProperty;
 import javax.faces.annotation.FacesConfig.Version;
+import javax.inject.Inject;
 import javax.inject.Named;
+
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
 import co.alfite.sis.ejb.UsuarioEJB;
 import co.alfite.sis.entidades.ImagenPlanta;
 import co.alfite.sis.entidades.MeGustaEspeciePlanta;
+import co.alfite.sis.entidades.Persona;
 import co.alfite.sis.entidades.Resenia;
 import co.alfite.sis.entidades.Resenia.Estado;
 import co.alfite.sis.entidades.Usuario;
@@ -35,25 +43,44 @@ public class UsuarioBean {
 	 * lista de imagenes
 	 */
 	List<ImagenPlanta> imagenes;
+	List<byte[]> imagenes1;
+	List<StreamedContent> imagenes2;
 	@EJB
 	UsuarioEJB usuarioEJB;
 
 	/**
 	 * Usuario en sesion
 	 */
-	Usuario usuario;
+	@Inject
+	@ManagedProperty(value = "#{seguridadBean.persona}")
+	Persona usuario;
 	private String textoResenia;
 	private ImagenPlanta imagen;
 
+	private StreamedContent img;
 	public UsuarioBean() {
 		// TODO Auto-generated constructor stub
 	}
 
 	@PostConstruct
 	private void init() {
+		
+		
 		mislikes = usuarioEJB.obtenerListaMeGusta(usuario.getIdPersona());
 		imagenes = usuarioEJB.obtenerListaImagenes();
 		imagenesMasGustadas = usuarioEJB.obtenerListaImagenesOrdenadasPorLikes();
+
+		imagenes1=usuarioEJB.obtenerListaImagenesByte();
+		
+		
+		
+		img=new DefaultStreamedContent(new ByteArrayInputStream(imagenes1.get(0)), "image/png");
+	imagenes2=new ArrayList<>();
+	
+	for (int i = 0; i <imagenes1.size(); i++) {
+		
+		imagenes2.add(new DefaultStreamedContent(new ByteArrayInputStream(imagenes1.get(i)), "image/png"));
+	}
 
 		// likes de un a imagen y reseniasd de una imagem
 	}
@@ -64,7 +91,7 @@ public class UsuarioBean {
 	public void insertarLike() {
 		MeGustaEspeciePlanta nuevoLike = new MeGustaEspeciePlanta();
 		nuevoLike.setFecha(new Date());
-		nuevoLike.setUsuario(usuario);
+		//nuevoLike.setUsuario(usuario);
 		nuevoLike.setImagen(imagen);
 		usuarioEJB.insertarMegusta(nuevoLike);
 		imagenes = usuarioEJB.obtenerListaImagenes();
@@ -81,7 +108,7 @@ public class UsuarioBean {
 
 		nuevaResenia.setTexto(this.textoResenia);
 		nuevaResenia.setImagen(imagen);
-		nuevaResenia.setUsuario(usuario);
+		//nuevaResenia.setUsuario(usuario);
 		nuevaResenia.setEstado(Estado.aprobado);
 		usuarioEJB.insertarResenia(nuevaResenia);
 
@@ -145,13 +172,6 @@ public class UsuarioBean {
 		this.usuarioEJB = usuarioEJB;
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
-	public Usuario getUsuario() {
-		return usuario;
-	}
 
 	/**
 	 * 
@@ -190,6 +210,76 @@ public class UsuarioBean {
 
 	public void setImagen(ImagenPlanta imagen) {
 		this.imagen = imagen;
+	}
+
+	/**
+	 * @return the imagenes
+	 */
+	public List<ImagenPlanta> getImagenes() {
+		return imagenes;
+	}
+
+	/**
+	 * @param imagenes the imagenes to set
+	 */
+	public void setImagenes(List<ImagenPlanta> imagenes) {
+		this.imagenes = imagenes;
+	}
+
+	/**
+	 * @return the usuario
+	 */
+	public Persona getUsuario() {
+		return usuario;
+	}
+
+	/**
+	 * @param usuario the usuario to set
+	 */
+	public void setUsuario(Persona usuario) {
+		this.usuario = usuario;
+	}
+
+	/**
+	 * @return the imagenes1
+	 */
+	public List<byte[]> getImagenes1() {
+		return imagenes1;
+	}
+
+	/**
+	 * @param imagenes1 the imagenes1 to set
+	 */
+	public void setImagenes1(List<byte[]> imagenes1) {
+		this.imagenes1 = imagenes1;
+	}
+
+	/**
+	 * @return the imagenes2
+	 */
+	public List<StreamedContent> getImagenes2() {
+		return imagenes2;
+	}
+
+	/**
+	 * @param imagenes2 the imagenes2 to set
+	 */
+	public void setImagenes2(List<StreamedContent> imagenes2) {
+		this.imagenes2 = imagenes2;
+	}
+
+	/**
+	 * @return the img
+	 */
+	public StreamedContent getImg() {
+		return img;
+	}
+
+	/**
+	 * @param img the img to set
+	 */
+	public void setImg(StreamedContent img) {
+		this.img = img;
 	}
 
 }

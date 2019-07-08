@@ -34,4 +34,12 @@ public class Recolector extends Trabajador implements Serializable {
 		super();
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return getNombre();
+	}
+
 }

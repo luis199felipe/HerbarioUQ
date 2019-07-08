@@ -8,13 +8,16 @@ import javax.ejb.EJB;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.annotation.FacesConfig;
+import javax.faces.annotation.ManagedProperty;
 import javax.faces.annotation.FacesConfig.Version;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import co.alfite.sis.ejb.AdministradorEJB;
 import co.alfite.sis.entidades.Empleado;
 import co.alfite.sis.entidades.Persona;
 import co.alfite.sis.entidades.Recolector;
+import co.alfite.sis.entidades.Usuario;
 import co.alfite.sis.excepciones.ElementoRepetidoExcepcion;
 import co.alfite.sis.util.Util;
 
@@ -56,11 +59,17 @@ public class GestionPersonaBean implements Serializable {
 	private String email;
 
 	private boolean flag;
-	
-	
+	private boolean flagEditar;
+
 	private String tipo;
+
+	private Persona personaEditar;
 	@EJB
 	private AdministradorEJB trabajadorEJB;
+
+	@Inject
+	@ManagedProperty(value = "#{seguridadBean.persona}")
+	private Persona personaEnSesionEdit;
 
 	/**
 	 * 
@@ -71,27 +80,114 @@ public class GestionPersonaBean implements Serializable {
 	@PostConstruct
 	public void init() {
 		flag = false;
+		flagEditar = false;
+		personaEditar = new Persona();
 	}
 
 	public String registrarPersona() {
 
-	
-
+		flagEditar=false;
+		
 		System.out.println("Registra");
 
 		try {
 			switch (tipo) {
 			case "empleado":
 				Empleado e = new Empleado();
-				e.setNombre(nombre);
-				e.setEmail(email);
-				e.setPassword(password);
-				e.setTelefono(telefono);
+				e.setNombre(personaEditar.getNombre());
+				e.setEmail(personaEditar.getEmail());
+				e.setPassword(personaEditar.getPassword());
+				e.setTelefono(personaEditar.getTelefono());
 				e.setEstado(co.alfite.sis.entidades.Persona.Estado.activo);
-				e.setFechaNacimiento(fechaNacimiento);
-				e.setIdPersona(idPersona);
+				e.setFechaNacimiento(personaEditar.getFechaNacimiento());
+				e.setIdPersona(personaEditar.getIdPersona());
 
 				trabajadorEJB.insertarEmpleado(e);
+
+				break;
+			case "recolector":
+
+				Recolector r = new Recolector();
+				r.setNombre(personaEditar.getNombre());
+				r.setEmail(personaEditar.getEmail());
+				r.setPassword(personaEditar.getPassword());
+				r.setTelefono(personaEditar.getTelefono());
+				r.setEstado(co.alfite.sis.entidades.Persona.Estado.activo);
+				r.setFechaNacimiento(personaEditar.getFechaNacimiento());
+				r.setIdPersona(personaEditar.getIdPersona());
+
+				trabajadorEJB.insertarRecolector(r);
+
+				break;
+				
+			case "usuario":
+
+				Usuario u = new Usuario();
+				u.setNombre(personaEditar.getNombre());
+				u.setEmail(personaEditar.getEmail());
+				u.setPassword(personaEditar.getPassword());
+				u.setTelefono(personaEditar.getTelefono());
+				u.setEstado(co.alfite.sis.entidades.Persona.Estado.activo);
+				u.setFechaNacimiento(personaEditar.getFechaNacimiento());
+				u.setIdPersona(personaEditar.getIdPersona());
+
+				trabajadorEJB.insertarUsuario(u);
+
+				break;
+
+			default:
+				break;
+			}
+
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			
+		}
+		Util.mostrarMensaje("Bienvenido al herbario de la universidad del Quindio", "Exito");
+
+		return "/index?faces-redirect=true";
+
+	}
+
+	public String editar() {
+		flagEditar = true;
+		nombre = personaEditar.getNombre();
+		idPersona = personaEditar.getIdPersona();
+		email = personaEditar.getEmail();
+		password = personaEditar.getPassword();
+		fechaNacimiento = personaEditar.getFechaNacimiento();
+		this.tipo = personaEditar.getClass().getSimpleName().toLowerCase();
+		telefono = personaEditar.getTelefono();
+
+		return "/admin/persona/registrar_persona";
+	}
+
+	public String editarPersonaEnSesion() {
+		personaEditar = personaEnSesionEdit;
+
+		return editar();
+	}
+
+
+
+	public String actualizarDatos() {
+
+		try {
+
+			Persona p = trabajadorEJB.buscarPersona(idPersona);
+			System.out.println(p.getClass().getSimpleName().toLowerCase() + "$#$#$#$");
+			switch (p.getClass().getSimpleName().toLowerCase()) {
+			case "empleado":
+				Empleado e = new Empleado();
+				e.setNombre(personaEditar.getNombre());
+				e.setEmail(personaEditar.getEmail());
+				e.setPassword(personaEditar.getPassword());
+				e.setTelefono(personaEditar.getTelefono());
+				e.setEstado(co.alfite.sis.entidades.Persona.Estado.activo);
+				e.setFechaNacimiento(personaEditar.getFechaNacimiento());
+				e.setIdPersona(personaEditar.getIdPersona());
+
+				trabajadorEJB.actualizarEmpleado(e);
 
 				break;
 			case "recolector":
@@ -104,7 +200,8 @@ public class GestionPersonaBean implements Serializable {
 				r.setEstado(co.alfite.sis.entidades.Persona.Estado.activo);
 				r.setFechaNacimiento(fechaNacimiento);
 				r.setIdPersona(idPersona);
-				trabajadorEJB.insertarRecolector(r);
+
+				System.out.println(trabajadorEJB.actualizarRecolector(r));
 
 				break;
 
@@ -113,45 +210,11 @@ public class GestionPersonaBean implements Serializable {
 			}
 
 		} catch (Exception e1) {
-			System.err.println(e1.getMessage());
+			e1.printStackTrace();
 			Util.mostrarMensaje("No se pudo hacer el registro", "Error");
 		}
-		Util.mostrarMensaje("Bienvenido al herbario de la universidad del Quindio", "Exito");
-		
+
 		return "/index?faces-redirect=true";
-
-	}
-
-	public void prueba() {
-		flag = true;
-		System.out.println("prueba");
-	}
-
-	public void eliminarPersona(int tipo) {
-
-		// se deben limpiar todos los atributos de la clase antas de esto
-		try {
-			switch (tipo) {
-			case 0:
-
-				// porbando la teoria d que solo compara por llave primaria para eliminar
-				Empleado x = new Empleado();
-				x.setIdPersona(idPersona);
-				trabajadorEJB.inactivarEmpleado(x);
-				break;
-			case 1:
-
-				Recolector r = new Recolector();
-				r.setIdPersona(idPersona);
-				trabajadorEJB.inactivarRecolector(r);
-				break;
-
-			default:
-				break;
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
 
 	}
 
@@ -253,5 +316,35 @@ public class GestionPersonaBean implements Serializable {
 
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
+	}
+
+	public Persona getPersonaEditar() {
+		return personaEditar;
+	}
+
+	public void setPersonaEditar(Persona personaEditar) {
+		this.personaEditar = personaEditar;
+	}
+
+	public boolean isFlagEditar() {
+		return flagEditar;
+	}
+
+	public void setFlagEditar(boolean flagEditar) {
+		this.flagEditar = flagEditar;
+	}
+
+	/**
+	 * @return the personaEnSesionEdit
+	 */
+	public Persona getPersonaEnSesionEdit() {
+		return personaEnSesionEdit;
+	}
+
+	/**
+	 * @param personaEnSesionEdit the personaEnSesionEdit to set
+	 */
+	public void setPersonaEnSesionEdit(Persona personaEnSesionEdit) {
+		this.personaEnSesionEdit = personaEnSesionEdit;
 	}
 }

@@ -27,6 +27,7 @@ public interface UsuarioEJBRemote {
 	MeGustaEspeciePlanta insertarMegusta(MeGustaEspeciePlanta meGusta);
 
 	List<ImagenPlanta> obtenerListaImagenes();
+	List<byte[]> obtenerListaImagenesByte();
 
 	List<Resenia> obtenerListaResenias(String id);
 

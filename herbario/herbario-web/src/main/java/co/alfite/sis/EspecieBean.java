@@ -1,5 +1,7 @@
 package co.alfite.sis;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -31,6 +33,14 @@ public class EspecieBean {
 
 	private List<RegistroEspecie> registrosAceptadosDeRecolectorF;
 	private List<RegistroEspecie> registrosAceptadosDeRecolectorG;
+	
+	private List<EspeciePlanta> especiesPorFamilia;
+	private List<EspeciePlanta> especiesPorGenero;
+	
+	
+	private List<EspeciePlanta>allEspecies;
+	
+
 
 	private EspeciePlanta especie;
 
@@ -48,11 +58,12 @@ public class EspecieBean {
 	public void init() {
 		especies = bean.listarEspecies();
 		especiesAceptadas = bean.listarEspeciesPorEstado(co.alfite.sis.entidades.RegistroEspecie.Estado.aprobado);
-		especiesRechazadas = bean.listarEspeciesPorEstado(co.alfite.sis.entidades.RegistroEspecie.Estado.aprobado);
-
+		especiesRechazadas = bean.listarEspeciesPorEstado(co.alfite.sis.entidades.RegistroEspecie.Estado.rechazado);
+		
 		registrosAceptadosDeRecolector = bean.listarRegistrosRecolector(personaEnSesion.getIdPersona());
 
 	}
+	
 
 	public void filtrarPorFamilia() {
 		 registrosAceptadosDeRecolectorF=bean.listarRegistrosRecolectorAF(personaEnSesion.getIdPersona(),
@@ -62,6 +73,16 @@ public class EspecieBean {
 	public void filtrarPorGenero() {
 		registrosAceptadosDeRecolectorG = bean.listarRegistrosRecolectorAG(personaEnSesion.getIdPersona(),
 				generoTemp.getIdGenero() + "");
+
+	}
+	
+	public void filtrarAllPorFamilia() {
+		 especiesPorFamilia=bean.listarEspeciesPorFamilia(familiaTemp.getNombre());
+
+	}
+	public void filtrarAllPorGenero() {
+		
+		especiesPorGenero=bean.listarEspeciesPorGenero(generoTemp.getNombre());
 
 	}
 
@@ -214,6 +235,54 @@ public class EspecieBean {
 	 */
 	public void setGeneroTemp(GeneroPlanta generoTemp) {
 		this.generoTemp = generoTemp;
+	}
+
+
+	/**
+	 * @return the especiesPorFamilia
+	 */
+	public List<EspeciePlanta> getEspeciesPorFamilia() {
+		return especiesPorFamilia;
+	}
+
+
+	/**
+	 * @param especiesPorFamilia the especiesPorFamilia to set
+	 */
+	public void setEspeciesPorFamilia(List<EspeciePlanta> especiesPorFamilia) {
+		this.especiesPorFamilia = especiesPorFamilia;
+	}
+
+
+	/**
+	 * @return the especiesPorGenero
+	 */
+	public List<EspeciePlanta> getEspeciesPorGenero() {
+		return especiesPorGenero;
+	}
+
+
+	/**
+	 * @param especiesPorGenero the especiesPorGenero to set
+	 */
+	public void setEspeciesPorGenero(List<EspeciePlanta> especiesPorGenero) {
+		this.especiesPorGenero = especiesPorGenero;
+	}
+
+
+	/**
+	 * @return the allEspecies
+	 */
+	public List<EspeciePlanta> getAllEspecies() {
+		return allEspecies;
+	}
+
+
+	/**
+	 * @param allEspecies the allEspecies to set
+	 */
+	public void setAllEspecies(List<EspeciePlanta> allEspecies) {
+		this.allEspecies = allEspecies;
 	}
 
 }

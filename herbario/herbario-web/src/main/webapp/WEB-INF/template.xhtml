@@ -32,7 +32,7 @@
 							<p:commandButton value="Aceptar"
 								action="#{seguridadBean.iniciarSesion}" ajax="false" />
 							<p:commandButton value="recuperar contraseña"
-								action="#{seguridadBean.recuperarContrasenia}" ajax="false" />
+								action="#{seguridadBean.recuperarClave}" ajax="false" />
 
 							<p:tooltip />
 
@@ -55,14 +55,14 @@
 					<p:menubar style="background:transparent">
 						<f:facet name="options" >
 							<p:menuButton value="#{seguridadBean.persona.nombre}" >
-								<p:menuitem value="Actualizar Informacion"  />
+								<p:menuitem value="Actualizar Informacion"  rendered="#{seguridadBean.flagRecolector}" action="#{gestionPersonaBean.editarPersonaEnSesion}" />
 								<p:menuitem value="Cerrar Sesion"  action="#{seguridadBean.cerrarSesion}" />
 							</p:menuButton>
 
 						</f:facet>
 						<p:submenu label="Recolector" rendered="#{!seguridadBean.flagRecolector}">
 						<p:menuitem value="Listar recolectores"
-								action="/admin/registro_especie" ajax="false" />
+								action="/admin/persona/recolectores" ajax="false" />
 						</p:submenu>
 						
 		
@@ -96,6 +96,14 @@
 									<p:menuitem value="Lista de Especies Aceptadas Por Familia" rendered="#{seguridadBean.flagRecolector}"
 								action="/admin/especie/especies_recolectorAF" ajax="false" />
 								
+								<p:menuitem value="Lista de Especies por Familia" rendered="#{!seguridadBean.flagRecolector}"
+								action="/admin/especie/especies_por_familia" ajax="false" />
+								<p:menuitem value="Lista de Especies por Genero" rendered="#{!seguridadBean.flagRecolector}"
+								action="/admin/especie/especies_por_genero" ajax="false" />
+								
+								<p:menuitem value="Lista de Especies Rechazadas" rendered="#{!seguridadBean.flagRecolector}"
+								action="/admin/especie/especies_rechazadas" ajax="false" />
+								
 						</p:submenu>
 					</p:menubar>
 
@@ -108,5 +116,8 @@
 		<ui:insert name="contenido" />
 
 	</div>
+		<f:event type="preRenderView" listener="#{facesContext.externalContext.response.setHeader('Cache-Control', 'no-cache, no-store')}" />
+
+	
 </h:body>
 </html>

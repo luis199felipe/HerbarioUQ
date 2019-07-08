@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/WEB-INF/template.xhtml">
+
+	<ui:define name="contenido">
+		<h:form id="recolectorForm">
+
+			<p:fieldset id="recolectres"
+				legend="Informacion Y Gestion de Recolectores">
+				<p:dataTable id="listaRecolectores" var="re"
+					value="#{recolectorBean.listaRecolectores}">
+
+					<p:column headerText="Id">
+						<h:outputText value="#{re.idPersona}" />
+					</p:column>
+
+					<p:column headerText="Nombre">
+						<h:outputText value="#{re.nombre}" />
+					</p:column>
+
+					<p:column headerText="Email">
+						<h:outputText value="#{re.email}" />
+					</p:column>
+					
+					<p:column headerText="Telefono">
+						<h:outputText value="#{re.telefono}" />
+					</p:column>
+					
+					
+					<p:column headerText="Estado">
+						<h:outputText value="#{re.estado}" />
+					</p:column>
+					<p:column style="width:100px" headerText="Editar/Eliminar">
+						<p:commandButton update=":recolectorForm:display"
+							oncomplete="PF('reDialog').show()" icon="pi pi-search">
+							<f:setPropertyActionListener value="#{re}"
+								target="#{recolectorBean.recolector}"/>
+						</p:commandButton>
+					</p:column>
+
+				</p:dataTable>
+			</p:fieldset>
+
+
+			<p:dialog header="Gestion del recolector" widgetVar="reDialog"
+				resizable="false" draggable="false" showEffect="fade"
+				hideEffect="fade" modal="true" >
+				<p:outputPanel id="display">
+					<h:panelGrid columns="2" cellpadding="4"
+						rendered="#{not empty recolectorBean.recolector}">
+						<h:outputText value="gestione" />
+						
+				
+				<p:selectOneMenu value="#{gestionPersonaBean.personaEditar}" converter="selectItemObjectConverter" effect="fade" filter="true" filterMatchMode="startsWith">
+					
+					<f:selectItems value="#{recolectorBean.listaRecolectores}"/>
+					<f:selectItem itemValue="#{recolectorBean.recolector}"/>
+				</p:selectOneMenu>
+		             <f:facet name="footer">
+							<p:commandButton value="Eliminar"  action="#" />
+							<p:commandButton value="Actualizar"  action="#{gestionPersonaBean.editar}"/>							
+						</f:facet>   
+		              
+
+					</h:panelGrid>
+				</p:outputPanel>
+			</p:dialog>
+
+		</h:form>
+	</ui:define>
+
+</ui:composition>
+</html>

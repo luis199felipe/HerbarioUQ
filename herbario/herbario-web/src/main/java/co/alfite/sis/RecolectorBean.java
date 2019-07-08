@@ -17,6 +17,7 @@ import co.alfite.sis.entidades.Administrador;
 import co.alfite.sis.entidades.EspeciePlanta;
 import co.alfite.sis.entidades.FamiliaPlanta;
 import co.alfite.sis.entidades.GeneroPlanta;
+import co.alfite.sis.entidades.Persona;
 import co.alfite.sis.entidades.Recolector;
 import co.alfite.sis.entidades.RegistroEspecie;
 import co.alfite.sis.entidades.RegistroEspecie.Estado;
@@ -30,7 +31,7 @@ public class RecolectorBean {
 
 	@Inject
 	@ManagedProperty(value = "#{seguridadBean.persona}")
-	private Recolector recolector;
+	private Persona recolector;
 
 	// duda con el registro, siemre que la instancia cambie en registro bean
 	// cambiara aaqui tambien?
@@ -65,6 +66,8 @@ public class RecolectorBean {
 	private List<RegistroEspecie> misRegistrosAceptadosG;
 
 	private List<RegistroEspecie> misRegistrosAceptadosF;
+	
+	private  List<Recolector>listaRecolectores;
 
 	@PostConstruct
 	public void init() {
@@ -83,6 +86,8 @@ public class RecolectorBean {
 		familiaTemp.setIdFamilia(-1);
 		generoTemp = new GeneroPlanta();
 		generoTemp.setIdGenero(-1);
+		
+		listaRecolectores=trabajadorEJB.listarRecolectores();
 
 	}
 
@@ -154,14 +159,7 @@ public class RecolectorBean {
 		return "/admin/registro_especie";
 	}
 
-	/**
-	 * /**
-	 * 
-	 * @return the recolector
-	 */
-	public Recolector getRecolector() {
-		return recolector;
-	}
+	
 
 	/**
 	 * @param recolector the recolector to set
@@ -398,6 +396,34 @@ public class RecolectorBean {
 	 */
 	public void setGeneroTemp(GeneroPlanta generoTemp) {
 		this.generoTemp = generoTemp;
+	}
+
+	/**
+	 * @return the listaRecolectores
+	 */
+	public List<Recolector> getListaRecolectores() {
+		return listaRecolectores;
+	}
+
+	/**
+	 * @param listaRecolectores the listaRecolectores to set
+	 */
+	public void setListaRecolectores(List<Recolector> listaRecolectores) {
+		this.listaRecolectores = listaRecolectores;
+	}
+
+	/**
+	 * @return the recolector
+	 */
+	public Persona getRecolector() {
+		return recolector;
+	}
+
+	/**
+	 * @param recolector the recolector to set
+	 */
+	public void setRecolector(Persona recolector) {
+		this.recolector = recolector;
 	}
 
 }
