@@ -1,7 +1,5 @@
 package co.alfite.sis;
 
-
-
 import java.io.ByteArrayInputStream;
 
 import java.util.Date;
@@ -20,7 +18,6 @@ import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
-
 
 import co.alfite.sis.ejb.AdministradorEJB;
 import co.alfite.sis.entidades.EspeciePlanta;
@@ -52,7 +49,7 @@ public class RegistroEspecieBean {
 
 	private UploadedFile img;
 
-	private StreamedContent graphicImage;	
+	private StreamedContent graphicImage;
 	private List<RegistroEspecie> registros;
 
 	@EJB
@@ -61,50 +58,43 @@ public class RegistroEspecieBean {
 	@PostConstruct
 	private void init() {
 		registros = admiEJB.listarRegistrosRecolector(trabajador.getIdPersona());
-	
+
 	}
 
 	public void nuevoRegistro() {
 
 		registroEspecie = null;
-
 		registroEspecie = new RegistroEspecie();
-
 		registroEspecie.setEstado(Estado.enviado);
 		registroEspecie.setFecha(new Date());
-		
-		ImagenPlanta im=new ImagenPlanta();
+
+		ImagenPlanta im = new ImagenPlanta();
 		im.setImagen(img.getContents());
 		im.setRegistro(registroEspecie);
 		registroEspecie.setImagen(im);
 		registroEspecie.setNombreEspecie(nombreEspecie);
 		registroEspecie.setNombreFamilia(nombreFamilia);
 		registroEspecie.setNombreGenero(nombreGenero);
-		
+
 		registroEspecie.setTrabajador(trabajador);
 		admiEJB.insertarRegistro(registroEspecie);
 
-		System.out.println("res");
-		// debe quedas asi
-		// la persistencia se hace desde el rol solicitante
 	}
 
 	public String upload() {
-		
-		
+
 		return "/admin/registro_especie";
 
 	}
 
 	public void handleFileUpload(FileUploadEvent event) {
 		System.out.println(event.getFile().getFileName());
-		//File im = new File(event.getFile().getFileName());
-	
-		img=event.getFile();
-		
-		
-		 graphicImage = new DefaultStreamedContent(new ByteArrayInputStream(img.getContents()), "image/png"); 
-		
+		// File im = new File(event.getFile().getFileName());
+
+		img = event.getFile();
+
+		graphicImage = new DefaultStreamedContent(new ByteArrayInputStream(img.getContents()), "image/png");
+
 	}
 
 	public Trabajador getTrabajador() {

@@ -49,7 +49,7 @@ public class SeguridadBean implements Serializable {
 	 * dice si la persona inicio sesion o no
 	 */
 	private boolean autenticado;
-	
+
 	private boolean flagRecolector;
 	@EJB
 	private AdministradorEJB adminEJB;
@@ -64,30 +64,37 @@ public class SeguridadBean implements Serializable {
 	@PostConstruct
 	private void init() {
 		persona = new Persona();
+		flagEmpleado=false;
+		flagRecolector=false;
+		flagUsuario=false;
 		autenticado = false;
 
 	}
+
+	/**
+	 * metodo que lanza los distintos roles
+	 * 
+	 * @return
+	 */
 
 	public String iniciarSesion() {
 
 		Persona u = adminEJB.personaPorCredenciales(persona.getEmail(), persona.getPassword());
 		if (u != null) {
-			persona = u;
-			System.out.println(persona.getNombre());
+			this.persona = u;
 			autenticado = true;
-
 			String user = persona.getClass().getSimpleName();
-
 			switch (user) {
-	
+
 			case "Empleado":
-				setFlagEmpleado(true);
+				flagEmpleado = true;
+				;
 				return "admin/contenido_empleado";
 			case "Recolector":
-				flagRecolector=true;
+				flagRecolector = true;
 				return "admin/contenido_recolector";
 			case "Usuario":
-				flagUsuario=true;
+				flagUsuario = true;
 				return "admin/contenido_usuario";
 
 			default:
@@ -101,36 +108,25 @@ public class SeguridadBean implements Serializable {
 
 	}
 
-	public String olvide() {
-
-		return "admin/registrar_persona";
-
-	}
-	public String prueba() {
-
-		System.out.println("puedo redireccionar");
-		return "admin/registrar_empleado";
-	}
-
 	public String cerrarSesion() {
 
 		persona = new Persona();
+		flagEmpleado=false;
+		flagRecolector=false;
+		flagUsuario=false;
 		autenticado = false;
-		System.out.println("sale");
 		return "/index";
-
 	}
 
-	
-	
 	public void recuperarClave() {
 
 		String destinatario = persona.getEmail();
-		 System.out.println(persona.getEmail());
-		 System.out.println(adminEJB.recuperarContrasenia(persona.getEmail())+"#$%%%");
+		System.out.println(persona.getEmail());
+		System.out.println(adminEJB.recuperarContrasenia(persona.getEmail()) + "#$%%%");
 		try {
-		
-			enviarConGMail(destinatario, "Contraseña", "Hola, su clave es:" + adminEJB.recuperarContrasenia(persona.getEmail()));
+
+			enviarConGMail(destinatario, "Contraseña",
+					"Hola, su clave es:" + adminEJB.recuperarContrasenia(persona.getEmail()));
 			Util.mostrarMensaje("Email enviado exitosamente", "Email enviado exitosamente");
 
 		} catch (NullPointerException e) {
@@ -171,18 +167,16 @@ public class SeguridadBean implements Serializable {
 			message.setSubject(asunto);
 			message.setText(cuerpo);
 			Transport transport = session.getTransport("smtp");
-			transport.connect("smtp.gmail.com", remitente,"alfite12345" );
+			transport.connect("smtp.gmail.com", remitente, "alfite12345");
 			transport.sendMessage(message, message.getAllRecipients());
 			transport.close();
 		} catch (MessagingException me) {
 			me.printStackTrace(); // Si se produce un error
 		}
 	}
-	
-	
+
 	public String redirect() {
 
-	
 		return "admin/contenido_recolector";
 
 	}

@@ -45,6 +45,8 @@ public class UsuarioBean {
 	List<ImagenPlanta> imagenes;
 	List<byte[]> imagenes1;
 	List<StreamedContent> imagenes2;
+	
+	private String cantImagenes;
 	@EJB
 	UsuarioEJB usuarioEJB;
 
@@ -68,11 +70,12 @@ public class UsuarioBean {
 		
 		mislikes = usuarioEJB.obtenerListaMeGusta(usuario.getIdPersona());
 		imagenes = usuarioEJB.obtenerListaImagenes();
+		
 		imagenesMasGustadas = usuarioEJB.obtenerListaImagenesOrdenadasPorLikes();
 
 		imagenes1=usuarioEJB.obtenerListaImagenesByte();
 		
-		
+		cantImagenes=imagenes.size()+"";
 		
 		img=new DefaultStreamedContent(new ByteArrayInputStream(imagenes1.get(0)), "image/png");
 	imagenes2=new ArrayList<>();
@@ -97,6 +100,19 @@ public class UsuarioBean {
 		imagenes = usuarioEJB.obtenerListaImagenes();
 		imagenesMasGustadas = usuarioEJB.obtenerListaImagenesOrdenadasPorLikes();
 
+	}
+	
+	public String cantImagenes() {
+		
+		return imagenes.size()+"";
+	}
+	
+	
+	public StreamedContent toImagen(ImagenPlanta im) {
+		
+		
+	return new DefaultStreamedContent(new ByteArrayInputStream(im.getImagen()), "image/png");
+		
 	}
 
 	/**
@@ -280,6 +296,14 @@ public class UsuarioBean {
 	 */
 	public void setImg(StreamedContent img) {
 		this.img = img;
+	}
+
+	public String getCantImagenes() {
+		return cantImagenes;
+	}
+
+	public void setCantImagenes(String cantImagenes) {
+		this.cantImagenes = cantImagenes;
 	}
 
 }

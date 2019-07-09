@@ -10,13 +10,90 @@
 <ui:composition template="/WEB-INF/template.xhtml">
 
 	<ui:define name="contenido">
-	<h:form>
-	<p:galleria value="#{usuarioBean.imagenes2}" var="image" panelWidth="500" panelHeight="313"  showCaption="true">
-    <p:graphicImage name="img" alt="Image Description for img"  value="#{usuarioBean.img}" title="img" stream="false"/>
-    </p:galleria>
-    </h:form>
+
+		<style type="text/css">
+.value {
+	font-weight: bold;
+}
+
+.ui-carousel {
+	margin-bottom: 20px;
+}
+</style>
+		<h:form id="form">
+			<p:carousel value="#{usuarioBean.imagenes}" headerText="Todas las Imagenes"
+				var="esp" itemStyle="text-align:center" responsive="true">
+				<p:panel columns="2" 
+					columnClasses="label,value" layout="grid"
+					styleClass="ui-panelgrid-blank">
+
+
+					<p:graphicImage value="#{usuarioBean.toImagen(esp)}" stream="false"
+						style="width:50%" />
+
+					<f:facet name="footer">
+					
+					<h:panelGrid columns="2">
+						<h:outputText value="Nombre:" />
+						<h:outputText value="#{esp.registro.nombreEspecie}" />
+						<p:commandButton value="Like"
+							ajax="false" />
+							<p:commandButton value="Reseñar"
+							ajax="false" />
+							<p:commandButton value="Ver Reseñas"
+							ajax="false" />		
+						
+						</h:panelGrid>
+					</f:facet>
+
+
+				</p:panel>
+
+				<f:facet name="footer">
+				<h:outputText  value="#{usuarioBean.cantImagenes} imagenes en total" />
+				
+				</f:facet>
+			</p:carousel>
+			
+			
+			<p:carousel value="#{usuarioBean.imagenes}" headerText="Imagenes mas Gustadas"
+				var="esp" itemStyle="text-align:center" responsive="true">
+				<p:panel columns="2" 
+					columnClasses="label,value" layout="grid"
+					styleClass="ui-panelgrid-blank">
+
+
+					<p:graphicImage value="#{usuarioBean.toImagen(esp)}" stream="false"
+						style="width:50%" />
+
+					<f:facet name="footer">
+					<h:panelGrid columns="2">
+						<h:outputText value="Nombre:" />
+						<h:outputText value="#{esp.registro.nombreEspecie}" />
+						<p:commandButton value="Like"
+							ajax="false" />
+							<p:commandButton value="Reseñar"
+							ajax="false" />
+							
+							<p:commandButton value="Ver Reseñas" 
+							ajax="false" />
+							</h:panelGrid>
+					</f:facet>
+
+
+				</p:panel>
+
+				<f:facet name="footer">
+				
+				
+				<h:outputText  value="#{usuarioBean.cantImagenes} imagenes en total" />
+				
+				
+				</f:facet>
+			</p:carousel>
+		</h:form>
 
 	</ui:define>
-	
+
 </ui:composition>
 </html>

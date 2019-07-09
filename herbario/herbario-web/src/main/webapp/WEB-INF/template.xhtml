@@ -12,8 +12,8 @@
 <h:body>
 	<div align="center">
 		<div>
-			<p:graphicImage value="#{resource['herbariumheader.jpg']}"
-				rendered="#{!seguridadBean.autenticado}" stream="false" />
+			<p:graphicImage value="#{resource['logoHerbario.png']}"
+				rendered="#{!seguridadBean.autenticado}" stream="false" height="250"  width="400"/>
 		</div>
 		<h:panelGroup rendered="#{!seguridadBean.autenticado}">
 			<ui:insert name="login">
@@ -27,7 +27,7 @@
 						<f:facet name="footer">
 
 							<p:commandButton value="registrarse"
-								action="/admin/persona/registrar_persona" ajax="false" />
+								action= "#{gestionPersonaBean.registrar}" ajax="false" />
 
 							<p:commandButton value="Aceptar"
 								action="#{seguridadBean.iniciarSesion}" ajax="false" />
@@ -60,48 +60,54 @@
 							</p:menuButton>
 
 						</f:facet>
-						<p:submenu label="Recolector" rendered="#{!seguridadBean.flagRecolector}">
+						<p:submenu label="Recolector" rendered="#{seguridadBean.flagEmpleado}">
 						<p:menuitem value="Listar recolectores"
 								action="/admin/persona/recolectores" ajax="false" />
 						</p:submenu>
 						
 		
-						<p:submenu label="Registros">
+		
+						<p:submenu label="Registros" rendered="#{!seguridadBean.flagUsuario}">
 						
 						<p:menuitem value="Crear Registro"
-								action="/admin/registro/registrar_especie" ajax="false" />
+								action="/admin/registro/registrar_especie" ajax="false"  rendered="#{!seguridadBean.flagUsuario}"/>
 								
 								
 						</p:submenu>
-						<p:submenu label="Familias" rendered="#{!seguridadBean.flagRecolector}">
+						<p:submenu label="Familias" rendered="#{seguridadBean.flagEmpleado}">
 							<p:menuitem value="Familias" action="/admin/familia/familias"
 								ajax="false" />
 						</p:submenu>
-							<p:submenu label="Generos" rendered="#{!seguridadBean.flagRecolector}">
+							<p:submenu label="Generos" rendered="#{seguridadBean.flagEmpleado}">
 							<p:menuitem value="Lista de Generos" action="/admin/genero/generos"
 								ajax="false" />
 								<p:menuitem value="Registrar generos"
 								action="/admin/genero/registrar_genero" ajax="false" />
 						</p:submenu>
 						
-							<p:submenu label="Especie">
-							<p:menuitem value="Lista de Especies" action="/admin/especie/especies"
+							<p:submenu label="Especie" rendered="#{!seguridadBean.flagUsuario}">
+							
+							<p:menuitem value="Lista de Especies" action="/admin/especie/especies" rendered="#{!seguridadBean.flagUsuario}"
 								ajax="false" />
 								<p:menuitem  value="Lista de Especies aceptadas" rendered="#{seguridadBean.flagRecolector}"
 								action="/admin/especie/especies_aceptadas" ajax="false" />
+								
 									<p:menuitem value="Lista de Especies Enviadas" rendered="#{seguridadBean.flagRecolector}"
 								action="/admin/registro/registros_recolector" ajax="false" />
+								
 									<p:menuitem value="Lista de Especies Aceptadas Por genero" rendered="#{seguridadBean.flagRecolector}"
 								action="/admin/especie/especies_recolectorAG" ajax="false" />
+								
 									<p:menuitem value="Lista de Especies Aceptadas Por Familia" rendered="#{seguridadBean.flagRecolector}"
 								action="/admin/especie/especies_recolectorAF" ajax="false" />
 								
-								<p:menuitem value="Lista de Especies por Familia" rendered="#{!seguridadBean.flagRecolector}"
+								<p:menuitem value="Lista de Especies por Familia" rendered="#{seguridadBean.flagEmpleado} "
 								action="/admin/especie/especies_por_familia" ajax="false" />
-								<p:menuitem value="Lista de Especies por Genero" rendered="#{!seguridadBean.flagRecolector}"
+								
+								<p:menuitem value="Lista de Especies por Genero" rendered="#{seguridadBean.flagEmpleado}"
 								action="/admin/especie/especies_por_genero" ajax="false" />
 								
-								<p:menuitem value="Lista de Especies Rechazadas" rendered="#{!seguridadBean.flagRecolector}"
+								<p:menuitem value="Lista de Especies Rechazadas" rendered="#{seguridadBean.flagEmpleado}"
 								action="/admin/especie/especies_rechazadas" ajax="false" />
 								
 						</p:submenu>

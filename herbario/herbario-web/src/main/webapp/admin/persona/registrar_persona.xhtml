@@ -14,13 +14,12 @@
 	</ui:define>
 	<ui:define name="contenido">
 
-		<h:form>
+		<h:form >
 			<p:panelGrid columns="2">
-				<f:facet name="header">Formulario de Registro</f:facet>
+				<f:facet name="header">Formulario de Ingreso de Datos</f:facet>
 
 				<p:outputLabel value="Nombre" />
 				<p:inputText value="#{gestionPersonaBean.personaEditar.nombre}" />
-
 				<p:outputLabel value="Cedula" />
 				<p:inputText value="#{gestionPersonaBean.personaEditar.idPersona}" />
 				<p:outputLabel value="Correo" />
@@ -29,28 +28,31 @@
 				<p:inputText value="#{gestionPersonaBean.personaEditar.password}" />
 				<p:outputLabel value="Telefono" />
 				<p:inputText value="#{gestionPersonaBean.personaEditar.telefono}" />
-
-
 				<p:outputLabel value="Fecha nacimiento" />
-			
-				<p:calendar value="#{gestionPersonaBean.personaEditar.fechaNacimiento}"/>
+				<p:calendar
+					value="#{gestionPersonaBean.personaEditar.fechaNacimiento}" />
 
 
-			<p:outputLabel value="Registrarse como"  />
-		
-			  <p:selectOneRadio id="console" value="#{gestionPersonaBean.tipo}" unselectable="#{gestionPersonaBean.flagEditar}">
-            <f:selectItem itemLabel="usuario" itemValue="usuario"  itemDisabled="#{gestionPersonaBean.flagEditar}"/>
-            <f:selectItem itemLabel="empleado" itemValue="empleado"  itemDisabled="#{gestionPersonaBean.flagEditar}"/>
-            <f:selectItem itemLabel="recolector" itemValue="recolector" itemDisabled="#{gestionPersonaBean.flagEditar}" />
-        </p:selectOneRadio>
+				<p:outputLabel value="Registrarse como" />
+				<p:selectOneRadio id="console" value="#{gestionPersonaBean.tipo}"
+					unselectable="#{gestionPersonaBean.flagEditar}">
+					<f:selectItem itemLabel="usuario" itemValue="usuario"
+						itemDisabled="#{gestionPersonaBean.flagEditar}" />
+					<f:selectItem itemLabel="empleado" itemValue="empleado"
+						itemDisabled="#{gestionPersonaBean.flagEditar}" />
+					<f:selectItem itemLabel="recolector" itemValue="recolector"
+						itemDisabled="#{gestionPersonaBean.flagEditar}" />
+				</p:selectOneRadio>
 
-                <p:commandButton action="/index" value="atras" />
-                
+				<p:commandButton action="#{gestionPersonaBean.irAtras}"
+					value="atras" />
+
 				<p:commandButton action="#{gestionPersonaBean.registrarPersona}"
-					value="Registrarse"  rendered="#{!gestionPersonaBean.flagEditar}"/>
-					
-					<p:commandButton action="#{gestionPersonaBean.actualizarDatos}"
-					value="Actualizar Datos"  rendered="#{gestionPersonaBean.flagEditar}"/>
+					value="Registrarse" rendered="#{!gestionPersonaBean.flagEditar}" />
+
+				<p:commandButton action="#{gestionPersonaBean.actualizarDatos}"
+					value="Actualizar Datos"
+					rendered="#{gestionPersonaBean.flagEditar}" />
 			</p:panelGrid>
 		</h:form>
 

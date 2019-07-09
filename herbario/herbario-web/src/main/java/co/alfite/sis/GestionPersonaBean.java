@@ -84,12 +84,22 @@ public class GestionPersonaBean implements Serializable {
 		personaEditar = new Persona();
 	}
 
+	public String  irAtras() {
+		flagEditar=false;
+		return "/index";
+	}
+	
+	public String registrar() {
+		
+		flagEditar=false;
+		personaEditar=new Persona();
+		return "/admin/persona/registrar_persona";
+	}
 	public String registrarPersona() {
 
 		flagEditar=false;
 		
-		System.out.println("Registra");
-
+		
 		try {
 			switch (tipo) {
 			case "empleado":
@@ -150,21 +160,20 @@ public class GestionPersonaBean implements Serializable {
 	}
 
 	public String editar() {
-		flagEditar = true;
-		nombre = personaEditar.getNombre();
-		idPersona = personaEditar.getIdPersona();
-		email = personaEditar.getEmail();
-		password = personaEditar.getPassword();
-		fechaNacimiento = personaEditar.getFechaNacimiento();
-		this.tipo = personaEditar.getClass().getSimpleName().toLowerCase();
-		telefono = personaEditar.getTelefono();
+		flagEditar = true;		
+//		nombre = personaEditar.getNombre();
+//		idPersona = personaEditar.getIdPersona();
+//		email = personaEditar.getEmail();
+//		password = personaEditar.getPassword();
+//		fechaNacimiento = personaEditar.getFechaNacimiento();
+//		this.tipo = personaEditar.getClass().getSimpleName().toLowerCase();
+//		telefono = personaEditar.getTelefono();
 
 		return "/admin/persona/registrar_persona";
 	}
 
 	public String editarPersonaEnSesion() {
 		personaEditar = personaEnSesionEdit;
-
 		return editar();
 	}
 
