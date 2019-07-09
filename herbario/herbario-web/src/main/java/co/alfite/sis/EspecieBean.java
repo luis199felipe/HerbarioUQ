@@ -19,6 +19,7 @@ import co.alfite.sis.entidades.FamiliaPlanta;
 import co.alfite.sis.entidades.GeneroPlanta;
 import co.alfite.sis.entidades.Persona;
 import co.alfite.sis.entidades.RegistroEspecie;
+import co.alfite.sis.entidades.RegistroEspecie.Estado;
 
 @FacesConfig(version = Version.JSF_2_3)
 @Named("especieBean")
@@ -28,7 +29,7 @@ public class EspecieBean {
 	private List<EspeciePlanta> especies;
 
 	private List<EspeciePlanta> especiesAceptadas;
-	private List<EspeciePlanta> especiesRechazadas;
+	private List<RegistroEspecie> especiesRechazadas;
 	private List<RegistroEspecie> registrosAceptadosDeRecolector;
 
 	private List<RegistroEspecie> registrosAceptadosDeRecolectorF;
@@ -41,6 +42,7 @@ public class EspecieBean {
 	private List<EspeciePlanta>allEspecies;
 	
 
+	private RegistroEspecie reTemp;
 
 	private EspeciePlanta especie;
 
@@ -58,7 +60,8 @@ public class EspecieBean {
 	public void init() {
 		especies = bean.listarEspecies();
 		especiesAceptadas = bean.listarEspeciesPorEstado(co.alfite.sis.entidades.RegistroEspecie.Estado.aprobado);
-		especiesRechazadas = bean.listarEspeciesPorEstado(co.alfite.sis.entidades.RegistroEspecie.Estado.rechazado);
+		especiesRechazadas = bean.listarRegsitrosPorEstado(Estado.rechazado);
+		
 		
 		registrosAceptadosDeRecolector = bean.listarRegistrosRecolector(personaEnSesion.getIdPersona());
 
@@ -122,20 +125,7 @@ public class EspecieBean {
 		this.especiesAceptadas = especiesAceptadas;
 	}
 
-	/**
-	 * @return the especiesRechazadas
-	 */
-	public List<EspeciePlanta> getEspeciesRechazadas() {
-		return especiesRechazadas;
-	}
-
-	/**
-	 * @param especiesRechazadas the especiesRechazadas to set
-	 */
-	public void setEspeciesRechazadas(List<EspeciePlanta> especiesRechazadas) {
-		this.especiesRechazadas = especiesRechazadas;
-	}
-
+	
 	/**
 	 * @return the personaEnSesion
 	 */
@@ -283,6 +273,38 @@ public class EspecieBean {
 	 */
 	public void setAllEspecies(List<EspeciePlanta> allEspecies) {
 		this.allEspecies = allEspecies;
+	}
+
+
+	/**
+	 * @return the especiesRechazadas
+	 */
+	public List<RegistroEspecie> getEspeciesRechazadas() {
+		return especiesRechazadas;
+	}
+
+
+	/**
+	 * @param especiesRechazadas the especiesRechazadas to set
+	 */
+	public void setEspeciesRechazadas(List<RegistroEspecie> especiesRechazadas) {
+		this.especiesRechazadas = especiesRechazadas;
+	}
+
+
+	/**
+	 * @return the reTemp
+	 */
+	public RegistroEspecie getReTemp() {
+		return reTemp;
+	}
+
+
+	/**
+	 * @param reTemp the reTemp to set
+	 */
+	public void setReTemp(RegistroEspecie reTemp) {
+		this.reTemp = reTemp;
 	}
 
 }

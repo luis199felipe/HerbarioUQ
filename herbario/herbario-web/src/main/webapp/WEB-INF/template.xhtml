@@ -72,7 +72,8 @@
 						<p:menuitem value="Crear Registro"
 								action="/admin/registro/registrar_especie" ajax="false"  rendered="#{!seguridadBean.flagUsuario}"/>
 								
-								
+								<p:menuitem value="Validar Registro"
+								action="/admin/validar_registro" ajax="false"  rendered="#{seguridadBean.flagEmpleado}"/>
 						</p:submenu>
 						<p:submenu label="Familias" rendered="#{seguridadBean.flagEmpleado}">
 							<p:menuitem value="Familias" action="/admin/familia/familias"

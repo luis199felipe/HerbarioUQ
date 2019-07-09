@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/WEB-INF/template.xhtml">
+	
+	<ui:define name="contenido">
+	 	    <h:form id="especieForm">
+			
+			<p:fieldset id="especies" legend="Especies Recibidas">
+				<p:dataTable id="listaEspecies" var="esp" value="#{registroEspecieBean.allRegistros}">
+				
+					<p:column headerText="Id">
+						<h:outputText value="#{esp.idRegistro}" />
+					</p:column>
+				
+					<p:column headerText="Nombre Especie">
+						<h:outputText value="#{esp.nombreEspecie}" />
+					</p:column>
+					<p:column headerText="Nombre Genero">
+						<h:outputText value="#{esp.nombreGenero}" />
+					</p:column>
+					<p:column headerText="Nombre Familia">
+						<h:outputText value="#{esp.nombreFamilia}" />
+					</p:column>
+									
+					<p:column style="width:100px" headerText="Validar">
+	                    <p:commandButton update=":especieForm:display" oncomplete="PF('especieDialog').show()" icon="pi pi-search">
+	                        <f:setPropertyActionListener value="#{esp}" target="#{registroEspecieBean.registroEspecie}" />
+	                    </p:commandButton>
+                	</p:column>
+					
+				</p:dataTable>
+			</p:fieldset>
+			
+			
+			<p:dialog header="Detalle del Registro" widgetVar="especieDialog" resizable="false" draggable="false"
+              showEffect="fade" hideEffect="fade" modal="true">
+		        <p:outputPanel id="display">
+		            <h:panelGrid columns="2" cellpadding="4" rendered="#{not empty registroEspecieBean.registroEspecie}">
+		                
+		                <h:outputText value="Id" />
+		                <h:outputText value="#{registroEspecieBean.registroEspecie.idRegistro}" style="font-weight:bold"/>
+		  
+	
+		                <f:facet name="footer">
+							<p:commandButton value="Aceptar"  action="#{registroEspecieBean.aceptarRegistro}" />
+							<p:commandButton value="Rechazar"  action="#{registroEspecieBean.rechazarRegistro}" />							
+						</f:facet>
+		                
+		            </h:panelGrid>
+		        </p:outputPanel>
+    		</p:dialog>
+			
+			
+		</h:form>
+	</ui:define>
+
+</ui:composition>
+</html>

@@ -21,11 +21,14 @@ import org.primefaces.model.UploadedFile;
 
 import co.alfite.sis.ejb.AdministradorEJB;
 import co.alfite.sis.entidades.EspeciePlanta;
+import co.alfite.sis.entidades.FamiliaPlanta;
+import co.alfite.sis.entidades.GeneroPlanta;
 import co.alfite.sis.entidades.ImagenPlanta;
 import co.alfite.sis.entidades.Persona;
 import co.alfite.sis.entidades.Trabajador;
 import co.alfite.sis.entidades.RegistroEspecie;
 import co.alfite.sis.entidades.RegistroEspecie.Estado;
+import co.alfite.sis.excepciones.ElementoRepetidoExcepcion;
 
 @FacesConfig(version = Version.JSF_2_3)
 @Named("registroEspecieBean")
@@ -51,6 +54,7 @@ public class RegistroEspecieBean {
 
 	private StreamedContent graphicImage;
 	private List<RegistroEspecie> registros;
+	private List<RegistroEspecie> allRegistros;
 
 	@EJB
 	private AdministradorEJB admiEJB;
@@ -58,6 +62,8 @@ public class RegistroEspecieBean {
 	@PostConstruct
 	private void init() {
 		registros = admiEJB.listarRegistrosRecolector(trabajador.getIdPersona());
+
+		allRegistros = admiEJB.listarRegsitrosPorEstado(Estado.enviado);
 
 	}
 
@@ -78,6 +84,69 @@ public class RegistroEspecieBean {
 
 		registroEspecie.setTrabajador(trabajador);
 		admiEJB.insertarRegistro(registroEspecie);
+
+	}
+
+	public void rechazarRegistro() {
+
+		admiEJB.validarRegistro(registroEspecie.getIdRegistro(), Estado.rechazado);
+	}
+
+	public void aceptarRegistro() {
+		
+		
+		System.out.println("aceta");
+			//la idea es que cuando cambie el estado a aprobado se persista una especie nueva
+					// y ademas debe haber una opcion de si la espceie ya existe tomar la imagen del
+					// registro y agregarla a la lista de imagenes de la especie
+									
+		admiEJB.validarRegistro(registroEspecie.getIdRegistro(), Estado.aprobado);
+						FamiliaPlanta fam = admiEJB.buscarFamiliaPlanta(registroEspecie.getNombreFamilia());
+						if (fam == null) {
+
+							FamiliaPlanta nuevaFamilia = new FamiliaPlanta();
+							nuevaFamilia.setNombre(registroEspecie.getNombreFamilia());
+							try {
+								fam = admiEJB.insertarFamilia(nuevaFamilia);
+							} catch (ElementoRepetidoExcepcion e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+
+						
+						GeneroPlanta gen = admiEJB.buscarGeneroPlanta(registroEspecie.getNombreFamilia());
+
+						if (gen == null) {
+							GeneroPlanta nuevoGenero = new GeneroPlanta();
+							nuevoGenero.setNombre(registroEspecie.getNombreFamilia());
+							nuevoGenero.setFamiliaPlanta(fam);
+							try {
+								gen = admiEJB.insertarGenero(nuevoGenero);
+							} catch (ElementoRepetidoExcepcion e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+
+						EspeciePlanta esp = admiEJB.buscarEspeciePlanta(registroEspecie.getNombreEspecie());
+
+						if (esp == null) {
+
+							EspeciePlanta nuevaEspecie = new EspeciePlanta();
+							nuevaEspecie.setGeneroPlanta(gen);
+							nuevaEspecie.setNombre(registroEspecie.getNombreEspecie());
+							admiEJB.insertarEspecie(nuevaEspecie);
+
+							ImagenPlanta im = admiEJB.buscarImagenPlanta(registroEspecie.getImagen().getIdImagen());
+							
+							im.setEspecie(nuevaEspecie);
+						    admiEJB.actualizarImagenPlanta(im);
+
+						}
+
+					}
+
+				
 
 	}
 
@@ -225,6 +294,20 @@ public class RegistroEspecieBean {
 	 */
 	public void setRegistros(List<RegistroEspecie> registros) {
 		this.registros = registros;
+	}
+
+	/**
+	 * @return the allRegistros
+	 */
+	public List<RegistroEspecie> getAllRegistros() {
+		return allRegistros;
+	}
+
+	/**
+	 * @param allRegistros the allRegistros to set
+	 */
+	public void setAllRegistros(List<RegistroEspecie> allRegistros) {
+		this.allRegistros = allRegistros;
 	}
 
 }

@@ -16,16 +16,16 @@
 				<p:dataTable id="listaEspecies" var="esp" value="#{especieBean.especiesRechazadas}">
 				
 					<p:column headerText="Id">
-						<h:outputText value="#{esp.idEspecie}" />
+						<h:outputText value="#{esp.idRegistro}" />
 					</p:column>
 				
 					<p:column headerText="Nombre">
-						<h:outputText value="#{esp.nombre}" />
+						<h:outputText value="#{esp.nombreEspecie}" />
 					</p:column>
 									
 					<p:column style="width:100px" headerText="Vista En Detalle">
 	                    <p:commandButton update=":especieForm:display" oncomplete="PF('especieDialog').show()" icon="pi pi-search">
-	                        <f:setPropertyActionListener value="#{esp}" target="#{especieBean.especie}" />
+	                        <f:setPropertyActionListener value="#{esp}" target="#{especieBean.reTemp}" />
 	                    </p:commandButton>
                 	</p:column>
 					
@@ -36,24 +36,22 @@
 			<p:dialog header="Detalle de la Especie" widgetVar="especieDialog" resizable="false" draggable="false"
               showEffect="fade" hideEffect="fade" modal="true">
 		        <p:outputPanel id="display">
-		            <h:panelGrid columns="2" cellpadding="4" rendered="#{not empty especieBean.especie}">
+		            <h:panelGrid columns="2" cellpadding="4" rendered="#{not empty especieBean.reTemp}">
 		                
 		                <h:outputText value="Id" />
-		                <h:outputText value="#{especieBean.especie.idEspecie}" style="font-weight:bold"/>
+		                <h:outputText value="#{especieBean.reTemp.idRegistro}" style="font-weight:bold"/>
 		 
 		                <h:outputText value="Nombre:" />
-		                <h:outputText value="#{especieBean.especie.nombre}" style="font-weight:bold"/>
+		                <h:outputText value="#{especieBean.reTemp.nombreEspecie}" style="font-weight:bold"/>
 
 		                <h:outputText value="Familia" />
-		                <h:outputText value="#{especieBean.especie.generoPlanta.familiaPlanta.nombre}" style="font-weight:bold"/>
+		                <h:outputText value="#{especieBean.reTemp.nombreFamilia}" style="font-weight:bold"/>
 		 		               
 		 		        <h:outputText value="Genero" />
-		                <h:outputText value="#{especieBean.especie.generoPlanta.nombre}" style="font-weight:bold"/> 
+		                <h:outputText value="#{especieBeanr.reTemp.nombreGenero}" style="font-weight:bold"/> 
+	
 		                
-		                <f:facet name="footer">
-							<p:commandButton value="Eliminar" ajax="false" action="#" />
-							<p:commandButton value="Actualizar" ajax="false" action="#" />							
-						</f:facet>
+		              
 		                
 		            </h:panelGrid>
 		        </p:outputPanel>
